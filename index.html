@@ -3,518 +3,395 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Prototype</title>
+<title>Murat Mert Titiz — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --red:#D14B3F;
-    --red-deep:#A8281F;
-    --coral:#E8866F;
-    --ochre:#D99A4E;
-    --cream:#FBF3E7;
-    --ink:#241B14;
-    --white:#FFFFFF;
-    --line: rgba(36,27,20,0.13);
-    --mono: 'IBM Plex Mono', monospace;
-    --display: 'Fraunces', serif;
-    --body: 'Inter', sans-serif;
-    --sidebar-w: 230px;
-    --r: 18px;
+    --red:#D14B3F; --red-deep:#A8281F; --coral:#E8866F; --ochre:#D99A4E;
+    --cream:#FBF3E7; --ink:#241B14; --white:#FFFFFF; --line:rgba(36,27,20,0.13);
+    --mono:'IBM Plex Mono',monospace; --display:'Fraunces',serif; --body:'Inter',sans-serif;
+    --sidebar-w:230px; --r:18px;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0; background:var(--cream); color:var(--ink);
-    font-family:var(--body); -webkit-font-smoothing:antialiased;
-  }
-  ::selection{background:var(--red); color:var(--cream);}
-  a{color:inherit;}
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--red);color:var(--cream);} a{color:inherit;}
 
-  aside{
-    position:fixed; top:0; left:0; bottom:0; width:var(--sidebar-w);
-    background:var(--white);
-    display:flex; flex-direction:column; justify-content:space-between;
-    padding:30px 24px; z-index:400; border-radius:0 28px 28px 0;
-    box-shadow: 4px 0 24px rgba(36,27,20,0.05);
-  }
-  .brand{ font-family:var(--display); font-weight:700; font-size:1.25rem; line-height:1.15; cursor:pointer; }
+  aside{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:var(--white);
+    display:flex;flex-direction:column;justify-content:space-between;padding:30px 24px;z-index:400;
+    border-radius:0 28px 28px 0;box-shadow:4px 0 24px rgba(36,27,20,0.05);}
+  .brand{font-family:var(--display);font-weight:700;font-size:1.1rem;line-height:1.15;cursor:pointer;}
   .brand .dot{color:var(--red);}
-  .brand-role{
-    font-family:var(--mono); font-size:0.62rem; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--red-deep); margin-top:10px; background:rgba(209,75,63,0.1); display:inline-block;
-    padding:5px 10px; border-radius:20px;
-  }
-
-  nav{margin-top:50px;}
-  nav ol{list-style:none; margin:0; padding:0;}
-  nav a{
-    display:flex; align-items:center; gap:10px;
-    font-family:var(--display); font-weight:500; font-size:1rem;
-    text-decoration:none; color:rgba(36,27,20,0.45);
-    padding:11px 14px; border-radius:14px; margin-bottom:4px;
-    transition:all .2s;
-  }
-  nav a:hover{color:var(--ink); background:rgba(36,27,20,0.04);}
-  nav a.active{color:var(--white); background:var(--red);}
+  .brand-role{font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--red-deep);margin-top:10px;background:rgba(209,75,63,0.1);display:inline-block;padding:5px 10px;border-radius:20px;}
+  nav{margin-top:40px;}
+  nav ol{list-style:none;margin:0;padding:0;}
+  nav a{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;font-size:1rem;
+    text-decoration:none;color:rgba(36,27,20,0.45);padding:11px 14px;border-radius:14px;margin-bottom:4px;transition:all .2s;}
+  nav a:hover{color:var(--ink);background:rgba(36,27,20,0.04);}
+  nav a.active{color:var(--white);background:var(--red);}
   nav a .emoji{font-size:1rem;}
 
-  .sidebar-foot{font-family:var(--mono); font-size:0.62rem; color:rgba(36,27,20,0.45); line-height:1.8;}
-  .sidebar-foot .loc{color:var(--red-deep); font-weight:600;}
+  /* ---------- language toggle ---------- */
+  .lang-toggle{display:flex;gap:4px;margin-top:16px;}
+  .lang-btn{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;
+    padding:6px 12px;border-radius:16px;border:1px solid var(--line);background:transparent;
+    color:rgba(36,27,20,0.5);cursor:pointer;transition:all .2s;}
+  .lang-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink);}
+
+  .sidebar-foot{font-family:var(--mono);font-size:0.62rem;color:rgba(36,27,20,0.45);line-height:1.8;}
+  .sidebar-foot .loc{color:var(--red-deep);font-weight:600;}
 
   #menu-toggle{display:none;}
-  @media (max-width:860px){
-    aside{
-      width:100%; height:auto; bottom:auto; flex-direction:row; align-items:center;
-      justify-content:space-between; padding:14px 5vw; border-radius:0;
-      position:fixed; z-index:600;
-    }
-    nav{margin-top:0; position:fixed; top:64px; left:0; right:0; background:var(--white);
-        border-radius:0 0 24px 24px; max-height:0; overflow:hidden; transition:max-height .25s; box-shadow:0 10px 24px rgba(36,27,20,0.08);}
-    nav.open{max-height:360px;}
-    nav ol{padding:10px 5vw 16px;}
+  @media(max-width:860px){
+    aside{width:100%;height:auto;bottom:auto;flex-direction:row;align-items:center;
+      justify-content:space-between;padding:14px 5vw;border-radius:0;position:fixed;z-index:600;}
+    nav{margin-top:0;position:fixed;top:64px;left:0;right:0;background:var(--white);
+      border-radius:0 0 24px 24px;max-height:0;overflow:hidden;transition:max-height .25s;box-shadow:0 10px 24px rgba(36,27,20,0.08);}
+    nav.open{max-height:400px;} nav ol{padding:10px 5vw 16px;}
     .sidebar-foot{display:none;}
-    #menu-toggle{display:block; font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; background:var(--red); color:var(--cream); border:none; padding:8px 16px; border-radius:20px; cursor:pointer;}
+    .lang-toggle{margin-top:0;}
+    #menu-toggle{display:block;font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;
+      background:var(--red);color:var(--cream);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;}
   }
 
   main{margin-left:var(--sidebar-w);}
-  @media (max-width:860px){ main{margin-left:0; padding-top:64px;} }
-
-  .view{display:none;}
-  .view.active{display:block; animation:fadeIn .45s ease;}
-  @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
-
+  @media(max-width:860px){main{margin-left:0;padding-top:64px;}}
+  .view{display:none;} .view.active{display:block;animation:fadeIn .45s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
   section{padding:6vh 5.5vw;}
-  .index-no{
-    font-family:var(--mono); font-size:0.72rem; color:var(--red-deep); letter-spacing:.08em;
-    text-transform:uppercase; margin-bottom:16px; display:inline-flex; align-items:center; gap:8px;
-    background:rgba(209,75,63,0.1); padding:6px 12px; border-radius:20px;
-  }
+  .index-no{font-family:var(--mono);font-size:0.72rem;color:var(--red-deep);letter-spacing:.08em;
+    text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;
+    background:rgba(209,75,63,0.1);padding:6px 12px;border-radius:20px;}
 
-  /* ---------- HOME ---------- */
+  /* HOME */
   .hero{padding-bottom:5vh;}
-  .hero-row{display:grid; grid-template-columns:1fr 230px; gap:40px; align-items:center;}
-  .hero h1{
-    font-family:var(--display); font-weight:600; font-size:clamp(2.5rem,5.6vw,4.4rem);
-    line-height:1.08; margin:0 0 22px; letter-spacing:-0.01em;
-  }
-  .hero h1 em{font-style:italic; font-weight:600; color:var(--red-deep); position:relative;}
-  .hero p.sub{font-size:1.08rem; max-width:540px; color:rgba(36,27,20,0.72); line-height:1.65; margin-bottom:24px;}
-  .discipline-tags{display:flex; gap:10px; flex-wrap:wrap;}
-  .tag{
-    font-family:var(--mono); font-size:0.72rem; letter-spacing:.04em; text-transform:uppercase;
-    padding:9px 16px; border-radius:20px; background:var(--white); border:1px solid var(--line);
-  }
-  .tag.primary{color:var(--white); background:var(--red); border-color:var(--red); font-weight:500;}
-  .hero-photo{
-    aspect-ratio:1/1; border-radius:28px; background:var(--white); border:2px dashed var(--line);
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
-    font-family:var(--mono); font-size:0.62rem; text-transform:uppercase; letter-spacing:.04em;
-    color:rgba(36,27,20,0.4); text-align:center; cursor:pointer; transition:transform .2s, border-color .2s;
-  }
-  .hero-photo:hover{border-color:var(--red); transform:rotate(-2deg);}
-  @media (max-width:760px){.hero-row{grid-template-columns:1fr;} .hero-photo{max-width:180px;}}
+  .hero-row{display:grid;grid-template-columns:1fr 230px;gap:40px;align-items:center;}
+  .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(2.5rem,5.6vw,4.4rem);line-height:1.08;margin:0 0 22px;letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic;font-weight:600;color:var(--red-deep);}
+  .hero p.sub{font-size:1.08rem;max-width:540px;color:rgba(36,27,20,0.72);line-height:1.65;margin-bottom:24px;}
+  .discipline-tags{display:flex;gap:10px;flex-wrap:wrap;}
+  .tag{font-family:var(--mono);font-size:0.72rem;letter-spacing:.04em;text-transform:uppercase;
+    padding:9px 16px;border-radius:20px;background:var(--white);border:1px solid var(--line);}
+  .tag.primary{color:var(--white);background:var(--red);border-color:var(--red);font-weight:500;}
+  .hero-photo{aspect-ratio:1/1;border-radius:28px;overflow:hidden;border:2px solid var(--line);}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  @media(max-width:760px){.hero-row{grid-template-columns:1fr;}.hero-photo{max-width:180px;}}
 
-  .stats-wrap{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px;}
-  .stat-card{
-    background:var(--white); border-radius:18px; padding:20px 22px;
-    border:1px solid var(--line); transition:transform .2s;
-  }
+  .stats-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
+  .stat-card{background:var(--white);border-radius:18px;padding:20px 22px;border:1px solid var(--line);transition:transform .2s;}
   .stat-card:hover{transform:translateY(-3px);}
-  .stat-card .num{font-family:var(--display); font-weight:700; font-size:1.7rem; color:var(--red);}
-  .stat-card .label{font-family:var(--body); font-size:0.78rem; color:rgba(36,27,20,0.62); margin-top:4px; line-height:1.4;}
+  .stat-card .num{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--red);}
+  .stat-card .label{font-family:var(--body);font-size:0.78rem;color:rgba(36,27,20,0.62);margin-top:4px;line-height:1.4;}
 
-  .work-intro{max-width:680px; margin-bottom:36px;}
-  .work-intro h2{font-family:var(--display); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.5rem); margin:0 0 14px; letter-spacing:-0.01em;}
-
-  /* ---------- WORK tiles (friendly, rounded, not a stiff ledger) ---------- */
-  .tiles{display:flex; flex-direction:column; gap:14px;}
-  .tile{
-    background:var(--white); border-radius:22px; padding:26px 28px;
-    display:flex; gap:22px; align-items:center; cursor:pointer;
-    border:1px solid var(--line); transition:transform .2s, box-shadow .2s;
-  }
-  .tile:hover{transform:translateY(-3px); box-shadow:0 14px 30px rgba(36,27,20,0.08); border-color:transparent;}
-  .tile .badge{
-    width:54px; height:54px; border-radius:16px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--display); font-weight:700; font-size:1.2rem; color:var(--white);
-  }
-  .tile .info{flex:1; min-width:0;}
-  .tile .tile-meta{font-family:var(--mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:.05em; color:rgba(36,27,20,0.4); margin-bottom:5px;}
-  .tile h3{font-family:var(--display); font-weight:600; font-size:clamp(1.15rem,2vw,1.4rem); margin:0 0 6px;}
-  .tile .desc{font-size:0.88rem; color:rgba(36,27,20,0.6); line-height:1.5; max-width:560px;}
-  .tile .chips{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
-  .tile .chips span{
-    font-family:var(--mono); font-size:0.66rem; text-transform:uppercase; letter-spacing:.04em;
-    background:rgba(36,27,20,0.05); padding:4px 10px; border-radius:14px; color:rgba(36,27,20,0.6);
-  }
-  .tile-demo{
-    font-family:var(--mono); font-size:0.66rem; text-transform:uppercase; letter-spacing:.04em;
-    background:var(--red); color:var(--white); padding:4px 12px; border-radius:14px;
-    text-decoration:none; transition:background .2s;
-  }
+  /* WORK tiles */
+  .work-intro{max-width:680px;margin-bottom:36px;}
+  .work-intro h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.2vw,2.5rem);margin:0 0 14px;letter-spacing:-0.01em;}
+  .tiles{display:flex;flex-direction:column;gap:14px;}
+  .tile{background:var(--white);border-radius:22px;padding:26px 28px;display:flex;gap:22px;align-items:center;
+    cursor:pointer;border:1px solid var(--line);transition:transform .2s,box-shadow .2s;}
+  .tile:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(36,27,20,0.08);border-color:transparent;}
+  .tile .badge{width:54px;height:54px;border-radius:16px;flex-shrink:0;display:flex;align-items:center;
+    justify-content:center;font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--white);}
+  .tile .info{flex:1;min-width:0;}
+  .tile .tile-meta{font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.4);margin-bottom:5px;}
+  .tile h3{font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,2vw,1.4rem);margin:0 0 6px;}
+  .tile .desc{font-size:0.88rem;color:rgba(36,27,20,0.6);line-height:1.5;max-width:560px;}
+  .tile .chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .tile .chips span{font-family:var(--mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:.04em;
+    background:rgba(36,27,20,0.05);padding:4px 10px;border-radius:14px;color:rgba(36,27,20,0.6);}
+  .tile-demo{font-family:var(--mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:.04em;
+    background:var(--red);color:var(--white);padding:4px 12px;border-radius:14px;text-decoration:none;transition:background .2s;}
   .tile-demo:hover{background:var(--red-deep);}
-  .tile .go{font-family:var(--display); font-size:1.5rem; color:var(--red); transition:transform .2s;}
+  .tile .go{font-family:var(--display);font-size:1.5rem;color:var(--red);transition:transform .2s;}
   .tile:hover .go{transform:translateX(6px);}
-  @media (max-width:600px){ .tile{flex-wrap:wrap;} .tile .go{display:none;} }
+  @media(max-width:600px){.tile{flex-wrap:wrap;}.tile .go{display:none;}}
 
-  /* ---------- MY STORY: hero ---------- */
-  .story-hero-img{
-    width:100%; aspect-ratio:16/7; border-radius:26px; background:var(--white);
-    border:2px dashed var(--line); display:flex; align-items:center; justify-content:center;
-    flex-direction:column; gap:10px; font-family:var(--mono); font-size:0.7rem;
-    text-transform:uppercase; letter-spacing:.04em; color:rgba(36,27,20,0.4);
-    cursor:pointer; margin-bottom:36px; transition:border-color .2s;
-  }
-  .story-hero-img:hover{border-color:var(--red);}
-  .story-headline{margin:0 0 14px; line-height:1.18;}
-  .story-headline span{display:inline-block; margin-right:0.22em;}
-  .sz-a{font-family:var(--mono); font-size:0.85rem; text-transform:uppercase; letter-spacing:.08em; color:var(--red-deep); vertical-align:middle;}
-  .sz-b{font-family:var(--display); font-weight:400; font-style:italic; font-size:clamp(1.6rem,3.4vw,2.6rem); color:rgba(36,27,20,0.7);}
-  .sz-c{font-family:var(--display); font-weight:700; font-size:clamp(2.6rem,6.5vw,4.8rem); color:var(--ink);}
-  .sz-d{font-family:var(--display); font-weight:600; font-size:clamp(2rem,4.4vw,3.2rem); color:var(--red);}
-  .sz-e{font-family:var(--body); font-weight:600; font-size:clamp(1.1rem,2vw,1.5rem); color:rgba(36,27,20,0.55);}
-  .story-hero-sub{font-size:1.05rem; line-height:1.7; color:rgba(36,27,20,0.72); max-width:620px; margin-bottom:50px;}
-
-  /* ---------- MY STORY: early life (polaroid stack) ---------- */
-  .early-life{display:grid; grid-template-columns:340px 1fr; gap:50px; align-items:start; padding-bottom:6vh; border-bottom:1px solid var(--line); margin-bottom:6vh;}
-  .polaroid-stack{position:relative; height:420px;}
-  .polaroid{
-    position:absolute; width:230px; background:var(--white); padding:14px 14px 38px;
-    border-radius:6px; box-shadow:0 10px 24px rgba(36,27,20,0.18);
-    cursor:pointer; transition:transform .25s, box-shadow .25s; z-index:1;
-  }
-  .polaroid:hover{transform:scale(1.05) rotate(0deg) !important; box-shadow:0 18px 34px rgba(36,27,20,0.26); z-index:10;}
-  .polaroid .frame{
-    aspect-ratio:1/1; background:var(--cream); border:2px dashed var(--line);
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
-    font-family:var(--mono); font-size:0.6rem; text-transform:uppercase; color:rgba(36,27,20,0.4);
-  }
-  .polaroid .cap{
-    position:absolute; bottom:10px; left:14px; right:14px; text-align:center;
-    font-family:var(--display); font-style:italic; font-size:0.8rem; color:rgba(36,27,20,0.55);
-  }
-  .polaroid.p1{top:0; left:10px; transform:rotate(-7deg);}
-  .polaroid.p2{top:30px; left:140px; transform:rotate(5deg);}
-  .polaroid.p3{top:190px; left:0; transform:rotate(4deg);}
-  .polaroid.p4{top:210px; left:150px; transform:rotate(-4deg);}
-  .polaroid.p5{top:380px; left:70px; transform:rotate(8deg);}
-  .early-life-text{font-size:1.04rem; line-height:1.8; color:rgba(36,27,20,0.78);}
-  .early-life-text h3{font-family:var(--display); font-weight:600; font-size:clamp(1.6rem,3.2vw,2.2rem); margin:0 0 18px; letter-spacing:-0.01em;}
-  .early-life-text p{margin:0 0 16px;}
-  .early-life-text [contenteditable]:focus{background:rgba(209,75,63,0.05); border-radius:8px; outline:none;}
-  @media (max-width:860px){
-    .early-life{grid-template-columns:1fr;}
-    .polaroid-stack{height:420px; max-width:340px; margin:0 auto;}
-  }
-
-  /* ---------- MY STORY: teaching journey, 3 mood sections ---------- */
-  .journey-intro{max-width:680px; margin-bottom:10px;}
-  .journey-intro h3{font-family:var(--display); font-weight:600; font-size:clamp(1.7rem,3.4vw,2.4rem); margin:0 0 10px; letter-spacing:-0.01em;}
-  .journey-intro p{font-size:1rem; color:rgba(36,27,20,0.68); line-height:1.65;}
-
-  .mood-step{
-    margin:30px calc(-5.5vw) 0; padding:9vh 5.5vw; position:relative; overflow:hidden;
-  }
-  .mood-step .step-kicker{
-    font-family:var(--mono); font-size:0.74rem; text-transform:uppercase; letter-spacing:.08em;
-    margin-bottom:14px; display:inline-block;
-  }
-  .mood-step h4{font-family:var(--display); font-weight:700; font-size:clamp(1.8rem,4vw,3rem); margin:0 0 18px; letter-spacing:-0.01em;}
-  .mood-step .mood-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center;}
-  .mood-step p.mood-text{font-size:1.06rem; line-height:1.8;}
-  .mood-photo{
-    aspect-ratio:4/3; border-radius:20px; display:flex; align-items:center; justify-content:center;
-    flex-direction:column; gap:8px; font-family:var(--mono); font-size:0.66rem; text-transform:uppercase;
-    letter-spacing:.04em; cursor:pointer; transition:transform .2s;
-  }
-  @media (max-width:860px){ .mood-step .mood-grid{grid-template-columns:1fr;} }
-
-  /* Step 1 — joyful / childish */
-  .mood-step.joy{
-    background:linear-gradient(135deg,#FFE39A 0%, #FFB4A2 45%, #8FD9C4 100%);
-    border-radius:32px; color:#2A2014;
-  }
-  .mood-step.joy .step-kicker{background:rgba(255,255,255,0.6); color:#B5471F; padding:6px 14px; border-radius:20px;}
-  .mood-step.joy h4{font-style:italic; text-shadow:2px 2px 0 rgba(255,255,255,0.4);}
-  .mood-step.joy .mood-photo{background:rgba(255,255,255,0.55); border:3px dashed rgba(255,255,255,0.9); color:#7A4B2A; transform:rotate(-2deg);}
-  .mood-step.joy .mood-photo:hover{transform:rotate(0deg) scale(1.03);}
-  .mood-step.joy .deco{position:absolute; font-size:2.2rem; opacity:0.7;}
-
-  /* Step 2 — dark / gloomy */
-  .mood-step.gloom{
-    background:#15110D; color:#C9BFB4; border-radius:32px;
-  }
-  .mood-step.gloom .step-kicker{background:rgba(255,255,255,0.06); color:#C0746B; padding:6px 14px; border-radius:20px;}
-  .mood-step.gloom h4{color:#E8E2D8; font-weight:500; font-style:italic;}
+  /* MY STORY */
+  .story-hero-img{width:100%;aspect-ratio:16/7;border-radius:26px;overflow:hidden;border:1px solid var(--line);margin-bottom:36px;}
+  .story-hero-img img{width:100%;height:100%;object-fit:cover;}
+  .story-headline{margin:0 0 14px;line-height:1.18;}
+  .story-headline span{display:inline-block;margin-right:0.22em;}
+  .sz-a{font-family:var(--mono);font-size:0.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--red-deep);vertical-align:middle;}
+  .sz-b{font-family:var(--display);font-weight:400;font-style:italic;font-size:clamp(1.6rem,3.4vw,2.6rem);color:rgba(36,27,20,0.7);}
+  .sz-c{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,6.5vw,4.8rem);color:var(--ink);}
+  .story-hero-sub{font-size:1.05rem;line-height:1.7;color:rgba(36,27,20,0.72);max-width:620px;margin-bottom:50px;}
+  .early-life{display:grid;grid-template-columns:340px 1fr;gap:50px;align-items:start;padding-bottom:6vh;border-bottom:1px solid var(--line);margin-bottom:6vh;}
+  .polaroid-stack{position:relative;height:420px;}
+  .polaroid{position:absolute;width:230px;background:var(--white);padding:14px 14px 38px;border-radius:6px;
+    box-shadow:0 10px 24px rgba(36,27,20,0.18);cursor:pointer;transition:transform .25s,box-shadow .25s;z-index:1;}
+  .polaroid:hover{transform:scale(1.05) rotate(0deg)!important;box-shadow:0 18px 34px rgba(36,27,20,0.26);z-index:10;}
+  .polaroid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+  .polaroid .frame{aspect-ratio:1/1;background:var(--cream);border:2px dashed var(--line);display:flex;
+    align-items:center;justify-content:center;font-family:var(--mono);font-size:0.6rem;color:rgba(36,27,20,0.4);}
+  .polaroid .cap{position:absolute;bottom:10px;left:14px;right:14px;text-align:center;
+    font-family:var(--display);font-style:italic;font-size:0.8rem;color:rgba(36,27,20,0.55);}
+  .polaroid.p1{top:0;left:10px;transform:rotate(-7deg);}
+  .polaroid.p2{top:30px;left:140px;transform:rotate(5deg);}
+  .polaroid.p3{top:190px;left:0;transform:rotate(4deg);}
+  .polaroid.p4{top:210px;left:150px;transform:rotate(-4deg);}
+  .early-life-text{font-size:1.04rem;line-height:1.8;color:rgba(36,27,20,0.78);}
+  .early-life-text h3{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.2rem);margin:0 0 18px;letter-spacing:-0.01em;}
+  .early-life-text p{margin:0 0 14px;}
+  .early-life-text [contenteditable]:focus{background:rgba(209,75,63,0.05);border-radius:8px;outline:none;}
+  @media(max-width:860px){.early-life{grid-template-columns:1fr;}.polaroid-stack{height:420px;max-width:340px;margin:0 auto;}}
+  .journey-intro{max-width:680px;margin-bottom:10px;}
+  .journey-intro h3{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0 0 10px;letter-spacing:-0.01em;}
+  .journey-intro p{font-size:1rem;color:rgba(36,27,20,0.68);line-height:1.65;}
+  .mood-step{margin:30px calc(-5.5vw) 0;padding:9vh 5.5vw;position:relative;overflow:hidden;}
+  .mood-step .step-kicker{font-family:var(--mono);font-size:0.74rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;display:inline-block;}
+  .mood-step h4{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4vw,3rem);margin:0 0 18px;letter-spacing:-0.01em;}
+  .mood-step .mood-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;}
+  .mood-step p.mood-text{font-size:1.06rem;line-height:1.8;}
+  .mood-photo{aspect-ratio:4/3;border-radius:20px;overflow:hidden;}
+  .mood-photo img{width:100%;height:100%;object-fit:cover;}
+  @media(max-width:860px){.mood-step .mood-grid{grid-template-columns:1fr;}}
+  .mood-step.joy{background:linear-gradient(135deg,#FFE39A 0%,#FFB4A2 45%,#8FD9C4 100%);border-radius:32px;color:#2A2014;}
+  .mood-step.joy .step-kicker{background:rgba(255,255,255,0.6);color:#B5471F;padding:6px 14px;border-radius:20px;}
+  .mood-step.joy h4{font-style:italic;}
+  .mood-step.joy .deco{position:absolute;font-size:2.2rem;opacity:0.7;}
+  .mood-step.gloom{background:#15110D;color:#C9BFB4;border-radius:32px;}
+  .mood-step.gloom .step-kicker{background:rgba(255,255,255,0.06);color:#C0746B;padding:6px 14px;border-radius:20px;}
+  .mood-step.gloom h4{color:#E8E2D8;font-weight:500;font-style:italic;}
   .mood-step.gloom p.mood-text{color:#9C9388;}
-  .mood-step.gloom .mood-photo{background:rgba(255,255,255,0.03); border:2px dashed rgba(255,255,255,0.15); color:#6E665C;}
-
-  /* Step 3 — joyful but mature */
-  .mood-step.meaning{
-    background:linear-gradient(160deg,#2E3B36 0%, #4A4030 55%, #8C5A3C 100%); color:#EFE6D8; border-radius:32px;
-  }
-  .mood-step.meaning .step-kicker{background:rgba(255,255,255,0.1); color:#E3B06C; padding:6px 14px; border-radius:20px;}
+  .mood-step.meaning{background:linear-gradient(160deg,#2E3B36 0%,#4A4030 55%,#8C5A3C 100%);color:#EFE6D8;border-radius:32px;}
+  .mood-step.meaning .step-kicker{background:rgba(255,255,255,0.1);color:#E3B06C;padding:6px 14px;border-radius:20px;}
   .mood-step.meaning h4{color:#F4E9D6;}
   .mood-step.meaning p.mood-text{color:#D8CDB9;}
-  .mood-step.meaning .mood-photo{background:rgba(255,255,255,0.06); border:2px dashed rgba(244,233,214,0.3); color:#D8CDB9;}
+  .story-cta{margin-top:7vh;padding:5vh 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .story-cta p{font-size:1.02rem;color:rgba(36,27,20,0.68);max-width:440px;line-height:1.6;margin:0;}
+  .story-cta-btn{font-family:var(--display);font-weight:600;font-size:1.05rem;background:var(--red);color:var(--white);
+    border:none;padding:16px 34px;border-radius:30px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:transform .2s,box-shadow .2s;}
+  .story-cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(168,40,31,0.3);}
 
-  .story-cta{
-    margin-top:7vh; padding:5vh 0; text-align:center; display:flex; flex-direction:column; align-items:center; gap:18px;
-  }
-  .story-cta p{font-size:1.02rem; color:rgba(36,27,20,0.68); max-width:440px; line-height:1.6; margin:0;}
-  .story-cta-btn{
-    font-family:var(--display); font-weight:600; font-size:1.05rem;
-    background:var(--red); color:var(--white); border:none; padding:16px 34px;
-    border-radius:30px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:10px;
-    transition:transform .2s, box-shadow .2s;
-  }
-  .story-cta-btn:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(168,40,31,0.3);}
-
-  /* ---------- CONTACT ---------- */
-  .contact-wrap{max-width:620px;}
-  .contact-wrap h2{font-family:var(--display); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.5rem); margin:0 0 16px; letter-spacing:-0.01em;}
-  .contact-row{margin-top:26px; display:flex; flex-direction:column; gap:10px;}
-  .contact-link{
-    display:flex; justify-content:space-between; align-items:center;
-    font-family:var(--display); font-weight:500; font-size:1rem;
-    padding:18px 24px; border-radius:18px; background:var(--white); border:1px solid var(--line);
-    text-decoration:none; color:var(--ink); transition:all .2s;
-  }
-  .contact-link:hover{background:var(--red); color:var(--white); border-color:var(--red); transform:translateX(4px);}
+  /* CONTACT */
+  .contact-wrap{max-width:640px;}
+  .contact-wrap h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.2vw,2.5rem);margin:0 0 16px;letter-spacing:-0.01em;}
+  .contact-row{margin-top:26px;display:flex;flex-direction:column;gap:10px;}
+  .resume-dropdown-wrap{user-select:none;}
+  .resume-dropdown{display:none;flex-direction:column;gap:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin-top:-10px;}
+  .resume-dropdown.open{display:flex;}
+  .resume-option{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:500;font-size:1rem;
+    padding:16px 24px;background:var(--cream);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);transition:all .2s;}
+  .resume-option:last-child{border-bottom:none;}
+  .resume-option:hover{background:var(--red);color:var(--white);padding-left:30px;}
+  .contact-link{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:500;font-size:1rem;
+    padding:18px 24px;border-radius:18px;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:all .2s;}
+  .contact-link:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateX(4px);}
   .contact-link span:last-child{font-size:1.2rem;}
 
-  /* ---------- CASE STUDY DETAIL ---------- */
+  /* CASE STUDY */
   .study-header{padding:6vh 5.5vw 4vh;}
-  .back-link{
-    font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--red-deep); text-decoration:none; display:inline-flex; align-items:center; gap:6px;
-    margin-bottom:20px; background:rgba(209,75,63,0.1); padding:7px 14px; border-radius:20px;
-  }
-  .study-header h1{font-family:var(--display); font-weight:600; font-size:clamp(2rem,4.6vw,3.3rem); margin:0; letter-spacing:-0.01em;}
-  .study-header .study-tags{margin-top:16px; display:flex; gap:10px;}
-  .study-header .study-tags span{
-    font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:.04em; color:var(--red-deep);
-    background:rgba(209,75,63,0.1); padding:6px 12px; border-radius:16px;
-  }
-
-  .story-block{
-    display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center;
-    padding:5vh 5.5vw;
-  }
-  .story-block.reverse .visual{order:2;}
-  .story-block.reverse .text{order:1;}
-  .visual{
-    aspect-ratio:4/3; background:var(--white); border-radius:22px; border:2px dashed var(--line);
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
-    font-family:var(--mono); font-size:0.7rem; color:rgba(36,27,20,0.4); text-align:center; padding:20px;
-    cursor:zoom-in; transition:transform .2s, border-color .25s;
-  }
-  .visual:hover{border-color:var(--red); transform:translateY(-3px);}
-  .text .step-label{
-    font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--red-deep);
-    margin-bottom:10px; display:inline-block; background:rgba(209,75,63,0.1); padding:5px 12px; border-radius:14px;
-  }
-  .text h3{font-family:var(--display); font-weight:600; font-size:1.5rem; margin:0 0 14px; letter-spacing:-0.005em;}
-  .text p{line-height:1.75; color:rgba(36,27,20,0.75);}
-  @media (max-width:760px){
-    .story-block{grid-template-columns:1fr;}
-    .story-block.reverse .visual{order:1;} .story-block.reverse .text{order:2;}
-  }
-
-  #zoom-modal{
-    position:fixed; inset:0; background:rgba(36,27,20,0.85); z-index:2000;
-    display:none; align-items:center; justify-content:center; padding:6vw;
-  }
+  .back-link{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
+    text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;background:rgba(209,75,63,0.1);padding:7px 14px;border-radius:20px;}
+  .study-header h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4.6vw,3.3rem);margin:0;letter-spacing:-0.01em;}
+  .study-header .study-tags{margin-top:16px;display:flex;gap:10px;}
+  .study-header .study-tags span{font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--red-deep);background:rgba(209,75,63,0.1);padding:6px 12px;border-radius:16px;}
+  .story-block{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:5vh 5.5vw;}
+  .story-block.reverse .visual{order:2;} .story-block.reverse .text{order:1;}
+  .visual{aspect-ratio:4/3;background:var(--white);border-radius:22px;border:2px dashed var(--line);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
+    font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.4);text-align:center;padding:20px;cursor:zoom-in;transition:transform .2s,border-color .25s;}
+  .visual:hover{border-color:var(--red);transform:translateY(-3px);}
+  .text .step-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
+    margin-bottom:10px;display:inline-block;background:rgba(209,75,63,0.1);padding:5px 12px;border-radius:14px;}
+  .text h3{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 14px;letter-spacing:-0.005em;}
+  .text p{line-height:1.75;color:rgba(36,27,20,0.75);}
+  @media(max-width:760px){.story-block{grid-template-columns:1fr;}.story-block.reverse .visual{order:1;}.story-block.reverse .text{order:2;}}
+  #zoom-modal{position:fixed;inset:0;background:rgba(36,27,20,0.85);z-index:2000;display:none;align-items:center;justify-content:center;padding:6vw;}
   #zoom-modal.active{display:flex;}
-  .zoom-box{
-    background:var(--cream); border-radius:24px; max-width:900px; width:100%; aspect-ratio:16/10;
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px;
-    font-family:var(--mono); color:rgba(36,27,20,0.5);
-  }
-
-  footer{padding:30px 5.5vw; font-family:var(--mono); font-size:0.7rem; color:rgba(36,27,20,0.5); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
-  footer a{text-decoration:none; color:var(--red-deep);}
-
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
+  .zoom-box{background:var(--cream);border-radius:24px;max-width:900px;width:100%;aspect-ratio:16/10;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-family:var(--mono);color:rgba(36,27,20,0.5);}
+  footer{padding:30px 5.5vw;font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.5);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer a{text-decoration:none;color:var(--red-deep);}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
 
 <aside>
   <div>
-    <div class="brand" data-nav="home">Your Name<span class="dot">.</span></div>
-    <div class="brand-role">Learning Ops &amp; Customer Ed</div>
+    <div class="brand" data-nav="home">Murat Mert Titiz<span class="dot">.</span></div>
+    <div class="brand-role" data-en="Learning Ops &amp; Customer Ed" data-ja="ラーニングオペレーション">Learning Ops &amp; Customer Ed</div>
   </div>
-  <button id="menu-toggle">Menu</button>
+  <button id="menu-toggle" data-en="Menu" data-ja="メニュー">Menu</button>
   <nav id="main-nav">
     <ol>
-      <li><a href="#" data-nav="home" class="active"><span class="emoji">🏠</span>Home</a></li>
-      <li><a href="#" data-nav="work"><span class="emoji">🧩</span>Work</a></li>
-      <li><a href="#" data-nav="story"><span class="emoji">✨</span>My Story</a></li>
-      <li><a href="#" data-nav="contact"><span class="emoji">💬</span>Contact</a></li>
+      <li><a href="#" data-nav="home" class="active"><span class="emoji">🏠</span><span data-en="Home" data-ja="ホーム">Home</span></a></li>
+      <li><a href="#" data-nav="work"><span class="emoji">🧩</span><span data-en="Work" data-ja="実績">Work</span></a></li>
+      <li><a href="#" data-nav="story"><span class="emoji">✨</span><span data-en="My Story" data-ja="私のストーリー">My Story</span></a></li>
+      <li><a href="#" data-nav="contact"><span class="emoji">💬</span><span data-en="Contact" data-ja="お問い合わせ">Contact</span></a></li>
     </ol>
   </nav>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en">EN</button>
+    <button class="lang-btn" id="btn-ja">日本語</button>
+  </div>
   <div class="sidebar-foot">
-    Based in <span class="loc">Tokyo</span><br>
-    Lived in <span class="loc">TR · US · IT · JP</span><br>
-    Speak <span class="loc">TR · EN · JP · IT</span> + basic RU<br>
-    <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" style="color:var(--red-deep); text-decoration:none; font-weight:600;">LinkedIn ↗</a><br>
-    © 2026 — local prototype
+    <span data-en="Based in" data-ja="拠点：">Based in</span> <span class="loc">Tokyo</span><br>
+    <span data-en="Lived in" data-ja="居住歴：">Lived in</span> <span class="loc">TR · US · IT · JP</span><br>
+    <span data-en="Speak" data-ja="言語：">Speak</span> <span class="loc">TR · EN · JP · IT</span> + basic RU<br>
+    <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" style="color:var(--red-deep);text-decoration:none;font-weight:600;">LinkedIn ↗</a><br>
+    © 2026 Murat Mert Titiz
   </div>
 </aside>
 
 <main>
 
+  <!-- HOME -->
   <div class="view active" id="view-home">
     <section class="hero">
-      <span class="index-no">👋 Learning Ops · Customer Education · Instructional Design</span>
+      <span class="index-no" data-en="👋 Learning Ops · Customer Education · Instructional Design" data-ja="👋 ラーニングオペレーション · カスタマーエデュケーション · インストラクショナルデザイン">👋 Learning Ops · Customer Education · Instructional Design</span>
       <div class="hero-row">
         <div>
-          <h1>I build the systems that make learning <em>work</em> for the people stuck running it.</h1>
-          <p class="sub">My background's in instructional design, but most of what I end up fixing sits underneath the lessons: the scheduling, the data, the parent communication nobody budgeted time for. I grew up moving between cultures and now build for schools and teams who deal with the same kind of complexity. Currently in Japan, after stretches in the US and Italy.</p>
+          <h1 data-en='I build the systems that make learning <em>work</em> for the people stuck running it.' data-ja='学びを<em>機能させる</em>仕組みをつくるのが、私の仕事です。'>I build the systems that make learning <em>work</em> for the people stuck running it.</h1>
+          <p class="sub" data-en="My background's in instructional design, but most of what I end up fixing sits underneath the lessons: the scheduling, the data, the parent communication nobody budgeted time for. I grew up moving between cultures and now build for schools and teams who deal with the same kind of complexity. Currently in Japan, after stretches in the US and Italy." data-ja="バックグラウンドはインストラクショナルデザインですが、実際に取り組む課題のほとんどはレッスンの裏側にあります。スケジュール管理、データ収集、誰も時間を割けていない保護者とのコミュニケーション。トルコ、アメリカ、イタリア、日本と文化をまたいで生きてきた経験をもとに、複雑な環境で動く学校やチームのための仕組みをつくっています。">My background's in instructional design, but most of what I end up fixing sits underneath the lessons: the scheduling, the data, the parent communication nobody budgeted time for. I grew up moving between cultures and now build for schools and teams who deal with the same kind of complexity. Currently in Japan, after stretches in the US and Italy.</p>
         </div>
-        <div class="hero-photo" data-headshot>
-          <div style="font-size:1.6rem;">📷</div>
-          <div>Add photo</div>
+        <div class="hero-photo">
+          <img src="hero.jpg" alt="Murat Mert Titiz" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
         </div>
       </div>
       <div class="discipline-tags">
-        <span class="tag primary">Learning Operations</span>
-        <span class="tag primary">Customer Education</span>
-        <span class="tag">Instructional Design</span>
+        <span class="tag primary" data-en="Learning Operations" data-ja="ラーニングオペレーション">Learning Operations</span>
+        <span class="tag primary" data-en="Customer Education" data-ja="カスタマーエデュケーション">Customer Education</span>
+        <span class="tag" data-en="Instructional Design" data-ja="インストラクショナルデザイン">Instructional Design</span>
       </div>
     </section>
 
     <section>
-      <span class="index-no">📊 At a glance</span>
+      <span class="index-no" data-en="📊 At a glance" data-ja="📊 実績サマリー">📊 At a glance</span>
       <div class="stats-wrap">
-        <div class="stat-card"><div class="num">250+</div><div class="label">Learners served across instructional programs and operational systems</div></div>
-        <div class="stat-card"><div class="num">~100%</div><div class="label">Staff adoption of an in-house lesson tracking tool, built and iterated from scratch</div></div>
-        <div class="stat-card"><div class="num">90%</div><div class="label">Parent adoption of a custom LMS communication system for scheduling and support</div></div>
-        <div class="stat-card"><div class="num">87%</div><div class="label">Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom</div></div>
-        <div class="stat-card"><div class="num">100+</div><div class="label">Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide</div></div>
-        <div class="stat-card"><div class="num">5</div><div class="label">Languages — Turkish, English, Japanese, Italian, basic Russian</div></div>
-        <div class="stat-card" style="grid-column: 1 / -1;">
-          <div class="num" style="font-size:1.05rem; line-height:1.6; letter-spacing:0;">Articulate Rise &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Moodle &nbsp;·&nbsp; Google UX/UI Design &nbsp;·&nbsp; Copyediting &nbsp;·&nbsp; ABA Therapy</div>
-          <div class="label">Tools &amp; certifications</div>
+        <div class="stat-card"><div class="num">250+</div><div class="label" data-en="Learners served across instructional programs and operational systems" data-ja="授業プログラムおよび運営システムを通じて関わった学習者数">Learners served across instructional programs and operational systems</div></div>
+        <div class="stat-card"><div class="num">~100%</div><div class="label" data-en="Staff adoption of an in-house lesson tracking tool, built and iterated from scratch" data-ja="自社開発の授業記録ツールのスタッフ定着率（ゼロから設計・改善）">Staff adoption of an in-house lesson tracking tool, built and iterated from scratch</div></div>
+        <div class="stat-card"><div class="num">90%</div><div class="label" data-en="Parent adoption of a custom LMS communication system for scheduling and support" data-ja="スケジュール管理・サポート用LINEシステムの保護者登録率">Parent adoption of a custom LMS communication system for scheduling and support</div></div>
+        <div class="stat-card"><div class="num">87%</div><div class="label" data-en="Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom" data-ja="家庭学習を促す保護者参加プログラムの継続的な定着率">Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom</div></div>
+        <div class="stat-card"><div class="num">100+</div><div class="label" data-en="Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide" data-ja="制作した学習コンテンツ数（カリキュラム解説、オンボーディング資料、インストラクターガイドなど）">Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide</div></div>
+        <div class="stat-card"><div class="num">5</div><div class="label" data-en="Languages — Turkish, English, Japanese, Italian, basic Russian" data-ja="言語 — トルコ語、英語、日本語、イタリア語、ロシア語（基礎）">Languages — Turkish, English, Japanese, Italian, basic Russian</div></div>
+        <div class="stat-card" style="grid-column:1/-1;">
+          <div class="num" style="font-size:1.05rem;line-height:1.6;letter-spacing:0;">Articulate Rise &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Moodle &nbsp;·&nbsp; Google UX/UI Design &nbsp;·&nbsp; Copyediting &nbsp;·&nbsp; ABA Therapy</div>
+          <div class="label" data-en="Tools &amp; certifications" data-ja="ツール・資格">Tools &amp; certifications</div>
         </div>
       </div>
     </section>
 
     <section>
-      <span class="index-no">🧩 Selected work</span>
+      <span class="index-no" data-en="🧩 Selected work" data-ja="🧩 主な実績">🧩 Selected work</span>
       <div class="tiles" id="home-tiles"></div>
     </section>
   </div>
 
+  <!-- WORK -->
   <div class="view" id="view-work">
     <section>
       <div class="work-intro">
-        <span class="index-no">🧩 Work</span>
-        <h2>Four systems I've built, all solving the same underlying problem.</h2>
+        <span class="index-no" data-en="🧩 Work" data-ja="🧩 実績">🧩 Work</span>
+        <h2 data-en="Four systems I've built, all solving the same underlying problem." data-ja="つくってきた4つのシステム。どれも同じ根本的な課題に向き合っています。">Four systems I've built, all solving the same underlying problem.</h2>
       </div>
       <div class="tiles" id="work-tiles"></div>
     </section>
   </div>
 
+  <!-- MY STORY -->
   <div class="view" id="view-story">
     <section>
-      <div class="story-hero-img" data-headshot>
-        <div style="font-size:2rem;">📷</div>
-        <div>Hero photo — add yours here</div>
+      <div class="story-hero-img">
+        <img src="story-hero.jpg" alt="My Story">
       </div>
-
       <h1 class="story-headline">
-        <span class="sz-a">This is</span><br>
-        <span class="sz-c">my story</span><span class="sz-b">, start to finish.</span>
+        <span class="sz-a" data-en="This is" data-ja="これが">This is</span><br>
+        <span class="sz-c" data-en="my story" data-ja="私のストーリー">my story</span><span class="sz-b" data-en=", start to finish." data-ja="、最初から最後まで。">, start to finish.</span>
       </h1>
-      <p class="story-hero-sub" contenteditable="true">From a fencing strip in Turkey to building learning systems in Japan — replace this line with your own opening, the one sentence that sets the tone for everything below.</p>
+      <p class="story-hero-sub" contenteditable="true" data-en="From a fencing strip in Turkey to building learning systems in Japan — replace this line with your own opening, the one sentence that sets the tone for everything below." data-ja="トルコのフェンシング場から、日本で学びの仕組みをつくる今まで — この一文を、自分らしい言葉に書き換えてください。">From a fencing strip in Turkey to building learning systems in Japan — replace this line with your own opening, the one sentence that sets the tone for everything below.</p>
 
-      <!-- ===== EARLY LIFE ===== -->
       <div class="early-life">
         <div class="polaroid-stack">
-          <div class="polaroid p1" data-headshot><div class="frame">📷</div><div class="cap">fencing</div></div>
-          <div class="polaroid p2" data-headshot><div class="frame">📷</div><div class="cap">UWC Adriatic</div></div>
-          <div class="polaroid p3" data-headshot><div class="frame">📷</div><div class="cap">Trieste</div></div>
-          <div class="polaroid p4" data-headshot><div class="frame">📷</div><div class="cap">UVM</div></div>
+          <div class="polaroid p1"><img src="fencing.jpg" alt="Fencing"><div class="cap" data-en="fencing" data-ja="フェンシング">fencing</div></div>
+          <div class="polaroid p2"><img src="uwc.jpg" alt="UWC Adriatic"><div class="cap" data-en="UWC Adriatic" data-ja="UWCアドリアティック">UWC Adriatic</div></div>
+          <div class="polaroid p3"><img src="trieste.jpg" alt="Trieste"><div class="cap" data-en="Trieste" data-ja="トリエステ">Trieste</div></div>
+          <div class="polaroid p4"><img src="uvm.jpg" alt="UVM"><div class="cap" data-en="UVM" data-ja="バーモント大学">UVM</div></div>
         </div>
         <div class="early-life-text">
-          <span class="index-no">🤺 Early life</span>
-          <h3>Fencing, UWC, and finding my way to psychology</h3>
+          <span class="index-no" data-en="🤺 Early life" data-ja="🤺 幼少期・学生時代">🤺 Early life</span>
+          <h3 data-en="Fencing, UWC, and finding my way to psychology" data-ja="フェンシング、UWC、そして心理学へ">Fencing, UWC, and finding my way to psychology</h3>
           <div contenteditable="true">
-            <p>This is where the fencing strip, UWC Adriatic, and UVM all live together as one stretch of your life — not three separate chapters, just the years that shaped how you see people and competition and difference. Write it as one flowing story: what fencing for the Turkish national team taught you, how UWC cracked open your sense of the world, and why psychology (and keeping Italian alive) made sense by the time you got to Vermont.</p>
-            <p>Click into this text and write the real version — five photos are stacked to the left like polaroids on a table, click any of them to swap in the real thing.</p>
+            <p data-en="This is where the fencing strip, UWC Adriatic, and UVM all live together as one stretch of your life — not three separate chapters, just the years that shaped how you see people and competition and difference. Write it as one flowing story: what fencing for the Turkish national team taught you, how UWC cracked open your sense of the world, and why psychology (and keeping Italian alive) made sense by the time you got to Vermont." data-ja="フェンシング、UWCアドリアティック、バーモント大学。三つの場所は別々の章ではなく、自分の見方や競争への向き合い方、差異への感覚を形づくった一続きの時間です。トルコナショナルチームで学んだこと、UWCで世界観が広がった経験、そして心理学（とイタリア語）を続ける意味がバーモントで見えてきたこと。ひとつの流れる物語として書いてみてください。">This is where the fencing strip, UWC Adriatic, and UVM all live together as one stretch of your life — not three separate chapters, just the years that shaped how you see people and competition and difference. Write it as one flowing story: what fencing for the Turkish national team taught you, how UWC cracked open your sense of the world, and why psychology (and keeping Italian alive) made sense by the time you got to Vermont.</p>
           </div>
         </div>
       </div>
 
-      <!-- ===== TEACHING JOURNEY ===== -->
       <div class="journey-intro">
-        <span class="index-no">📚 The teaching years</span>
-        <h3>Three stages of falling in, falling apart, and finding my footing</h3>
-        <p contenteditable="true">After Vermont came a stretch as a home therapist for kids with ASD, then the move to Japan — and that's where teaching really started. It didn't go in a straight line. Here's the honest shape of it.</p>
+        <span class="index-no" data-en="📚 The teaching years" data-ja="📚 教育の現場へ">📚 The teaching years</span>
+        <h3 data-en="Three stages of falling in, falling apart, and finding my footing" data-ja="惚れ込み、打ちのめされ、自分の立ち位置を見つけた三つの段階">Three stages of falling in, falling apart, and finding my footing</h3>
+        <p contenteditable="true" data-en="After Vermont came a stretch as a home therapist for kids with ASD in Boston, then the move to Japan — and that's where teaching really started. The research years at UVM left something behind: a comfort with evidence, a habit of asking whether something actually works before assuming it does, and enough familiarity with scientific literature to apply frameworks like ICAP correctly rather than just name-dropping them. It didn't go in a straight line from there. Here's the honest shape of it." data-ja="バーモントの後はボストンで自閉症の子どもたちのホームセラピストとして働き、その後日本へ。本当の意味での教育はここから始まりました。UVMでの研究経験が残したものがあります。根拠を大切にする習慣、「本当に機能するか」を問う癖、ICAPのようなフレームワークを名前だけでなく正しく使える素地。そこからは一直線ではありませんでした。正直な形でお伝えします。">After Vermont came a stretch as a home therapist for kids with ASD in Boston, then the move to Japan — and that's where teaching really started. The research years at UVM left something behind: a comfort with evidence, a habit of asking whether something actually works before assuming it does, and enough familiarity with scientific literature to apply frameworks like ICAP correctly rather than just name-dropping them. It didn't go in a straight line from there. Here's the honest shape of it.</p>
       </div>
 
       <div class="mood-step joy reveal">
-        <span class="deco" style="top:8%; left:6%;">✨</span>
-        <span class="deco" style="top:70%; left:88%;">🎈</span>
-        <span class="deco" style="top:15%; left:90%;">🌟</span>
-        <span class="step-kicker">Step one — the honeymoon</span>
-        <h4>I fell in love with the idea of it.</h4>
+        <span class="deco" style="top:8%;left:6%;">✨</span>
+        <span class="deco" style="top:70%;left:88%;">🎈</span>
+        <span class="deco" style="top:15%;left:90%;">🌟</span>
+        <span class="step-kicker" data-en="Step one — the honeymoon" data-ja="第一段階 — 蜜月期">Step one — the honeymoon</span>
+        <h4 data-en="I fell in love with the idea of it." data-ja="教育という「理想」に恋をした。">I fell in love with the idea of it.</h4>
         <div class="mood-grid">
-          <p class="mood-text" contenteditable="true">Write about the early excitement here — the curiosity, the feeling of wanting to learn and grow, the optimism before reality set in. Keep the tone light and genuine; this is the part of the story before anything got hard.</p>
-          <div class="mood-photo" data-headshot><div style="font-size:1.5rem;">📷</div><div>Add a photo</div></div>
+          <p class="mood-text" contenteditable="true" data-en="Write about the early excitement here — the curiosity, the feeling of wanting to learn and grow, the optimism before reality set in. Keep the tone light and genuine; this is the part of the story before anything got hard." data-ja="最初の興奮について書いてください。好奇心、学び成長したいという気持ち、現実を知る前の楽観。まだ何も難しくなかった頃の話です。">Write about the early excitement here — the curiosity, the feeling of wanting to learn and grow, the optimism before reality set in. Keep the tone light and genuine; this is the part of the story before anything got hard.</p>
+          <div class="mood-photo"><img src="step1.jpg" alt="The honeymoon period"></div>
         </div>
       </div>
 
       <div class="mood-step gloom reveal">
-        <span class="step-kicker">Step two — the reality check</span>
-        <h4>Then I saw what the field actually runs on.</h4>
+        <span class="step-kicker" data-en="Step two — the reality check" data-ja="第二段階 — 現実との衝突">Step two — the reality check</span>
+        <h4 data-en="Then I saw what the field actually runs on." data-ja="そしてこの業界が何で動いているかを見た。">Then I saw what the field actually runs on.</h4>
         <div class="mood-grid">
-          <p class="mood-text" contenteditable="true">Write the honest version here — long hours, small funding, tired teachers, burnout, mismanagement. This is the section that's allowed to be heavy. Don't soften it for the sake of the portfolio; the contrast with step one and step three is the point.</p>
-          <div class="mood-photo" data-headshot><div style="font-size:1.4rem;">📷</div><div>Optional photo</div></div>
+          <p class="mood-text" contenteditable="true" data-en="Write the honest version here — long hours, small funding, tired teachers, burnout, mismanagement. This is the section that's allowed to be heavy. Don't soften it for the sake of the portfolio; the contrast with step one and step three is the point." data-ja="ここには正直な言葉を書いてください。長時間労働、少ない予算、疲弊した先生たち、燃え尽き、組織の問題。重くていい。第一段階と第三段階との対比がこのページの核心です。">Write the honest version here — long hours, small funding, tired teachers, burnout, mismanagement. This is the section that's allowed to be heavy. Don't soften it for the sake of the portfolio; the contrast with step one and step three is the point.</p>
+          <div class="mood-photo"><img src="step2.jpg" alt="The reality check"></div>
         </div>
       </div>
 
       <div class="mood-step meaning reveal">
-        <span class="step-kicker">Step three — finding meaning</span>
-        <h4>And then I started fixing it instead of just feeling it.</h4>
+        <span class="step-kicker" data-en="Step three — finding meaning" data-ja="第三段階 — 意味を見つける">Step three — finding meaning</span>
+        <h4 data-en="And then I started fixing it instead of just feeling it." data-ja="感じるだけでなく、直し始めた。">And then I started fixing it instead of just feeling it.</h4>
         <div class="mood-grid">
-          <p class="mood-text" contenteditable="true">Write about where the meaning actually showed up — not the naive hope from step one, but something steadier: choosing to work on the systems instead of just absorbing the frustration. This is the bridge into the case studies in your Work section.</p>
-          <div class="mood-photo" data-headshot><div style="font-size:1.4rem;">📷</div><div>Optional photo</div></div>
+          <p class="mood-text" contenteditable="true" data-en="Write about where the meaning actually showed up — not the naive hope from step one, but something steadier: choosing to work on the systems instead of just absorbing the frustration. This is the bridge into the case studies in your Work section." data-ja="意味が実際に現れた場所について書いてください。第一段階の無邪気な希望ではなく、もっと落ち着いたもの。不満を抱えるだけでなく、システムを変えることを選んだ瞬間。これが実績（Work）へとつながる橋です。">Write about where the meaning actually showed up — not the naive hope from step one, but something steadier: choosing to work on the systems instead of just absorbing the frustration. This is the bridge into the case studies in your Work section.</p>
+          <div class="mood-photo"><img src="step3.jpg" alt="Finding meaning"></div>
         </div>
       </div>
 
       <div class="story-cta">
-        <p>That's the path that got me here. The work below is where it landed.</p>
-        <a href="#" class="story-cta-btn" data-nav="work">See how this shows up in my work →</a>
+        <p data-en="That's the path that got me here. The work below is where it landed." data-ja="これが今につながる道のりです。その結果が、実績として残っています。">That's the path that got me here. The work below is where it landed.</p>
+        <a href="#" class="story-cta-btn" data-nav="work" data-en="See how this shows up in my work →" data-ja="実績を見る →">See how this shows up in my work →</a>
       </div>
-
     </section>
   </div>
 
+  <!-- CONTACT -->
   <div class="view" id="view-contact">
     <section>
       <div class="contact-wrap">
-        <span class="index-no">💬 Contact</span>
-        <h2>Let's talk about a project.</h2>
-        <p style="line-height:1.75; color:rgba(36,27,20,0.75);">I'm open to roles and project work in learning operations, customer education, and instructional design — reach out if something seems like a fit.</p>
+        <span class="index-no" data-en="💬 Contact" data-ja="💬 お問い合わせ">💬 Contact</span>
+        <h2 data-en="Let's talk about a project." data-ja="プロジェクトについて話しましょう。">Let's talk about a project.</h2>
+        <p style="line-height:1.75;color:rgba(36,27,20,0.75);" data-en="I'm open to roles and project work in learning operations, customer education, and instructional design — reach out if something seems like a fit." data-ja="ラーニングオペレーション、カスタマーエデュケーション、インストラクショナルデザイン分野でのポジションやプロジェクトに関心があります。何かご縁がありそうでしたら、お気軽にご連絡ください。">I'm open to roles and project work in learning operations, customer education, and instructional design — reach out if something seems like a fit.</p>
         <div class="contact-row">
-          <a href="mailto:muratto.titiz@gmail.com" class="contact-link"><span>Email</span><span>↗</span></a>
+          <a href="mailto:muratto.titiz@gmail.com" class="contact-link"><span data-en="Email" data-ja="メール">Email</span><span>↗</span></a>
           <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link"><span>LinkedIn</span><span>↗</span></a>
-          <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="contact-link"><span>Résumé (PDF)</span><span>↗</span></a>
+          <div class="contact-link resume-dropdown-wrap" id="resume-toggle" style="cursor:pointer;">
+            <span data-en="Résumé (PDF)" data-ja="履歴書 (PDF)">Résumé (PDF)</span>
+            <span id="resume-arrow">↓</span>
+          </div>
+          <div class="resume-dropdown" id="resume-dropdown">
+            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option"><span data-en="🇬🇧 English" data-ja="🇬🇧 英語版">🇬🇧 English</span><span>↗</span></a>
+            <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option"><span data-en="🇯🇵 日本語" data-ja="🇯🇵 日本語版">🇯🇵 日本語</span><span>↗</span></a>
+          </div>
         </div>
       </div>
     </section>
   </div>
 
+  <!-- CASE STUDY DETAIL -->
   <div class="view" id="view-study">
     <div class="study-header">
-      <a href="#" class="back-link" data-nav="work">← Back to work</a>
-      <h1 id="study-title">Case Study Title</h1>
+      <a href="#" class="back-link" data-nav="work" data-en="← Back to work" data-ja="← 実績一覧へ">← Back to work</a>
+      <h1 id="study-title"></h1>
       <div class="study-tags" id="study-tags"></div>
     </div>
     <div id="study-body"></div>
@@ -523,177 +400,265 @@
 </main>
 
 <footer>
-  <div>© 2026 Your Name — Prototype build, local only.</div>
-  <a href="#" data-nav="contact">Get in touch ↗</a>
+  <div>© 2026 Murat Mert Titiz</div>
+  <a href="#" data-nav="contact" data-en="Get in touch ↗" data-ja="お問い合わせ ↗">Get in touch ↗</a>
 </footer>
 
 <div id="zoom-modal">
   <div class="zoom-box">
     <div style="font-size:1.6rem;">⤢</div>
-    <div id="zoom-label">Diagram placeholder — replace with real image</div>
+    <div id="zoom-label">Diagram — full-size view</div>
   </div>
 </div>
 
 <script>
 const TILE_COLORS = ["#D14B3F","#D99A4E","#A8281F","#E8866F"];
+let LANG = 'en';
 
 const CASE_STUDIES = [
   {
-    id: "line-automation",
-    num: "01",
-    title: "LINE Communication & Workflow Automation",
-    type: "Learning Operations",
-    loc: "Japan",
-    tags: ["Process Automation", "Communication Design", "UX Research", "No-Code Tools"],
-    summary: "A 9-step email loop for scheduling makeup lessons now runs through LINE and resolves in under a minute.",
-    steps: [
-      { label:"01 — Problem", title:"Nine steps, all done by hand", body:"At KANA English School, every absence or makeup request went through the same email chain: check the site, email a request, wait for staff to check availability, wait again for a teacher consult, get a confirmation, confirm back, and hope someone records it correctly. About 35 of these came in per week across 150 students and 100+ families. On a normal weekday that loop ate up 20+ hours; over a weekend, closer to 30, since the school was closed Sundays. Only staff with strong Japanese could even handle the requests, and because different part-timers picked up different threads, the same conversation would get answered twice or dropped entirely.", reverse:false },
-      { label:"02 — Process", title:"Stop fighting the channel parents already use", body:"A survey of parents found 74 of them wanted LINE instead of email, and 43 said the makeup process itself was confusing. So instead of building a separate scheduling app, I built the whole flow inside LINE using LIFF, which lets a custom interface open right inside the chat — no download, no new login. Make.com handles everything behind it: checking a student's identity, pulling live class capacity, preventing two parents from grabbing the same open seat, and even managing credit balances for adult students who pay per lesson.", reverse:true },
-      { label:"03 — Outcome", title:"Days down to under a minute, 90% adoption", body:"The LINE interface now sits at 90% adoption across the school's families — covering absence reporting, makeup scheduling, and general support requests. What used to take a staff member 10 minutes of manually cross-checking schedules finishes in under three seconds, and a parent can submit a request, get confirmation, and be done in under a minute total. Staff time went back to the things that actually need a person — not schedule lookups.", reverse:false }
+    id:"line-automation", num:"01",
+    title:{en:"LINE Communication & Workflow Automation", ja:"LINEコミュニケーション・業務自動化"},
+    type:{en:"Learning Operations", ja:"ラーニングオペレーション"},
+    loc:"Japan",
+    tags:{en:["Process Automation","Communication Design","UX Research","No-Code Tools"],
+          ja:["プロセス自動化","コミュニケーション設計","UXリサーチ","ノーコードツール"]},
+    summary:{en:"A 9-step email loop for scheduling makeup lessons now runs through LINE and resolves in under a minute.",
+             ja:"振替授業の依頼に9段階かかっていたメール対応を、LINEで1分以内に完結する仕組みに変えました。"},
+    steps:[
+      {label:{en:"01 — Problem",ja:"01 — 課題"},
+       title:{en:"Nine steps, all done by hand",ja:"9段階、すべて手作業"},
+       body:{en:"At KANA English School, every absence or makeup request went through the same email chain: check the site, email a request, wait for staff to check availability, wait again for a teacher consult, get a confirmation, confirm back, and hope someone records it correctly. About 35 of these came in per week across 150 students and 100+ families. On a normal weekday that loop ate up 20+ hours; over a weekend, closer to 30, since the school was closed Sundays. Only staff with strong Japanese could even handle the requests, and because different part-timers picked up different threads, the same conversation would get answered twice or dropped entirely.",
+              ja:"KANA English Schoolでは、欠席・振替の依頼がすべて同じメールのやり取りを経ていました。サイトを確認し、メールを送り、スタッフが空き状況を確認し、担当講師に相談し、返信を待ち、確認の返信をし、記録に残す。週に約35件、150名の生徒・100家庭以上からこの依頼が届きます。平日だけで20時間以上、日曜休業のため週末はさらに30時間近くをこの対応に費やしていました。日本語対応できるスタッフしか処理できず、引き継ぎのミスで二重対応や見落としも頻発していました。"},
+       reverse:false},
+      {label:{en:"02 — Process",ja:"02 — プロセス"},
+       title:{en:"Stop fighting the channel parents already use",ja:"保護者がすでに使っているチャネルに合わせる"},
+       body:{en:"A survey of parents found 74 of them wanted LINE instead of email, and 43 said the makeup process itself was confusing. So instead of building a separate scheduling app, I built the whole flow inside LINE using LIFF, which lets a custom interface open right inside the chat — no download, no new login. Make.com handles everything behind it: checking a student's identity, pulling live class capacity, preventing two parents from grabbing the same open seat, and even managing credit balances for adult students who pay per lesson.",
+              ja:"保護者へのアンケートで74名がLINEをメールより好むと回答し、43名が振替プロセス自体がわかりにくいと答えました。別のスケジュールアプリを作る代わりに、LIFFを使ってLINEの中にカスタムインターフェースを設計。ダウンロードも新規ログインも不要です。裏側ではMake.comが生徒の本人確認、空き枠の取得、二重予約の防止、大人の生徒のクレジット管理まですべて自動で処理します。"},
+       reverse:true},
+      {label:{en:"03 — Outcome",ja:"03 — 成果"},
+       title:{en:"Days down to under a minute, 90% adoption",ja:"数日かかっていた対応が1分以内に。定着率90%"},
+       body:{en:"The LINE interface now sits at 90% adoption across the school's families — covering absence reporting, makeup scheduling, and general support requests. What used to take a staff member 10 minutes of manually cross-checking schedules finishes in under three seconds, and a parent can submit a request, get confirmation, and be done in under a minute total. Staff time went back to the things that actually need a person — not schedule lookups.",
+              ja:"LINEインターフェースの定着率は現在90%。欠席連絡、振替依頼、一般的なサポート依頼をカバーしています。スタッフが10分かけて手作業でスケジュールを照合していた処理が、3秒以内に完了。保護者側も依頼から確認まで1分以内で終わります。スタッフの時間は、本当に人が必要な対応に使えるようになりました。"},
+       reverse:false}
     ]
   },
   {
-    id: "churn-study",
-    num: "02",
-    title: "Parent Retention & Customer Education",
-    type: "Customer Education",
-    loc: "Japan",
-    tags: ["Retention Strategy", "Behaviour Change", "Content Production", "Stakeholder Communication"],
-    summary: "Parents thought their kids weren't learning English. The kids were — just not where anyone could see it.",
-    steps: [
-      { label:"01 — Problem", title:"The progress was real. Parents just couldn't see it.", body:"After more than 30 parent interviews, a pattern showed up everywhere: kids spoke English at school and reverted to their home language the second they walked in the door, because that's just where their identity as a kid lived. To a parent watching from outside, that looked like zero progress, even though teachers were marking most students as on track. Thirteen of 36 parents brought up some version of the same complaint, almost word for word: their kid couldn't even tell them what happened in class that day.", reverse:false },
-      { label:"02 — Process", title:"Give the work somewhere to live outside the classroom", body:"Three things came out of this. First, an \"Output Relay\" where students teach the lesson back to a parent at home — turns the kid into the expert instead of the passive recipient. Students earn a sticker per signed notebook entry, with a reward (game day, Pokémon cards) at the end of each unit, which keeps the habit sticky. Second, over 100 short video explainers built in the parent's native language and placed right next to the homework, so a parent who doesn't speak English can actually follow along and help. Third, a flexible observation option, in person or over Google Meet, replacing the single rigid observation week that most working parents couldn't make anyway.", reverse:true },
-      { label:"03 — Outcome", title:"87% sustained adoption, 30% jump in homework completion", body:"The Output Relay is now at 87% sustained adoption across the school — parents signing notebooks, students relaying lessons, the reward cycle running on its own. Since it launched there hasn't been a single complaint about a kid forgetting what happened in class. Homework completion rose 30% overall, with a 45% jump specifically in listening sections parents previously couldn't help with. Observation attendance nearly tripled, from roughly 20-25 parents a year to 43 in the first cycle, about a third of the whole school.", reverse:false },
-      { label:"04 — Supporting materials", title:"Onboarding, 100+ videos, and a full teacher manual", body:"Alongside the student-facing work, I built the internal infrastructure to make it all sustainable: an onboarding package for new families so they understand the school's systems from day one, over 100 curriculum and lesson-explanation videos for the parent library, and a full teacher manual covering lesson planning frameworks, class management approaches, and handover notes so incoming teachers can get up to speed without having to shadow someone for weeks.", reverse:true }
+    id:"churn-study", num:"02",
+    title:{en:"Parent Retention & Customer Education", ja:"保護者リテンションとカスタマーエデュケーション"},
+    type:{en:"Customer Education", ja:"カスタマーエデュケーション"},
+    loc:"Japan",
+    tags:{en:["Retention Strategy","Behaviour Change","Content Production","Stakeholder Communication"],
+          ja:["リテンション戦略","行動変容","コンテンツ制作","ステークホルダーコミュニケーション"]},
+    summary:{en:"Parents thought their kids weren't learning English. The kids were — just not where anyone could see it.",
+             ja:"保護者は「子どもが英語を身につけていない」と感じていました。実際は学んでいた。ただ、見える場所ではなかっただけです。"},
+    steps:[
+      {label:{en:"01 — Problem",ja:"01 — 課題"},
+       title:{en:"The progress was real. Parents just couldn't see it.",ja:"成長はあった。ただ、保護者には見えていなかった。"},
+       body:{en:"After more than 30 parent interviews, a pattern showed up everywhere: kids spoke English at school and reverted to their home language the second they walked in the door, because that's just where their identity as a kid lived. To a parent watching from outside, that looked like zero progress, even though teachers were marking most students as on track. Thirteen of 36 parents brought up some version of the same complaint, almost word for word: their kid couldn't even tell them what happened in class that day.",
+              ja:"30名以上の保護者にインタビューを行い、共通のパターンが見えてきました。子どもは学校では英語を話すが、家に帰ると母国語に戻る。それは子どもとしてのアイデンティティがそこにあるから。外から見ている保護者にとっては「進歩ゼロ」に映ります。36名中13名が、ほぼ同じ言葉でこう言いました。「今日何をやったか聞いても、子どもが何も覚えていない」"},
+       reverse:false},
+      {label:{en:"02 — Process",ja:"02 — プロセス"},
+       title:{en:"Give the work somewhere to live outside the classroom",ja:"学びに、教室の外での居場所をつくる"},
+       body:{en:"Three things came out of this. First, an \"Output Relay\" where students teach the lesson back to a parent at home — turns the kid into the expert instead of the passive recipient. Students earn a sticker per signed notebook entry, with a reward (game day, Pokémon cards) at the end of each unit, which keeps the habit sticky. Second, over 100 short video explainers built in the parent's native language and placed right next to the homework, so a parent who doesn't speak English can actually follow along and help. Third, a flexible observation option, in person or over Google Meet, replacing the single rigid observation week that most working parents couldn't make anyway.",
+              ja:"ここから三つの施策が生まれました。①「アウトプットリレー」：生徒が家でレッスン内容を保護者に教える仕組み。受け身から「教える側」へ。ノートへの保護者サインでスティッカーが貯まり、単元ごとにご褒美（ゲームデー・ポケモンカード）が得られます。②100本以上の動画：保護者の母国語で宿題の内容を解説。英語が話せない保護者でも一緒に取り組めます。③柔軟な授業参観：年1回の固定観覧週を廃止し、対面またはGoogle Meetで好きな日に参観できる仕組みに変更。"},
+       reverse:true},
+      {label:{en:"03 — Outcome",ja:"03 — 成果"},
+       title:{en:"87% sustained adoption, 30% jump in homework completion",ja:"継続定着率87%、宿題完成率30%向上"},
+       body:{en:"The Output Relay is now at 87% sustained adoption across the school — parents signing notebooks, students relaying lessons, the reward cycle running on its own. Since it launched there hasn't been a single complaint about a kid forgetting what happened in class. Homework completion rose 30% overall, with a 45% jump specifically in listening sections parents previously couldn't help with. Observation attendance nearly tripled, from roughly 20-25 parents a year to 43 in the first cycle, about a third of the whole school.",
+              ja:"アウトプットリレーの継続定着率は87%。保護者がノートにサインし、生徒がレッスンを伝え、報酬サイクルが自然に回っています。導入後、「子どもがレッスンを覚えていない」という苦情はゼロ。宿題の完成率は全体で30%向上し、特にリスニングセクションは45%増（以前は保護者がサポートできず素通りされていた箇所）。授業参観参加者数は年間20〜25名から43名へと約2倍に。"},
+       reverse:false},
+      {label:{en:"04 — Supporting materials",ja:"04 — サポート資料"},
+       title:{en:"Onboarding, 100+ videos, and a full teacher manual",ja:"オンボーディング、100本以上の動画、インストラクターマニュアル"},
+       body:{en:"Alongside the student-facing work, I built the internal infrastructure to make it all sustainable: an onboarding package for new families so they understand the school's systems from day one, over 100 curriculum and lesson-explanation videos for the parent library, and a full teacher manual covering lesson planning frameworks, class management approaches, and handover notes so incoming teachers can get up to speed without having to shadow someone for weeks.",
+              ja:"生徒向けの施策と並行して、継続性を担保する内部インフラも整備しました。新規家庭向けオンボーディングパッケージ（入学初日から学校の仕組みを理解してもらうため）、保護者ライブラリ向け100本以上のカリキュラム解説動画、そして新任教師が数週間の見習いなしで即戦力として動けるインストラクターマニュアル（レッスン計画フレームワーク、クラス運営方法、引き継ぎノートを含む）を作成しました。"},
+       reverse:true}
     ]
   },
   {
-    id: "kana-progress-tracking",
-    num: "03",
-    title: "Student Progress Tracking System",
-    type: "Learning Operations",
-    loc: "Japan",
-    tags: ["Data Systems", "Iterative Design", "Staff Adoption", "Learning Analytics"],
-    summary: "A logging tool for teachers that had to survive three rebuilds before it actually got used.",
-    steps: [
-      { label:"01 — Problem", title:"Everyone had an opinion. Nobody had data.", body:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint, the one that shaped everything after: teachers get about 8 minutes between classes, and that time is already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used, no matter how good the idea was.", reverse:false },
-      { label:"02 — Process", title:"Two failed versions before this one stuck", body:"The first attempt was a Google Sheet with dropdown menus — fine on paper, miserable on a phone, and teachers hated scrolling through it. The second was a proper web app with charts, which was better, but teachers still had to go find the day's class manually, and once the novelty wore off, usage quietly dropped. The version that finally worked uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time. Everything saves to Supabase in real time, and it only asks teachers to log students who stood out — not a full roll call every time.", reverse:true },
-      { label:"03 — Outcome", title:"Near-100% adoption, all classes logged within 36 hours", body:"The tool is now at close to full adoption — every class gets logged within 36 hours of the lesson, and teachers spend maybe 5 minutes total across an entire day. The data ended up surfacing something nobody had noticed: engagement consistently dropped for kindergarten classes and for high schoolers, which gave management something concrete to bring into parent conversations instead of relying on whoever happened to remember what.", reverse:false }
+    id:"kana-progress-tracking", num:"03",
+    title:{en:"Student Progress Tracking System", ja:"生徒進捗管理システム"},
+    type:{en:"Learning Operations", ja:"ラーニングオペレーション"},
+    loc:"Japan",
+    tags:{en:["Data Systems","Iterative Design","Staff Adoption","Learning Analytics"],
+          ja:["データシステム","反復設計","スタッフ定着","学習アナリティクス"]},
+    summary:{en:"A logging tool for teachers that had to survive three rebuilds before it actually got used.",
+             ja:"実際に使われるまでに、三度の作り直しが必要だった教師用記録ツールの話。"},
+    steps:[
+      {label:{en:"01 — Problem",ja:"01 — 課題"},
+       title:{en:"Everyone had an opinion. Nobody had data.",ja:"全員が意見を持っていた。でも、データは誰も持っていなかった。"},
+       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint, the one that shaped everything after: teachers get about 8 minutes between classes, and that time is already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used, no matter how good the idea was.",
+              ja:"生徒の状態について教師と保護者の意見が食い違うことが多く、どちらの言い分を裏付ける記録もありませんでした。問題の核心は時間制約です。授業間のインターバルは約8分。しかしその時間はすでに、保護者への声かけ、教室のリセット、次の生徒の迎え入れで埋まっています。1〜2分以上かかる仕組みは、どんなに良いアイデアでも使われません。"},
+       reverse:false},
+      {label:{en:"02 — Process",ja:"02 — プロセス"},
+       title:{en:"Two failed versions before this one stuck",ja:"2つの失敗作を経て、ようやく定着した"},
+       body:{en:"The first attempt was a Google Sheet with dropdown menus — fine on paper, miserable on a phone, and teachers hated scrolling through it. The second was a proper web app with charts, which was better, but teachers still had to go find the day's class manually, and once the novelty wore off, usage quietly dropped. The version that finally worked uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time. Everything saves to Supabase in real time, and it only asks teachers to log students who stood out — not a full roll call every time.",
+              ja:"最初の試みはドロップダウン付きのGoogleスプレッドシート。紙の上ではよさそうでも、スマホでは最悪で、スクロールを嫌った教師には使われませんでした。次はグラフ付きのウェブアプリ。改善されましたが、教師が毎回クラスを手動で探す必要があり、目新しさが消えると利用が落ちました。最終的に機能したのは、各教室ステーションのQRコードを読み込むと、時刻から自動的に「今のクラス」が開くシステム。Supabaseでリアルタイム保存し、「いつもと違う生徒だけ記録する」方式で入力負荷を最小化しました。"},
+       reverse:true},
+      {label:{en:"03 — Outcome",ja:"03 — 成果"},
+       title:{en:"Near-100% adoption, all classes logged within 36 hours",ja:"定着率ほぼ100%、全クラス36時間以内に記録"},
+       body:{en:"The tool is now at close to full adoption — every class gets logged within 36 hours of the lesson, and teachers spend maybe 5 minutes total across an entire day. The data ended up surfacing something nobody had noticed: engagement consistently dropped for kindergarten classes and for high schoolers, which gave management something concrete to bring into parent conversations instead of relying on whoever happened to remember what.",
+              ja:"現在の定着率はほぼ100%。すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計5分程度です。データから新たな事実も浮かびました。幼稚園生と高校生のクラスで継続的にエンゲージメントが低い傾向があったのです。これにより、管理職は誰かの記憶に頼るのではなく、具体的なデータをもとに保護者と話せるようになりました。"},
+       reverse:false}
     ]
   },
   {
-    id: "lifehack-curriculum",
-    num: "04",
-    title: "Lifehack: Financial Literacy Curriculum",
-    type: "Instructional Design · Program Management",
-    loc: "Japan",
-    tags: ["Curriculum Design", "Experiential Learning", "Stakeholder Management", "Facilitation Design"],
-    demoUrl: "https://kanaenglishschool.github.io/articulaterise/",
-    demoLabel: "View Articulate Rise module ↗",
-    summary: "A civil servant brought us the idea, then had to step back. I took the curriculum from concept to a live test run with real students.",
-    steps: [
-      { label:"01 — Origin", title:"A civil servant walked in with an idea", body:"A local civil servant approached the school wanting a financial literacy program for teenagers in the area, and became a stakeholder on the project rather than just a requester. That shaped the whole thing from day one — this wasn't just an exercise designed on paper, it had to satisfy what a local government partner actually wanted delivered to real students in the community.", reverse:false },
-      { label:"02 — Building it", title:"Curriculum, recruiting, and clearing every real-world hurdle in the way", body:"With my staff, I built the curriculum from scratch: recruited the students, set the learning outcomes, and designed the learning experience itself. A good chunk of the actual work wasn't instructional design in the usual sense, it was making the stakeholder's more ambitious ideas actually possible. That meant getting a food hygiene certification so students could legally run a stall at a local festival, building a relationship with a tour guide so students could get real, hands-on service-industry experience using skills they already had, and setting up Mercari accounts so students could practice market research and pricing by actually selling things they already owned.", reverse:true },
-      { label:"03 — The setback", title:"The stakeholder had to step back — I took over delivery", body:"Partway through, the civil servant who initiated the project had to withdraw for health reasons. Rather than shelve the plan, I took over full delivery myself — running the test sessions and carrying the curriculum through to the students it was built for.", reverse:false },
-      { label:"04 — First trial run", title:"A proof-of-concept, built to test the idea before building the measurement", body:"The first run was a supermarket trading simulation with 9 students in 3 teams of 3. Before investing time in full instructor guides and tracking tools, I wanted to answer a simpler question: would students actually engage with a simulation-based approach, or would it fall flat like a lot of lecture-based financial literacy content does. Opening with \"what would you do with ¥100,000 right now\" surfaced a common misconception almost immediately — several students treated holding cash as risk-free. An e-learning module I built in Articulate Rise (<a href=\"https://kanaenglishschool.github.io/articulaterise/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--red-deep); font-weight:600;\">view the module ↗</a>) then let them find that flaw themselves: starting with a ¥10,000 grocery basket in 2020 and buying the same items in 2026, where purchasing power had dropped by almost half. All three teams grew their starting ¥2,000 (roughly 1.5x, 2x, and 3x), which told me my event cards were calibrated too generously rather than confirming a typical result — I've since adjusted them for a wider spread. Even with only 3-5 minutes for debrief, every team could answer specifically what worked, what didn't, and which trade mattered most, which told me the mechanics were clear enough for them to reconstruct their own reasoning afterward.", reverse:true },
-      { label:"05 — What's next", title:"A second trial, this time tactile and real", body:"The next run moves to the trading-floor version of the curriculum — a live, tactile session using real money and physical props instead of a supermarket-style simulation. It's built around Chi and Wylie's ICAP framework: an individual open-market phase where students trade quietly on their own, followed by a mandatory group strategy window that forces a shared decision, plus a full facilitator script for handling silent groups, dominating students, and deadlock votes. This run will stay mostly qualitative — I'm not yet sure how much of it I'll be able to turn into hard measurable outcomes this time. The plan for the run after that is to build in real measurement — a short pre/post knowledge check, an exit ticket for engagement, and structured participation tracking — so results can be reported with numbers instead of just description.", reverse:false }
+    id:"lifehack-curriculum", num:"04",
+    title:{en:"Lifehack: Financial Literacy Curriculum", ja:"Lifehack：金融リテラシーカリキュラム"},
+    type:{en:"Instructional Design · Program Management", ja:"インストラクショナルデザイン・プログラムマネジメント"},
+    loc:"Japan",
+    tags:{en:["Curriculum Design","Experiential Learning","Stakeholder Management","Facilitation Design"],
+          ja:["カリキュラム設計","体験学習","ステークホルダー管理","ファシリテーション設計"]},
+    demoUrl:"https://kanaenglishschool.github.io/articulaterise/",
+    demoLabel:{en:"View Articulate Rise module ↗", ja:"Articulate Riseモジュールを見る ↗"},
+    summary:{en:"A civil servant brought us the idea, then had to step back. I took the curriculum from concept to a live test run with real students.",
+             ja:"地方公務員がアイデアを持ってきた。でも途中で退いた。概念から実際の生徒との試験運用まで、私が引き取って届けました。"},
+    steps:[
+      {label:{en:"01 — Origin",ja:"01 — 始まり"},
+       title:{en:"A civil servant walked in with an idea",ja:"地方公務員が、アイデアを持ってやってきた"},
+       body:{en:"A local civil servant approached the school wanting a financial literacy program for teenagers in the area, and became a stakeholder on the project rather than just a requester. That shaped the whole thing from day one — this wasn't just an exercise designed on paper, it had to satisfy what a local government partner actually wanted delivered to real students in the community.",
+              ja:"地域の公務員がスクールを訪れ、地域の10代向けに金融リテラシープログラムをつくりたいと申し出ました。単なる依頼者ではなく、プロジェクトのステークホルダーとして参加。これが最初から方向性を定めました。紙の上の演習ではなく、行政パートナーが地域の生徒に届けたいと考えるものを実現する必要がありました。"},
+       reverse:false},
+      {label:{en:"02 — Building it",ja:"02 — 構築"},
+       title:{en:"Curriculum, recruiting, and clearing every real-world hurdle",ja:"カリキュラム設計、生徒募集、そして現実の壁を一つひとつ越える"},
+       body:{en:"With my staff, I built the curriculum from scratch: recruited the students, set the learning outcomes, and designed the learning experience itself. A good chunk of the actual work wasn't instructional design in the usual sense, it was making the stakeholder's more ambitious ideas actually possible. That meant getting a food hygiene certification so students could legally run a stall at a local festival, building a relationship with a tour guide so students could get real, hands-on service-industry experience using skills they already had, and setting up Mercari accounts so students could practice market research and pricing by actually selling things they already owned.",
+              ja:"スタッフと共にカリキュラムをゼロから構築。生徒を募集し、学習成果を設定し、学習体験そのものを設計しました。実際の作業の大半は、通常の意味でのインストラクショナルデザインではありませんでした。地元フェスティバルの屋台を合法的に運営するための食品衛生資格の取得、生徒が実際のサービス業体験を得るためのツアーガイドとの関係構築、手元にある物を使ってマーケットリサーチと価格設定を学ぶためのメルカリアカウントの開設など、ステークホルダーのより大きなビジョンを現実にするための作業でした。"},
+       reverse:true},
+      {label:{en:"03 — The setback",ja:"03 — 想定外の出来事"},
+       title:{en:"The stakeholder had to step back — I took over delivery",ja:"ステークホルダーが退いた。私が引き継いだ。"},
+       body:{en:"Partway through, the civil servant who initiated the project had to withdraw for health reasons. Rather than shelve the plan, I took over full delivery myself — running the test sessions and carrying the curriculum through to the students it was built for.",
+              ja:"途中で、プロジェクトを立ち上げた公務員が健康上の理由で退くことになりました。計画を棚上げにするのではなく、私自身がデリバリーを全面的に引き継ぎ、テストセッションを実施し、このカリキュラムを届けるべき生徒たちのもとへ届けました。"},
+       reverse:false},
+      {label:{en:"04 — First trial run",ja:"04 — 初回試験運用"},
+       title:{en:"A proof-of-concept, built to test the idea before building the measurement",ja:"計測ツールを作る前に、アイデアを検証する概念実証"},
+       body:{en:"The first run was a supermarket trading simulation with 9 students in 3 teams of 3. Before investing time in full instructor guides and tracking tools, I wanted to answer a simpler question: would students actually engage with a simulation-based approach, or would it fall flat like a lot of lecture-based financial literacy content does. Opening with \"what would you do with ¥100,000 right now\" surfaced a common misconception almost immediately — several students treated holding cash as risk-free. An e-learning module I built in Articulate Rise (<a href=\"https://kanaenglishschool.github.io/articulaterise/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--red-deep);font-weight:600;\">view the module ↗</a>) then let them find that flaw themselves: starting with a ¥10,000 grocery basket in 2020 and buying the same items in 2026, where purchasing power had dropped by almost half. All three teams grew their starting ¥2,000 (roughly 1.5x, 2x, and 3x), which told me my event cards were calibrated too generously rather than confirming a typical result — I've since adjusted them for a wider spread. Even with only 3-5 minutes for debrief, every team could answer specifically what worked, what didn't, and which trade mattered most.",
+              ja:"初回は3チーム3名ずつ、計9名のスーパーマーケット取引シミュレーション。インストラクターガイドや計測ツールに時間を投資する前に、シンプルな問いに答えたかったのです。「シミュレーション型アプローチで生徒は本当に参加するか、それとも多くの講義型金融教育のように失速するか」。「今¥100,000あったら何をする?」という問いかけで、すぐに共通の誤解が浮かびました。現金を持ち続けることをリスクなしと考えている生徒が複数いたのです。Articulate Riseで制作したeラーニングモジュール（<a href=\"https://kanaenglishschool.github.io/articulaterise/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--red-deep);font-weight:600;\">モジュールを見る ↗</a>）を使い、2020年の¥10,000の買い物かごを2026年で同じ内容を購入する「タイムマシン」体験で、購買力がほぼ半減していることを生徒自身に発見させました。3チーム全員が初期資金¥2,000を増やし（約1.5倍・2倍・3倍）、イベントカードの難易度設定が甘すぎたことが判明。次回に向けて調整済みです。デブリーフの時間はわずか3〜5分でしたが、各チームが具体的に「何がうまくいったか」「うまくいかなかったか」「最も重要な取引はどれか」を答えられました。"},
+       reverse:true},
+      {label:{en:"05 — Quiz results",ja:"05 — クイズ結果"},
+       title:{en:"Pre/post knowledge check: 9 students, 5 questions",ja:"事前・事後テスト：生徒9名、5問"},
+       body:{en:"A short quiz was given before and after the activity to measure learning gain on the specific concepts the session was designed to teach. Results across the sample group of 9 students: understanding of inflation (what it is) went from 2/9 to 8/9; understanding that cash loses value over time went from 1/9 to 9/9 — a full sweep; application of inflation to a real savings scenario went from 3/9 to 7/9; and the reflection concept (using a losing trade as a learning signal rather than giving up) went from 5/9 to 9/9. One question — supply and demand price movement — was already known by all 9 students before the activity and stayed at 9/9, confirming it as a baseline concept rather than a learning gain from this session. Small sample size, and results should be read as directional rather than statistically significant, but the pattern is consistent: the concepts the activity was explicitly designed to address showed the largest gains.",
+              ja:"セッション前後に5問の知識テストを実施し、学習効果を計測しました。9名のサンプルグループの結果：インフレの理解（概念）は2/9→8/9に向上。現金が時間とともに価値を失うことの理解は1/9→9/9（全員正解）。インフレを実際の貯蓄シナリオに応用する問題は3/9→7/9。「損した取引を諦めずに学びのシグナルとして使う」という振り返りの概念は5/9→9/9。1問（需要と供給による価格変動）は活動前から全員が正解しており、9/9のまま変化なし。これはセッションで教えた概念ではなく、事前知識として保持されていたベースライン概念と確認されました。サンプルが少なく、統計的有意性ではなく方向性として読むべきですが、パターンは一貫しています。活動が明示的に設計した概念において最大の伸びが見られました。"},
+       reverse:false},
+      {label:{en:"06 — What's next",ja:"06 — 次のステップ"},
+       title:{en:"A second trial, this time tactile and real",ja:"第二回試験運用：今度は実物で、触れて、体感する"},
+       body:{en:"The next run moves to the trading-floor version of the curriculum — a live, tactile session using real money and physical props instead of a supermarket-style simulation. It's built around Chi and Wylie's ICAP framework: an individual open-market phase where students trade quietly on their own, followed by a mandatory group strategy window that forces a shared decision, plus a full facilitator script for handling silent groups, dominating students, and deadlock votes. This run will stay mostly qualitative — I'm not yet sure how much of it I'll be able to turn into hard measurable outcomes this time. The plan for the run after that is to build in real measurement — a short pre/post knowledge check, an exit ticket for engagement, and structured participation tracking — so results can be reported with numbers instead of just description.",
+              ja:"次回はトレーディングフロア版カリキュラムへ移行。スーパーマーケット型シミュレーションではなく、実際のお金と物理的な小道具を使ったライブセッションです。ChiとWylie のICAPフレームワークに基づき、個人で静かに取引する「オープンマーケットフェーズ」と、グループで1つの意思決定を行う「ストラテジーウィンドウ」に分けて構成。無口なグループ、場を支配する生徒、票が割れた場合のファシリテーターセリフも完備。今回はほぼ定性的な内容になる予定で、どこまで定量的な成果に落とし込めるかはまだ不明です。その次の回では、事前・事後知識テスト、参加感のエグジットチケット、構造化した参加追跡を組み込み、数字で結果を報告できる体制を整える計画です。"},
+       reverse:true}
     ]
   }
 ];
 
 function tileHTML(cs, idx){
   const color = TILE_COLORS[idx % TILE_COLORS.length];
-  const demoBtn = cs.demoUrl ? `<a href="${cs.demoUrl}" target="_blank" rel="noopener" class="tile-demo" onclick="event.stopPropagation()">${cs.demoLabel}</a>` : '';
-  return `
-    <div class="tile reveal" data-study="${cs.id}">
-      <div class="badge" style="background:${color};">${cs.num}</div>
-      <div class="info">
-        <div class="tile-meta">${cs.type} &nbsp;·&nbsp; ${cs.loc}</div>
-        <h3>${cs.title}</h3>
-        <div class="desc">${cs.summary}</div>
-        <div class="chips">${cs.tags.map(t=>`<span>${t}</span>`).join("")}${demoBtn}</div>
-      </div>
-      <div class="go">→</div>
-    </div>`;
+  const t = cs.title[LANG]; const ty = cs.type[LANG];
+  const sm = cs.summary[LANG]; const tgs = cs.tags[LANG];
+  const dl = cs.demoUrl ? `<a href="${cs.demoUrl}" target="_blank" rel="noopener" class="tile-demo" onclick="event.stopPropagation()">${cs.demoLabel[LANG]}</a>` : '';
+  return `<div class="tile reveal" data-study="${cs.id}">
+    <div class="badge" style="background:${color};">${cs.num}</div>
+    <div class="info">
+      <div class="tile-meta">${ty} &nbsp;·&nbsp; ${cs.loc}</div>
+      <h3>${t}</h3>
+      <div class="desc">${sm}</div>
+      <div class="chips">${tgs.map(t=>`<span>${t}</span>`).join('')}${dl}</div>
+    </div>
+    <div class="go">→</div>
+  </div>`;
 }
-document.getElementById("home-tiles").innerHTML = CASE_STUDIES.map((c,i)=>tileHTML(c,i)).join("");
-document.getElementById("work-tiles").innerHTML = CASE_STUDIES.map((c,i)=>tileHTML(c,i)).join("");
+
+function renderTiles(){
+  document.getElementById("home-tiles").innerHTML = CASE_STUDIES.map((c,i)=>tileHTML(c,i)).join("");
+  document.getElementById("work-tiles").innerHTML = CASE_STUDIES.map((c,i)=>tileHTML(c,i)).join("");
+  document.querySelectorAll(".tile").forEach(el=>observer.observe(el));
+}
+renderTiles();
 
 function openStudy(id){
-  const cs = CASE_STUDIES.find(c=>c.id===id);
-  if(!cs) return;
-  document.getElementById("study-title").textContent = cs.title;
-  document.getElementById("study-tags").innerHTML = `<span>${cs.type}</span><span>${cs.loc}</span>`;
+  const cs = CASE_STUDIES.find(c=>c.id===id); if(!cs) return;
+  document.getElementById("study-title").textContent = cs.title[LANG];
+  document.getElementById("study-tags").innerHTML = `<span>${cs.type[LANG]}</span><span>${cs.loc}</span>`;
   document.getElementById("study-body").innerHTML = cs.steps.map(s=>`
-    <div class="story-block ${s.reverse ? 'reverse':''}">
-      <div class="visual" data-zoom="${s.title}">
+    <div class="story-block ${s.reverse?'reverse':''}">
+      <div class="visual" data-zoom="${s.title[LANG]}">
         <div style="font-size:1.4rem;">⤢</div>
-        <div>${s.title} — diagram/photo<br>click to preview</div>
+        <div>${s.title[LANG]} — diagram/photo<br>click to preview</div>
       </div>
       <div class="text">
-        <span class="step-label">${s.label}</span>
-        <h3>${s.title}</h3>
-        <p>${s.body}</p>
+        <span class="step-label">${s.label[LANG]}</span>
+        <h3>${s.title[LANG]}</h3>
+        <p>${s.body[LANG]}</p>
       </div>
-    </div>
-  `).join("");
-  showView("study");
-  window.scrollTo({top:0});
+    </div>`).join("");
+  showView("study"); window.scrollTo({top:0});
 }
+
+/* ---------- language toggle ---------- */
+function applyLang(lang){
+  LANG = lang;
+  document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-ja').classList.toggle('active', lang==='ja');
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const val = el.getAttribute('data-'+lang);
+    if(!val) return;
+    if(el.tagName==='INPUT'||el.tagName==='BUTTON') el.textContent = val;
+    else if(el.hasAttribute('contenteditable')) el.textContent = val;
+    else el.innerHTML = val;
+  });
+  renderTiles();
+  // re-render open study if visible
+  const studyEl = document.getElementById('view-study');
+  if(studyEl.classList.contains('active')){
+    const id = studyEl.getAttribute('data-current');
+    if(id) openStudy(id);
+  }
+}
+document.getElementById('btn-en').addEventListener('click',()=>applyLang('en'));
+document.getElementById('btn-ja').addEventListener('click',()=>applyLang('ja'));
 
 function showView(name){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  document.getElementById("view-"+name).classList.add("active");
+  const el = document.getElementById("view-"+name);
+  el.classList.add("active");
+  if(name==='study') el.setAttribute('data-current', currentStudyId||'');
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   document.querySelectorAll(`nav a[data-nav="${name}"]`).forEach(a=>a.classList.add("active"));
   document.getElementById("main-nav").classList.remove("open");
   initReveal();
 }
+let currentStudyId = '';
 document.querySelectorAll("[data-nav]").forEach(el=>{
-  el.addEventListener("click", e=>{
+  el.addEventListener("click",e=>{
     e.preventDefault();
     showView(el.getAttribute("data-nav"));
-    window.scrollTo({top:0, behavior:"smooth"});
+    window.scrollTo({top:0,behavior:"smooth"});
   });
 });
-document.body.addEventListener("click", e=>{
+document.body.addEventListener("click",e=>{
   const tile = e.target.closest(".tile");
-  if(tile) openStudy(tile.getAttribute("data-study"));
+  if(tile){ currentStudyId = tile.getAttribute("data-study"); openStudy(currentStudyId); }
 });
-document.getElementById("menu-toggle").addEventListener("click", ()=>{
+document.getElementById("menu-toggle").addEventListener("click",()=>{
   document.getElementById("main-nav").classList.toggle("open");
 });
-
-document.body.addEventListener("click", e=>{
+document.body.addEventListener("click",e=>{
   const v = e.target.closest(".visual");
-  if(v){
-    document.getElementById("zoom-label").textContent = v.getAttribute("data-zoom") + " — full-size preview placeholder";
-    document.getElementById("zoom-modal").classList.add("active");
-  } else if(e.target.id === "zoom-modal"){
-    document.getElementById("zoom-modal").classList.remove("active");
-  }
+  if(v){ document.getElementById("zoom-label").textContent = v.getAttribute("data-zoom")+" — full-size view"; document.getElementById("zoom-modal").classList.add("active"); }
+  else if(e.target.id==="zoom-modal") document.getElementById("zoom-modal").classList.remove("active");
 });
-
-document.body.addEventListener("click", e=>{
-  if(e.target.closest("[data-headshot]")){
-    if(e.target.closest("[contenteditable]")) return;
-    alert("Drop your real photo file here once you have one — replace this placeholder div with an <img> tag pointing to it.");
-  }
+document.getElementById("resume-toggle").addEventListener("click",()=>{
+  const dd = document.getElementById("resume-dropdown");
+  const arrow = document.getElementById("resume-arrow");
+  const open = dd.classList.toggle("open");
+  arrow.textContent = open?"↑":"↓";
 });
-
 function initReveal(){
   document.querySelectorAll(".reveal").forEach(el=>{
-    const rect = el.getBoundingClientRect();
-    if(rect.top < window.innerHeight*0.9) el.classList.add("in");
+    if(el.getBoundingClientRect().top < window.innerHeight*0.9) el.classList.add("in");
   });
 }
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); });
-},{threshold:0.1});
+const observer = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); }); },{threshold:0.1});
 function observeAll(){ document.querySelectorAll(".reveal").forEach(el=>observer.observe(el)); }
-observeAll();
-initReveal();
+observeAll(); initReveal();
 </script>
-
 </body>
 </html>
