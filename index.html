@@ -107,63 +107,6 @@
   .tile:hover .go{transform:translateX(6px);}
   @media(max-width:600px){.tile{flex-wrap:wrap;}.tile .go{display:none;}}
 
-  /* MY STORY */
-  .story-hero-img{width:100%;aspect-ratio:16/7;border-radius:26px;overflow:hidden;border:1px solid var(--line);margin-bottom:36px;}
-  .story-hero-img img{width:100%;height:100%;object-fit:cover;}
-  .story-headline{margin:0 0 14px;line-height:1.18;}
-  .story-headline span{display:inline-block;margin-right:0.22em;}
-  .sz-a{font-family:var(--mono);font-size:0.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--red-deep);vertical-align:middle;}
-  .sz-b{font-family:var(--display);font-weight:400;font-style:italic;font-size:clamp(1.6rem,3.4vw,2.6rem);color:rgba(36,27,20,0.7);}
-  .sz-c{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,6.5vw,4.8rem);color:var(--ink);}
-  .story-hero-sub{font-size:1.05rem;line-height:1.7;color:rgba(36,27,20,0.72);max-width:620px;margin-bottom:50px;}
-  .early-life{display:grid;grid-template-columns:340px 1fr;gap:50px;align-items:start;padding-bottom:6vh;border-bottom:1px solid var(--line);margin-bottom:6vh;}
-  .polaroid-stack{position:relative;height:420px;}
-  .polaroid{position:absolute;width:230px;background:var(--white);padding:14px 14px 38px;border-radius:6px;
-    box-shadow:0 10px 24px rgba(36,27,20,0.18);cursor:pointer;transition:transform .25s,box-shadow .25s;z-index:1;}
-  .polaroid:hover{transform:scale(1.05) rotate(0deg)!important;box-shadow:0 18px 34px rgba(36,27,20,0.26);z-index:10;}
-  .polaroid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
-  .polaroid .frame{aspect-ratio:1/1;background:var(--cream);border:2px dashed var(--line);display:flex;
-    align-items:center;justify-content:center;font-family:var(--mono);font-size:0.6rem;color:rgba(36,27,20,0.4);}
-  .polaroid .cap{position:absolute;bottom:10px;left:14px;right:14px;text-align:center;
-    font-family:var(--display);font-style:italic;font-size:0.8rem;color:rgba(36,27,20,0.55);}
-  .polaroid.p1{top:0;left:10px;transform:rotate(-7deg);}
-  .polaroid.p2{top:30px;left:140px;transform:rotate(5deg);}
-  .polaroid.p3{top:190px;left:0;transform:rotate(4deg);}
-  .polaroid.p4{top:210px;left:150px;transform:rotate(-4deg);}
-  .early-life-text{font-size:1.04rem;line-height:1.8;color:rgba(36,27,20,0.78);}
-  .early-life-text h3{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.2rem);margin:0 0 18px;letter-spacing:-0.01em;}
-  .early-life-text p{margin:0 0 14px;}
-  .early-life-text [contenteditable]:focus{background:rgba(209,75,63,0.05);border-radius:8px;outline:none;}
-  @media(max-width:860px){.early-life{grid-template-columns:1fr;}.polaroid-stack{height:420px;max-width:340px;margin:0 auto;}}
-  .journey-intro{max-width:680px;margin-bottom:10px;}
-  .journey-intro h3{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0 0 10px;letter-spacing:-0.01em;}
-  .journey-intro p{font-size:1rem;color:rgba(36,27,20,0.68);line-height:1.65;}
-  .mood-step{margin:30px calc(-5.5vw) 0;padding:9vh 5.5vw;position:relative;overflow:hidden;}
-  .mood-step .step-kicker{font-family:var(--mono);font-size:0.74rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;display:inline-block;}
-  .mood-step h4{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4vw,3rem);margin:0 0 18px;letter-spacing:-0.01em;}
-  .mood-step .mood-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;}
-  .mood-step p.mood-text{font-size:1.06rem;line-height:1.8;}
-  .mood-photo{aspect-ratio:4/3;border-radius:20px;overflow:hidden;}
-  .mood-photo img{width:100%;height:100%;object-fit:cover;}
-  @media(max-width:860px){.mood-step .mood-grid{grid-template-columns:1fr;}}
-  .mood-step.joy{background:linear-gradient(135deg,#FFE39A 0%,#FFB4A2 45%,#8FD9C4 100%);border-radius:32px;color:#2A2014;}
-  .mood-step.joy .step-kicker{background:rgba(255,255,255,0.6);color:#B5471F;padding:6px 14px;border-radius:20px;}
-  .mood-step.joy h4{font-style:italic;}
-  .mood-step.joy .deco{position:absolute;font-size:2.2rem;opacity:0.7;}
-  .mood-step.gloom{background:#15110D;color:#C9BFB4;border-radius:32px;}
-  .mood-step.gloom .step-kicker{background:rgba(255,255,255,0.06);color:#C0746B;padding:6px 14px;border-radius:20px;}
-  .mood-step.gloom h4{color:#E8E2D8;font-weight:500;font-style:italic;}
-  .mood-step.gloom p.mood-text{color:#9C9388;}
-  .mood-step.meaning{background:linear-gradient(160deg,#2E3B36 0%,#4A4030 55%,#8C5A3C 100%);color:#EFE6D8;border-radius:32px;}
-  .mood-step.meaning .step-kicker{background:rgba(255,255,255,0.1);color:#E3B06C;padding:6px 14px;border-radius:20px;}
-  .mood-step.meaning h4{color:#F4E9D6;}
-  .mood-step.meaning p.mood-text{color:#D8CDB9;}
-  .story-cta{margin-top:7vh;padding:5vh 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;}
-  .story-cta p{font-size:1.02rem;color:rgba(36,27,20,0.68);max-width:440px;line-height:1.6;margin:0;}
-  .story-cta-btn{font-family:var(--display);font-weight:600;font-size:1.05rem;background:var(--red);color:var(--white);
-    border:none;padding:16px 34px;border-radius:30px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:transform .2s,box-shadow .2s;}
-  .story-cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(168,40,31,0.3);}
-
   /* CONTACT */
   .contact-wrap{max-width:640px;}
   .contact-wrap h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.2vw,2.5rem);margin:0 0 16px;letter-spacing:-0.01em;}
@@ -221,7 +164,6 @@
     <ol>
       <li><a href="#" data-nav="home" class="active"><span class="emoji">🏠</span><span data-en="Home" data-ja="ホーム">Home</span></a></li>
       <li><a href="#" data-nav="work"><span class="emoji">🧩</span><span data-en="Work" data-ja="実績">Work</span></a></li>
-      <li><a href="#" data-nav="story"><span class="emoji">✨</span><span data-en="My Story" data-ja="私のストーリー">My Story</span></a></li>
       <li><a href="#" data-nav="contact"><span class="emoji">💬</span><span data-en="Contact" data-ja="お問い合わせ">Contact</span></a></li>
     </ol>
   </nav>
@@ -290,77 +232,6 @@
         <h2 data-en="Four systems I've built, all solving the same underlying problem." data-ja="つくってきた4つのシステム。どれも同じ根本的な課題に向き合っています。">Four systems I've built, all solving the same underlying problem.</h2>
       </div>
       <div class="tiles" id="work-tiles"></div>
-    </section>
-  </div>
-
-  <!-- MY STORY -->
-  <div class="view" id="view-story">
-    <section>
-      <div class="story-hero-img">
-        <img src="story-hero.jpg" alt="My Story">
-      </div>
-      <h1 class="story-headline">
-        <span class="sz-a" data-en="This is" data-ja="これが">This is</span><br>
-        <span class="sz-c" data-en="my story" data-ja="私のストーリー">my story</span><span class="sz-b" data-en=", start to finish." data-ja="、最初から最後まで。">, start to finish.</span>
-      </h1>
-      <p class="story-hero-sub" contenteditable="true" data-en="From a fencing strip in Turkey to building learning systems in Japan — replace this line with your own opening, the one sentence that sets the tone for everything below." data-ja="トルコのフェンシング場から、日本で学びの仕組みをつくる今まで — この一文を、自分らしい言葉に書き換えてください。">From a fencing strip in Turkey to building learning systems in Japan — replace this line with your own opening, the one sentence that sets the tone for everything below.</p>
-
-      <div class="early-life">
-        <div class="polaroid-stack">
-          <div class="polaroid p1"><img src="fencing.jpg" alt="Fencing"><div class="cap" data-en="fencing" data-ja="フェンシング">fencing</div></div>
-          <div class="polaroid p2"><img src="uwc.jpg" alt="UWC Adriatic"><div class="cap" data-en="UWC Adriatic" data-ja="UWCアドリアティック">UWC Adriatic</div></div>
-          <div class="polaroid p3"><img src="trieste.jpg" alt="Trieste"><div class="cap" data-en="Trieste" data-ja="トリエステ">Trieste</div></div>
-          <div class="polaroid p4"><img src="uvm.jpg" alt="UVM"><div class="cap" data-en="UVM" data-ja="バーモント大学">UVM</div></div>
-        </div>
-        <div class="early-life-text">
-          <span class="index-no" data-en="🤺 Early life" data-ja="🤺 幼少期・学生時代">🤺 Early life</span>
-          <h3 data-en="Fencing, UWC, and finding my way to psychology" data-ja="フェンシング、UWC、そして心理学へ">Fencing, UWC, and finding my way to psychology</h3>
-          <div contenteditable="true">
-            <p data-en="This is where the fencing strip, UWC Adriatic, and UVM all live together as one stretch of your life — not three separate chapters, just the years that shaped how you see people and competition and difference. Write it as one flowing story: what fencing for the Turkish national team taught you, how UWC cracked open your sense of the world, and why psychology (and keeping Italian alive) made sense by the time you got to Vermont." data-ja="フェンシング、UWCアドリアティック、バーモント大学。三つの場所は別々の章ではなく、自分の見方や競争への向き合い方、差異への感覚を形づくった一続きの時間です。トルコナショナルチームで学んだこと、UWCで世界観が広がった経験、そして心理学（とイタリア語）を続ける意味がバーモントで見えてきたこと。ひとつの流れる物語として書いてみてください。">This is where the fencing strip, UWC Adriatic, and UVM all live together as one stretch of your life — not three separate chapters, just the years that shaped how you see people and competition and difference. Write it as one flowing story: what fencing for the Turkish national team taught you, how UWC cracked open your sense of the world, and why psychology (and keeping Italian alive) made sense by the time you got to Vermont.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="journey-intro">
-        <span class="index-no" data-en="📚 The teaching years" data-ja="📚 教育の現場へ">📚 The teaching years</span>
-        <h3 data-en="Three stages of falling in, falling apart, and finding my footing" data-ja="惚れ込み、打ちのめされ、自分の立ち位置を見つけた三つの段階">Three stages of falling in, falling apart, and finding my footing</h3>
-        <p contenteditable="true" data-en="After Vermont came a stretch as a home therapist for kids with ASD in Boston, then the move to Japan — and that's where teaching really started. The research years at UVM left something behind: a comfort with evidence, a habit of asking whether something actually works before assuming it does, and enough familiarity with scientific literature to apply frameworks like ICAP correctly rather than just name-dropping them. It didn't go in a straight line from there. Here's the honest shape of it." data-ja="バーモントの後はボストンで自閉症の子どもたちのホームセラピストとして働き、その後日本へ。本当の意味での教育はここから始まりました。UVMでの研究経験が残したものがあります。根拠を大切にする習慣、「本当に機能するか」を問う癖、ICAPのようなフレームワークを名前だけでなく正しく使える素地。そこからは一直線ではありませんでした。正直な形でお伝えします。">After Vermont came a stretch as a home therapist for kids with ASD in Boston, then the move to Japan — and that's where teaching really started. The research years at UVM left something behind: a comfort with evidence, a habit of asking whether something actually works before assuming it does, and enough familiarity with scientific literature to apply frameworks like ICAP correctly rather than just name-dropping them. It didn't go in a straight line from there. Here's the honest shape of it.</p>
-      </div>
-
-      <div class="mood-step joy reveal">
-        <span class="deco" style="top:8%;left:6%;">✨</span>
-        <span class="deco" style="top:70%;left:88%;">🎈</span>
-        <span class="deco" style="top:15%;left:90%;">🌟</span>
-        <span class="step-kicker" data-en="Step one — the honeymoon" data-ja="第一段階 — 蜜月期">Step one — the honeymoon</span>
-        <h4 data-en="I fell in love with the idea of it." data-ja="教育という「理想」に恋をした。">I fell in love with the idea of it.</h4>
-        <div class="mood-grid">
-          <p class="mood-text" contenteditable="true" data-en="Write about the early excitement here — the curiosity, the feeling of wanting to learn and grow, the optimism before reality set in. Keep the tone light and genuine; this is the part of the story before anything got hard." data-ja="最初の興奮について書いてください。好奇心、学び成長したいという気持ち、現実を知る前の楽観。まだ何も難しくなかった頃の話です。">Write about the early excitement here — the curiosity, the feeling of wanting to learn and grow, the optimism before reality set in. Keep the tone light and genuine; this is the part of the story before anything got hard.</p>
-          <div class="mood-photo"><img src="step1.jpg" alt="The honeymoon period"></div>
-        </div>
-      </div>
-
-      <div class="mood-step gloom reveal">
-        <span class="step-kicker" data-en="Step two — the reality check" data-ja="第二段階 — 現実との衝突">Step two — the reality check</span>
-        <h4 data-en="Then I saw what the field actually runs on." data-ja="そしてこの業界が何で動いているかを見た。">Then I saw what the field actually runs on.</h4>
-        <div class="mood-grid">
-          <p class="mood-text" contenteditable="true" data-en="Write the honest version here — long hours, small funding, tired teachers, burnout, mismanagement. This is the section that's allowed to be heavy. Don't soften it for the sake of the portfolio; the contrast with step one and step three is the point." data-ja="ここには正直な言葉を書いてください。長時間労働、少ない予算、疲弊した先生たち、燃え尽き、組織の問題。重くていい。第一段階と第三段階との対比がこのページの核心です。">Write the honest version here — long hours, small funding, tired teachers, burnout, mismanagement. This is the section that's allowed to be heavy. Don't soften it for the sake of the portfolio; the contrast with step one and step three is the point.</p>
-          <div class="mood-photo"><img src="step2.jpg" alt="The reality check"></div>
-        </div>
-      </div>
-
-      <div class="mood-step meaning reveal">
-        <span class="step-kicker" data-en="Step three — finding meaning" data-ja="第三段階 — 意味を見つける">Step three — finding meaning</span>
-        <h4 data-en="And then I started fixing it instead of just feeling it." data-ja="感じるだけでなく、直し始めた。">And then I started fixing it instead of just feeling it.</h4>
-        <div class="mood-grid">
-          <p class="mood-text" contenteditable="true" data-en="Write about where the meaning actually showed up — not the naive hope from step one, but something steadier: choosing to work on the systems instead of just absorbing the frustration. This is the bridge into the case studies in your Work section." data-ja="意味が実際に現れた場所について書いてください。第一段階の無邪気な希望ではなく、もっと落ち着いたもの。不満を抱えるだけでなく、システムを変えることを選んだ瞬間。これが実績（Work）へとつながる橋です。">Write about where the meaning actually showed up — not the naive hope from step one, but something steadier: choosing to work on the systems instead of just absorbing the frustration. This is the bridge into the case studies in your Work section.</p>
-          <div class="mood-photo"><img src="step3.jpg" alt="Finding meaning"></div>
-        </div>
-      </div>
-
-      <div class="story-cta">
-        <p data-en="That's the path that got me here. The work below is where it landed." data-ja="これが今につながる道のりです。その結果が、実績として残っています。">That's the path that got me here. The work below is where it landed.</p>
-        <a href="#" class="story-cta-btn" data-nav="work" data-en="See how this shows up in my work →" data-ja="実績を見る →">See how this shows up in my work →</a>
-      </div>
     </section>
   </div>
 
