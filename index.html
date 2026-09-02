@@ -19,10 +19,20 @@
     Recommended: square crop, min 600×600px.
 
   ── CASE STUDY 01 — LINE Automation ────────────────────────
-  images/cs01-step01-problem.jpg
-    Screenshot or diagram of the old 9-step email chain.
-    Works well as: a flowchart, a screenshot of an email thread,
-    or a whiteboard photo showing the old process.
+  Step 01 uses a Before/After/Flow CAROUSEL — three image slots:
+
+  images/cs01-step01-before.jpg
+    BEFORE: a screenshot or photo of the old 9-step email chain.
+    Works well as a screenshot of an actual email thread,
+    a flowchart of the old process, or a whiteboard photo.
+
+  images/cs01-step01-after.jpg
+    AFTER: a screenshot of the new LINE/LIFF interface
+    showing the parent-facing scheduling screen.
+
+  images/cs01-step01-flowchart.jpg
+    FLOW: the user flow diagram or the Make.com scenario map
+    showing how the automation connects the pieces.
 
   images/cs01-step02-process.jpg
     The LINE interface you built — screenshot of the LIFF app
@@ -219,10 +229,53 @@
     color:var(--red-deep);background:rgba(209,75,63,0.1);padding:6px 12px;border-radius:16px;}
   .story-block{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:5vh 5.5vw;}
   .story-block.reverse .visual{order:2;} .story-block.reverse .text{order:1;}
-  .visual{aspect-ratio:4/3;background:var(--white);border-radius:22px;border:2px dashed var(--line);
+  .visual{aspect-ratio:16/9;background:var(--white);border-radius:22px;border:2px dashed var(--line);
     display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
     font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.4);text-align:center;padding:20px;cursor:zoom-in;transition:transform .2s,border-color .25s;}
   .visual:hover{border-color:var(--red);transform:translateY(-3px);}
+
+  /* USER FLOW DIAGRAM */
+  .flow-diagram{width:100%;overflow-x:auto;padding:32px 0 20px;}
+  .flow-inner{display:flex;align-items:flex-start;gap:0;min-width:max-content;padding:0 20px;}
+  .flow-branch{display:flex;flex-direction:column;gap:0;align-items:center;}
+  .flow-branch-row{display:flex;align-items:flex-start;gap:0;}
+  .flow-phone{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .flow-device{width:130px;background:#1a1a1a;border-radius:22px;padding:8px;box-shadow:0 4px 20px rgba(0,0,0,0.18);border:2.5px solid #333;position:relative;}
+  .flow-device::before{content:'';display:block;width:36px;height:5px;background:#333;border-radius:3px;margin:0 auto 6px;}
+  .flow-screen{width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#f0f0f0;position:relative;}
+  .flow-screen img{width:100%;height:100%;object-fit:cover;display:block;}
+  .flow-screen-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:var(--mono);font-size:0.58rem;color:rgba(36,27,20,0.35);text-align:center;padding:8px;background:#f5f5f5;}
+  .flow-label{font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.5);text-align:center;max-width:130px;line-height:1.4;}
+  .flow-step-num{font-family:var(--display);font-weight:700;font-size:0.75rem;color:var(--red-deep);background:rgba(209,75,63,0.1);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
+  .flow-arrow{display:flex;align-items:center;padding:0 6px;margin-top:60px;flex-shrink:0;}
+  .flow-arrow svg{width:32px;height:20px;flex-shrink:0;}
+  .flow-split{display:flex;flex-direction:column;gap:16px;}
+  .flow-split-label{font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.4);text-align:center;padding:3px 8px;background:rgba(36,27,20,0.05);border-radius:10px;white-space:nowrap;}
+  .flow-split-group{display:flex;flex-direction:column;gap:8px;align-items:center;}
+  .flow-split-branch{display:flex;align-items:flex-start;gap:0;}
+  .flow-connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;margin-top:60px;}
+  .flow-connector-line{width:2px;height:100%;background:rgba(36,27,20,0.12);}
+
+  /* BEFORE/AFTER CAROUSEL */
+  .ba-carousel{aspect-ratio:16/9;border-radius:22px;overflow:hidden;position:relative;background:var(--white);border:1px solid var(--line);}
+  .ba-slides{display:flex;height:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);}
+  .ba-slide{min-width:100%;height:100%;position:relative;flex-shrink:0;}
+  .ba-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ba-slide .ba-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:0.68rem;color:rgba(36,27,20,0.35);text-align:center;padding:20px;}
+  .ba-badge{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;padding:5px 12px;border-radius:20px;font-weight:600;pointer-events:none;}
+  .ba-badge.before{background:rgba(36,27,20,0.75);color:var(--cream);}
+  .ba-badge.after{background:var(--red);color:var(--white);}
+  .ba-badge.flow{background:var(--ochre);color:var(--ink);}
+  .ba-nav{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;}
+  .ba-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);border:none;cursor:pointer;padding:0;transition:all .2s;}
+  .ba-dot.active{background:var(--white);transform:scale(1.3);}
+  .ba-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.85);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--ink);transition:all .2s;box-shadow:0 2px 8px rgba(36,27,20,0.15);}
+  .ba-arrow:hover{background:var(--white);box-shadow:0 4px 16px rgba(36,27,20,0.2);}
+  .ba-arrow.prev{left:12px;}
+  .ba-arrow.next{right:12px;}
+  .ba-caption{margin-top:10px;font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.45);text-align:center;min-height:1.2em;transition:opacity .2s;}
+  .ba-captions{display:none;}
+
   .text .step-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
     margin-bottom:10px;display:inline-block;background:rgba(209,75,63,0.1);padding:5px 12px;border-radius:14px;}
   .text h3{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 14px;letter-spacing:-0.005em;}
@@ -307,9 +360,9 @@
       <div class="hero-row">
         <div>
           <h1
-            data-en='I build the systems that make learning <em>work</em> for the people stuck running it.'
-            data-ja='学びを<em>機能させる</em>仕組みをつくるのが、私の仕事です。'>
-            I build the systems that make learning <em>work</em> for the people stuck running it.
+            data-en='Every parent sends their child to school with a dream. I build the <em>operations</em> that give schools a real chance of delivering on it.'
+            data-ja='すべての保護者は、夢を抱いて子どもを学校に送り出す。私は、学校がその夢に応えられる<em>仕組み</em>をつくります。'>
+            Every parent sends their child to school with a dream. I build the <em>operations</em> that give schools a real chance of delivering on it.
           </h1>
           <p class="sub"
             data-en="Most small language schools lose students for reasons that are completely fixable — but only visible if you know where to look. I find those gaps and build the systems that close them. Everything on this page came from real problems at a real school, not a classroom exercise."
@@ -608,8 +661,18 @@ const GITHUB_BASE = "";
 // =============================================================
 const IMAGES = {
   "hero":                    "images/hero.jpg",
-  "line-automation-0":       "images/cs01-step01-problem.jpg",
+  // LINE Automation — Step 01 carousel (Before/After + Flow)
+  "line-automation-0-before":"images/cs01-step01-before.jpg",   // Before: old email chain / screenshot of the 9-step process
+  "line-automation-0-after": "images/cs01-step01-after.jpg",    // After:  the new LINE interface / LIFF screen
+  "line-automation-0-flow":  "images/cs01-step01-flowchart.jpg",// Flow:   user flow diagram / Make.com scenario map
   "line-automation-1":       "images/cs01-step02-process.jpg",
+  // LINE LIFF user flow diagram — 5 screens
+  // Upload these in order: LINE menu → absence screens → makeup screens
+  "line-flow-0": "images/cs01-flow-01-menu.jpg",         // Screen 1: LINE main menu
+  "line-flow-1": "images/cs01-flow-02-absence-1.jpg",    // Screen 2: Absence — select student/date
+  "line-flow-2": "images/cs01-flow-03-absence-2.jpg",    // Screen 3: Absence — confirm & submit
+  "line-flow-3": "images/cs01-flow-04-makeup-1.jpg",     // Screen 4: Makeup — browse available slots
+  "line-flow-4": "images/cs01-flow-05-makeup-2.jpg",     // Screen 5: Makeup — confirm booking
   "line-automation-2":       "images/cs01-step03-outcome.jpg",
   "churn-study-0":           "images/cs02-step01-problem.jpg",
   "churn-study-1":           "images/cs02-step02-process.jpg",
@@ -809,28 +872,181 @@ function renderTiles(){
 }
 renderTiles();
 
+function phoneScreen(key, stepNum, labelEN, labelJA){
+  const src = imgSrc(key);
+  const filename = IMAGES[key] || key;
+  const label = LANG === 'ja' ? labelJA : labelEN;
+  const inner = src
+    ? `<img src="${src}" alt="${label}" onerror="this.parentElement.innerHTML='<div class=\\'flow-screen-ph\\'><div>🖼</div><div>${filename}</div></div>'">`
+    : `<div class="flow-screen-ph"><div style="font-size:1.1rem">🖼</div><div>Upload:<br>${filename}</div></div>`;
+  return `<div class="flow-phone">
+    <div class="flow-step-num">${stepNum}</div>
+    <div class="flow-device"><div class="flow-screen">${inner}</div></div>
+    <div class="flow-label">${label}</div>
+  </div>`;
+}
+
+function arrowSVG(color){
+  return `<svg viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="10" x2="24" y2="10" stroke="${color||'rgba(36,27,20,0.25)'}" stroke-width="1.5"/>
+    <path d="M18 4L26 10L18 16" stroke="${color||'rgba(36,27,20,0.25)'}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </svg>`;
+}
+
+function flowDiagramHTML(){
+  const isJA = LANG === 'ja';
+  const titleEN = "How it works — the full parent journey";
+  const titleJA = "実際の操作フロー — 保護者の全体体験";
+  const absenceLabel = isJA ? "欠席連絡" : "Absence";
+  const makeupLabel  = isJA ? "振替授業" : "Makeup";
+
+  const screens = [
+    { key:"line-flow-0", num:1, en:"LINE menu",             ja:"LINEメニュー" },
+    { key:"line-flow-1", num:2, en:"Select date",           ja:"日付選択" },
+    { key:"line-flow-2", num:3, en:"Confirm absence",       ja:"欠席確認" },
+    { key:"line-flow-3", num:4, en:"Pick a slot",           ja:"空き枠を選ぶ" },
+    { key:"line-flow-4", num:5, en:"Confirm makeup",        ja:"振替確認" },
+  ];
+
+  const arrowDown  = `<svg width="20" height="32" viewBox="0 0 20 32" fill="none"><line x1="10" y1="0" x2="10" y2="24" stroke="rgba(36,27,20,0.22)" stroke-width="1.5"/><path d="M4 18L10 26L16 18" stroke="rgba(36,27,20,0.22)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const arrowDiagL = `<svg width="80" height="48" viewBox="0 0 80 48" fill="none"><path d="M40 0 Q10 10 8 44" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M2 38L8 46L14 38" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowDiagR = `<svg width="80" height="48" viewBox="0 0 80 48" fill="none"><path d="M40 0 Q70 10 72 44" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M66 38L72 46L78 38" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowRight = `<svg width="32" height="20" viewBox="0 0 32 20" fill="none"><line x1="0" y1="10" x2="24" y2="10" stroke="rgba(209,75,63,0.45)" stroke-width="1.5"/><path d="M18 4L26 10L18 16" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+
+  return `
+  <div style="padding:28px 0 8px;">
+    <div style="font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);background:rgba(209,75,63,0.08);display:inline-block;padding:5px 12px;border-radius:20px;margin-bottom:20px;">
+      ${isJA ? titleJA : titleEN}
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:0;padding-bottom:32px;">
+
+    <!-- Row 1: Menu (top of pyramid) -->
+    <div style="display:flex;justify-content:center;">
+      ${phoneScreen(screens[0].key, screens[0].num, screens[0].en, screens[0].ja)}
+    </div>
+
+    <!-- Split arrows -->
+    <div style="display:flex;justify-content:center;gap:80px;margin:0;">
+      <div style="display:flex;justify-content:flex-end;">${arrowDiagL}</div>
+      <div style="display:flex;justify-content:flex-start;">${arrowDiagR}</div>
+    </div>
+
+    <!-- Row 2: Absence left, Makeup right -->
+    <div style="display:flex;align-items:flex-start;gap:48px;justify-content:center;flex-wrap:wrap;">
+
+      <!-- Absence branch -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(36,27,20,0.45);background:rgba(36,27,20,0.06);padding:3px 12px;border-radius:10px;">${absenceLabel}</div>
+        <div style="display:flex;align-items:flex-start;gap:0;">
+          ${phoneScreen(screens[1].key, screens[1].num, screens[1].en, screens[1].ja)}
+          <div style="display:flex;align-items:center;padding:0 6px;margin-top:56px;">${arrowRight}</div>
+          ${phoneScreen(screens[2].key, screens[2].num, screens[2].en, screens[2].ja)}
+        </div>
+      </div>
+
+      <!-- Makeup branch -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);background:rgba(209,75,63,0.08);padding:3px 12px;border-radius:10px;">${makeupLabel}</div>
+        <div style="display:flex;align-items:flex-start;gap:0;">
+          ${phoneScreen(screens[3].key, screens[3].num, screens[3].en, screens[3].ja)}
+          <div style="display:flex;align-items:center;padding:0 6px;margin-top:56px;">${arrowRight}</div>
+          ${phoneScreen(screens[4].key, screens[4].num, screens[4].en, screens[4].ja)}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <p style="font-family:var(--mono);font-size:0.65rem;color:rgba(36,27,20,0.38);text-align:center;margin:0 0 24px;">
+    ${isJA ? "← スクロールして全フローを確認" : "← Scroll horizontally on smaller screens"}
+  </p>`;
+}
+
+function carouselHTML(studyId){
+  const slides = [
+    { key: `${studyId}-0-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — the 9-step email process", captionJA:"導入前 — 9段階のメール対応" },
+    { key: `${studyId}-0-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — the LINE scheduling interface", captionJA:"導入後 — LINEスケジュールインターフェース" },
+    { key: `${studyId}-0-flow`,   badge:"flow",   badgeEN:"User Flow", badgeJA:"ユーザーフロー", captionEN:"User flow — how the automation connects", captionJA:"ユーザーフロー — 自動化の接続図" },
+  ];
+  const captions = slides.map(s=> LANG==='ja' ? s.captionJA : s.captionEN);
+  const slidesHTML = slides.map(s=>{
+    const src = imgSrc(s.key);
+    const filename = IMAGES[s.key] || s.key;
+    const badgeLabel = LANG==='ja' ? s.badgeJA : s.badgeEN;
+    const inner = src
+      ? `<img src="${src}" alt="${badgeLabel}" onerror="this.parentElement.innerHTML='<div class=\\'ba-ph\\'><div style=\\'font-size:1.4rem\\'>🖼</div><div>Upload: ${filename}</div></div>'">`
+      : `<div class="ba-ph"><div style="font-size:1.4rem">🖼</div><div>Upload: ${filename}</div></div>`;
+    return `<div class="ba-slide"><span class="ba-badge ${s.badge}">${badgeLabel}</span>${inner}</div>`;
+  }).join("");
+  return `
+  <div class="ba-carousel" id="carousel-${studyId}">
+    <div class="ba-slides" id="slides-${studyId}">${slidesHTML}</div>
+    <button class="ba-arrow prev" onclick="carouselMove('${studyId}',-1)">&#8249;</button>
+    <button class="ba-arrow next" onclick="carouselMove('${studyId}',1)">&#8250;</button>
+    <div class="ba-nav">
+      ${slides.map((_,i)=>`<button class="ba-dot ${i===0?'active':''}" onclick="carouselGo('${studyId}',${i})"></button>`).join("")}
+    </div>
+  </div>
+  <div class="ba-caption" id="caption-${studyId}">${captions[0]}</div>
+  <script type="application/json" id="captions-data-${studyId}">${JSON.stringify(captions)}<\/script>`;
+}
+
+function carouselMove(id, dir){
+  const track = document.getElementById(`slides-${id}`);
+  const dots = document.querySelectorAll(`#carousel-${id} .ba-dot`);
+  const caption = document.getElementById(`caption-${id}`);
+  const captionsData = JSON.parse(document.getElementById(`captions-data-${id}`).textContent);
+  const total = dots.length;
+  let current = [...dots].findIndex(d=>d.classList.contains('active'));
+  current = (current + dir + total) % total;
+  carouselGo(id, current);
+}
+
+function carouselGo(id, index){
+  const track = document.getElementById(`slides-${id}`);
+  const dots = document.querySelectorAll(`#carousel-${id} .ba-dot`);
+  const caption = document.getElementById(`caption-${id}`);
+  const captionsData = JSON.parse(document.getElementById(`captions-data-${id}`).textContent);
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach((d,i)=>d.classList.toggle('active', i===index));
+  if(caption && captionsData) caption.textContent = captionsData[index] || "";
+}
+
 function openStudy(id){
   const cs = CASE_STUDIES.find(c=>c.id===id); if(!cs) return;
   document.getElementById("study-title").textContent = cs.title[LANG];
   document.getElementById("study-tags").innerHTML = `<span>${cs.type[LANG]}</span><span>${cs.loc}</span>`;
   document.getElementById("study-body").innerHTML = cs.steps.map((s,i)=>{
-    const imgKey = `${id}-${i}`;
-    const src = imgSrc(imgKey);
-    const filename = IMAGES[imgKey] || "no filename";
-    const visualInner = src
-      ? `<img src="${src}" alt="${s.title.en}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" onerror="this.parentElement.innerHTML=placeholderHTML('Upload: ${filename}')">`
-      : placeholderHTML(`Upload: ${filename}`);
+    // LINE automation step 0 gets the carousel
+    const isCarousel = (id === "line-automation" && i === 0);
+    // LINE automation step 1 gets the flow diagram appended below the text
+    const hasFlowDiagram = (id === "line-automation" && i === 1);
+    let visualBlock;
+    if(isCarousel){
+      visualBlock = carouselHTML(id);
+    } else {
+      const imgKey = `${id}-${i}`;
+      const src = imgSrc(imgKey);
+      const filename = IMAGES[imgKey] || "no filename";
+      const visualInner = src
+        ? `<img src="${src}" alt="${s.title.en}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" onerror="this.parentElement.innerHTML=placeholderHTML('Upload: ${filename}')">`
+        : placeholderHTML(`Upload: ${filename}`);
+      visualBlock = `<div class="visual" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">${visualInner}</div>`;
+    }
     return `
     <div class="story-block ${s.reverse?'reverse':''}">
-      <div class="visual" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">
-        ${visualInner}
+      <div style="display:flex;flex-direction:column;gap:0;">
+        ${visualBlock}
       </div>
       <div class="text">
         <span class="step-label">${s.label[LANG]}</span>
         <h3>${s.title[LANG]}</h3>
         <p>${s.body[LANG]}</p>
       </div>
-    </div>`;
+    </div>
+    ${hasFlowDiagram ? `<div style="padding:0 5.5vw 2vh;">${flowDiagramHTML()}</div>` : ''}`;
+
   }).join("");
   showView("study"); window.scrollTo({top:0});
 }
