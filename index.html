@@ -1,4 +1,88 @@
 <!DOCTYPE html>
+<!--
+=============================================================
+  IMAGE UPLOAD GUIDE — read before uploading to GitHub
+=============================================================
+
+  All images live in an /images/ folder in your GitHub repo.
+  Upload them with EXACTLY these filenames (case-sensitive).
+  The site will pull them automatically once they are there.
+
+  YOUR GITHUB PAGES BASE URL:
+  Change the GITHUB_BASE variable in the <script> block near
+  the bottom of this file to match your repo, e.g.:
+    const GITHUB_BASE = "https://yourusername.github.io/yourrepo";
+
+  ── HOME PAGE ───────────────────────────────────────────────
+  images/hero.jpg
+    Your professional headshot or portrait.
+    Recommended: square crop, min 600×600px.
+
+  ── CASE STUDY 01 — LINE Automation ────────────────────────
+  images/cs01-step01-problem.jpg
+    Screenshot or diagram of the old 9-step email chain.
+    Works well as: a flowchart, a screenshot of an email thread,
+    or a whiteboard photo showing the old process.
+
+  images/cs01-step02-process.jpg
+    The LINE interface you built — screenshot of the LIFF app
+    or a diagram of the Make.com workflow.
+
+  images/cs01-step03-outcome.jpg
+    A before/after stat graphic, a screenshot of the LINE
+    confirmation flow, or a photo of staff using the system.
+
+  ── CASE STUDY 02 — Parent Retention ───────────────────────
+  images/cs02-step01-problem.jpg
+    A visual of the complaint pattern — e.g. a photo of
+    the notebook, or a graphic showing "13 of 36 parents."
+
+  images/cs02-step02-process.jpg
+    The Output Relay in action — a photo of a student
+    teaching a parent, or the notebook/sticker system.
+
+  images/cs02-step03-outcome.jpg
+    Stats graphic — 87% adoption, 30% homework rise, 0 complaints.
+
+  images/cs02-step04-materials.jpg
+    Screenshot of the 100+ video library or the teacher manual.
+
+  images/cs02-step05-signal.jpg
+    A chart showing the 47% word-of-mouth decline, or a
+    screenshot of the Google Business Profile before/after.
+
+  ── CASE STUDY 03 — Progress Tracking ──────────────────────
+  images/cs03-step01-problem.jpg
+    The constraint diagram — 8-minute gap, what fills it.
+    A simple timeline or whiteboard sketch works well.
+
+  images/cs03-step02-process.jpg
+    Screenshot of the QR code station setup, or the Supabase
+    dashboard showing real-time logging.
+
+  images/cs03-step03-outcome.jpg
+    A screenshot of the completed data — class logs, the
+    engagement dip for kindergarten/high school classes.
+
+  ── CASE STUDY 04 — Lifehack Curriculum ────────────────────
+  images/cs04-step01-origin.jpg
+    A photo from the planning meeting or the initial brief,
+    or a photo of the civil servant / stakeholder session.
+
+  images/cs04-step02-build.jpg
+    A photo from the festival stall, the Mercari setup,
+    or the tour guide session.
+
+  images/cs04-step03-setback.jpg
+    An abstract or neutral image representing a pivot moment.
+    Could be a photo of your notes or a planning document.
+
+  images/cs04-step04-trial.jpg
+    A photo from the actual trial run — students at the
+    simulation table, or the Articulate Rise module on screen.
+
+=============================================================
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -234,7 +318,8 @@
           </p>
         </div>
         <div class="hero-photo">
-          <img src="hero.jpg" alt="Murat Mert Titiz" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+          <!-- IMAGE: images/hero.jpg — your headshot -->
+          <img id="img-hero" src="" alt="Murat Mert Titiz" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
         </div>
       </div>
       <div class="discipline-tags">
@@ -507,6 +592,53 @@
 </div>
 
 <script>
+// =============================================================
+//  GITHUB PAGES BASE URL
+//  Change this to your GitHub Pages URL, e.g.:
+//  "https://yourusername.github.io/yourrepo"
+//  Leave as empty string "" if index.html is at the root.
+// =============================================================
+const GITHUB_BASE = "";
+
+// =============================================================
+//  IMAGE MAP
+//  Keys match case study id + step index (0-based).
+//  Values are filenames inside your /images/ folder.
+//  Upload images to GitHub with these exact filenames.
+// =============================================================
+const IMAGES = {
+  "hero":                    "images/hero.jpg",
+  "line-automation-0":       "images/cs01-step01-problem.jpg",
+  "line-automation-1":       "images/cs01-step02-process.jpg",
+  "line-automation-2":       "images/cs01-step03-outcome.jpg",
+  "churn-study-0":           "images/cs02-step01-problem.jpg",
+  "churn-study-1":           "images/cs02-step02-process.jpg",
+  "churn-study-2":           "images/cs02-step03-outcome.jpg",
+  "churn-study-3":           "images/cs02-step04-materials.jpg",
+  "churn-study-4":           "images/cs02-step05-signal.jpg",
+  "kana-progress-tracking-0":"images/cs03-step01-problem.jpg",
+  "kana-progress-tracking-1":"images/cs03-step02-process.jpg",
+  "kana-progress-tracking-2":"images/cs03-step03-outcome.jpg",
+  "lifehack-curriculum-0":   "images/cs04-step01-origin.jpg",
+  "lifehack-curriculum-1":   "images/cs04-step02-build.jpg",
+  "lifehack-curriculum-2":   "images/cs04-step03-setback.jpg",
+  "lifehack-curriculum-3":   "images/cs04-step04-trial.jpg",
+};
+
+function imgSrc(key){
+  const path = IMAGES[key];
+  if(!path) return "";
+  return GITHUB_BASE ? GITHUB_BASE + "/" + path : path;
+}
+
+// Placeholder shown when an image hasn't been uploaded yet
+function placeholderHTML(label){
+  return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:0.68rem;color:rgba(36,27,20,0.35);text-align:center;padding:16px;">
+    <div style="font-size:1.6rem;">🖼</div>
+    <div>${label}</div>
+  </div>`;
+}
+
 const TILE_COLORS = ["#D14B3F","#D99A4E","#A8281F","#E8866F","#5C8A6E"];
 let LANG = 'en';
 
@@ -681,18 +813,25 @@ function openStudy(id){
   const cs = CASE_STUDIES.find(c=>c.id===id); if(!cs) return;
   document.getElementById("study-title").textContent = cs.title[LANG];
   document.getElementById("study-tags").innerHTML = `<span>${cs.type[LANG]}</span><span>${cs.loc}</span>`;
-  document.getElementById("study-body").innerHTML = cs.steps.map(s=>`
+  document.getElementById("study-body").innerHTML = cs.steps.map((s,i)=>{
+    const imgKey = `${id}-${i}`;
+    const src = imgSrc(imgKey);
+    const filename = IMAGES[imgKey] || "no filename";
+    const visualInner = src
+      ? `<img src="${src}" alt="${s.title.en}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" onerror="this.parentElement.innerHTML=placeholderHTML('Upload: ${filename}')">`
+      : placeholderHTML(`Upload: ${filename}`);
+    return `
     <div class="story-block ${s.reverse?'reverse':''}">
-      <div class="visual" data-zoom="${s.title[LANG]}">
-        <div style="font-size:1.4rem;">⤢</div>
-        <div>${s.title[LANG]} — diagram/photo<br>click to preview</div>
+      <div class="visual" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">
+        ${visualInner}
       </div>
       <div class="text">
         <span class="step-label">${s.label[LANG]}</span>
         <h3>${s.title[LANG]}</h3>
         <p>${s.body[LANG]}</p>
       </div>
-    </div>`).join("");
+    </div>`;
+  }).join("");
   showView("study"); window.scrollTo({top:0});
 }
 
@@ -773,6 +912,21 @@ function initReveal(){
 }
 function observeAll(){ document.querySelectorAll(".reveal").forEach(el=>observer.observe(el)); }
 observeAll(); initReveal();
+
+// Apply hero image
+(function(){
+  const heroImg = document.getElementById("img-hero");
+  const src = imgSrc("hero");
+  if(src){
+    heroImg.src = src;
+    heroImg.onerror = function(){
+      heroImg.style.display = "none";
+      heroImg.parentElement.innerHTML = placeholderHTML("Upload: images/hero.jpg");
+    };
+  } else {
+    heroImg.parentElement.innerHTML = placeholderHTML("Upload: images/hero.jpg");
+  }
+})();
 </script>
 </body>
 </html>
