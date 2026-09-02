@@ -32,7 +32,6 @@
   nav a.active{color:var(--white);background:var(--red);}
   nav a .emoji{font-size:1rem;}
 
-  /* ---------- language toggle ---------- */
   .lang-toggle{display:flex;gap:4px;margin-top:16px;}
   .lang-btn{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;
     padding:6px 12px;border-radius:16px;border:1px solid var(--line);background:transparent;
@@ -105,6 +104,7 @@
   .tile-demo:hover{background:var(--red-deep);}
   .tile .go{font-family:var(--display);font-size:1.5rem;color:var(--red);transition:transform .2s;}
   .tile:hover .go{transform:translateX(6px);}
+  .tile.audit-tile{border:2px solid var(--red);background:linear-gradient(135deg,rgba(209,75,63,0.04) 0%,rgba(255,255,255,1) 60%);}
   @media(max-width:600px){.tile{flex-wrap:wrap;}.tile .go{display:none;}}
 
   /* CONTACT */
@@ -122,6 +122,8 @@
     padding:18px 24px;border-radius:18px;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:all .2s;}
   .contact-link:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateX(4px);}
   .contact-link span:last-child{font-size:1.2rem;}
+  .contact-link.primary-cta{background:var(--red);color:var(--white);border-color:var(--red);}
+  .contact-link.primary-cta:hover{background:var(--red-deep);border-color:var(--red-deep);}
 
   /* CASE STUDY */
   .study-header{padding:6vh 5.5vw 4vh;}
@@ -146,6 +148,31 @@
   #zoom-modal.active{display:flex;}
   .zoom-box{background:var(--cream);border-radius:24px;max-width:900px;width:100%;aspect-ratio:16/10;
     display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-family:var(--mono);color:rgba(36,27,20,0.5);}
+
+  /* AUDIT OFFER PAGE */
+  .audit-view{max-width:760px;margin:0 auto;}
+  .audit-view h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.2vw,2.6rem);margin:0 0 14px;letter-spacing:-0.01em;}
+  .audit-view .lead{font-size:1.08rem;line-height:1.75;color:rgba(36,27,20,0.75);margin-bottom:40px;max-width:620px;}
+  .audit-section{margin-bottom:40px;}
+  .audit-section h3{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0 0 12px;}
+  .audit-section p{font-size:1rem;line-height:1.75;color:rgba(36,27,20,0.75);margin:0 0 10px;}
+  .audit-section ul{margin:0;padding-left:1.2em;color:rgba(36,27,20,0.75);font-size:1rem;line-height:1.9;}
+  .audit-pricing{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+  .price-card{background:var(--white);border-radius:18px;padding:22px 24px;border:1px solid var(--line);}
+  .price-card.featured{border:2px solid var(--red);background:linear-gradient(135deg,rgba(209,75,63,0.04),var(--white));}
+  .price-card .price-label{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.45);margin-bottom:8px;}
+  .price-card .price-num{font-family:var(--display);font-weight:700;font-size:1.9rem;color:var(--red);margin-bottom:6px;}
+  .price-card .price-desc{font-size:0.85rem;color:rgba(36,27,20,0.62);line-height:1.5;}
+  @media(max-width:600px){.audit-pricing{grid-template-columns:1fr;}}
+  .audit-cta-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:1.05rem;
+    background:var(--red);color:var(--white);padding:16px 34px;border-radius:30px;text-decoration:none;border:none;cursor:pointer;
+    transition:transform .2s,box-shadow .2s;margin-top:8px;}
+  .audit-cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(168,40,31,0.3);}
+  .proof-strip{background:var(--white);border-radius:20px;border:1px solid var(--line);padding:24px 28px;margin:28px 0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;}
+  .proof-stat .num{font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--red);}
+  .proof-stat .lbl{font-size:0.78rem;color:rgba(36,27,20,0.6);line-height:1.4;margin-top:3px;}
+
   footer{padding:30px 5.5vw;font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.5);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
   footer a{text-decoration:none;color:var(--red-deep);}
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
@@ -157,13 +184,16 @@
 <aside>
   <div>
     <div class="brand" data-nav="home">Murat Mert Titiz<span class="dot">.</span></div>
-    <div class="brand-role" data-en="Learning Ops &amp; Customer Ed" data-ja="ラーニングオペレーション">Learning Ops &amp; Customer Ed</div>
+    <div class="brand-role"
+      data-en="School Retention &amp; Operations"
+      data-ja="スクール経営・リテンション支援">School Retention &amp; Operations</div>
   </div>
   <button id="menu-toggle" data-en="Menu" data-ja="メニュー">Menu</button>
   <nav id="main-nav">
     <ol>
       <li><a href="#" data-nav="home" class="active"><span class="emoji">🏠</span><span data-en="Home" data-ja="ホーム">Home</span></a></li>
       <li><a href="#" data-nav="work"><span class="emoji">🧩</span><span data-en="Work" data-ja="実績">Work</span></a></li>
+      <li><a href="#" data-nav="audit"><span class="emoji">🔍</span><span data-en="Audit Service" data-ja="スクール診断">Audit Service</span></a></li>
       <li><a href="#" data-nav="contact"><span class="emoji">💬</span><span data-en="Contact" data-ja="お問い合わせ">Contact</span></a></li>
     </ol>
   </nav>
@@ -185,19 +215,31 @@
   <!-- HOME -->
   <div class="view active" id="view-home">
     <section class="hero">
-      <span class="index-no" data-en="👋 Learning Ops · Customer Education · Instructional Design" data-ja="👋 ラーニングオペレーション · カスタマーエデュケーション · インストラクショナルデザイン">👋 Learning Ops · Customer Education · Instructional Design</span>
+      <span class="index-no"
+        data-en="👋 School Retention · Learning Operations · Instructional Design"
+        data-ja="👋 スクール経営支援 · ラーニングオペレーション · インストラクショナルデザイン">
+        👋 School Retention · Learning Operations · Instructional Design
+      </span>
       <div class="hero-row">
         <div>
-          <h1 data-en='I build the systems that make learning <em>work</em> for the people stuck running it.' data-ja='学びを<em>機能させる</em>仕組みをつくるのが、私の仕事です。'>I build the systems that make learning <em>work</em> for the people stuck running it.</h1>
-          <p class="sub" data-en="My background's in instructional design, but most of what I end up fixing sits underneath the lessons: the scheduling, the data, the parent communication nobody budgeted time for. I grew up moving between cultures and now build for schools and teams who deal with the same kind of complexity. Currently in Japan, after stretches in the US and Italy." data-ja="バックグラウンドはインストラクショナルデザインですが、実際に取り組む課題のほとんどはレッスンの裏側にあります。スケジュール管理、データ収集、誰も時間を割けていない保護者とのコミュニケーション。トルコ、アメリカ、イタリア、日本と文化をまたいで生きてきた経験をもとに、複雑な環境で動く学校やチームのための仕組みをつくっています。">My background's in instructional design, but most of what I end up fixing sits underneath the lessons: the scheduling, the data, the parent communication nobody budgeted time for. I grew up moving between cultures and now build for schools and teams who deal with the same kind of complexity. Currently in Japan, after stretches in the US and Italy.</p>
+          <h1
+            data-en='I build the systems that make learning <em>work</em> for the people stuck running it.'
+            data-ja='学びを<em>機能させる</em>仕組みをつくるのが、私の仕事です。'>
+            I build the systems that make learning <em>work</em> for the people stuck running it.
+          </h1>
+          <p class="sub"
+            data-en="Most small language schools lose students for reasons that are completely fixable — but only visible if you know where to look. I find those gaps and build the systems that close them. Everything on this page came from real problems at a real school, not a classroom exercise."
+            data-ja="小規模な語学スクールが生徒を失う理由のほとんどは、正しく見れば完全に修正できます。私はその見えていないギャップを見つけ、それを埋める仕組みをつくります。このページにあるすべての実績は、机上の演習ではなく、実際のスクールで起きた本物の課題から生まれました。">
+            Most small language schools lose students for reasons that are completely fixable — but only visible if you know where to look. I find those gaps and build the systems that close them. Everything on this page came from real problems at a real school, not a classroom exercise.
+          </p>
         </div>
         <div class="hero-photo">
           <img src="hero.jpg" alt="Murat Mert Titiz" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
         </div>
       </div>
       <div class="discipline-tags">
+        <span class="tag primary" data-en="School Retention" data-ja="スクールリテンション">School Retention</span>
         <span class="tag primary" data-en="Learning Operations" data-ja="ラーニングオペレーション">Learning Operations</span>
-        <span class="tag primary" data-en="Customer Education" data-ja="カスタマーエデュケーション">Customer Education</span>
         <span class="tag" data-en="Instructional Design" data-ja="インストラクショナルデザイン">Instructional Design</span>
       </div>
     </section>
@@ -205,14 +247,58 @@
     <section>
       <span class="index-no" data-en="📊 At a glance" data-ja="📊 実績サマリー">📊 At a glance</span>
       <div class="stats-wrap">
-        <div class="stat-card"><div class="num">250+</div><div class="label" data-en="Learners served across instructional programs and operational systems" data-ja="授業プログラムおよび運営システムを通じて関わった学習者数">Learners served across instructional programs and operational systems</div></div>
-        <div class="stat-card"><div class="num">~100%</div><div class="label" data-en="Staff adoption of an in-house lesson tracking tool, built and iterated from scratch" data-ja="自社開発の授業記録ツールのスタッフ定着率（ゼロから設計・改善）">Staff adoption of an in-house lesson tracking tool, built and iterated from scratch</div></div>
-        <div class="stat-card"><div class="num">90%</div><div class="label" data-en="Parent adoption of a custom LMS communication system for scheduling and support" data-ja="スケジュール管理・サポート用LINEシステムの保護者登録率">Parent adoption of a custom LMS communication system for scheduling and support</div></div>
-        <div class="stat-card"><div class="num">87%</div><div class="label" data-en="Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom" data-ja="家庭学習を促す保護者参加プログラムの継続的な定着率">Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom</div></div>
-        <div class="stat-card"><div class="num">100+</div><div class="label" data-en="Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide" data-ja="制作した学習コンテンツ数（カリキュラム解説、オンボーディング資料、インストラクターガイドなど）">Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide</div></div>
-        <div class="stat-card"><div class="num">5</div><div class="label" data-en="Languages — Turkish, English, Japanese, Italian, basic Russian" data-ja="言語 — トルコ語、英語、日本語、イタリア語、ロシア語（基礎）">Languages — Turkish, English, Japanese, Italian, basic Russian</div></div>
+        <div class="stat-card">
+          <div class="num">150+</div>
+          <div class="label"
+            data-en="Students across 100+ families — the school where all four case studies were built"
+            data-ja="生徒数150名以上・100家庭以上。4つのケーススタディはすべてここから生まれました">
+            Students across 100+ families — the school where all four case studies were built
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="num">~100%</div>
+          <div class="label"
+            data-en="Staff adoption of an in-house lesson tracking tool, built and iterated from scratch"
+            data-ja="自社開発の授業記録ツールのスタッフ定着率（ゼロから設計・改善）">
+            Staff adoption of an in-house lesson tracking tool, built and iterated from scratch
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="num">90%</div>
+          <div class="label"
+            data-en="Parent adoption of a custom LINE communication system for scheduling and support"
+            data-ja="スケジュール管理・サポート用LINEシステムの保護者登録率">
+            Parent adoption of a custom LINE communication system for scheduling and support
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="num">87%</div>
+          <div class="label"
+            data-en="Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom"
+            data-ja="家庭学習を促す保護者参加プログラムの継続的な定着率">
+            Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="num">100+</div>
+          <div class="label"
+            data-en="Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide"
+            data-ja="制作した学習コンテンツ数（カリキュラム解説、オンボーディング資料、インストラクターガイドなど）">
+            Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="num">5</div>
+          <div class="label"
+            data-en="Languages — Turkish, English, Japanese, Italian, basic Russian"
+            data-ja="言語 — トルコ語、英語、日本語、イタリア語、ロシア語（基礎）">
+            Languages — Turkish, English, Japanese, Italian, basic Russian
+          </div>
+        </div>
         <div class="stat-card" style="grid-column:1/-1;">
-          <div class="num" style="font-size:1.05rem;line-height:1.6;letter-spacing:0;">Articulate Rise &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Moodle &nbsp;·&nbsp; Google UX/UI Design &nbsp;·&nbsp; Copyediting &nbsp;·&nbsp; ABA Therapy</div>
+          <div class="num" style="font-size:1.05rem;line-height:1.6;letter-spacing:0;">
+            LINE LIFF &nbsp;·&nbsp; Make.com &nbsp;·&nbsp; Supabase &nbsp;·&nbsp; Google Workspace &nbsp;·&nbsp; Articulate Rise &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Google UX/UI Design &nbsp;·&nbsp; ABA Therapy
+          </div>
           <div class="label" data-en="Tools &amp; certifications" data-ja="ツール・資格">Tools &amp; certifications</div>
         </div>
       </div>
@@ -229,9 +315,132 @@
     <section>
       <div class="work-intro">
         <span class="index-no" data-en="🧩 Work" data-ja="🧩 実績">🧩 Work</span>
-        <h2 data-en="Four systems I've built, all solving the same underlying problem." data-ja="つくってきた4つのシステム。どれも同じ根本的な課題に向き合っています。">Four systems I've built, all solving the same underlying problem.</h2>
+        <h2
+          data-en="Four problems I found inside one school — and built solutions for. Each one started with a parent complaint, a staff frustration, or a number that didn't add up."
+          data-ja="一つのスクールで見つけた四つの課題と、それぞれに構築した解決策。どれも保護者のクレーム、スタッフの悩み、あるいは辻褄の合わない数字から始まりました。">
+          Four problems I found inside one school — and built solutions for. Each one started with a parent complaint, a staff frustration, or a number that didn't add up.
+        </h2>
       </div>
       <div class="tiles" id="work-tiles"></div>
+    </section>
+  </div>
+
+  <!-- AUDIT SERVICE PAGE -->
+  <div class="view" id="view-audit">
+    <section>
+      <div class="audit-view">
+        <span class="index-no" data-en="🔍 Audit Service" data-ja="🔍 スクール診断サービス">🔍 Audit Service</span>
+
+        <h2
+          data-en="School Audit: Parent Retention &amp; Revenue Clarity"
+          data-ja="スクール診断：保護者リテンションと収益の可視化">
+          School Audit: Parent Retention &amp; Revenue Clarity
+        </h2>
+
+        <p class="lead"
+          data-en="You know some parents are unhappy. You see enrollment flat, trial requests shrinking, or students quitting after two or three months. Most schools don't know the real cause because they're not asking the right people, in the right way. That's what this audit is for."
+          data-ja="保護者の不満はなんとなく感じている。でも、体験入学の問い合わせは減り、2〜3ヶ月で辞める生徒が後を絶たない。多くのスクールが原因を特定できていないのは、正しい相手に、正しい方法で聞いていないからです。この診断はそのためにあります。">
+          You know some parents are unhappy. You see enrollment flat, trial requests shrinking, or students quitting after two or three months. Most schools don't know the real cause because they're not asking the right people, in the right way. That's what this audit is for.
+        </p>
+
+        <div class="proof-strip">
+          <div class="proof-stat">
+            <div class="num">25</div>
+            <div class="lbl" data-en="New students in the first year post-implementation" data-ja="施策後、初年度に増えた新規生徒数">New students in year one</div>
+          </div>
+          <div class="proof-stat">
+            <div class="num">90%</div>
+            <div class="lbl" data-en="Parent adoption of a new communication system within two months" data-ja="2ヶ月以内に新コミュニケーションシステムを利用した保護者の割合">Parent system adoption</div>
+          </div>
+          <div class="proof-stat">
+            <div class="num">30%</div>
+            <div class="lbl" data-en="Rise in homework completion after a visibility intervention" data-ja="可視化施策後の宿題完成率の向上">Homework completion rise</div>
+          </div>
+          <div class="proof-stat">
+            <div class="num">0</div>
+            <div class="lbl" data-en="Complaints about progress visibility since the Output Relay launched" data-ja="アウトプットリレー導入後の進捗に関するクレーム件数">Progress complaints since launch</div>
+          </div>
+        </div>
+
+        <div class="audit-section">
+          <h3 data-en="What the audit involves" data-ja="診断の内容">What the audit involves</h3>
+          <p data-en="We conduct structured interviews with three groups:" data-ja="三つのグループに対して構造化インタビューを実施します。">We conduct structured interviews with three groups:</p>
+          <ul>
+            <li data-en="<strong>Parents (current and former)</strong> — why they joined, what surprised them, why some left" data-ja="<strong>保護者（在籍・退会）</strong> — 入学の理由、予想と異なった点、退会した理由"><strong>Parents (current and former)</strong> — why they joined, what surprised them, why some left</li>
+            <li data-en="<strong>Staff and teachers</strong> — recurring complaints, where communication breaks down, what they find hardest to manage" data-ja="<strong>スタッフ・講師</strong> — 繰り返されるクレーム、コミュニケーションの断絶ポイント、管理上の課題"><strong>Staff and teachers</strong> — recurring complaints, where communication breaks down, what they find hardest to manage</li>
+            <li data-en="<strong>You (the owner)</strong> — your revenue targets, your read on where the gaps are, what you've already tried" data-ja="<strong>オーナー</strong> — 収益目標、課題の認識、これまでに試みた施策"><strong>You (the owner)</strong> — your revenue targets, your read on where the gaps are, what you've already tried</li>
+          </ul>
+          <p style="margin-top:14px;"
+            data-en="We also review your parent journey end-to-end — from trial inquiry through the first months of enrollment — and identify where families are most likely to disengage."
+            data-ja="体験入学の問い合わせから入学後数ヶ月までの保護者体験を通じて確認し、どの段階で最も離脱しやすいかを特定します。">
+            We also review your parent journey end-to-end — from trial inquiry through the first months of enrollment — and identify where families are most likely to disengage.
+          </p>
+        </div>
+
+        <div class="audit-section">
+          <h3 data-en="What you get" data-ja="お渡しするもの">What you get</h3>
+          <ul>
+            <li data-en="<strong>Specific problems, not observations</strong> — diagnoses with enough detail to act on immediately" data-ja="<strong>具体的な問題点（観察ではなく診断）</strong> — すぐに行動できる粒度で提示"><strong>Specific problems, not observations</strong> — diagnoses with enough detail to act on immediately</li>
+            <li data-en="<strong>Revenue impact assessment</strong> — which issues are costing you students and which are just friction" data-ja="<strong>収益への影響評価</strong> — 生徒を失っている問題と、単なる摩擦の区別"><strong>Revenue impact assessment</strong> — which issues are costing you students and which are just friction</li>
+            <li data-en="<strong>A prioritised first fix</strong> — the highest-impact, lowest-effort intervention, with a rationale for why it comes first" data-ja="<strong>優先度付きの最初の改善策</strong> — 最も効果が高く、最も手間の少ない施策とその根拠"><strong>A prioritised first fix</strong> — the highest-impact, lowest-effort intervention, with a rationale for why it comes first</li>
+            <li data-en="<strong>Systems assessment</strong> — whether your current tools and workflows are part of the problem" data-ja="<strong>システム評価</strong> — 現在のツールやフローが問題の一因となっていないかの確認"><strong>Systems assessment</strong> — whether your current tools and workflows are part of the problem</li>
+          </ul>
+        </div>
+
+        <div class="audit-section">
+          <h3 data-en="Investment" data-ja="料金">Investment</h3>
+          <div class="audit-pricing">
+            <div class="price-card">
+              <div class="price-label" data-en="Audit only" data-ja="診断のみ">Audit only</div>
+              <div class="price-num">¥75,000</div>
+              <div class="price-desc"
+                data-en="Structured interviews, written report with specific findings, and a prioritised first recommendation."
+                data-ja="構造化インタビュー、具体的な所見を含む書面レポート、優先度付き初回改善提案。">
+                Structured interviews, written report with specific findings, and a prioritised first recommendation.
+              </div>
+            </div>
+            <div class="price-card featured">
+              <div class="price-label" data-en="Audit + implementation" data-ja="診断＋実施支援">Audit + implementation</div>
+              <div class="price-num">¥150,000</div>
+              <div class="price-desc"
+                data-en="Everything above, plus 4–6 weeks of hands-on support executing the first fix — system builds, workflow redesigns, communication infrastructure."
+                data-ja="上記すべてに加え、最初の改善策の実施支援（システム構築、フロー再設計、コミュニケーション基盤整備）を4〜6週間にわたり提供。">
+                Everything above, plus 4–6 weeks of hands-on support executing the first fix — system builds, workflow redesigns, communication infrastructure.
+              </div>
+            </div>
+          </div>
+          <p style="font-size:0.85rem;color:rgba(36,27,20,0.5);"
+            data-en="The first conversation is free. We'll spend 90 minutes looking at your school together. If an audit would genuinely help, we'll tell you. If it wouldn't, we'll tell you that too."
+            data-ja="最初の面談は無料です。90分間、一緒にスクールの現状を確認します。診断が本当に役立つと判断すれば正直にお伝えし、そうでなければそれもお伝えします。">
+            The first conversation is free. We'll spend 90 minutes looking at your school together. If an audit would genuinely help, we'll tell you. If it wouldn't, we'll tell you that too.
+          </p>
+        </div>
+
+        <div class="audit-section">
+          <h3 data-en="What we can help you implement" data-ja="実施支援の対象領域">What we can help you implement</h3>
+          <ul>
+            <li data-en="Parent communication infrastructure — LINE-based scheduling, automated workflows, progress reporting" data-ja="保護者コミュニケーション基盤 — LINEスケジュール管理、自動化フロー、進捗レポート">Parent communication infrastructure — LINE-based scheduling, automated workflows, progress reporting</li>
+            <li data-en="Staff-facing logging and tracking tools built around real operational constraints" data-ja="スタッフ向け記録・追跡ツールの構築（現場の制約を踏まえた設計）">Staff-facing logging and tracking tools built around real operational constraints</li>
+            <li data-en="Acquisition channel diagnostics — Google, social, referral programme design" data-ja="集客チャネル診断 — Google、SNS、紹介プログラムの設計">Acquisition channel diagnostics — Google, social, referral programme design</li>
+            <li data-en="Trial-to-enrollment conversion flow redesign" data-ja="体験入学から本入学への転換フローの再設計">Trial-to-enrollment conversion flow redesign</li>
+            <li data-en="Onboarding materials for new families and incoming teaching staff" data-ja="新規家庭・新任講師向けオンボーディング資料の整備">Onboarding materials for new families and incoming teaching staff</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:36px;">
+          <p style="font-size:1rem;line-height:1.7;color:rgba(36,27,20,0.72);max-width:560px;margin-bottom:20px;"
+            data-en="Get in touch with your school name, approximate student count, and what you think your biggest retention challenge is. We'll take it from there."
+            data-ja="スクール名、生徒数の目安、最も大きなリテンション課題と思われる点をお知らせください。あとはこちらで対応します。">
+            Get in touch with your school name, approximate student count, and what you think your biggest retention challenge is. We'll take it from there.
+          </p>
+          <a href="mailto:muratto.titiz@gmail.com" class="audit-cta-btn"
+            data-en="Book a free 90-min intake call →"
+            data-ja="無料90分相談を予約する →">
+            Book a free 90-min intake call →
+          </a>
+        </div>
+
+      </div>
     </section>
   </div>
 
@@ -240,18 +449,33 @@
     <section>
       <div class="contact-wrap">
         <span class="index-no" data-en="💬 Contact" data-ja="💬 お問い合わせ">💬 Contact</span>
-        <h2 data-en="Let's talk about a project." data-ja="プロジェクトについて話しましょう。">Let's talk about a project.</h2>
-        <p style="line-height:1.75;color:rgba(36,27,20,0.75);" data-en="I'm open to roles and project work in learning operations, customer education, and instructional design — reach out if something seems like a fit." data-ja="ラーニングオペレーション、カスタマーエデュケーション、インストラクショナルデザイン分野でのポジションやプロジェクトに関心があります。何かご縁がありそうでしたら、お気軽にご連絡ください。">I'm open to roles and project work in learning operations, customer education, and instructional design — reach out if something seems like a fit.</p>
+        <h2 data-en="Let's talk about your school." data-ja="スクールについて話しましょう。">Let's talk about your school.</h2>
+        <p style="line-height:1.75;color:rgba(36,27,20,0.75);"
+          data-en="If you run a small eikaiwa or language school and you're losing students you can't fully explain, that's usually where I start. Get in touch and tell me what you're seeing — I'll tell you honestly whether an audit would help."
+          data-ja="小規模な英会話スクールや語学スクールを運営していて、理由がよくわからないまま生徒が離れているなら、そこから始めましょう。現状をお聞かせください。診断が本当に役立つかどうか、正直にお伝えします。">
+          If you run a small eikaiwa or language school and you're losing students you can't fully explain, that's usually where I start. Get in touch and tell me what you're seeing — I'll tell you honestly whether an audit would help.
+        </p>
         <div class="contact-row">
-          <a href="mailto:muratto.titiz@gmail.com" class="contact-link"><span data-en="Email" data-ja="メール">Email</span><span>↗</span></a>
-          <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link"><span>LinkedIn</span><span>↗</span></a>
+          <a href="mailto:muratto.titiz@gmail.com" class="contact-link primary-cta">
+            <span data-en="Book a free 90-min intake call" data-ja="無料90分相談を予約する">Book a free 90-min intake call</span><span>→</span>
+          </a>
+          <a href="mailto:muratto.titiz@gmail.com" class="contact-link">
+            <span data-en="Email" data-ja="メール">Email</span><span>↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link">
+            <span>LinkedIn</span><span>↗</span>
+          </a>
           <div class="contact-link resume-dropdown-wrap" id="resume-toggle" style="cursor:pointer;">
             <span data-en="Résumé (PDF)" data-ja="履歴書 (PDF)">Résumé (PDF)</span>
             <span id="resume-arrow">↓</span>
           </div>
           <div class="resume-dropdown" id="resume-dropdown">
-            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option"><span data-en="🇬🇧 English" data-ja="🇬🇧 英語版">🇬🇧 English</span><span>↗</span></a>
-            <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option"><span data-en="🇯🇵 日本語" data-ja="🇯🇵 日本語版">🇯🇵 日本語</span><span>↗</span></a>
+            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option">
+              <span data-en="🇬🇧 English" data-ja="🇬🇧 英語版">🇬🇧 English</span><span>↗</span>
+            </a>
+            <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option">
+              <span data-en="🇯🇵 日本語" data-ja="🇯🇵 日本語版">🇯🇵 日本語</span><span>↗</span>
+            </a>
           </div>
         </div>
       </div>
@@ -283,7 +507,7 @@
 </div>
 
 <script>
-const TILE_COLORS = ["#D14B3F","#D99A4E","#A8281F","#E8866F"];
+const TILE_COLORS = ["#D14B3F","#D99A4E","#A8281F","#E8866F","#5C8A6E"];
 let LANG = 'en';
 
 const CASE_STUDIES = [
@@ -299,18 +523,18 @@ const CASE_STUDIES = [
     steps:[
       {label:{en:"01 — Problem",ja:"01 — 課題"},
        title:{en:"Nine steps, all done by hand",ja:"9段階、すべて手作業"},
-       body:{en:"At KANA English School, every absence or makeup request went through the same email chain: check the site, email a request, wait for staff to check availability, wait again for a teacher consult, get a confirmation, confirm back, and hope someone records it correctly. About 35 of these came in per week across 150 students and 100+ families. On a normal weekday that loop ate up 20+ hours; over a weekend, closer to 30, since the school was closed Sundays. Only staff with strong Japanese could even handle the requests, and because different part-timers picked up different threads, the same conversation would get answered twice or dropped entirely.",
-              ja:"KANA English Schoolでは、欠席・振替の依頼がすべて同じメールのやり取りを経ていました。サイトを確認し、メールを送り、スタッフが空き状況を確認し、担当講師に相談し、返信を待ち、確認の返信をし、記録に残す。週に約35件、150名の生徒・100家庭以上からこの依頼が届きます。平日だけで20時間以上、日曜休業のため週末はさらに30時間近くをこの対応に費やしていました。日本語対応できるスタッフしか処理できず、引き継ぎのミスで二重対応や見落としも頻発していました。"},
+       body:{en:"At KANA English School, every absence or makeup request went through the same email chain: check the site, email a request, wait for staff to check availability, wait again for a teacher consultation, get a confirmation, confirm back, and hope someone records it correctly. About 35 of these came in per week across 150 students and 100+ families. On a normal weekday that loop ate up 20+ hours; over a weekend, closer to 30, since the school was closed Sundays. Only staff with strong Japanese could even handle the requests, and because different part-timers picked up different threads, the same conversation would get answered twice or dropped entirely.",
+              ja:"KANA English Schoolでは、欠席・振替の依頼がすべて同じメールのやり取りを経ていました。サイトを確認し、メールを送り、スタッフが空き状況を確認し、担当講師に相談し、返信を待ち、確認の返信をし、記録に残す。週に約35件、150名の生徒・100家庭以上からこの依頼が届きます。平日だけで20時間以上、日曜休業のため週末はさらに30時間近くをこの対応に費やしていました。"},
        reverse:false},
       {label:{en:"02 — Process",ja:"02 — プロセス"},
        title:{en:"Stop fighting the channel parents already use",ja:"保護者がすでに使っているチャネルに合わせる"},
-       body:{en:"A survey of parents found 74 of them wanted LINE instead of email, and 43 said the makeup process itself was confusing. So instead of building a separate scheduling app, I built the whole flow inside LINE using LIFF, which lets a custom interface open right inside the chat — no download, no new login. Make.com handles everything behind it: checking a student's identity, pulling live class capacity, preventing two parents from grabbing the same open seat, and even managing credit balances for adult students who pay per lesson.",
-              ja:"保護者へのアンケートで74名がLINEをメールより好むと回答し、43名が振替プロセス自体がわかりにくいと答えました。別のスケジュールアプリを作る代わりに、LIFFを使ってLINEの中にカスタムインターフェースを設計。ダウンロードも新規ログインも不要です。裏側ではMake.comが生徒の本人確認、空き枠の取得、二重予約の防止、大人の生徒のクレジット管理まですべて自動で処理します。"},
+       body:{en:"A survey of parents found 74 of them wanted LINE instead of email, and 43 said the makeup process itself was confusing. So instead of building a separate scheduling app, I built the whole flow inside LINE using LIFF — no download, no new login. Make.com handles everything behind it: checking a student's identity, pulling live class capacity, preventing two parents from grabbing the same open seat, and managing credit balances for adult students who pay per lesson.",
+              ja:"保護者へのアンケートで74名がLINEをメールより好むと回答し、43名が振替プロセス自体がわかりにくいと答えました。別のスケジュールアプリを作る代わりに、LIFFを使ってLINEの中にカスタムインターフェースを設計。ダウンロードも新規ログインも不要です。裏側ではMake.comが生徒の本人確認、空き枠の取得、二重予約の防止、クレジット管理まですべて自動で処理します。"},
        reverse:true},
       {label:{en:"03 — Outcome",ja:"03 — 成果"},
        title:{en:"Days down to under a minute, 90% adoption",ja:"数日かかっていた対応が1分以内に。定着率90%"},
-       body:{en:"The LINE interface now sits at 90% adoption across the school's families — covering absence reporting, makeup scheduling, and general support requests. What used to take a staff member 10 minutes of manually cross-checking schedules finishes in under three seconds, and a parent can submit a request, get confirmation, and be done in under a minute total. Staff time went back to the things that actually need a person — not schedule lookups.",
-              ja:"LINEインターフェースの定着率は現在90%。欠席連絡、振替依頼、一般的なサポート依頼をカバーしています。スタッフが10分かけて手作業でスケジュールを照合していた処理が、3秒以内に完了。保護者側も依頼から確認まで1分以内で終わります。スタッフの時間は、本当に人が必要な対応に使えるようになりました。"},
+       body:{en:"The LINE interface now sits at 90% adoption across the school's families. What used to take a staff member 10 minutes of manually cross-checking schedules finishes in under three seconds, and a parent can submit a request, get confirmation, and be done in under a minute total. Staff time went back to the things that actually need a person — marketing, account management, customer support, and building relationships.",
+              ja:"LINEインターフェースの定着率は現在90%。スタッフが10分かけて手作業でスケジュールを照合していた処理が、3秒以内に完了。保護者側も依頼から確認まで1分以内で終わります。スタッフの時間は、本当に人が必要な対応に使えるようになりました。"},
        reverse:false}
     ]
   },
@@ -321,49 +545,34 @@ const CASE_STUDIES = [
     loc:"Japan",
     tags:{en:["Retention Strategy","Behaviour Change","Content Production","Stakeholder Communication","Channel Diagnostics"],
           ja:["リテンション戦略","行動変容","コンテンツ制作","ステークホルダーコミュニケーション","チャネル診断"]},
-    summary:{en:"Parents thought their kids weren't learning English. The kids were — just not where anyone could see it.",
+    summary:{en:"Parents thought their kids weren't learning English. The kids were; just not where anyone could see it.",
              ja:"保護者は「子どもが英語を身につけていない」と感じていました。実際は学んでいた。ただ、見える場所ではなかっただけです。"},
     steps:[
       {label:{en:"01 — Problem",ja:"01 — 課題"},
        title:{en:"The progress was real. Parents just couldn't see it.",ja:"成長はあった。ただ、保護者には見えていなかった。"},
-       body:{en:"After more than 30 parent interviews, a pattern showed up everywhere: kids spoke English at school and reverted to their home language the second they walked in the door, because that's just where their identity as a kid lived. To a parent watching from outside, that looked like zero progress, even though teachers were marking most students as on track. Thirteen of 36 parents brought up some version of the same complaint, almost word for word: their kid couldn't even tell them what happened in class that day.",
-              ja:"30名以上の保護者にインタビューを行い、共通のパターンが見えてきました。子どもは学校では英語を話すが、家に帰ると母国語に戻る。それは子どもとしてのアイデンティティがそこにあるから。外から見ている保護者にとっては「進歩ゼロ」に映ります。36名中13名が、ほぼ同じ言葉でこう言いました。「今日何をやったか聞いても、子どもが何も覚えていない」"},
+       body:{en:"After more than 30 parent interviews, a pattern showed up everywhere: kids spoke English at school and reverted to their home language the second they walked in the door. To a parent watching from outside, that looked like zero progress, even though teachers were marking most students as on track. Thirteen of 36 parents interviewed brought up some version of the same complaint, almost word for word: their kid couldn't even tell them what happened in class that day.",
+              ja:"30名以上の保護者にインタビューを行い、共通のパターンが見えてきました。子どもは学校では英語を話すが、家に帰ると母国語に戻る。外から見ている保護者にとっては「進歩ゼロ」に映ります。36名中13名が、ほぼ同じ言葉でこう言いました。「今日何をやったか聞いても、子どもが何も覚えていない」"},
        reverse:false},
       {label:{en:"02 — Process",ja:"02 — プロセス"},
        title:{en:"Give the work somewhere to live outside the classroom",ja:"学びに、教室の外での居場所をつくる"},
-       body:{en:"Three things came out of this. First, an \"Output Relay\" where students teach the lesson back to a parent at home — turns the kid into the expert instead of the passive recipient. Students earn a sticker per signed notebook entry, with a reward (game day, Pokémon cards) at the end of each unit, which keeps the habit sticky. Second, over 100 short video explainers built in the parent's native language and placed right next to the homework, so a parent who doesn't speak English can actually follow along and help. Third, a flexible observation option, in person or over Google Meet, replacing the single rigid observation week that most working parents couldn't make anyway.",
-              ja:"ここから三つの施策が生まれました。①「アウトプットリレー」：生徒が家でレッスン内容を保護者に教える仕組み。受け身から「教える側」へ。ノートへの保護者サインでスティッカーが貯まり、単元ごとにご褒美（ゲームデー・ポケモンカード）が得られます。②100本以上の動画：保護者の母国語で宿題の内容を解説。英語が話せない保護者でも一緒に取り組めます。③柔軟な授業参観：年1回の固定観覧週を廃止し、対面またはGoogle Meetで好きな日に参観できる仕組みに変更。"},
+       body:{en:"Three things came out of this. First, an Output Relay program where students teach the lesson back to a parent at home — turning the kid into the expert instead of the passive recipient. Students earn a sticker per signed notebook entry, with a reward at the end of each unit. Second, over 100 short video explanations in the parent's native language placed next to the homework. Third, a flexible observation option replacing the single rigid observation week most working parents couldn't make anyway.",
+              ja:"ここから三つの施策が生まれました。①「アウトプットリレー」：生徒が家でレッスン内容を保護者に教える仕組み。ノートへの保護者サインでスティッカーが貯まり、単元ごとにご褒美が得られます。②100本以上の動画：保護者の母国語で宿題の内容を解説。③柔軟な授業参観：年1回の固定観覧週を廃止し、対面またはGoogle Meetで好きな日に参観できる仕組みに変更。"},
        reverse:true},
       {label:{en:"03 — Outcome",ja:"03 — 成果"},
        title:{en:"87% sustained adoption, 30% jump in homework completion",ja:"継続定着率87%、宿題完成率30%向上"},
-       body:{en:"The Output Relay is now at 87% sustained adoption across the school — parents signing notebooks, students relaying lessons, the reward cycle running on its own. Since it launched there hasn't been a single complaint about a kid forgetting what happened in class. Homework completion rose 30% overall, with a 45% jump specifically in listening sections parents previously couldn't help with. Observation attendance nearly tripled, from roughly 20-25 parents a year to 43 in the first cycle, about a third of the whole school.",
-              ja:"アウトプットリレーの継続定着率は87%。保護者がノートにサインし、生徒がレッスンを伝え、報酬サイクルが自然に回っています。導入後、「子どもがレッスンを覚えていない」という苦情はゼロ。宿題の完成率は全体で30%向上し、特にリスニングセクションは45%増（以前は保護者がサポートできず素通りされていた箇所）。授業参観参加者数は年間20〜25名から43名へと約2倍に。"},
+       body:{en:"The Output Relay is now at 87% sustained adoption. Since it launched there hasn't been a single complaint about a kid forgetting what happened in class. Homework completion rose 30% overall, with a 45% jump specifically in listening sections parents previously couldn't help with.",
+              ja:"アウトプットリレーの継続定着率は87%。導入後、「子どもがレッスンを覚えていない」という苦情はゼロ。宿題の完成率は全体で30%向上し、特にリスニングセクションは45%増。"},
        reverse:false},
       {label:{en:"04 — Supporting materials",ja:"04 — サポート資料"},
        title:{en:"Onboarding, 100+ videos, and a full teacher manual",ja:"オンボーディング、100本以上の動画、インストラクターマニュアル"},
-       body:{en:"Alongside the student-facing work, I built the internal infrastructure to make it all sustainable: an onboarding package for new families so they understand the school's systems from day one, over 100 curriculum and lesson-explanation videos for the parent library, and a full teacher manual covering lesson planning frameworks, class management approaches, and handover notes so incoming teachers can get up to speed without having to shadow someone for weeks.",
-              ja:"生徒向けの施策と並行して、継続性を担保する内部インフラも整備しました。新規家庭向けオンボーディングパッケージ（入学初日から学校の仕組みを理解してもらうため）、保護者ライブラリ向け100本以上のカリキュラム解説動画、そして新任教師が数週間の見習いなしで即戦力として動けるインストラクターマニュアル（レッスン計画フレームワーク、クラス運営方法、引き継ぎノートを含む）を作成しました。"},
+       body:{en:"Alongside the student-facing work, I built the internal infrastructure to make it all sustainable: an onboarding package for new families, over 100 curriculum and lesson-explanation videos for the parent library, and a full teacher manual covering lesson planning frameworks, class management approaches, and handover notes so incoming teachers can get up to speed without having to shadow someone for weeks.",
+              ja:"生徒向けの施策と並行して、継続性を担保する内部インフラも整備しました。新規家庭向けオンボーディングパッケージ、保護者ライブラリ向け100本以上のカリキュラム解説動画、新任教師が数週間の見習いなしで即戦力として動けるインストラクターマニュアルを作成しました。"},
        reverse:true},
-      {label:{en:"05 — Sustaining the habit",ja:"05 — 継続のための工夫"},
-       title:{en:"Two additions built on the same logic: staff feedback and classroom video",ja:"同じ発想でつくった二つの追加施策：スタッフのフィードバックと教室動画"},
-       body:{en:"Two further additions extend the Output Relay's core idea — give parents something concrete to see. First, a standardized feedback practice: teachers now write specific, genuine comments for each student — what they're doing well and what to work on — sent at irregular intervals and spread across different classes rather than as a scheduled batch, so they read as a real observation rather than an automated report. Second, an extension of the video channel: short in-class clips sent alongside the existing native-language explainers, giving parents direct visual evidence of their child's engagement rather than a written description of it. Both are recent enough that I don't have adoption or satisfaction numbers to report yet — they're logged here as design decisions, not measured outcomes.",
-              ja:"アウトプットリレーの核心である「保護者に具体的な形で見せる」という発想をもとに、二つの施策を追加しました。①フィードバックの標準化：教師が生徒一人ひとりについて、良かった点と改善点を含む具体的で率直なコメントを書く仕組み。まとめて一斉送信するのではなく、不定期に、クラスをまたいで分散して送ることで、自動化されたレポートではなく本物の所見として伝わるようにしています。②教室動画の拡張：既存の母語解説動画に加えて、授業中の短いクリップを送付。文章での説明ではなく、子どもの取り組む様子を保護者が直接目にできます。どちらも導入して間もないため、定着率や満足度の数値はまだ報告できません。ここでは施策の設計判断として記録しています。"},
-       reverse:false},
-      {label:{en:"06 — A new retention lever",ja:"06 — 新たなリテンション施策"},
-       title:{en:"An 18-month loyalty tier, built around where families actually sit on the curve",ja:"実際の在籍分布に合わせて設計した、18ヶ月時点のロイヤルティ施策"},
-       body:{en:"A look at current tenure across the school showed roughly 30% of families under a year in, about 10% sitting near the 18-month mark, and the remaining 60% past the two-year point most often cited as this industry's typical churn window. That distribution shaped a new appreciation program — discounts on school events, bonus lessons, and additional test-prep support — activated once a family passes 18 months, intervening ahead of the point where comparable schools tend to lose them rather than after a cancellation request comes in. It's early enough that I'm tracking retention by cohort going forward rather than reporting a before/after number yet.",
-              ja:"現在の在籍期間の分布を見ると、家庭の約30%が1年未満、約10%が18ヶ月前後、残る60%がこの業界で一般的に離脱の目安とされる2年を超えていました。この分布をもとに、新しい「感謝プログラム」を設計しました。学校行事の割引、追加レッスン、試験対策サポートの拡充を、在籍18ヶ月に達した家庭から適用するというものです。解約の申し出があってから対応するのではなく、同業他校が顧客を失いやすいタイミングより前に介入する狙いです。導入して間もないため、現時点ではビフォー・アフターの数値ではなく、今後コホート単位でリテンションを追跡していく段階です。"},
-       reverse:true},
-      {label:{en:"07 — A parallel signal",ja:"07 — もう一つのシグナル"},
-       title:{en:"On the acquisition side, a problem the retention numbers didn't show",ja:"リテンションの数字には現れない、集客側の問題"},
-       body:{en:"The retention work surfaced a second problem worth tracking with the same rigor. The school's Google rating has stayed essentially flat over the past five years, and new-family word-of-mouth referrals fell 47% between 2023 and 2026 — with the sharpest single-year drop, 24%, in the most recent year alone. Over the same period, Google Search overtook word-of-mouth as the most common way new parents said they found the school. Word-of-mouth had quietly been doing more of the acquisition work than anyone was tracking, and it eroded without anyone noticing until the numbers were pulled.",
-              ja:"リテンション施策を進める中で、同じ厳密さで追うべきもう一つの問題が浮かび上がりました。学校のGoogle評価はこの5年間ほぼ横ばいで、口コミによる新規家庭の紹介数は2023年から2026年にかけて47%減少。中でも直近1年（2025年→2026年）の落ち込みが最も大きく、24%減でした。同じ期間で、新規の保護者が学校を知ったきっかけとして「Google検索」が口コミを上回るようになりました。口コミは誰も追跡していないまま集客の大きな部分を担っていて、数字を確認するまで誰も気づかないうちに弱まっていたのです。"},
-       reverse:false},
-      {label:{en:"08 — Response",ja:"08 — 対応"},
-       title:{en:"Building channels on purpose, instead of hoping word-of-mouth recovers",ja:"口コミの回復を待つのではなく、意図的にチャネルを構築する"},
-       body:{en:"That diagnosis led to a deliberate shift away from relying on word-of-mouth alone: an active push on the school's Google Business Profile, the start of YouTube, Instagram, and TikTok content, an expanded LINE presence, and more public-facing events and community projects — including the free events already running, now explicitly paired with a direct ask for reviews and referrals rather than left to happen organically. This is a live, in-progress response rather than a finished intervention, so it's being tracked the same way the original churn work was: diagnose, act, measure, adjust.",
-              ja:"この診断を受けて、口コミだけに頼る体制から意図的に転換しました。Googleビジネスプロフィールへの積極的な取り組み、YouTube・Instagram・TikTokでのコンテンツ発信の開始、LINE活用の拡大、そしてより公開性の高いイベントやコミュニティプロジェクトの実施です。すでに実施していた無料イベントについても、自然発生的な口コミに任せるのではなく、レビューや紹介を直接お願いする形に明確に変更しました。これは完了した施策ではなく、現在進行形の取り組みです。最初の離脱防止の取り組みと同じやり方で追跡しています。診断し、実行し、計測し、調整する。"},
-       reverse:true}
+      {label:{en:"05 — A parallel signal",ja:"05 — もう一つのシグナル"},
+       title:{en:"Word-of-mouth referrals fell 47% — and nobody noticed",ja:"口コミ紹介が47%減少していた。誰も気づいていなかった。"},
+       body:{en:"The retention work surfaced a second problem. New-family word-of-mouth referrals fell 47% between 2023 and 2026 — with the sharpest single-year drop, 24%, in the most recent year. Google Search had overtaken word-of-mouth as the most common discovery channel without anyone tracking it. That diagnosis led to an active push on Google Business Profile, YouTube, Instagram, and TikTok, with public events now explicitly paired with direct review and referral asks.",
+              ja:"リテンション施策を進める中で、もう一つの問題が浮かび上がりました。口コミによる新規家庭の紹介数は2023年から2026年にかけて47%減少し、直近1年の落ち込みだけで24%に達していました。誰も追跡していないうちに、Googleが口コミを上回る主要な発見チャネルになっていたのです。この診断をもとに、GoogleビジネスプロフィールやSNSへの積極的な取り組みを開始しました。"},
+       reverse:false}
     ]
   },
   {
@@ -378,18 +587,18 @@ const CASE_STUDIES = [
     steps:[
       {label:{en:"01 — Problem",ja:"01 — 課題"},
        title:{en:"Everyone had an opinion. Nobody had data.",ja:"全員が意見を持っていた。でも、データは誰も持っていなかった。"},
-       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint, the one that shaped everything after: teachers get about 8 minutes between classes, and that time is already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used, no matter how good the idea was.",
-              ja:"生徒の状態について教師と保護者の意見が食い違うことが多く、どちらの言い分を裏付ける記録もありませんでした。問題の核心は時間制約です。授業間のインターバルは約8分。しかしその時間はすでに、保護者への声かけ、教室のリセット、次の生徒の迎え入れで埋まっています。1〜2分以上かかる仕組みは、どんなに良いアイデアでも使われません。"},
+       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint: teachers get about 8 minutes between classes, already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used.",
+              ja:"生徒の状態について教師と保護者の意見が食い違うことが多く、どちらの言い分を裏付ける記録もありませんでした。問題の核心は時間制約です。授業間のインターバルは約8分で、すでに保護者への声かけ、教室のリセット、次の生徒の迎え入れで埋まっています。1〜2分以上かかる仕組みは使われません。"},
        reverse:false},
       {label:{en:"02 — Process",ja:"02 — プロセス"},
        title:{en:"Two failed versions before this one stuck",ja:"2つの失敗作を経て、ようやく定着した"},
-       body:{en:"The first attempt was a Google Sheet with dropdown menus — fine on paper, miserable on a phone, and teachers hated scrolling through it. The second was a proper web app with charts, which was better, but teachers still had to go find the day's class manually, and once the novelty wore off, usage quietly dropped. The version that finally worked uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time. Everything saves to Supabase in real time, and it only asks teachers to log students who stood out — not a full roll call every time.",
-              ja:"最初の試みはドロップダウン付きのGoogleスプレッドシート。紙の上ではよさそうでも、スマホでは最悪で、スクロールを嫌った教師には使われませんでした。次はグラフ付きのウェブアプリ。改善されましたが、教師が毎回クラスを手動で探す必要があり、目新しさが消えると利用が落ちました。最終的に機能したのは、各教室ステーションのQRコードを読み込むと、時刻から自動的に「今のクラス」が開くシステム。Supabaseでリアルタイム保存し、「いつもと違う生徒だけ記録する」方式で入力負荷を最小化しました。"},
+       body:{en:"The first attempt was a Google Sheet with dropdown menus — miserable on a phone. The second was a web app with charts — better, but teachers still had to find the day's class manually, and usage dropped once the novelty wore off. The version that finally worked uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by time. Everything saves to Supabase in real time, and it only asks teachers to log students who stood out — not a full roll call every time.",
+              ja:"最初の試みはドロップダウン付きのGoogleスプレッドシートでスマホでは使えませんでした。次はグラフ付きのウェブアプリ。改善されましたが、教師が毎回クラスを手動で探す必要があり、目新しさが消えると利用が落ちました。最終的に機能したのは、各教室ステーションのQRコードを読み込むと、時刻から自動的に「今のクラス」が開くシステムです。Supabaseでリアルタイム保存し、「いつもと違う生徒だけ記録する」方式で入力負荷を最小化しました。"},
        reverse:true},
       {label:{en:"03 — Outcome",ja:"03 — 成果"},
        title:{en:"Near-100% adoption, all classes logged within 36 hours",ja:"定着率ほぼ100%、全クラス36時間以内に記録"},
-       body:{en:"The tool is now at close to full adoption — every class gets logged within 36 hours of the lesson, and teachers spend maybe 5 minutes total across an entire day. The data ended up surfacing something nobody had noticed: engagement consistently dropped for kindergarten classes and for high schoolers, which gave management something concrete to bring into parent conversations instead of relying on whoever happened to remember what.",
-              ja:"現在の定着率はほぼ100%。すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計5分程度です。データから新たな事実も浮かびました。幼稚園生と高校生のクラスで継続的にエンゲージメントが低い傾向があったのです。これにより、管理職は誰かの記憶に頼るのではなく、具体的なデータをもとに保護者と話せるようになりました。"},
+       body:{en:"The tool is now at close to full adoption — every class gets logged within 36 hours of the lesson, and teachers spend maybe 5 minutes total across an entire day. The data surfaced something nobody had noticed: engagement consistently dropped for kindergarten classes and for high schoolers, giving management something concrete to bring into parent conversations instead of relying on whoever happened to remember what.",
+              ja:"現在の定着率はほぼ100%。すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計5分程度です。データから新たな事実も浮かびました。幼稚園生と高校生のクラスで継続的にエンゲージメントが低い傾向があり、管理職は具体的なデータをもとに保護者と話せるようになりました。"},
        reverse:false}
     ]
   },
@@ -407,44 +616,46 @@ const CASE_STUDIES = [
     steps:[
       {label:{en:"01 — Origin",ja:"01 — 始まり"},
        title:{en:"A civil servant walked in with an idea",ja:"地方公務員が、アイデアを持ってやってきた"},
-       body:{en:"A local civil servant approached the school wanting a financial literacy program for teenagers in the area, and became a stakeholder on the project rather than just a requester. That shaped the whole thing from day one — this wasn't just an exercise designed on paper, it had to satisfy what a local government partner actually wanted delivered to real students in the community.",
-              ja:"地域の公務員がスクールを訪れ、地域の10代向けに金融リテラシープログラムをつくりたいと申し出ました。単なる依頼者ではなく、プロジェクトのステークホルダーとして参加。これが最初から方向性を定めました。紙の上の演習ではなく、行政パートナーが地域の生徒に届けたいと考えるものを実現する必要がありました。"},
+       body:{en:"A local civil servant approached the school wanting a financial literacy program for teenagers in the area, and became a stakeholder on the project rather than just a requester. This wasn't just an exercise designed on paper — it had to satisfy what a local government partner actually wanted delivered to real students in the community.",
+              ja:"地域の公務員がスクールを訪れ、地域の10代向けに金融リテラシープログラムをつくりたいと申し出ました。単なる依頼者ではなく、プロジェクトのステークホルダーとして参加。紙の上の演習ではなく、行政パートナーが地域の生徒に届けたいものを実現する必要がありました。"},
        reverse:false},
       {label:{en:"02 — Building it",ja:"02 — 構築"},
        title:{en:"Curriculum, recruiting, and clearing every real-world hurdle",ja:"カリキュラム設計、生徒募集、そして現実の壁を一つひとつ越える"},
-       body:{en:"With my staff, I built the curriculum from scratch: recruited the students, set the learning outcomes, and designed the learning experience itself. A good chunk of the actual work wasn't instructional design in the usual sense, it was making the stakeholder's more ambitious ideas actually possible. That meant getting a food hygiene certification so students could legally run a stall at a local festival, building a relationship with a tour guide so students could get real, hands-on service-industry experience using skills they already had, and setting up Mercari accounts so students could practice market research and pricing by actually selling things they already owned.",
-              ja:"スタッフと共にカリキュラムをゼロから構築。生徒を募集し、学習成果を設定し、学習体験そのものを設計しました。実際の作業の大半は、通常の意味でのインストラクショナルデザインではありませんでした。地元フェスティバルの屋台を合法的に運営するための食品衛生資格の取得、生徒が実際のサービス業体験を得るためのツアーガイドとの関係構築、手元にある物を使ってマーケットリサーチと価格設定を学ぶためのメルカリアカウントの開設など、ステークホルダーのより大きなビジョンを現実にするための作業でした。"},
+       body:{en:"With my staff, I built the curriculum from scratch: recruited the students, set the learning outcomes, and designed the learning experience. That meant getting a food hygiene certification so students could legally run a stall at a local festival, building a relationship with a tour guide for real service-industry experience, and setting up Mercari accounts so students could practice market research and pricing by actually selling things they owned.",
+              ja:"スタッフと共にカリキュラムをゼロから構築。生徒を募集し、学習成果を設定し、学習体験を設計しました。地元フェスティバルの屋台を合法的に運営するための食品衛生資格の取得、ツアーガイドとの関係構築、メルカリアカウントの開設など、ステークホルダーのビジョンを現実にするための作業でした。"},
        reverse:true},
       {label:{en:"03 — The setback",ja:"03 — 想定外の出来事"},
        title:{en:"The stakeholder had to step back — I took over delivery",ja:"ステークホルダーが退いた。私が引き継いだ。"},
        body:{en:"Partway through, the civil servant who initiated the project had to withdraw for health reasons. Rather than shelve the plan, I took over full delivery myself — running the test sessions and carrying the curriculum through to the students it was built for.",
-              ja:"途中で、プロジェクトを立ち上げた公務員が健康上の理由で退くことになりました。計画を棚上げにするのではなく、私自身がデリバリーを全面的に引き継ぎ、テストセッションを実施し、このカリキュラムを届けるべき生徒たちのもとへ届けました。"},
+              ja:"途中で、プロジェクトを立ち上げた公務員が健康上の理由で退くことになりました。計画を棚上げにするのではなく、私自身がデリバリーを全面的に引き継ぎ、テストセッションを実施しました。"},
        reverse:false},
       {label:{en:"04 — First trial run",ja:"04 — 初回試験運用"},
-       title:{en:"A proof-of-concept, built to test the idea before building the measurement",ja:"計測ツールを作る前に、アイデアを検証する概念実証"},
-       body:{en:"The first run was a supermarket trading simulation with 9 students in 3 teams of 3. Before investing time in full instructor guides and tracking tools, I wanted to answer a simpler question: would students actually engage with a simulation-based approach, or would it fall flat like a lot of lecture-based financial literacy content does. Opening with \"what would you do with ¥100,000 right now\" surfaced a common misconception almost immediately — several students treated holding cash as risk-free. An e-learning module I built in Articulate Rise (<a href=\"https://kanaenglishschool.github.io/articulaterise/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--red-deep);font-weight:600;\">view the module ↗</a>) then let them find that flaw themselves: starting with a ¥10,000 grocery basket in 2020 and buying the same items in 2026, where purchasing power had dropped by almost half. All three teams grew their starting ¥2,000 (roughly 1.5x, 2x, and 3x), which told me my event cards were calibrated too generously rather than confirming a typical result — I've since adjusted them for a wider spread. Even with only 3-5 minutes for debrief, every team could answer specifically what worked, what didn't, and which trade mattered most.",
-              ja:"初回は3チーム3名ずつ、計9名のスーパーマーケット取引シミュレーション。インストラクターガイドや計測ツールに時間を投資する前に、シンプルな問いに答えたかったのです。「シミュレーション型アプローチで生徒は本当に参加するか、それとも多くの講義型金融教育のように失速するか」。「今¥100,000あったら何をする?」という問いかけで、すぐに共通の誤解が浮かびました。現金を持ち続けることをリスクなしと考えている生徒が複数いたのです。Articulate Riseで制作したeラーニングモジュール（<a href=\"https://kanaenglishschool.github.io/articulaterise/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--red-deep);font-weight:600;\">モジュールを見る ↗</a>）を使い、2020年の¥10,000の買い物かごを2026年で同じ内容を購入する「タイムマシン」体験で、購買力がほぼ半減していることを生徒自身に発見させました。3チーム全員が初期資金¥2,000を増やし（約1.5倍・2倍・3倍）、イベントカードの難易度設定が甘すぎたことが判明。次回に向けて調整済みです。デブリーフの時間はわずか3〜5分でしたが、各チームが具体的に「何がうまくいったか」「うまくいかなかったか」「最も重要な取引はどれか」を答えられました。"},
-       reverse:true},
-      {label:{en:"05 — Quiz results",ja:"05 — クイズ結果"},
-       title:{en:"Pre/post knowledge check: 9 students, 5 questions",ja:"事前・事後テスト：生徒9名、5問"},
-       body:{en:"A short quiz was given before and after the activity to measure learning gain on the specific concepts the session was designed to teach. Results across the sample group of 9 students: understanding of inflation (what it is) went from 2/9 to 8/9; understanding that cash loses value over time went from 1/9 to 9/9 — a full sweep; application of inflation to a real savings scenario went from 3/9 to 7/9; and the reflection concept (using a losing trade as a learning signal rather than giving up) went from 5/9 to 9/9. One question — supply and demand price movement — was already known by all 9 students before the activity and stayed at 9/9, confirming it as a baseline concept rather than a learning gain from this session. Small sample size, and results should be read as directional rather than statistically significant, but the pattern is consistent: the concepts the activity was explicitly designed to address showed the largest gains.",
-              ja:"セッション前後に5問の知識テストを実施し、学習効果を計測しました。9名のサンプルグループの結果：インフレの理解（概念）は2/9→8/9に向上。現金が時間とともに価値を失うことの理解は1/9→9/9（全員正解）。インフレを実際の貯蓄シナリオに応用する問題は3/9→7/9。「損した取引を諦めずに学びのシグナルとして使う」という振り返りの概念は5/9→9/9。1問（需要と供給による価格変動）は活動前から全員が正解しており、9/9のまま変化なし。これはセッションで教えた概念ではなく、事前知識として保持されていたベースライン概念と確認されました。サンプルが少なく、統計的有意性ではなく方向性として読むべきですが、パターンは一貫しています。活動が明示的に設計した概念において最大の伸びが見られました。"},
-       reverse:false},
-      {label:{en:"06 — What's next",ja:"06 — 次のステップ"},
-       title:{en:"A second trial, this time tactile and real",ja:"第二回試験運用：今度は実物で、触れて、体感する"},
-       body:{en:"The next run moves to the trading-floor version of the curriculum — a live, tactile session using real money and physical props instead of a supermarket-style simulation. It's built around Chi and Wylie's ICAP framework: an individual open-market phase where students trade quietly on their own, followed by a mandatory group strategy window that forces a shared decision, plus a full facilitator script for handling silent groups, dominating students, and deadlock votes. This run will stay mostly qualitative — I'm not yet sure how much of it I'll be able to turn into hard measurable outcomes this time. The plan for the run after that is to build in real measurement — a short pre/post knowledge check, an exit ticket for engagement, and structured participation tracking — so results can be reported with numbers instead of just description.",
-              ja:"次回はトレーディングフロア版カリキュラムへ移行。スーパーマーケット型シミュレーションではなく、実際のお金と物理的な小道具を使ったライブセッションです。ChiとWylie のICAPフレームワークに基づき、個人で静かに取引する「オープンマーケットフェーズ」と、グループで1つの意思決定を行う「ストラテジーウィンドウ」に分けて構成。無口なグループ、場を支配する生徒、票が割れた場合のファシリテーターセリフも完備。今回はほぼ定性的な内容になる予定で、どこまで定量的な成果に落とし込めるかはまだ不明です。その次の回では、事前・事後知識テスト、参加感のエグジットチケット、構造化した参加追跡を組み込み、数字で結果を報告できる体制を整える計画です。"},
+       title:{en:"A proof-of-concept with 9 students",ja:"9名の生徒との概念実証"},
+       body:{en:'The first run was a supermarket trading simulation with 9 students in 3 teams. Opening with "what would you do with ¥100,000 right now" surfaced a common misconception immediately — several students treated holding cash as risk-free. An e-learning module built in Articulate Rise (<a href="https://kanaenglishschool.github.io/articulaterise/" target="_blank" rel="noopener" style="color:var(--red-deep);font-weight:600;">view the module ↗</a>) let them find that flaw themselves. All three teams grew their starting capital. Pre/post quiz: understanding that cash loses value over time went from 1/9 to 9/9.',
+              ja:'初回は3チーム3名ずつ、計9名のスーパーマーケット取引シミュレーション。「今¥100,000あったら何をする?」という問いかけで、現金を持ち続けることをリスクなしと考える誤解がすぐに浮かびました。Articulate Riseで制作したeラーニングモジュール（<a href="https://kanaenglishschool.github.io/articulaterise/" target="_blank" rel="noopener" style="color:var(--red-deep);font-weight:600;">モジュールを見る ↗</a>）で生徒自身に発見させました。事前・事後テストでは、「現金が価値を失う」理解が1/9から9/9に向上。'},
        reverse:true}
     ]
   }
 ];
 
-function tileHTML(cs, idx){
+const AUDIT_TILE = {
+  id:"audit-service", num:"05",
+  title:{en:"School Audit: Parent Retention & Revenue Clarity", ja:"スクール診断：保護者リテンションと収益の可視化"},
+  type:{en:"Consulting Service", ja:"コンサルティングサービス"},
+  loc:"Japan",
+  tags:{en:["Retention Audit","Communication Systems","Revenue Diagnostics"], ja:["リテンション診断","コミュニケーション設計","収益分析"]},
+  summary:{en:"A structured diagnostic for small eikaiwa and language schools — interviews with parents, staff, and owners, followed by a written report and a prioritised first fix.", ja:"小規模英会話スクール・語学スクール向けの構造化診断。保護者・スタッフ・オーナーへのインタビューをもとに、書面レポートと優先度付きの改善策を提供します。"},
+  isAudit: true
+};
+
+function tileHTML(cs, idx, isAuditTile){
   const color = TILE_COLORS[idx % TILE_COLORS.length];
   const t = cs.title[LANG]; const ty = cs.type[LANG];
   const sm = cs.summary[LANG]; const tgs = cs.tags[LANG];
   const dl = cs.demoUrl ? `<a href="${cs.demoUrl}" target="_blank" rel="noopener" class="tile-demo" onclick="event.stopPropagation()">${cs.demoLabel[LANG]}</a>` : '';
-  return `<div class="tile reveal" data-study="${cs.id}">
+  const auditClass = isAuditTile ? ' audit-tile' : '';
+  const nav = isAuditTile ? `data-nav-audit="true"` : `data-study="${cs.id}"`;
+  return `<div class="tile reveal${auditClass}" ${nav}>
     <div class="badge" style="background:${color};">${cs.num}</div>
     <div class="info">
       <div class="tile-meta">${ty} &nbsp;·&nbsp; ${cs.loc}</div>
@@ -459,8 +670,9 @@ function tileHTML(cs, idx){
 const observer = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); }); },{threshold:0.1});
 
 function renderTiles(){
-  document.getElementById("home-tiles").innerHTML = CASE_STUDIES.map((c,i)=>tileHTML(c,i)).join("");
-  document.getElementById("work-tiles").innerHTML = CASE_STUDIES.map((c,i)=>tileHTML(c,i)).join("");
+  const all = [...CASE_STUDIES.map((c,i)=>tileHTML(c,i,false)), tileHTML(AUDIT_TILE, CASE_STUDIES.length, true)];
+  document.getElementById("home-tiles").innerHTML = all.join("");
+  document.getElementById("work-tiles").innerHTML = all.join("");
   document.querySelectorAll(".tile").forEach(el=>observer.observe(el));
 }
 renderTiles();
@@ -484,7 +696,6 @@ function openStudy(id){
   showView("study"); window.scrollTo({top:0});
 }
 
-/* ---------- language toggle ---------- */
 function applyLang(lang){
   LANG = lang;
   document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
@@ -494,11 +705,9 @@ function applyLang(lang){
     const val = el.getAttribute('data-'+lang);
     if(!val) return;
     if(el.tagName==='INPUT'||el.tagName==='BUTTON') el.textContent = val;
-    else if(el.hasAttribute('contenteditable')) el.textContent = val;
     else el.innerHTML = val;
   });
   renderTiles();
-  // re-render open study if visible
   const studyEl = document.getElementById('view-study');
   if(studyEl.classList.contains('active')){
     const id = studyEl.getAttribute('data-current');
@@ -511,13 +720,13 @@ document.getElementById('btn-ja').addEventListener('click',()=>applyLang('ja'));
 function showView(name){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   const el = document.getElementById("view-"+name);
-  el.classList.add("active");
-  if(name==='study') el.setAttribute('data-current', currentStudyId||'');
+  if(el) el.classList.add("active");
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   document.querySelectorAll(`nav a[data-nav="${name}"]`).forEach(a=>a.classList.add("active"));
   document.getElementById("main-nav").classList.remove("open");
   initReveal();
 }
+
 let currentStudyId = '';
 document.querySelectorAll("[data-nav]").forEach(el=>{
   el.addEventListener("click",e=>{
@@ -526,24 +735,37 @@ document.querySelectorAll("[data-nav]").forEach(el=>{
     window.scrollTo({top:0,behavior:"smooth"});
   });
 });
+
 document.body.addEventListener("click",e=>{
   const tile = e.target.closest(".tile");
-  if(tile){ currentStudyId = tile.getAttribute("data-study"); openStudy(currentStudyId); }
+  if(tile){
+    if(tile.hasAttribute("data-nav-audit")){
+      showView("audit"); window.scrollTo({top:0,behavior:"smooth"});
+    } else {
+      currentStudyId = tile.getAttribute("data-study");
+      openStudy(currentStudyId);
+      document.getElementById('view-study').setAttribute('data-current', currentStudyId);
+    }
+  }
 });
+
 document.getElementById("menu-toggle").addEventListener("click",()=>{
   document.getElementById("main-nav").classList.toggle("open");
 });
+
 document.body.addEventListener("click",e=>{
   const v = e.target.closest(".visual");
   if(v){ document.getElementById("zoom-label").textContent = v.getAttribute("data-zoom")+" — full-size view"; document.getElementById("zoom-modal").classList.add("active"); }
   else if(e.target.id==="zoom-modal") document.getElementById("zoom-modal").classList.remove("active");
 });
+
 document.getElementById("resume-toggle").addEventListener("click",()=>{
   const dd = document.getElementById("resume-dropdown");
   const arrow = document.getElementById("resume-arrow");
   const open = dd.classList.toggle("open");
   arrow.textContent = open?"↑":"↓";
 });
+
 function initReveal(){
   document.querySelectorAll(".reveal").forEach(el=>{
     if(el.getBoundingClientRect().top < window.innerHeight*0.9) el.classList.add("in");
