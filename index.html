@@ -239,13 +239,15 @@
   .flow-inner{display:flex;align-items:flex-start;gap:0;min-width:max-content;padding:0 20px;}
   .flow-branch{display:flex;flex-direction:column;gap:0;align-items:center;}
   .flow-branch-row{display:flex;align-items:flex-start;gap:0;}
-  .flow-phone{display:flex;flex-direction:column;align-items:center;gap:10px;}
-  .flow-device{width:130px;background:#1a1a1a;border-radius:22px;padding:8px;box-shadow:0 4px 20px rgba(0,0,0,0.18);border:2.5px solid #333;position:relative;}
+  .flow-phone{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:zoom-in;}
+  .flow-phone:hover .flow-device{box-shadow:0 10px 32px rgba(0,0,0,0.32);transform:translateY(-4px);}
+  .flow-device{width:130px;background:#1a1a1a;border-radius:22px;padding:8px;box-shadow:0 4px 20px rgba(0,0,0,0.18);border:2.5px solid #333;position:relative;transition:transform .22s,box-shadow .22s;}
   .flow-device::before{content:'';display:block;width:36px;height:5px;background:#333;border-radius:3px;margin:0 auto 6px;}
   .flow-screen{width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#f0f0f0;position:relative;}
   .flow-screen img{width:100%;height:100%;object-fit:cover;display:block;}
   .flow-screen-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:var(--mono);font-size:0.58rem;color:rgba(36,27,20,0.35);text-align:center;padding:8px;background:#f5f5f5;}
   .flow-label{font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.5);text-align:center;max-width:130px;line-height:1.4;}
+  .flow-expand-hint{font-family:var(--mono);font-size:0.55rem;color:rgba(36,27,20,0.28);letter-spacing:.03em;}
   .flow-step-num{font-family:var(--display);font-weight:700;font-size:0.75rem;color:var(--red-deep);background:rgba(209,75,63,0.1);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
   .flow-arrow{display:flex;align-items:center;padding:0 6px;margin-top:60px;flex-shrink:0;}
   .flow-arrow svg{width:32px;height:20px;flex-shrink:0;}
@@ -255,6 +257,24 @@
   .flow-split-branch{display:flex;align-items:flex-start;gap:0;}
   .flow-connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;margin-top:60px;}
   .flow-connector-line{width:2px;height:100%;background:rgba(36,27,20,0.12);}
+
+  /* ANNOTATION BUBBLES */
+  .ann{background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:9px 13px;box-shadow:0 2px 14px rgba(36,27,20,0.07);font-size:0.78rem;line-height:1.45;color:rgba(36,27,20,0.72);max-width:180px;position:relative;}
+  .ann strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px;font-size:0.8rem;}
+  .ann.red{border-color:rgba(209,75,63,0.3);background:rgba(209,75,63,0.03);}
+  .ann.green{border-color:rgba(92,138,110,0.3);background:rgba(92,138,110,0.04);}
+  .ann.tail-b::after,.ann.tail-t::after,.ann.tail-r::after,.ann.tail-l::after{content:'';position:absolute;width:9px;height:9px;transform:rotate(45deg);}
+  .ann.tail-b::after{bottom:-5px;left:20px;background:var(--white);border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line);}
+  .ann.tail-t::after{top:-5px;left:20px;background:var(--white);border-left:1.5px solid var(--line);border-top:1.5px solid var(--line);}
+  .ann.tail-r::after{right:-5px;top:14px;background:var(--white);border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);}
+  .ann.tail-l::after{left:-5px;top:14px;background:var(--white);border-bottom:1.5px solid var(--line);border-left:1.5px solid var(--line);}
+  .ann.red.tail-b::after{background:rgba(209,75,63,0.03);border-color:rgba(209,75,63,0.3);}
+  .ann.green.tail-b::after{background:rgba(92,138,110,0.04);border-color:rgba(92,138,110,0.3);}
+  .ann.red.tail-t::after{background:rgba(209,75,63,0.03);border-color:rgba(209,75,63,0.3);}
+  .ann.red.tail-r::after{background:rgba(209,75,63,0.03);border-color:rgba(209,75,63,0.3);}
+  .ann.green.tail-r::after{background:rgba(92,138,110,0.04);border-color:rgba(92,138,110,0.3);}
+  .ann-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:6px;}
+  .ann-col{display:flex;flex-direction:column;align-items:center;gap:6px;}
 
   /* BEFORE/AFTER CAROUSEL */
   .ba-carousel{aspect-ratio:16/9;border-radius:22px;overflow:hidden;position:relative;background:var(--white);border:1px solid var(--line);}
@@ -278,14 +298,27 @@
   .ba-caption{margin-top:10px;font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.45);text-align:center;min-height:1.2em;transition:opacity .2s;}
   .ba-captions{display:none;}
 
-  /* CAROUSEL LIGHTBOX */
-  #ca-lightbox{position:fixed;inset:0;background:rgba(20,14,10,0.92);z-index:3000;display:none;align-items:center;justify-content:center;padding:4vw;cursor:zoom-out;}
-  #ca-lightbox.active{display:flex;}
-  #ca-lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);object-fit:contain;cursor:default;}
-  #ca-lightbox-ph{font-family:var(--mono);font-size:0.8rem;color:rgba(255,255,255,0.4);text-align:center;}
-  .ca-lb-close{position:fixed;top:20px;right:24px;background:rgba(255,255,255,0.1);border:none;color:var(--white);font-size:1.4rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;z-index:3001;}
-  .ca-lb-close:hover{background:rgba(255,255,255,0.2);}
-  .ca-lb-caption{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);padding:6px 16px;border-radius:20px;white-space:nowrap;}
+  /* UNIFIED ZOOMABLE LIGHTBOX */
+  #zlb{position:fixed;inset:0;background:rgba(14,10,8,0.94);z-index:5000;display:none;flex-direction:column;align-items:center;justify-content:center;}
+  #zlb.active{display:flex;}
+  #zlb-viewport{position:relative;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:grab;}
+  #zlb-viewport.dragging{cursor:grabbing;}
+  #zlb-img-wrap{position:absolute;transform-origin:center center;will-change:transform;user-select:none;-webkit-user-select:none;}
+  #zlb-img{max-width:92vw;max-height:88vh;object-fit:contain;display:block;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,0.6);pointer-events:none;user-select:none;}
+  #zlb-phone-wrap{display:none;flex-direction:column;align-items:center;gap:0;}
+  #zlb-phone-device{background:#1a1a1a;border-radius:36px;padding:14px;border:3px solid #333;box-shadow:0 24px 60px rgba(0,0,0,0.6);width:min(300px,75vw);}
+  #zlb-phone-device::before{content:'';display:block;width:44px;height:6px;background:#333;border-radius:3px;margin:0 auto 10px;}
+  #zlb-phone-screen{width:100%;aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:#f0f0f0;}
+  #zlb-phone-screen img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+  #zlb-ph{font-family:var(--mono);font-size:0.8rem;color:rgba(255,255,255,0.4);text-align:center;padding:20px;}
+  #zlb-caption{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.52);background:rgba(0,0,0,0.45);padding:6px 18px;border-radius:20px;white-space:nowrap;z-index:5002;pointer-events:none;}
+  #zlb-close{position:fixed;top:18px;right:22px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5003;transition:background .2s;}
+  #zlb-close:hover{background:rgba(255,255,255,0.22);}
+  #zlb-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:8px;z-index:5003;}
+  .zlb-btn{background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:1.1rem;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;font-family:var(--mono);}
+  .zlb-btn:hover{background:rgba(255,255,255,0.24);}
+  #zlb-zoom-level{position:fixed;top:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);background:rgba(0,0,0,0.35);padding:4px 12px;border-radius:12px;z-index:5003;pointer-events:none;letter-spacing:.05em;}
+  #zlb-hint{position:fixed;top:56px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.6rem;color:rgba(255,255,255,0.28);text-align:center;z-index:5003;pointer-events:none;letter-spacing:.04em;transition:opacity .4s;}
 
   .text .step-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
     margin-bottom:10px;display:inline-block;background:rgba(209,75,63,0.1);padding:5px 12px;border-radius:14px;}
@@ -887,13 +920,17 @@ function phoneScreen(key, stepNum, labelEN, labelJA){
   const src = imgSrc(key);
   const filename = IMAGES[key] || key;
   const label = LANG === 'ja' ? labelJA : labelEN;
+  const expandHint = LANG === 'ja' ? 'タップして拡大' : 'tap to enlarge';
   const inner = src
     ? `<img src="${src}" alt="${label}" onerror="this.parentElement.innerHTML='<div class=\\'flow-screen-ph\\'><div>🖼</div><div>${filename}</div></div>'">`
     : `<div class="flow-screen-ph"><div style="font-size:1.1rem">🖼</div><div>Upload:<br>${filename}</div></div>`;
-  return `<div class="flow-phone">
+  const safeSrc = src ? src.replace(/'/g,"\\'") : '';
+  const safeLabel = label.replace(/'/g,"\\'");
+  return `<div class="flow-phone" onclick="openFlowLightbox('${safeSrc}','${safeLabel}','${filename}')">
     <div class="flow-step-num">${stepNum}</div>
     <div class="flow-device"><div class="flow-screen">${inner}</div></div>
     <div class="flow-label">${label}</div>
+    <div class="flow-expand-hint">${expandHint}</div>
   </div>`;
 }
 
@@ -906,72 +943,125 @@ function arrowSVG(color){
 
 function flowDiagramHTML(){
   const isJA = LANG === 'ja';
-  const titleEN = "How it works — the full parent journey";
-  const titleJA = "実際の操作フロー — 保護者の全体体験";
-  const absenceLabel = isJA ? "欠席連絡" : "Absence";
-  const makeupLabel  = isJA ? "振替授業" : "Makeup";
 
   const screens = [
-    { key:"line-flow-0", num:1, en:"LINE menu",             ja:"LINEメニュー" },
-    { key:"line-flow-1", num:2, en:"Select date",           ja:"日付選択" },
-    { key:"line-flow-2", num:3, en:"Confirm absence",       ja:"欠席確認" },
-    { key:"line-flow-3", num:4, en:"Pick a slot",           ja:"空き枠を選ぶ" },
-    { key:"line-flow-4", num:5, en:"Confirm makeup",        ja:"振替確認" },
+    { key:"line-flow-0", num:1, en:"LINE menu",           ja:"LINEメニュー" },
+    { key:"line-flow-1", num:2, en:"Select date",         ja:"日付選択" },
+    { key:"line-flow-2", num:3, en:"Confirm absence",     ja:"欠席確認" },
+    { key:"line-flow-3", num:4, en:"Pick a slot",         ja:"空き枠を選ぶ" },
+    { key:"line-flow-4", num:5, en:"Confirm makeup",      ja:"振替確認" },
   ];
 
-  const arrowDown  = `<svg width="20" height="32" viewBox="0 0 20 32" fill="none"><line x1="10" y1="0" x2="10" y2="24" stroke="rgba(36,27,20,0.22)" stroke-width="1.5"/><path d="M4 18L10 26L16 18" stroke="rgba(36,27,20,0.22)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  const arrowDiagL = `<svg width="80" height="48" viewBox="0 0 80 48" fill="none"><path d="M40 0 Q10 10 8 44" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M2 38L8 46L14 38" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
-  const arrowDiagR = `<svg width="80" height="48" viewBox="0 0 80 48" fill="none"><path d="M40 0 Q70 10 72 44" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M66 38L72 46L78 38" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowDiagL = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q12 12 9 48" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M3 42L9 50L15 42" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowDiagR = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q78 12 81 48" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M75 42L81 50L87 42" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
   const arrowRight = `<svg width="32" height="20" viewBox="0 0 32 20" fill="none"><line x1="0" y1="10" x2="24" y2="10" stroke="rgba(209,75,63,0.45)" stroke-width="1.5"/><path d="M18 4L26 10L18 16" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 
+  // Annotation texts
+  const ann = {
+    menu_title:   isJA ? "保護者がLINEを開く" : "Parent opens LINE",
+    menu_body:    isJA ? "いつも使っているアプリ。新しいログイン不要。" : "An app they already use. No new login required.",
+    absence_title:isJA ? "欠席連絡" : "Reporting an absence",
+    absence_1:    isJA ? "生徒と日付を選ぶだけ。スタッフへの連絡不要。" : "Selects student and date. No need to contact staff.",
+    absence_2:    isJA ? "1回タップで送信完了。スタッフに即時通知。" : "One tap to confirm. Staff notified instantly.",
+    makeup_title: isJA ? "振替授業" : "Booking a makeup lesson",
+    makeup_1:     isJA ? "リアルタイムで空き枠を確認。二重予約なし。" : "Sees live available slots. No double-booking possible.",
+    makeup_2:     isJA ? "予約確定。カレンダーに自動追加。所要時間1分未満。" : "Booking confirmed. Auto-added to calendar. Under one minute total.",
+  };
+
   return `
-  <div style="padding:28px 0 8px;">
-    <div style="font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);background:rgba(209,75,63,0.08);display:inline-block;padding:5px 12px;border-radius:20px;margin-bottom:20px;">
-      ${isJA ? titleJA : titleEN}
+  <!-- Section title -->
+  <div style="padding:36px 0 24px;">
+    <div style="font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--red-deep);background:rgba(209,75,63,0.08);display:inline-block;padding:5px 14px;border-radius:20px;margin-bottom:14px;">
+      ${isJA ? "実際の操作フロー" : "The parent experience, step by step"}
     </div>
+    <h3 style="font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:0 0 8px;letter-spacing:-0.01em;color:var(--ink);">
+      ${isJA ? "保護者がLINEで完結できる、シンプルな導線" : "Everything a parent needs, inside the app they already use"}
+    </h3>
+    <p style="font-size:0.92rem;color:rgba(36,27,20,0.56);line-height:1.65;max-width:500px;margin:0;">
+      ${isJA
+        ? "欠席連絡も振替予約も、LINEを離れることなく1分以内に完結します。ダウンロード不要、新しいログイン不要。"
+        : "Absence reports and makeup bookings both resolve in under a minute without leaving LINE. No download, no new account, no waiting for staff."}
+    </p>
   </div>
 
-  <div style="display:flex;flex-direction:column;align-items:center;gap:0;padding-bottom:32px;">
+  <!-- Pyramid flow -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:0;padding-bottom:16px;overflow-x:auto;">
 
-    <!-- Row 1: Menu (top of pyramid) -->
-    <div style="display:flex;justify-content:center;">
+    <!-- Row 1: Menu + annotation -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="ann tail-b" style="margin-bottom:4px;">
+        <strong>${ann.menu_title}</strong>${ann.menu_body}
+      </div>
       ${phoneScreen(screens[0].key, screens[0].num, screens[0].en, screens[0].ja)}
     </div>
 
     <!-- Split arrows -->
-    <div style="display:flex;justify-content:center;gap:80px;margin:0;">
-      <div style="display:flex;justify-content:flex-end;">${arrowDiagL}</div>
-      <div style="display:flex;justify-content:flex-start;">${arrowDiagR}</div>
+    <div style="display:flex;justify-content:center;gap:60px;margin:0;pointer-events:none;">
+      ${arrowDiagL}${arrowDiagR}
     </div>
 
     <!-- Row 2: Absence left, Makeup right -->
-    <div style="display:flex;align-items:flex-start;gap:48px;justify-content:center;flex-wrap:wrap;">
+    <div style="display:flex;align-items:flex-start;gap:40px;justify-content:center;flex-wrap:wrap;">
 
       <!-- Absence branch -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-        <div style="font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(36,27,20,0.45);background:rgba(36,27,20,0.06);padding:3px 12px;border-radius:10px;">${absenceLabel}</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:rgba(36,27,20,0.5);background:rgba(36,27,20,0.06);padding:4px 14px;border-radius:10px;">
+          ${isJA ? "欠席連絡" : "Absence"}
+        </div>
         <div style="display:flex;align-items:flex-start;gap:0;">
-          ${phoneScreen(screens[1].key, screens[1].num, screens[1].en, screens[1].ja)}
-          <div style="display:flex;align-items:center;padding:0 6px;margin-top:56px;">${arrowRight}</div>
-          ${phoneScreen(screens[2].key, screens[2].num, screens[2].en, screens[2].ja)}
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="ann tail-b" style="max-width:160px;">
+              <strong>${ann.absence_title}</strong>${ann.absence_1}
+            </div>
+            ${phoneScreen(screens[1].key, screens[1].num, screens[1].en, screens[1].ja)}
+          </div>
+
+          <div style="display:flex;align-items:center;padding:0 4px;margin-top:100px;">${arrowRight}</div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="ann red tail-b" style="max-width:160px;">
+              <strong>✓ ${isJA ? "完了" : "Done"}</strong>${ann.absence_2}
+            </div>
+            ${phoneScreen(screens[2].key, screens[2].num, screens[2].en, screens[2].ja)}
+          </div>
+
         </div>
       </div>
 
       <!-- Makeup branch -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-        <div style="font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);background:rgba(209,75,63,0.08);padding:3px 12px;border-radius:10px;">${makeupLabel}</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--red-deep);background:rgba(209,75,63,0.08);padding:4px 14px;border-radius:10px;">
+          ${isJA ? "振替授業" : "Makeup"}
+        </div>
         <div style="display:flex;align-items:flex-start;gap:0;">
-          ${phoneScreen(screens[3].key, screens[3].num, screens[3].en, screens[3].ja)}
-          <div style="display:flex;align-items:center;padding:0 6px;margin-top:56px;">${arrowRight}</div>
-          ${phoneScreen(screens[4].key, screens[4].num, screens[4].en, screens[4].ja)}
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="ann tail-b" style="max-width:160px;">
+              <strong>${ann.makeup_title}</strong>${ann.makeup_1}
+            </div>
+            ${phoneScreen(screens[3].key, screens[3].num, screens[3].en, screens[3].ja)}
+          </div>
+
+          <div style="display:flex;align-items:center;padding:0 4px;margin-top:100px;">${arrowRight}</div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="ann green tail-b" style="max-width:160px;">
+              <strong>✓ ${isJA ? "予約確定" : "Booked"}</strong>${ann.makeup_2}
+            </div>
+            ${phoneScreen(screens[4].key, screens[4].num, screens[4].en, screens[4].ja)}
+          </div>
+
         </div>
       </div>
 
     </div>
+
   </div>
-  <p style="font-family:var(--mono);font-size:0.65rem;color:rgba(36,27,20,0.38);text-align:center;margin:0 0 24px;">
-    ${isJA ? "← スクロールして全フローを確認" : "← Scroll horizontally on smaller screens"}
+  <p style="font-family:var(--mono);font-size:0.62rem;color:rgba(36,27,20,0.32);text-align:center;margin:4px 0 24px;">
+    ${isJA ? "各画面をタップして拡大表示" : "Tap any screen to enlarge"}
   </p>`;
+}
 }
 
 function carouselHTML(studyId){
@@ -1139,6 +1229,182 @@ function initReveal(){
     if(el.getBoundingClientRect().top < window.innerHeight*0.9) el.classList.add("in");
   });
 }
+// =============================================================
+//  UNIFIED ZOOMABLE LIGHTBOX ENGINE
+//  Handles both carousel images (flat) and flow phones (phone frame)
+//  Scroll/pinch = zoom · Drag = pan · Escape/✕ = close
+// =============================================================
+const zlb = {
+  el: null, viewport: null, wrap: null,
+  imgWrap: null, img: null, ph: null,
+  phoneWrap: null, phoneImg: null,
+  caption: null, hint: null, zoomEl: null,
+  scale: 1, minScale: 0.5, maxScale: 8,
+  ox: 0, oy: 0,          // current translate
+  dragging: false, lastX: 0, lastY: 0,
+  mode: 'flat',          // 'flat' | 'phone'
+
+  init(){
+    this.el       = document.getElementById('zlb');
+    this.viewport = document.getElementById('zlb-viewport');
+    this.imgWrap  = document.getElementById('zlb-img-wrap');
+    this.img      = document.getElementById('zlb-img');
+    this.ph       = document.getElementById('zlb-ph');
+    this.phoneWrap= document.getElementById('zlb-phone-wrap');
+    this.phoneImg = document.getElementById('zlb-phone-img');
+    this.caption  = document.getElementById('zlb-caption');
+    this.hint     = document.getElementById('zlb-hint');
+    this.zoomEl   = document.getElementById('zlb-zoom-level');
+    this._bindEvents();
+  },
+
+  open(src, label, mode){
+    this.mode = mode || 'flat';
+    this.scale = 1; this.ox = 0; this.oy = 0;
+    this.caption.textContent = label || '';
+
+    if(this.mode === 'phone'){
+      this.imgWrap.style.display  = 'none';
+      this.phoneWrap.style.display= 'flex';
+      if(src){
+        this.phoneImg.src = src;
+        this.phoneImg.style.display = 'block';
+      } else {
+        this.phoneImg.style.display = 'none';
+      }
+    } else {
+      this.imgWrap.style.display  = 'block';
+      this.phoneWrap.style.display= 'none';
+      if(src){
+        this.img.src = src;
+        this.img.style.display = 'block';
+        this.ph.textContent = '';
+      } else {
+        this.img.style.display = 'none';
+        this.ph.textContent = 'Image not yet uploaded';
+      }
+    }
+
+    this._applyTransform();
+    this.el.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Fade out the hint after 3s
+    setTimeout(()=>{ if(this.hint) this.hint.style.opacity = '0'; }, 3000);
+  },
+
+  close(){
+    this.el.classList.remove('active');
+    document.body.style.overflow = '';
+    if(this.hint) this.hint.style.opacity = '1';
+  },
+
+  zoom(delta, cx, cy){
+    const vp = this.viewport.getBoundingClientRect();
+    const pivotX = (cx !== undefined ? cx : vp.left + vp.width/2) - vp.left;
+    const pivotY = (cy !== undefined ? cy : vp.top + vp.height/2) - vp.top;
+    const prev = this.scale;
+    this.scale = Math.min(this.maxScale, Math.max(this.minScale, this.scale + delta));
+    const ratio = this.scale / prev;
+    // Adjust origin so zoom centres on the cursor/pinch point
+    this.ox = pivotX + (this.ox - pivotX) * ratio;
+    this.oy = pivotY + (this.oy - pivotY) * ratio;
+    this._applyTransform();
+  },
+
+  reset(){
+    this.scale = 1; this.ox = 0; this.oy = 0;
+    this._applyTransform();
+  },
+
+  _applyTransform(){
+    const target = this.mode === 'phone' ? this.phoneWrap : this.imgWrap;
+    target.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
+    if(this.mode !== 'phone'){
+      this.imgWrap.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
+    } else {
+      this.phoneWrap.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
+    }
+    this.zoomEl.textContent = Math.round(this.scale * 100) + '%';
+  },
+
+  _bindEvents(){
+    // Scroll to zoom
+    this.viewport.addEventListener('wheel', e=>{
+      if(!this.el.classList.contains('active')) return;
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.15 : 0.15;
+      this.zoom(delta, e.clientX, e.clientY);
+    }, { passive: false });
+
+    // Mouse drag to pan
+    this.viewport.addEventListener('mousedown', e=>{
+      if(e.button !== 0) return;
+      this.dragging = true;
+      this.lastX = e.clientX; this.lastY = e.clientY;
+      this.viewport.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', e=>{
+      if(!this.dragging) return;
+      this.ox += e.clientX - this.lastX;
+      this.oy += e.clientY - this.lastY;
+      this.lastX = e.clientX; this.lastY = e.clientY;
+      this._applyTransform();
+    });
+    window.addEventListener('mouseup', ()=>{
+      this.dragging = false;
+      this.viewport.classList.remove('dragging');
+    });
+
+    // Close on backdrop click
+    this.el.addEventListener('click', e=>{
+      if(e.target === this.el || e.target === this.viewport) this.close();
+    });
+
+    // Touch pinch-to-zoom + drag
+    let lastDist = null, lastTX = null, lastTY = null;
+    this.viewport.addEventListener('touchstart', e=>{
+      if(e.touches.length === 2){
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        lastDist = Math.hypot(dx, dy);
+      } else if(e.touches.length === 1){
+        lastTX = e.touches[0].clientX;
+        lastTY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    this.viewport.addEventListener('touchmove', e=>{
+      e.preventDefault();
+      if(e.touches.length === 2 && lastDist !== null){
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+        const delta = (dist - lastDist) / 120;
+        this.zoom(delta, midX, midY);
+        lastDist = dist;
+      } else if(e.touches.length === 1 && lastTX !== null){
+        this.ox += e.touches[0].clientX - lastTX;
+        this.oy += e.touches[0].clientY - lastTY;
+        lastTX = e.touches[0].clientX;
+        lastTY = e.touches[0].clientY;
+        this._applyTransform();
+      }
+    }, { passive: false });
+
+    this.viewport.addEventListener('touchend', ()=>{
+      lastDist = null; lastTX = null; lastTY = null;
+    }, { passive: true });
+  }
+};
+
+function zlbClose(){ zlb.close(); }
+function zlbZoom(d){ zlb.zoom(d); }
+function zlbReset(){ zlb.reset(); }
+
+// Called from carousel enlarge button
 function openLightbox(studyId){
   const dots = document.querySelectorAll(`#carousel-${studyId} .ba-dot`);
   const current = [...dots].findIndex(d=>d.classList.contains('active'));
@@ -1147,30 +1413,22 @@ function openLightbox(studyId){
   if(!srcsEl) return;
   const srcs = JSON.parse(srcsEl.textContent);
   const captions = captionsEl ? JSON.parse(captionsEl.textContent) : [];
-  const src = srcs[current];
-  const lb = document.getElementById('ca-lightbox');
-  const lbImg = document.getElementById('ca-lb-img');
-  const lbPh = document.getElementById('ca-lightbox-ph');
-  const lbCap = document.getElementById('ca-lb-caption');
-  lbCap.textContent = captions[current] || '';
-  if(src){
-    lbImg.src = src;
-    lbImg.style.display = 'block';
-    lbPh.textContent = '';
-  } else {
-    lbImg.style.display = 'none';
-    lbPh.textContent = 'Image not uploaded yet';
-  }
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  zlb.open(srcs[current] || '', captions[current] || '', 'flat');
 }
 
-function closeLightbox(){
-  document.getElementById('ca-lightbox').classList.remove('active');
-  document.body.style.overflow = '';
+// Called from flow phone taps
+function openFlowLightbox(src, label, filename){
+  zlb.open(src || '', label || filename, 'phone');
 }
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+// Deprecated stubs — kept so any stray calls don't throw
+function closeLightbox(){ zlb.close(); }
+function closeFlowLightbox(){ zlb.close(); }
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') zlb.close(); });
+document.addEventListener('DOMContentLoaded', ()=> zlb.init() );
+// Also init immediately in case DOMContentLoaded already fired
+if(document.readyState !== 'loading') zlb.init();
 
 function observeAll(){ document.querySelectorAll(".reveal").forEach(el=>observer.observe(el)); }
 observeAll(); initReveal();
@@ -1190,12 +1448,32 @@ observeAll(); initReveal();
   }
 })();
 </script>
-<!-- CAROUSEL LIGHTBOX -->
-<div id="ca-lightbox" onclick="if(event.target===this)closeLightbox()">
-  <button class="ca-lb-close" onclick="closeLightbox()">✕</button>
-  <img id="ca-lb-img" src="" alt="" style="display:none;">
-  <div id="ca-lightbox-ph"></div>
-  <div class="ca-lb-caption" id="ca-lb-caption"></div>
+<!-- UNIFIED ZOOMABLE LIGHTBOX -->
+<div id="zlb">
+  <div id="zlb-viewport">
+    <!-- flat image mode (carousel) -->
+    <div id="zlb-img-wrap">
+      <img id="zlb-img" src="" alt="" style="display:none;">
+      <div id="zlb-ph"></div>
+    </div>
+    <!-- phone frame mode (flow) -->
+    <div id="zlb-phone-wrap">
+      <div id="zlb-phone-device">
+        <div id="zlb-phone-screen">
+          <img id="zlb-phone-img" src="" alt="" style="display:none;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="zlb-close" onclick="zlbClose()">✕</button>
+  <div id="zlb-controls">
+    <button class="zlb-btn" onclick="zlbZoom(-0.25)" title="Zoom out">−</button>
+    <button class="zlb-btn" onclick="zlbReset()" title="Reset zoom" style="font-size:0.7rem;">1:1</button>
+    <button class="zlb-btn" onclick="zlbZoom(0.25)" title="Zoom in">+</button>
+  </div>
+  <div id="zlb-zoom-level">100%</div>
+  <div id="zlb-hint">Scroll to zoom · Drag to pan</div>
+  <div id="zlb-caption"></div>
 </div>
 
 </body>
