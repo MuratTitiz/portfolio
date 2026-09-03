@@ -258,23 +258,34 @@
 
   /* BEFORE/AFTER CAROUSEL */
   .ba-carousel{aspect-ratio:16/9;border-radius:22px;overflow:hidden;position:relative;background:var(--white);border:1px solid var(--line);}
-  .ba-slides{display:flex;height:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);}
-  .ba-slide{min-width:100%;height:100%;position:relative;flex-shrink:0;}
+  .ba-slides{display:flex;height:100%;width:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);will-change:transform;}
+  .ba-slide{width:100%;min-width:100%;max-width:100%;height:100%;position:relative;flex-shrink:0;flex-grow:0;overflow:hidden;}
   .ba-slide img{width:100%;height:100%;object-fit:cover;display:block;}
   .ba-slide .ba-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:0.68rem;color:rgba(36,27,20,0.35);text-align:center;padding:20px;}
-  .ba-badge{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;padding:5px 12px;border-radius:20px;font-weight:600;pointer-events:none;}
+  .ba-badge{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;padding:5px 12px;border-radius:20px;font-weight:600;pointer-events:none;z-index:2;}
   .ba-badge.before{background:rgba(36,27,20,0.75);color:var(--cream);}
   .ba-badge.after{background:var(--red);color:var(--white);}
   .ba-badge.flow{background:var(--ochre);color:var(--ink);}
-  .ba-nav{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;}
+  .ba-nav{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:3;}
   .ba-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);border:none;cursor:pointer;padding:0;transition:all .2s;}
   .ba-dot.active{background:var(--white);transform:scale(1.3);}
-  .ba-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.85);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--ink);transition:all .2s;box-shadow:0 2px 8px rgba(36,27,20,0.15);}
+  .ba-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.85);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--ink);transition:all .2s;box-shadow:0 2px 8px rgba(36,27,20,0.15);z-index:3;}
   .ba-arrow:hover{background:var(--white);box-shadow:0 4px 16px rgba(36,27,20,0.2);}
   .ba-arrow.prev{left:12px;}
   .ba-arrow.next{right:12px;}
+  .ba-enlarge{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.85);border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.9rem;color:var(--ink);transition:all .2s;box-shadow:0 2px 8px rgba(36,27,20,0.15);z-index:3;}
+  .ba-enlarge:hover{background:var(--white);box-shadow:0 4px 16px rgba(36,27,20,0.2);}
   .ba-caption{margin-top:10px;font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.45);text-align:center;min-height:1.2em;transition:opacity .2s;}
   .ba-captions{display:none;}
+
+  /* CAROUSEL LIGHTBOX */
+  #ca-lightbox{position:fixed;inset:0;background:rgba(20,14,10,0.92);z-index:3000;display:none;align-items:center;justify-content:center;padding:4vw;cursor:zoom-out;}
+  #ca-lightbox.active{display:flex;}
+  #ca-lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);object-fit:contain;cursor:default;}
+  #ca-lightbox-ph{font-family:var(--mono);font-size:0.8rem;color:rgba(255,255,255,0.4);text-align:center;}
+  .ca-lb-close{position:fixed;top:20px;right:24px;background:rgba(255,255,255,0.1);border:none;color:var(--white);font-size:1.4rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;z-index:3001;}
+  .ca-lb-close:hover{background:rgba(255,255,255,0.2);}
+  .ca-lb-caption{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);padding:6px 16px;border-radius:20px;white-space:nowrap;}
 
   .text .step-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
     margin-bottom:10px;display:inline-block;background:rgba(209,75,63,0.1);padding:5px 12px;border-radius:14px;}
@@ -984,12 +995,14 @@ function carouselHTML(studyId){
     <div class="ba-slides" id="slides-${studyId}">${slidesHTML}</div>
     <button class="ba-arrow prev" onclick="carouselMove('${studyId}',-1)">&#8249;</button>
     <button class="ba-arrow next" onclick="carouselMove('${studyId}',1)">&#8250;</button>
+    <button class="ba-enlarge" title="Enlarge" onclick="openLightbox('${studyId}')">⤢</button>
     <div class="ba-nav">
       ${slides.map((_,i)=>`<button class="ba-dot ${i===0?'active':''}" onclick="carouselGo('${studyId}',${i})"></button>`).join("")}
     </div>
   </div>
   <div class="ba-caption" id="caption-${studyId}">${captions[0]}</div>
-  <script type="application/json" id="captions-data-${studyId}">${JSON.stringify(captions)}<\/script>`;
+  <script type="application/json" id="captions-data-${studyId}">${JSON.stringify(captions)}<\/script>
+  <script type="application/json" id="srcs-data-${studyId}">${JSON.stringify(slides.map(s=>imgSrc(s.key)||''))}<\/script>`;
 }
 
 function carouselMove(id, dir){
@@ -1126,6 +1139,39 @@ function initReveal(){
     if(el.getBoundingClientRect().top < window.innerHeight*0.9) el.classList.add("in");
   });
 }
+function openLightbox(studyId){
+  const dots = document.querySelectorAll(`#carousel-${studyId} .ba-dot`);
+  const current = [...dots].findIndex(d=>d.classList.contains('active'));
+  const srcsEl = document.getElementById(`srcs-data-${studyId}`);
+  const captionsEl = document.getElementById(`captions-data-${studyId}`);
+  if(!srcsEl) return;
+  const srcs = JSON.parse(srcsEl.textContent);
+  const captions = captionsEl ? JSON.parse(captionsEl.textContent) : [];
+  const src = srcs[current];
+  const lb = document.getElementById('ca-lightbox');
+  const lbImg = document.getElementById('ca-lb-img');
+  const lbPh = document.getElementById('ca-lightbox-ph');
+  const lbCap = document.getElementById('ca-lb-caption');
+  lbCap.textContent = captions[current] || '';
+  if(src){
+    lbImg.src = src;
+    lbImg.style.display = 'block';
+    lbPh.textContent = '';
+  } else {
+    lbImg.style.display = 'none';
+    lbPh.textContent = 'Image not uploaded yet';
+  }
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  document.getElementById('ca-lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+
 function observeAll(){ document.querySelectorAll(".reveal").forEach(el=>observer.observe(el)); }
 observeAll(); initReveal();
 
@@ -1144,5 +1190,13 @@ observeAll(); initReveal();
   }
 })();
 </script>
+<!-- CAROUSEL LIGHTBOX -->
+<div id="ca-lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="ca-lb-close" onclick="closeLightbox()">✕</button>
+  <img id="ca-lb-img" src="" alt="" style="display:none;">
+  <div id="ca-lightbox-ph"></div>
+  <div class="ca-lb-caption" id="ca-lb-caption"></div>
+</div>
+
 </body>
 </html>
