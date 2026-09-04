@@ -34,9 +34,8 @@
     FLOW: the user flow diagram or the Make.com scenario map
     showing how the automation connects the pieces.
 
-  images/cs01-step02-process.png
-    The LINE interface you built — screenshot of the LIFF app
-    or a diagram of the Make.com workflow.
+  (Step 02 "Process" has no image slot — the flow diagram below it
+   already illustrates this step visually.)
 
   images/cs01-step03-outcome.png
     A before/after stat graphic, a screenshot of the LINE
@@ -159,7 +158,7 @@
 
   /* HOME */
   .hero{padding-bottom:5vh;}
-  .hero-row{display:grid;grid-template-columns:1fr 230px;gap:40px;align-items:center;}
+  .hero-row{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:center;}
   .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(2.5rem,5.6vw,4.4rem);line-height:1.08;margin:0 0 22px;letter-spacing:-0.01em;}
   .hero h1 em{font-style:italic;font-weight:600;color:var(--red-deep);}
   .hero p.sub{font-size:1.08rem;max-width:540px;color:rgba(36,27,20,0.72);line-height:1.65;margin-bottom:24px;}
@@ -169,7 +168,7 @@
   .tag.primary{color:var(--white);background:var(--red);border-color:var(--red);font-weight:500;}
   .hero-photo{aspect-ratio:1/1;border-radius:28px;overflow:hidden;border:2px solid var(--line);}
   .hero-photo img{width:100%;height:100%;object-fit:cover;}
-  @media(max-width:760px){.hero-row{grid-template-columns:1fr;}.hero-photo{max-width:180px;}}
+  @media(max-width:760px){.hero-row{grid-template-columns:1fr;}.hero-photo{max-width:260px;margin:0 auto;}}
 
   .stats-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
   .stat-card{background:var(--white);border-radius:18px;padding:20px 22px;border:1px solid var(--line);transition:transform .2s;}
@@ -259,7 +258,7 @@
   .flow-connector-line{width:2px;height:100%;background:rgba(36,27,20,0.12);}
 
   /* ANNOTATION BUBBLES */
-  .ann{background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:9px 13px;box-shadow:0 2px 14px rgba(36,27,20,0.07);font-size:0.78rem;line-height:1.45;color:rgba(36,27,20,0.72);max-width:180px;position:relative;}
+  .ann{background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:9px 13px;box-shadow:0 2px 14px rgba(36,27,20,0.07);font-size:0.78rem;line-height:1.45;color:rgba(36,27,20,0.72);max-width:180px;min-height:76px;display:flex;flex-direction:column;justify-content:center;position:relative;}
   .ann strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px;font-size:0.8rem;}
   .ann.red{border-color:rgba(209,75,63,0.3);background:rgba(209,75,63,0.03);}
   .ann.green{border-color:rgba(92,138,110,0.3);background:rgba(92,138,110,0.04);}
@@ -304,7 +303,7 @@
   #zlb-viewport{position:relative;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:grab;}
   #zlb-viewport.dragging{cursor:grabbing;}
   #zlb-img-wrap{position:absolute;transform-origin:center center;will-change:transform;user-select:none;-webkit-user-select:none;}
-  #zlb-img{max-width:92vw;max-height:88vh;object-fit:contain;display:block;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,0.6);pointer-events:none;user-select:none;}
+  #zlb-img{display:block;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,0.6);pointer-events:none;user-select:none;image-rendering:auto;}
   #zlb-phone-wrap{display:none;flex-direction:column;align-items:center;gap:0;}
   #zlb-phone-device{background:#1a1a1a;border-radius:36px;padding:14px;border:3px solid #333;box-shadow:0 24px 60px rgba(0,0,0,0.6);width:min(300px,75vw);}
   #zlb-phone-device::before{content:'';display:block;width:44px;height:6px;background:#333;border-radius:3px;margin:0 auto 10px;}
@@ -709,9 +708,6 @@ const IMAGES = {
   "line-automation-0-before":"images/cs01-step01-before.png",   // Before: old email chain / screenshot of the 9-step process
   "line-automation-0-after": "images/cs01-step01-after.png",    // After:  the new LINE interface / LIFF screen
   "line-automation-0-flow":  "images/cs01-step01-flowchart.png",// Flow:   user flow diagram / Make.com scenario map
-  "line-automation-1":       "images/cs01-step02-process.png",
-  // LINE LIFF user flow diagram — 5 screens
-  // Upload these in order: LINE menu → absence screens → makeup screens
   "line-flow-0": "images/cs01-flow-01-menu.png",         // Screen 1: LINE main menu
   "line-flow-1": "images/cs01-flow-02-absence-1.png",    // Screen 2: Absence — select student/date
   "line-flow-2": "images/cs01-flow-03-absence-2.png",    // Screen 3: Absence — confirm & submit
@@ -1127,6 +1123,10 @@ function openStudy(id){
     let visualBlock;
     if(isCarousel){
       visualBlock = carouselHTML(id);
+    } else if(hasFlowDiagram){
+      // Process step (LINE automation, step 1) has no image —
+      // the flow diagram below already illustrates this step visually.
+      visualBlock = null;
     } else {
       const imgKey = `${id}-${i}`;
       const src = imgSrc(imgKey);
@@ -1137,10 +1137,8 @@ function openStudy(id){
       visualBlock = `<div class="visual" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">${visualInner}</div>`;
     }
     return `
-    <div class="story-block ${s.reverse?'reverse':''}">
-      <div style="display:flex;flex-direction:column;gap:0;">
-        ${visualBlock}
-      </div>
+    <div class="story-block ${s.reverse?'reverse':''}" style="${visualBlock===null?'grid-template-columns:1fr;':''}">
+      ${visualBlock===null ? '' : `<div style="display:flex;flex-direction:column;gap:0;">${visualBlock}</div>`}
       <div class="text">
         <span class="step-label">${s.label[LANG]}</span>
         <h3>${s.title[LANG]}</h3>
@@ -1238,8 +1236,9 @@ const zlb = {
   imgWrap: null, img: null, ph: null,
   phoneWrap: null, phoneImg: null,
   caption: null, hint: null, zoomEl: null,
-  scale: 1, minScale: 0.5, maxScale: 8,
-  ox: 0, oy: 0,          // current translate
+  scale: 1, minScale: 0.5, maxScale: 12,
+  ox: 0, oy: 0,          // current translate (pan)
+  baseW: 0, baseH: 0,    // "fit to screen" size at scale=1, in real px
   dragging: false, lastX: 0, lastY: 0,
   mode: 'flat',          // 'flat' | 'phone'
 
@@ -1265,31 +1264,53 @@ const zlb = {
     if(this.mode === 'phone'){
       this.imgWrap.style.display  = 'none';
       this.phoneWrap.style.display= 'flex';
+      this.phoneWrap.style.transform = '';
       if(src){
         this.phoneImg.src = src;
         this.phoneImg.style.display = 'block';
       } else {
         this.phoneImg.style.display = 'none';
       }
+      this.el.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(()=>{ if(this.hint) this.hint.style.opacity = '0'; }, 3000);
     } else {
       this.imgWrap.style.display  = 'block';
-      this.phoneWrap.style.display= 'none';
       if(src){
-        this.img.src = src;
-        this.img.style.display = 'block';
         this.ph.textContent = '';
+        // Load the image fresh so we know its true natural pixel size,
+        // then size it explicitly (not via CSS max-width) so zooming
+        // re-renders from the real source resolution instead of a
+        // pre-shrunk, blurry compositor layer.
+        this.img.style.display = 'none';
+        this.img.onload = ()=>{
+          this._computeBaseSize();
+          this.img.style.display = 'block';
+          this._applyTransform();
+        };
+        this.img.src = src;
       } else {
         this.img.style.display = 'none';
         this.ph.textContent = 'Image not yet uploaded';
       }
+      this.el.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(()=>{ if(this.hint) this.hint.style.opacity = '0'; }, 3000);
     }
 
     this._applyTransform();
-    this.el.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  },
 
-    // Fade out the hint after 3s
-    setTimeout(()=>{ if(this.hint) this.hint.style.opacity = '0'; }, 3000);
+  // Work out the "fit to viewport" size in true pixels from the image's
+  // natural dimensions, so scale=1 always maps to real, unblurred pixels.
+  _computeBaseSize(){
+    const nw = this.img.naturalWidth  || 1600;
+    const nh = this.img.naturalHeight || 900;
+    const maxW = window.innerWidth  * 0.92;
+    const maxH = window.innerHeight * 0.88;
+    const ratio = Math.min(maxW / nw, maxH / nh, 1); // never upscale past native at 1x
+    this.baseW = Math.round(nw * ratio);
+    this.baseH = Math.round(nh * ratio);
   },
 
   close(){
@@ -1305,7 +1326,6 @@ const zlb = {
     const prev = this.scale;
     this.scale = Math.min(this.maxScale, Math.max(this.minScale, this.scale + delta));
     const ratio = this.scale / prev;
-    // Adjust origin so zoom centres on the cursor/pinch point
     this.ox = pivotX + (this.ox - pivotX) * ratio;
     this.oy = pivotY + (this.oy - pivotY) * ratio;
     this._applyTransform();
@@ -1317,12 +1337,19 @@ const zlb = {
   },
 
   _applyTransform(){
-    const target = this.mode === 'phone' ? this.phoneWrap : this.imgWrap;
-    target.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
-    if(this.mode !== 'phone'){
-      this.imgWrap.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
-    } else {
+    if(this.mode === 'phone'){
+      // Phone frame is small and mostly UI chrome, not dense text —
+      // transform-scale is fine here and keeps the device frame crisp.
       this.phoneWrap.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
+    } else {
+      // Flat images: set real pixel width/height so the browser
+      // re-rasterizes from the full-resolution source on every zoom
+      // step, instead of scaling an already-shrunk layer.
+      if(this.baseW && this.baseH){
+        this.img.style.width  = (this.baseW * this.scale) + 'px';
+        this.img.style.height = (this.baseH * this.scale) + 'px';
+      }
+      this.imgWrap.style.transform = `translate(${this.ox}px,${this.oy}px)`;
     }
     this.zoomEl.textContent = Math.round(this.scale * 100) + '%';
   },
