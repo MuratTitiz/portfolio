@@ -324,6 +324,13 @@
   .zlb-btn:hover{background:rgba(255,255,255,0.24);}
   #zlb-zoom-level{position:fixed;top:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);background:rgba(0,0,0,0.35);padding:4px 12px;border-radius:12px;z-index:5003;pointer-events:none;letter-spacing:.05em;}
   #zlb-hint{position:fixed;top:56px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:0.6rem;color:rgba(255,255,255,0.28);text-align:center;z-index:5003;pointer-events:none;letter-spacing:.04em;transition:opacity .4s;}
+  #zlb-nav-prev,#zlb-nav-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.6rem;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:5003;transition:background .2s;}
+  #zlb-nav-prev:hover,#zlb-nav-next:hover{background:rgba(255,255,255,0.22);}
+  #zlb-nav-prev{left:18px;}
+  #zlb-nav-next{right:18px;}
+  #zlb-nav-prev.show,#zlb-nav-next.show{display:flex;}
+  #zlb-slide-counter{position:fixed;top:22px;right:70px;font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);background:rgba(0,0,0,0.35);padding:4px 12px;border-radius:12px;z-index:5003;pointer-events:none;display:none;}
+  #zlb-slide-counter.show{display:block;}
 
   .text .step-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
     margin-bottom:10px;display:inline-block;background:rgba(209,75,63,0.1);padding:5px 12px;border-radius:14px;}
@@ -1241,11 +1248,15 @@ const zlb = {
   imgWrap: null, img: null, ph: null,
   phoneWrap: null, phoneImg: null,
   caption: null, hint: null, zoomEl: null,
+  navPrev: null, navNext: null, slideCounter: null,
   scale: 1, minScale: 0.5, maxScale: 12,
   ox: 0, oy: 0,          // current translate (pan)
   baseW: 0, baseH: 0,    // "fit to screen" size at scale=1, in real px
   dragging: false, lastX: 0, lastY: 0,
   mode: 'flat',          // 'flat' | 'phone'
+
+  // Carousel navigation state — only populated when opened from a carousel
+  carouselId: null, srcs: [], captions: [], slideIndex: 0,
 
   init(){
     this.el       = document.getElementById('zlb');
@@ -1258,12 +1269,65 @@ const zlb = {
     this.caption  = document.getElementById('zlb-caption');
     this.hint     = document.getElementById('zlb-hint');
     this.zoomEl   = document.getElementById('zlb-zoom-level');
+    this.navPrev  = document.getElementById('zlb-nav-prev');
+    this.navNext  = document.getElementById('zlb-nav-next');
+    this.slideCounter = document.getElementById('zlb-slide-counter');
     this._bindEvents();
   },
 
-  open(src, label, mode){
+  // src/label kept for backward compatibility (phone mode, single images).
+  // carouselId + srcs + captions + startIndex enable next/prev navigation.
+  open(src, label, mode, carouselId, srcs, captions, startIndex){
     this.mode = mode || 'flat';
     this.scale = 1; this.ox = 0; this.oy = 0;
+
+    if(this.mode === 'flat' && carouselId){
+      this.carouselId = carouselId;
+      this.srcs = srcs || [];
+      this.captions = captions || [];
+      this.slideIndex = startIndex || 0;
+    } else {
+      this.carouselId = null;
+      this.srcs = []; this.captions = []; this.slideIndex = 0;
+    }
+
+    this._updateNavVisibility();
+    this._renderCurrentSlide(src, label);
+  },
+
+  _updateNavVisibility(){
+    const showNav = this.mode === 'flat' && this.carouselId && this.srcs.length > 1;
+    this.navPrev.classList.toggle('show', showNav);
+    this.navNext.classList.toggle('show', showNav);
+    this.slideCounter.classList.toggle('show', showNav);
+    if(showNav) this.slideCounter.textContent = `${this.slideIndex + 1} / ${this.srcs.length}`;
+  },
+
+  nextSlide(){
+    if(!this.carouselId || this.srcs.length < 2) return;
+    this.slideIndex = (this.slideIndex + 1) % this.srcs.length;
+    this._goToSlide();
+  },
+
+  prevSlide(){
+    if(!this.carouselId || this.srcs.length < 2) return;
+    this.slideIndex = (this.slideIndex - 1 + this.srcs.length) % this.srcs.length;
+    this._goToSlide();
+  },
+
+  _goToSlide(){
+    // Reset zoom/pan on slide change — standard viewer behaviour
+    this.scale = 1; this.ox = 0; this.oy = 0;
+    this._updateNavVisibility();
+    this._renderCurrentSlide(this.srcs[this.slideIndex] || '', this.captions[this.slideIndex] || '');
+    // Keep the underlying carousel in sync so it reflects the current
+    // slide when the lightbox is closed.
+    if(typeof carouselGo === 'function'){
+      try { carouselGo(this.carouselId, this.slideIndex); } catch(e){}
+    }
+  },
+
+  _renderCurrentSlide(src, label){
     this.caption.textContent = label || '';
 
     if(this.mode === 'phone'){
@@ -1395,8 +1459,9 @@ const zlb = {
       if(e.target === this.el || e.target === this.viewport) this.close();
     });
 
-    // Touch pinch-to-zoom + drag
+    // Touch pinch-to-zoom + drag + swipe-to-navigate (when not zoomed in)
     let lastDist = null, lastTX = null, lastTY = null;
+    let touchStartX = null, touchStartY = null, touchTotalDX = 0, touchTotalDY = 0;
     this.viewport.addEventListener('touchstart', e=>{
       if(e.touches.length === 2){
         const dx = e.touches[0].clientX - e.touches[1].clientX;
@@ -1405,6 +1470,9 @@ const zlb = {
       } else if(e.touches.length === 1){
         lastTX = e.touches[0].clientX;
         lastTY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchTotalDX = 0; touchTotalDY = 0;
       }
     }, { passive: true });
 
@@ -1420,8 +1488,11 @@ const zlb = {
         this.zoom(delta, midX, midY);
         lastDist = dist;
       } else if(e.touches.length === 1 && lastTX !== null){
-        this.ox += e.touches[0].clientX - lastTX;
-        this.oy += e.touches[0].clientY - lastTY;
+        const dx = e.touches[0].clientX - lastTX;
+        const dy = e.touches[0].clientY - lastTY;
+        touchTotalDX += dx; touchTotalDY += dy;
+        this.ox += dx;
+        this.oy += dy;
         lastTX = e.touches[0].clientX;
         lastTY = e.touches[0].clientY;
         this._applyTransform();
@@ -1429,7 +1500,14 @@ const zlb = {
     }, { passive: false });
 
     this.viewport.addEventListener('touchend', ()=>{
+      // A clear horizontal swipe while not zoomed in navigates slides,
+      // even mid-zoom-gesture the pan itself still works as normal panning.
+      const isSwipe = this.scale <= 1.05 && Math.abs(touchTotalDX) > 70 && Math.abs(touchTotalDY) < 50;
+      if(isSwipe && this.mode === 'flat' && this.carouselId && this.srcs.length > 1){
+        if(touchTotalDX < 0) this.nextSlide(); else this.prevSlide();
+      }
       lastDist = null; lastTX = null; lastTY = null;
+      touchStartX = null; touchStartY = null; touchTotalDX = 0; touchTotalDY = 0;
     }, { passive: true });
   }
 };
@@ -1447,8 +1525,12 @@ function openLightbox(studyId){
   if(!srcsEl) return;
   const srcs = JSON.parse(srcsEl.textContent);
   const captions = captionsEl ? JSON.parse(captionsEl.textContent) : [];
-  zlb.open(srcs[current] || '', captions[current] || '', 'flat');
+  const idx = current >= 0 ? current : 0;
+  zlb.open(srcs[idx] || '', captions[idx] || '', 'flat', studyId, srcs, captions, idx);
 }
+
+function zlbNextSlide(){ zlb.nextSlide(); }
+function zlbPrevSlide(){ zlb.prevSlide(); }
 
 // Called from flow phone taps
 function openFlowLightbox(src, label, filename){
@@ -1459,7 +1541,12 @@ function openFlowLightbox(src, label, filename){
 function closeLightbox(){ zlb.close(); }
 function closeFlowLightbox(){ zlb.close(); }
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') zlb.close(); });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') zlb.close();
+  if(!zlb.el || !zlb.el.classList.contains('active')) return;
+  if(e.key==='ArrowRight') zlb.nextSlide();
+  if(e.key==='ArrowLeft') zlb.prevSlide();
+});
 document.addEventListener('DOMContentLoaded', ()=> zlb.init() );
 // Also init immediately in case DOMContentLoaded already fired
 if(document.readyState !== 'loading') zlb.init();
@@ -1500,6 +1587,9 @@ observeAll(); initReveal();
     </div>
   </div>
   <button id="zlb-close" onclick="zlbClose()">✕</button>
+  <button id="zlb-nav-prev" onclick="zlbPrevSlide()" title="Previous">&#8249;</button>
+  <button id="zlb-nav-next" onclick="zlbNextSlide()" title="Next">&#8250;</button>
+  <div id="zlb-slide-counter"></div>
   <div id="zlb-controls">
     <button class="zlb-btn" onclick="zlbZoom(-0.25)" title="Zoom out">−</button>
     <button class="zlb-btn" onclick="zlbReset()" title="Reset zoom" style="font-size:0.7rem;">1:1</button>
