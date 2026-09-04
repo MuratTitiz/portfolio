@@ -1268,6 +1268,7 @@ const zlb = {
 
     if(this.mode === 'phone'){
       this.imgWrap.style.display  = 'none';
+      this.img.src = '';
       this.phoneWrap.style.display= 'flex';
       this.phoneWrap.style.transform = '';
       if(src){
@@ -1281,6 +1282,8 @@ const zlb = {
       setTimeout(()=>{ if(this.hint) this.hint.style.opacity = '0'; }, 3000);
     } else {
       this.imgWrap.style.display  = 'block';
+      this.phoneWrap.style.display= 'none';
+      this.phoneImg.src = '';
       if(src){
         this.ph.textContent = '';
         // Load the image fresh so we know its true natural pixel size,
