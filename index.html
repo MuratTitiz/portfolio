@@ -337,10 +337,6 @@
   .text h3{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 14px;letter-spacing:-0.005em;}
   .text p{line-height:1.75;color:rgba(36,27,20,0.75);}
   @media(max-width:760px){.story-block{grid-template-columns:1fr;}.story-block.reverse .visual{order:1;}.story-block.reverse .text{order:2;}}
-  #zoom-modal{position:fixed;inset:0;background:rgba(36,27,20,0.85);z-index:2000;display:none;align-items:center;justify-content:center;padding:6vw;}
-  #zoom-modal.active{display:flex;}
-  .zoom-box{background:var(--cream);border-radius:24px;max-width:900px;width:100%;aspect-ratio:16/10;
-    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-family:var(--mono);color:rgba(36,27,20,0.5);}
 
   /* AUDIT OFFER PAGE */
   .audit-view{max-width:760px;margin:0 auto;}
@@ -692,13 +688,6 @@
   <div>© 2026 Murat Mert Titiz</div>
   <a href="#" data-nav="contact" data-en="Get in touch ↗" data-ja="お問い合わせ ↗">Get in touch ↗</a>
 </footer>
-
-<div id="zoom-modal">
-  <div class="zoom-box">
-    <div style="font-size:1.6rem;">⤢</div>
-    <div id="zoom-label">Diagram — full-size view</div>
-  </div>
-</div>
 
 <script>
 // =============================================================
@@ -1222,8 +1211,13 @@ document.getElementById("menu-toggle").addEventListener("click",()=>{
 
 document.body.addEventListener("click",e=>{
   const v = e.target.closest(".visual");
-  if(v){ document.getElementById("zoom-label").textContent = v.getAttribute("data-zoom")+" — full-size view"; document.getElementById("zoom-modal").classList.add("active"); }
-  else if(e.target.id==="zoom-modal") document.getElementById("zoom-modal").classList.remove("active");
+  if(v){
+    const img = v.querySelector("img");
+    const label = v.getAttribute("data-zoom") || "";
+    if(img && img.src){
+      zlb.open(img.src, label, 'flat');
+    }
+  }
 });
 
 document.getElementById("resume-toggle").addEventListener("click",()=>{
