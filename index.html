@@ -37,9 +37,15 @@
   (Step 02 "Process" has no image slot — the flow diagram below it
    already illustrates this step visually.)
 
-  images/cs01-step03-outcome.png
-    A before/after stat graphic, a screenshot of the LINE
-    confirmation flow, or a photo of staff using the system.
+  images/cs01-step03-before.png
+    Step 03 "Outcome" carousel — BEFORE slide.
+    The old manual result: e.g. a slow confirmation, a missed
+    request, or a screenshot showing the old process's output.
+
+  images/cs01-step03-after.png
+    Step 03 "Outcome" carousel — AFTER slide.
+    The result: a screenshot showing 90% adoption, the instant
+    confirmation screen, or a stats graphic of the outcome.
 
   ── CASE STUDY 02 — Parent Retention ───────────────────────
   images/cs02-step01-problem.png
@@ -713,7 +719,9 @@ const IMAGES = {
   "line-flow-2": "images/cs01-flow-03-absence-2.png",    // Screen 3: Absence — confirm & submit
   "line-flow-3": "images/cs01-flow-04-makeup-1.png",     // Screen 4: Makeup — browse available slots
   "line-flow-4": "images/cs01-flow-05-makeup-2.png",     // Screen 5: Makeup — confirm booking
-  "line-automation-2":       "images/cs01-step03-outcome.png",
+  // LINE Automation — Step 03 "Outcome" carousel (Before/After)
+  "line-automation-2-before": "images/cs01-step03-before.png", // Before: the old manual outcome (e.g. slow, error-prone confirmations)
+  "line-automation-2-after":  "images/cs01-step03-after.png",  // After: the result — 90% adoption, near-instant confirmation
   "churn-study-0":           "images/cs02-step01-problem.png",
   "churn-study-1":           "images/cs02-step02-process.png",
   "churn-study-2":           "images/cs02-step03-outcome.png",
@@ -1059,12 +1067,7 @@ function flowDiagramHTML(){
   </p>`;
 }
 
-function carouselHTML(studyId){
-  const slides = [
-    { key: `${studyId}-0-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — the 9-step email process", captionJA:"導入前 — 9段階のメール対応" },
-    { key: `${studyId}-0-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — the LINE scheduling interface", captionJA:"導入後 — LINEスケジュールインターフェース" },
-    { key: `${studyId}-0-flow`,   badge:"flow",   badgeEN:"User Flow", badgeJA:"ユーザーフロー", captionEN:"User flow — how the automation connects", captionJA:"ユーザーフロー — 自動化の接続図" },
-  ];
+function carouselHTML(carouselId, slides){
   const captions = slides.map(s=> LANG==='ja' ? s.captionJA : s.captionEN);
   const slidesHTML = slides.map(s=>{
     const src = imgSrc(s.key);
@@ -1076,18 +1079,18 @@ function carouselHTML(studyId){
     return `<div class="ba-slide"><span class="ba-badge ${s.badge}">${badgeLabel}</span>${inner}</div>`;
   }).join("");
   return `
-  <div class="ba-carousel" id="carousel-${studyId}">
-    <div class="ba-slides" id="slides-${studyId}">${slidesHTML}</div>
-    <button class="ba-arrow prev" onclick="carouselMove('${studyId}',-1)">&#8249;</button>
-    <button class="ba-arrow next" onclick="carouselMove('${studyId}',1)">&#8250;</button>
-    <button class="ba-enlarge" title="Enlarge" onclick="openLightbox('${studyId}')">⤢</button>
+  <div class="ba-carousel" id="carousel-${carouselId}">
+    <div class="ba-slides" id="slides-${carouselId}">${slidesHTML}</div>
+    <button class="ba-arrow prev" onclick="carouselMove('${carouselId}',-1)">&#8249;</button>
+    <button class="ba-arrow next" onclick="carouselMove('${carouselId}',1)">&#8250;</button>
+    <button class="ba-enlarge" title="Enlarge" onclick="openLightbox('${carouselId}')">⤢</button>
     <div class="ba-nav">
-      ${slides.map((_,i)=>`<button class="ba-dot ${i===0?'active':''}" onclick="carouselGo('${studyId}',${i})"></button>`).join("")}
+      ${slides.map((_,i)=>`<button class="ba-dot ${i===0?'active':''}" onclick="carouselGo('${carouselId}',${i})"></button>`).join("")}
     </div>
   </div>
-  <div class="ba-caption" id="caption-${studyId}">${captions[0]}</div>
-  <script type="application/json" id="captions-data-${studyId}">${JSON.stringify(captions)}<\/script>
-  <script type="application/json" id="srcs-data-${studyId}">${JSON.stringify(slides.map(s=>imgSrc(s.key)||''))}<\/script>`;
+  <div class="ba-caption" id="caption-${carouselId}">${captions[0]}</div>
+  <script type="application/json" id="captions-data-${carouselId}">${JSON.stringify(captions)}<\/script>
+  <script type="application/json" id="srcs-data-${carouselId}">${JSON.stringify(slides.map(s=>imgSrc(s.key)||''))}<\/script>`;
 }
 
 function carouselMove(id, dir){
@@ -1116,13 +1119,24 @@ function openStudy(id){
   document.getElementById("study-title").textContent = cs.title[LANG];
   document.getElementById("study-tags").innerHTML = `<span>${cs.type[LANG]}</span><span>${cs.loc}</span>`;
   document.getElementById("study-body").innerHTML = cs.steps.map((s,i)=>{
-    // LINE automation step 0 gets the carousel
-    const isCarousel = (id === "line-automation" && i === 0);
+    // LINE automation step 0 gets the Before/After/Flow carousel
+    const isProblemCarousel = (id === "line-automation" && i === 0);
     // LINE automation step 1 gets the flow diagram appended below the text
     const hasFlowDiagram = (id === "line-automation" && i === 1);
+    // LINE automation step 2 (Outcome) gets a Before/After carousel
+    const isOutcomeCarousel = (id === "line-automation" && i === 2);
     let visualBlock;
-    if(isCarousel){
-      visualBlock = carouselHTML(id);
+    if(isProblemCarousel){
+      visualBlock = carouselHTML(`${id}-problem`, [
+        { key: `${id}-0-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — the 9-step email process", captionJA:"導入前 — 9段階のメール対応" },
+        { key: `${id}-0-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — the LINE scheduling interface", captionJA:"導入後 — LINEスケジュールインターフェース" },
+        { key: `${id}-0-flow`,   badge:"flow",   badgeEN:"User Flow", badgeJA:"ユーザーフロー", captionEN:"User flow — how the automation connects", captionJA:"ユーザーフロー — 自動化の接続図" },
+      ]);
+    } else if(isOutcomeCarousel){
+      visualBlock = carouselHTML(`${id}-outcome`, [
+        { key: `${id}-2-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — manual, slow, error-prone", captionJA:"導入前 — 手作業で遅く、ミスも多い", },
+        { key: `${id}-2-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — 90% adoption, under a minute", captionJA:"導入後 — 定着率90%、1分未満で完了", },
+      ]);
     } else if(hasFlowDiagram){
       // Process step (LINE automation, step 1) has no image —
       // the flow diagram below already illustrates this step visually.
