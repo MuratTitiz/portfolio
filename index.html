@@ -81,20 +81,29 @@
 
   ── CASE STUDY 04 — Prosper Academy (プロアカ) Curriculum ───
   images/cs04-step01-origin.png
-    A photo from the planning meeting or the initial brief,
-    or a photo of the civil servant / stakeholder session.
+    A visual representing the broader problem: yen depreciation,
+    changing work environments, or Japan's rising truancy numbers.
+    A chart, infographic, or relevant photo all work here.
 
   images/cs04-step02-build.png
-    A photo from the festival stall, the Mercari setup,
-    or the tour guide session.
+    A screenshot or photo representing the free curricula landscape —
+    e.g. a PDF worksheet from an existing provider, or a photo of
+    students looking disengaged with static materials.
 
   images/cs04-step03-setback.png
-    An abstract or neutral image representing a pivot moment.
-    Could be a photo of your notes or a planning document.
+    A photo or graphic representing the interactive, game-like
+    curriculum you built — simulation materials, event cards,
+    or a photo from a session in progress.
 
   images/cs04-step04-trial.png
-    A photo from the actual trial run — students at the
-    simulation table, or the Articulate Rise module on screen.
+    A photo from the actual festival stall — students running
+    the stand, the signs they made, or the products themselves
+    (Yo-Yo Tsuri, Katakiri, origami).
+
+  images/cs04-step05-results.png
+    THE FINALE IMAGE — the photo of students holding up the cash
+    they earned. This renders large as the closing visual, so use
+    the highest resolution version you have.
 
 =============================================================
 -->
@@ -251,6 +260,10 @@
     display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
     font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.4);text-align:center;padding:20px;cursor:zoom-in;transition:transform .2s,border-color .25s;}
   .visual:hover{border-color:var(--red);transform:translateY(-3px);}
+  .visual.finale{aspect-ratio:16/9;}
+  .story-block.finale-block{grid-template-columns:1fr;padding-top:2vh;}
+  .story-block.finale-block .visual{aspect-ratio:21/9;max-width:100%;}
+  .story-block.finale-block .text{text-align:center;max-width:640px;margin:0 auto;}
 
   /* USER FLOW DIAGRAM */
   .flow-diagram{width:100%;overflow-x:auto;padding:32px 0 20px;}
@@ -680,6 +693,7 @@ const IMAGES = {
   "lifehack-curriculum-1":   "images/cs04-step02-build.png",
   "lifehack-curriculum-2":   "images/cs04-step03-setback.png",
   "lifehack-curriculum-3":   "images/cs04-step04-trial.png",
+  "lifehack-curriculum-4":   "images/cs04-step05-results.png",
 };
 
 function imgSrc(key){
@@ -868,29 +882,35 @@ const CASE_STUDIES = [
           ja:["カリキュラム設計","体験学習","ステークホルダー管理","ファシリテーション設計"]},
     demoUrl:"https://murattitiz.github.io/articulaterise/",
     demoLabel:{en:"View Articulate Rise module ↗", ja:"Articulate Riseモジュールを見る ↗"},
-    summary:{en:"A civil servant brought us the idea, then had to step back. I took the curriculum from concept to a live test run with real students.",
-             ja:"地方公務員がアイデアを持ってきた。でも途中で退いた。概念から実際の生徒との試験運用まで、私が引き取って届けました。"},
+    summary:{en:"Japan's schools weren't built to prepare kids for an uncertain economy. So I built a financial curriculum that treats money and business as what they actually are to a child: a game with rules worth learning.",
+             ja:"日本の学校教育は、不確実な経済を生きる子どもたちへの備えとしては十分ではありません。そこで、お金やビジネスを子どもにとっての本質、つまり「ルールを学ぶ価値のあるゲーム」として扱う金融教育カリキュラムを構築しました。"},
     steps:[
-      {label:{en:"01 — Origin",ja:"01 — 始まり"},
-       title:{en:"A civil servant walked in with an idea",ja:"地方公務員から、ひとつのアイデアが持ち込まれた"},
-       body:{en:"A local civil servant approached the school wanting a financial literacy program for teenagers in the area, and became a stakeholder on the project rather than just a requester. This wasn't just an exercise designed on paper — it had to satisfy what a local government partner actually wanted delivered to real students in the community.",
-              ja:"地域の公務員から、地域の10代向けに金融リテラシープログラムをつくりたいという相談がありました。その方には単なる依頼者ではなく、プロジェクトのステークホルダーとして関わってもらいました。机上の企画ではなく、行政パートナーが地域の生徒に届けたい内容を、実際の学習体験として形にする必要がありました。"},
+      {label:{en:"01 — The problem",ja:"01 — 課題"},
+       title:{en:"A shrinking yen, a changing job market, and a school system leaving too many kids behind",ja:"円安、変わりゆく労働環境、そして多くの子どもを取り残す教育制度"},
+       body:{en:"Japan's yen has weakened dramatically against major currencies in recent years, quietly eroding the purchasing power of a generation that was never taught to think about that risk in the first place. At the same time, the traditional model of lifetime employment at one company is fading, replaced by a labour market that increasingly expects individuals to manage their own career and financial trajectory. Japan's traditional education system, built around standardised testing and rigid classroom structure, is struggling to prepare students for either of these shifts. The clearest evidence is the country's truancy numbers: as of the 2024 school year, a record 353,970 elementary and junior high school students were classified as futoko (non-attending) by Japan's Ministry of Education, the twelfth consecutive year of increase, with a further 67,782 in high school. Meanwhile, in countries like the United States, financial literacy has long been treated as a normal part of early childhood, from classroom economics units to the almost clichéd rite of passage of running a lemonade stand. Japan has no equivalent tradition, and the gap shows.",
+              ja:"日本円は近年、主要通貨に対して大幅に下落しており、そのリスクについて学ぶ機会がなかった世代の購買力を静かに蝕んでいます。同時に、一つの会社で勤め上げる終身雇用モデルは薄れつつあり、個人が自らキャリアと家計を管理することを前提とした労働市場へと変化しています。標準化されたテストと画一的な教室運営を前提とする日本の従来型教育制度は、こうした変化のいずれにも十分に対応できていません。その最も明確な証拠が不登校の数字です。文部科学省の調査によると、2024年度における小・中学生の不登校児童生徒数は353,970人と過去最多を記録し、12年連続で増加、高校生でも67,782人にのぼります。一方、アメリカなど海外では、レモネードスタンドの運営に代表されるように、幼少期から金融リテラシーを学ぶことがごく当たり前の教育として根付いています。日本にはこれに相当する伝統がなく、そのギャップは明らかです。"},
        reverse:false},
-      {label:{en:"02 — Building it",ja:"02 — 構築"},
-       title:{en:"Curriculum, recruiting, and clearing every real-world hurdle",ja:"カリキュラム設計から生徒募集、実施に必要な準備まで"},
-       body:{en:"With my staff, I built the curriculum from scratch: recruited the students, set the learning outcomes, and designed the learning experience. That meant getting a food hygiene certification so students could legally run a stall at a local festival, building a relationship with a tour guide for real service-industry experience, and setting up Mercari accounts so students could practice market research and pricing by actually selling things they owned.",
-              ja:"スタッフと共にカリキュラムをゼロから構築し、生徒募集、学習成果の設定、学習体験の設計までを行いました。さらに、地元フェスティバルで屋台を合法的に運営するための食品衛生資格の取得、ツアーガイドとの連携、メルカリアカウントの開設など、ステークホルダーの構想を実現するために必要な準備も進めました。"},
+      {label:{en:"02 — What already exists",ja:"02 — 既存の取り組み"},
+       title:{en:"Free curricula exist. Nobody measures whether they work.",ja:"無償の教材は存在する。しかし、効果を測定している例はほとんどない。"},
+       body:{en:"To be fair, Japan is not without financial education resources. The Financial Services Agency's J-FLEC (Japan Financial Literacy and Education Corporation) distributes free classroom materials nationally. The Japan FP Association publishes free booklets for schools. Japan Post Bank and Nomura Holdings both run their own free in-school financial education programs, and NVIC has partnered with the SENSEI Note teacher platform to distribute free high-school financial materials nationwide since 2022. The intention behind all of these is genuine. But in practice, at the schools where these materials were actually used, the format was almost always the same: a printed worksheet, a short instructional PDF, maybe a single 50-minute visit from a bank employee running a simulated trading game once a year. Students sat through them politely and forgot the content by the following week. None of these providers publish measured learning outcomes, engagement data, or behavioural follow-up. The materials exist. Proof that they change how a child thinks about money does not.",
+              ja:"公平を期すために言えば、日本にも金融教育の資源が存在しないわけではありません。金融庁所管のJ-FLEC（金融経済教育推進機構）は全国の学校に無償で教材を配布しています。日本FP協会も学校向けの無償小冊子を発行しています。ゆうちょ銀行や野村ホールディングスもそれぞれ独自の無償金融教育プログラムを学校向けに展開しており、NVICは2022年より「SENSEIノート」と提携し、高校向け金融教育教材を全国の教員に無償提供しています。いずれも意図は真摯なものです。しかし実際にこれらの教材が使われた学校では、そのフォーマットはほぼ共通していました。印刷されたワークシート、短い解説PDF、年に一度、銀行員が来校して行う50分程度の模擬売買ゲーム。生徒たちは行儀よく座って聞き、翌週には内容を忘れてしまいます。これらの提供元のいずれも、学習成果や engagement データ、行動面の追跡調査を公表していません。教材は存在します。しかし、それが子どものお金に対する考え方を実際に変えたという証拠は存在しないのです。"},
        reverse:true},
-      {label:{en:"03 — The setback",ja:"03 — 想定外の出来事"},
-       title:{en:"The stakeholder had to step back — I took over delivery",ja:"ステークホルダーが離脱。私が実施を引き継いだ。"},
-       body:{en:"Partway through, the civil servant who initiated the project had to withdraw for health reasons. Rather than shelve the plan, I took over full delivery myself — running the test sessions and carrying the curriculum through to the students it was built for.",
-              ja:"途中で、プロジェクトを立ち上げた公務員が健康上の理由で離れることになりました。計画を棚上げにするのではなく、私が実施を全面的に引き継ぎ、テストセッションを行いながら、生徒に届けるところまで進めました。"},
+      {label:{en:"03 — Finance and business are games, and kids are good at games",ja:"03 — お金とビジネスはゲームであり、子どもはゲームが得意だ"},
+       title:{en:"So I built a curriculum designed to be played, not read",ja:"だから、「読む」ためではなく「遊ぶ」ためのカリキュラムをつくった"},
+       body:{en:"Every existing free resource treated financial literacy as content to be delivered. I treated it as a system to be played. Finance and business are, at their core, games: they have rules, feedback loops, risk, strategy, and a clear way to keep score. Children are extraordinarily good at learning exactly that kind of system, far better than they are at absorbing a lecture about compound interest. So instead of worksheets, I designed interactive simulations: a supermarket trading exercise where teams manage a starting capital against live event cards, a time-travel e-learning module (built in Articulate Rise) that lets students discover inflation themselves by comparing a ¥10,000 grocery basket in 2020 against the same basket in 2026, and a full trading-floor simulation built on Chi and Wylie's ICAP framework, with individual and group decision phases and a facilitator script for handling dominant personalities and group deadlock. The goal in every version was the same: make the rules of money visible, make the consequences immediate, and let the kids realise they are playing a game they can actually learn to win.",
+              ja:"既存の無償教材はすべて、金融リテラシーを「伝えるべきコンテンツ」として扱っていました。私はそれを「プレイするシステム」として設計し直しました。お金やビジネスは、本質的にはゲームです。ルールがあり、フィードバックループがあり、リスクがあり、戦略があり、明確なスコアがあります。子どもはまさにこの種のシステムを学ぶことに驚くほど長けています。複利についての講義を聞くよりも、はるかに得意なのです。そこでワークシートの代わりに、インタラクティブなシミュレーションを設計しました。チームがリアルタイムのイベントカードに応じて元手を運用するスーパーマーケット取引シミュレーション、2020年の1万円分の買い物かごと2026年の同じ買い物かごを比較することでインフレを自ら発見できるタイムトラベル型eラーニングモジュール（Articulate Riseで制作）、そしてChiとWylieのICAPフレームワークに基づく本格的なトレーディングフロア・シミュレーション（個人フェーズとグループフェーズ、支配的な性格の生徒やグループの意見対立に対応するファシリテーター用スクリプト付き）です。すべてのバージョンに共通する目的は同じでした。お金のルールを可視化し、結果をすぐに実感できるようにし、子ども自身に「これは自分にも勝てるゲームなのだ」と気づかせることです。"},
        reverse:false},
-      {label:{en:"04 — First trial run",ja:"04 — 初回試験運用"},
-       title:{en:"A proof-of-concept with 9 students",ja:"9名の生徒を対象とした実証運用"},
-       body:{en:'The first run was a supermarket trading simulation with 9 students in 3 teams. Opening with "what would you do with ¥100,000 right now" surfaced a common misconception immediately — several students treated holding cash as risk-free. An e-learning module built in Articulate Rise (<a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" style="color:var(--red-deep);font-weight:600;">view the module ↗</a>) let them find that flaw themselves. All three teams grew their starting capital. Pre/post quiz: understanding that cash loses value over time went from 1/9 to 9/9.',
-              ja:'初回は3チーム3名ずつ、計9名のスーパーマーケット取引シミュレーション。「今¥100,000あったら何をする?」という問いかけで、現金を持ち続けることをリスクなしと考える誤解がすぐに浮かびました。Articulate Riseで制作したeラーニングモジュール（<a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" style="color:var(--red-deep);font-weight:600;">モジュールを見る ↗</a>）で生徒自身に発見させました。事前・事後テストでは、「現金が価値を失う」理解が1/9から9/9に向上。'},
-       reverse:true}
+      {label:{en:"04 — Taking it into the real world",ja:"04 — 実社会へ踏み出す"},
+       title:{en:"From simulation to an actual festival stall in Florida, USA",ja:"シミュレーションから、米国フロリダ州の実際の屋台出店へ"},
+       body:{en:"Simulations can only go so far, so the program's most advanced students were given a real business to run. We secured a food and retail hygiene certification so students could legally operate their own stall, and set up a live stand at a community festival in Florida, USA, selling Yo-Yo Tsuri (a traditional Japanese water yo-yo game), Katakiri (paper cutting art), and origami. The students planned the entire operation themselves: they set prices, forecasted demand, designed and hand-made their own signage, and managed the stall's cash box through a full day of actual customers. Separately, students also practised market research and pricing by listing and selling their own belongings on Mercari, turning an app most of them already used casually into a structured lesson on supply, demand, and negotiation.",
+              ja:"シミュレーションだけでは限界があるため、プログラムの上級レベルの生徒には、実際に運営できる事業の機会を用意しました。生徒たちが自分たちの屋台を合法的に運営できるよう食品・小売の衛生資格を取得し、米国フロリダ州の地域フェスティバルにて、ヨーヨー釣り、切り絵、折り紙を販売する実際の屋台を出店しました。運営はすべて生徒自身が計画しました。価格設定、需要予測、看板のデザインと手作り、そして実際のお客様を相手にした1日を通じたレジ管理まで、すべてを自分たちで行いました。これとは別に、生徒たちはメルカリで自分の持ち物を出品・販売することで、市場調査と価格設定の練習も行いました。多くの生徒がすでに日常的に使っているアプリを、需要と供給、価格交渉を学ぶ構造化されたレッスンへと転換したのです。"},
+       reverse:true},
+      {label:{en:"05 — Results speak for themselves",ja:"05 — 結果がすべてを物語る"},
+       title:{en:"Results speak for themselves",ja:"結果がすべてを物語る"},
+       body:{en:"By the end of the day in Florida, the students had sold enough to earn more than $150 in real cash, money they priced, earned, and counted themselves. No worksheet score, no simulated leaderboard, no quiz result captures what happened next as well as this photo does: a group of kids who spent the day running an actual business, holding up what they made from it. This is what financial literacy looks like when it stops being a PDF and starts being real.",
+              ja:"フロリダでの1日の終わりには、生徒たちは自分たちで値付けし、稼ぎ、数えた150ドル以上の現金を手にしていました。ワークシートの点数も、シミュレーション上のランキングも、テストの結果も、この後に起きたことをこの一枚の写真ほど雄弁には物語りません。実際にビジネスを一日運営した子どもたちが、その成果を誇らしげに掲げている写真です。金融リテラシーがPDFであることをやめ、本物になった瞬間の姿です。"},
+       reverse:false,
+       finale:true}
     ]
   }
 ];
@@ -1127,6 +1147,7 @@ function openStudy(id){
     const isProblemCarousel = (id === "line-automation" && i === 0);
     const hasFlowDiagram = (id === "line-automation" && i === 1);
     const isOutcomeCarousel = (id === "line-automation" && i === 2);
+    const isFinale = !!s.finale;
     let visualBlock;
     if(isProblemCarousel){
       visualBlock = carouselHTML(`${id}-problem`, [
@@ -1148,8 +1169,23 @@ function openStudy(id){
       const visualInner = src
         ? `<img src="${src}" alt="${s.title.en}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" onerror="this.parentElement.innerHTML=placeholderHTML('Upload: ${filename}')">`
         : placeholderHTML(`Upload: ${filename}`);
-      visualBlock = `<div class="visual" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">${visualInner}</div>`;
+      visualBlock = `<div class="visual${isFinale?' finale':''}" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">${visualInner}</div>`;
     }
+
+    if(isFinale){
+      return `
+      <div class="story-block finale-block">
+        <div style="display:flex;flex-direction:column;gap:0;">
+          ${visualBlock}
+        </div>
+        <div class="text" style="margin-top:28px;">
+          <span class="step-label">${s.label[LANG]}</span>
+          <h3 style="font-size:2rem;">${s.title[LANG]}</h3>
+          <p>${s.body[LANG]}</p>
+        </div>
+      </div>`;
+    }
+
     return `
     <div class="story-block ${s.reverse?'reverse':''}" style="${visualBlock===null?'grid-template-columns:1fr;':''}">
       ${visualBlock===null ? '' : `<div style="display:flex;flex-direction:column;gap:0;">${visualBlock}</div>`}
