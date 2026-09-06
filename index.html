@@ -67,8 +67,14 @@
     screenshot of the Google Business Profile before/after.
 
   ── CASE STUDY 03 — Progress Tracking ──────────────────────
-  This case study is a single long explanation followed by a large
-  4-image carousel showing the system itself. Upload screenshots of:
+  Step 01 "Problem" is a normal side-by-side text+image step:
+
+  images/cs03-step01-problem.png
+    The constraint diagram — 8-minute gap, what fills it.
+    A simple timeline or whiteboard sketch works well.
+
+  Step 02 is a long explanation followed by a large 4-image
+  carousel showing the system itself. Upload screenshots of:
 
   images/cs03-carousel-01.png
     The QR code station / class check-in screen.
@@ -688,6 +694,7 @@ const IMAGES = {
   "churn-study-2":           "images/cs02-step03-outcome.png",
   "churn-study-3":           "images/cs02-step04-materials.png",
   "churn-study-4":           "images/cs02-step05-signal.png",
+  "kana-progress-tracking-0":"images/cs03-step01-problem.png",
   "kana-progress-tracking-carousel-0":"images/cs03-carousel-01.png",
   "kana-progress-tracking-carousel-1":"images/cs03-carousel-02.png",
   "kana-progress-tracking-carousel-2":"images/cs03-carousel-03.png",
@@ -858,11 +865,16 @@ const CASE_STUDIES = [
     summary:{en:"A logging tool for teachers that had to survive three rebuilds before it actually got used.",
              ja:"実際に使われるまでに、3度の改善を重ねた講師向け記録ツール。"},
     steps:[
+      {label:{en:"01 — Problem",ja:"01 — 課題"},
+       title:{en:"Everyone had an opinion. Nobody had data.",ja:"誰もが意見を持っていた。でも、それを裏付けるデータがなかった。"},
+       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint: teachers get about 8 minutes between classes, already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used.",
+              ja:"生徒の様子について教師と保護者の認識が食い違うことが多く、それを裏付ける記録もありませんでした。最大の制約は時間です。授業間の約8分は、保護者への声かけ、教室の片付け、次の生徒の迎え入れなどですでに埋まっています。1〜2分以上かかる仕組みでは、現場では定着しません。"},
+       reverse:false},
       {label:{en:"How it works",ja:"仕組み"},
        title:{en:"One system, built around the eight minutes teachers actually have",ja:"教師が実際に持つ「8分間」を前提に設計した、ひとつのシステム"},
-       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint shaping everything: teachers get about 8 minutes between classes, already spoken for by talking to parents on the way out, resetting the room, and greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used, no matter how good the idea was. Two earlier versions failed for exactly that reason, a Google Sheet with dropdown menus was miserable on a phone, and a web app with charts was better but still required teachers to manually hunt for the day's class. The version that finally stuck uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time of day, so there's nothing to search for and nothing to log in to. From there, the system does far more than just take attendance. Teachers rate each class as a whole and rate individual students within it, leaving short comments tied directly to specific lessons rather than vague end-of-term notes. Every one of these data points is saved to Supabase in real time and rolled up into charts and trend lines the school can actually read at a glance, rather than numbers buried in a spreadsheet nobody opens. On top of that, the system calculates a running health score for each student, an early-warning signal built from attendance patterns, behavioural notes, and recurring issues flagged in class, so a student quietly drifting off track shows up before it becomes a crisis rather than after. When a parent conversation comes up, staff aren't relying on memory or digging through old emails, they open the student's profile and see the key comments, the health trend, and recent test scores all in one place, ready to reference in the moment. The tool now sits at near-100% adoption, every class gets logged within 36 hours of the lesson, and teachers spend roughly five minutes total across an entire day making it happen.",
-              ja:"生徒の様子について教師と保護者の認識が食い違うことが多く、それを裏付ける記録もありませんでした。すべての設計を左右した最大の制約は時間です。授業間の約8分は、保護者への声かけ、教室の片付け、次の生徒の迎え入れなどですでに埋まっています。1〜2分以上かかる仕組みは、どれほど良いアイデアでも現場では定着しません。実際、過去に試した2つのバージョンはまさにこの理由で失敗しました。ドロップダウン付きのGoogleスプレッドシートはスマートフォンでは使いにくく、グラフ付きのウェブアプリも改善はしたものの、教師が毎回その日のクラスを手動で探す必要がありました。最終的に定着したのは、各教室のステーションにあるQRコードを読み込むと、時刻から「現在のクラス」を自動判定して開くシステムです。何かを探す必要も、ログインする必要もありません。ここから、このシステムは単なる出席管理をはるかに超えた機能を持ちます。教師はクラス全体を評価し、クラス内の個々の生徒も評価し、学期末の曖昧なコメントではなく、特定のレッスンに直結した短いコメントを残します。これらのデータはすべてSupabaseにリアルタイムで保存され、誰も開かないスプレッドシートに埋もれるのではなく、学校が一目で読み取れるグラフやトレンドとして集約されます。さらに、このシステムは各生徒の「健康スコア」を継続的に算出します。出席パターン、行動面のメモ、授業で繰り返し指摘された問題点から構成される早期警戒シグナルであり、静かに軌道から外れつつある生徒を、問題が深刻化する前に可視化します。保護者との面談の際、スタッフは記憶や過去のメールを頼りにする必要はなく、生徒のプロフィールを開けば、重要なコメント、健康スコアの推移、直近のテスト結果がすべて一箇所にまとまっており、その場ですぐに参照できます。現在、このツールの利用率はほぼ100%に達しており、すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計でおよそ5分程度です。"},
-       reverse:false,
+       body:{en:"Two earlier versions failed for exactly that reason, a Google Sheet with dropdown menus was miserable on a phone, and a web app with charts was better but still required teachers to manually hunt for the day's class. The version that finally stuck uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time of day, so there's nothing to search for and nothing to log in to. From there, the system does far more than just take attendance. Teachers rate each class as a whole and rate individual students within it, leaving short comments tied directly to specific lessons rather than vague end-of-term notes. Every one of these data points is saved to Supabase in real time and rolled up into charts and trend lines the school can actually read at a glance, rather than numbers buried in a spreadsheet nobody opens. On top of that, the system calculates a running health score for each student, an early-warning signal built from attendance patterns, behavioural notes, and recurring issues flagged in class, so a student quietly drifting off track shows up before it becomes a crisis rather than after. When a parent conversation comes up, staff aren't relying on memory or digging through old emails, they open the student's profile and see the key comments, the health trend, and recent test scores all in one place, ready to reference in the moment. The tool now sits at near-100% adoption, every class gets logged within 36 hours of the lesson, and teachers spend roughly five minutes total across an entire day making it happen.",
+              ja:"過去に試した2つのバージョンはまさにこの理由で失敗しました。ドロップダウン付きのGoogleスプレッドシートはスマートフォンでは使いにくく、グラフ付きのウェブアプリも改善はしたものの、教師が毎回その日のクラスを手動で探す必要がありました。最終的に定着したのは、各教室のステーションにあるQRコードを読み込むと、時刻から「現在のクラス」を自動判定して開くシステムです。何かを探す必要も、ログインする必要もありません。ここから、このシステムは単なる出席管理をはるかに超えた機能を持ちます。教師はクラス全体を評価し、クラス内の個々の生徒も評価し、学期末の曖昧なコメントではなく、特定のレッスンに直結した短いコメントを残します。これらのデータはすべてSupabaseにリアルタイムで保存され、誰も開かないスプレッドシートに埋もれるのではなく、学校が一目で読み取れるグラフやトレンドとして集約されます。さらに、このシステムは各生徒の「健康スコア」を継続的に算出します。出席パターン、行動面のメモ、授業で繰り返し指摘された問題点から構成される早期警戒シグナルであり、静かに軌道から外れつつある生徒を、問題が深刻化する前に可視化します。保護者との面談の際、スタッフは記憶や過去のメールを頼りにする必要はなく、生徒のプロフィールを開けば、重要なコメント、健康スコアの推移、直近のテスト結果がすべて一箇所にまとまっており、その場ですぐに参照できます。現在、このツールの利用率はほぼ100%に達しており、すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計でおよそ5分程度です。"},
+       reverse:true,
        carousel:true}
     ]
   },
