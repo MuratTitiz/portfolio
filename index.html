@@ -624,12 +624,12 @@
           <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link">
             <span>LinkedIn</span><span>↗</span>
           </a>
-          <div class="contact-link resume-dropdown-wrap" id="resume-toggle" style="cursor:pointer;">
+          <div class="contact-link -dropdown-wrap" id="-toggle" style="cursor:pointer;">
             <span data-en="Résumé (PDF)" data-ja="履歴書（PDF）">Résumé (PDF)</span>
-            <span id="resume-arrow">↓</span>
+            <span id="-arrow">↓</span>
           </div>
-          <div class="resume-dropdown" id="resume-dropdown">
-            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option">
+          <div class="-dropdown" id="-dropdown">
+            <a href="Murat_Titiz_Resume2026_EN.pdf" target="_blank" class="resume-option">
               <span data-en="🇬🇧 English" data-ja="🇬🇧 英語版">🇬🇧 English</span><span>↗</span>
             </a>
             <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option">
@@ -1278,7 +1278,7 @@ document.body.addEventListener("click",e=>{
   }
 });
 
-document.getElementById("resume-toggle").addEventListener("click",()=>{
+document.getElementById("-toggle").addEventListener("click",()=>{
   const dd = document.getElementById("resume-dropdown");
   const arrow = document.getElementById("resume-arrow");
   const open = dd.classList.toggle("open");
