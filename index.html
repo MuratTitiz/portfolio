@@ -90,10 +90,8 @@
     e.g. a PDF worksheet from an existing provider, or a photo of
     students looking disengaged with static materials.
 
-  images/cs04-step03-setback.png
-    A photo or graphic representing the interactive, game-like
-    curriculum you built — simulation materials, event cards,
-    or a photo from a session in progress.
+  (Step 03 "Finance and business are games" has no image slot — this
+   step is text-only by design.)
 
   images/cs04-step04-trial.png
     A photo from the actual festival stall — students running
@@ -691,7 +689,6 @@ const IMAGES = {
   "kana-progress-tracking-2":"images/cs03-step03-outcome.png",
   "lifehack-curriculum-0":   "images/cs04-step01-origin.png",
   "lifehack-curriculum-1":   "images/cs04-step02-build.png",
-  "lifehack-curriculum-2":   "images/cs04-step03-setback.png",
   "lifehack-curriculum-3":   "images/cs04-step04-trial.png",
   "lifehack-curriculum-4":   "images/cs04-step05-results.png",
 };
@@ -1160,7 +1157,7 @@ function openStudy(id){
         { key: `${id}-2-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — manual, slow, error-prone", captionJA:"導入前 — 手作業で時間がかかり、ミスも発生", },
         { key: `${id}-2-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — 90% adoption, under a minute", captionJA:"導入後 — 利用率90%、1分未満で完了", },
       ]);
-    } else if(hasFlowDiagram){
+    } else if(hasFlowDiagram || (id === "lifehack-curriculum" && i === 2)){
       visualBlock = null;
     } else {
       const imgKey = `${id}-${i}`;
