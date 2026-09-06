@@ -67,17 +67,21 @@
     screenshot of the Google Business Profile before/after.
 
   ── CASE STUDY 03 — Progress Tracking ──────────────────────
-  images/cs03-step01-problem.png
-    The constraint diagram — 8-minute gap, what fills it.
-    A simple timeline or whiteboard sketch works well.
+  This case study is a single long explanation followed by a large
+  4-image carousel showing the system itself. Upload screenshots of:
 
-  images/cs03-step02-process.png
-    Screenshot of the QR code station setup, or the Supabase
-    dashboard showing real-time logging.
+  images/cs03-carousel-01.png
+    The QR code station / class check-in screen.
 
-  images/cs03-step03-outcome.png
-    A screenshot of the completed data — class logs, the
-    engagement dip for kindergarten/high school classes.
+  images/cs03-carousel-02.png
+    The teacher's class + student rating and comment interface.
+
+  images/cs03-carousel-03.png
+    The charts/graphs dashboard showing trends over time.
+
+  images/cs03-carousel-04.png
+    A student profile view — health score, comments, and test
+    scores together, the "at a glance" view used in parent talks.
 
   ── CASE STUDY 04 — Prosper Academy (プロアカ) Curriculum ───
   images/cs04-step01-origin.png
@@ -624,13 +628,13 @@
           <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link">
             <span>LinkedIn</span><span>↗</span>
           </a>
-          <div class="contact-link -dropdown-wrap" id="-toggle" style="cursor:pointer;">
+          <div class="contact-link resume-dropdown-wrap" id="resume-toggle" style="cursor:pointer;">
             <span data-en="Résumé (PDF)" data-ja="履歴書（PDF）">Résumé (PDF)</span>
-            <span id="-arrow">↓</span>
+            <span id="resume-arrow">↓</span>
           </div>
-          <div class="-dropdown" id="-dropdown">
-            <a href="Murat_Titiz_Resume2026_EN.pdf" target="_blank" class="resume-option">
-              <span data-en="🇺🇸 English" data-ja="🇺🇸 英語版">🇬🇧 English</span><span>↗</span>
+          <div class="resume-dropdown" id="resume-dropdown">
+            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option">
+              <span data-en="🇬🇧 English" data-ja="🇬🇧 英語版">🇬🇧 English</span><span>↗</span>
             </a>
             <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option">
               <span data-en="🇯🇵 日本語" data-ja="🇯🇵 日本語版">🇯🇵 日本語</span><span>↗</span>
@@ -684,9 +688,10 @@ const IMAGES = {
   "churn-study-2":           "images/cs02-step03-outcome.png",
   "churn-study-3":           "images/cs02-step04-materials.png",
   "churn-study-4":           "images/cs02-step05-signal.png",
-  "kana-progress-tracking-0":"images/cs03-step01-problem.png",
-  "kana-progress-tracking-1":"images/cs03-step02-process.png",
-  "kana-progress-tracking-2":"images/cs03-step03-outcome.png",
+  "kana-progress-tracking-carousel-0":"images/cs03-carousel-01.png",
+  "kana-progress-tracking-carousel-1":"images/cs03-carousel-02.png",
+  "kana-progress-tracking-carousel-2":"images/cs03-carousel-03.png",
+  "kana-progress-tracking-carousel-3":"images/cs03-carousel-04.png",
   "lifehack-curriculum-0":   "images/cs04-step01-origin.png",
   "lifehack-curriculum-1":   "images/cs04-step02-build.png",
   "lifehack-curriculum-3":   "images/cs04-step04-trial.png",
@@ -853,21 +858,12 @@ const CASE_STUDIES = [
     summary:{en:"A logging tool for teachers that had to survive three rebuilds before it actually got used.",
              ja:"実際に使われるまでに、3度の改善を重ねた講師向け記録ツール。"},
     steps:[
-      {label:{en:"01 — Problem",ja:"01 — 課題"},
-       title:{en:"Everyone had an opinion. Nobody had data.",ja:"誰もが意見を持っていた。でも、それを裏付けるデータがなかった。"},
-       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint: teachers get about 8 minutes between classes, already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used.",
-              ja:"生徒の様子について教師と保護者の認識が食い違うことが多く、それを裏付ける記録もありませんでした。最大の制約は時間です。授業間の約8分は、保護者への声かけ、教室の片付け、次の生徒の迎え入れなどですでに埋まっています。1〜2分以上かかる仕組みでは、現場では定着しません。"},
-       reverse:false},
-      {label:{en:"02 — Process",ja:"02 — プロセス"},
-       title:{en:"Two failed versions before this one stuck",ja:"2度の改善を経て、ようやく定着"},
-       body:{en:"The first attempt was a Google Sheet with dropdown menus — miserable on a phone. The second was a web app with charts — better, but teachers still had to find the day's class manually, and usage dropped once the novelty wore off. The version that finally worked uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by time. Everything saves to Supabase in real time, and it only asks teachers to log students who stood out — not a full roll call every time.",
-              ja:"最初はドロップダウン付きのGoogleスプレッドシートを試しましたが、スマートフォンでは使いにくいものでした。次にグラフ付きのウェブアプリを作りましたが、教師が毎回その日のクラスを手動で探す必要があり、目新しさがなくなると利用率が下がりました。最終的に定着したのは、各教室のステーションにあるQRコードを読み込むと、時刻から「現在のクラス」を自動判定して開くシステムです。データはSupabaseにリアルタイムで保存し、「特に気になった生徒だけを記録する」方式にすることで、入力負荷を最小限にしました。"},
-       reverse:true},
-      {label:{en:"03 — Outcome",ja:"03 — 成果"},
-       title:{en:"Near-100% adoption, all classes logged within 36 hours",ja:"利用率ほぼ100%、全クラスを36時間以内に記録"},
-       body:{en:"The tool is now at close to full adoption — every class gets logged within 36 hours of the lesson, and teachers spend maybe 5 minutes total across an entire day. The data surfaced something nobody had noticed: engagement consistently dropped for kindergarten classes and for high schoolers, giving management something concrete to bring into parent conversations instead of relying on whoever happened to remember what.",
-              ja:"現在の利用率はほぼ100%。すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計5分程度です。データからは、幼稚園生と高校生のクラスでエンゲージメントが継続的に低下する傾向も明らかになりました。これにより、管理側は具体的なデータをもとに保護者と話せるようになりました。"},
-       reverse:false}
+      {label:{en:"How it works",ja:"仕組み"},
+       title:{en:"One system, built around the eight minutes teachers actually have",ja:"教師が実際に持つ「8分間」を前提に設計した、ひとつのシステム"},
+       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint shaping everything: teachers get about 8 minutes between classes, already spoken for by talking to parents on the way out, resetting the room, and greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used, no matter how good the idea was. Two earlier versions failed for exactly that reason, a Google Sheet with dropdown menus was miserable on a phone, and a web app with charts was better but still required teachers to manually hunt for the day's class. The version that finally stuck uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time of day, so there's nothing to search for and nothing to log in to. From there, the system does far more than just take attendance. Teachers rate each class as a whole and rate individual students within it, leaving short comments tied directly to specific lessons rather than vague end-of-term notes. Every one of these data points is saved to Supabase in real time and rolled up into charts and trend lines the school can actually read at a glance, rather than numbers buried in a spreadsheet nobody opens. On top of that, the system calculates a running health score for each student, an early-warning signal built from attendance patterns, behavioural notes, and recurring issues flagged in class, so a student quietly drifting off track shows up before it becomes a crisis rather than after. When a parent conversation comes up, staff aren't relying on memory or digging through old emails, they open the student's profile and see the key comments, the health trend, and recent test scores all in one place, ready to reference in the moment. The tool now sits at near-100% adoption, every class gets logged within 36 hours of the lesson, and teachers spend roughly five minutes total across an entire day making it happen.",
+              ja:"生徒の様子について教師と保護者の認識が食い違うことが多く、それを裏付ける記録もありませんでした。すべての設計を左右した最大の制約は時間です。授業間の約8分は、保護者への声かけ、教室の片付け、次の生徒の迎え入れなどですでに埋まっています。1〜2分以上かかる仕組みは、どれほど良いアイデアでも現場では定着しません。実際、過去に試した2つのバージョンはまさにこの理由で失敗しました。ドロップダウン付きのGoogleスプレッドシートはスマートフォンでは使いにくく、グラフ付きのウェブアプリも改善はしたものの、教師が毎回その日のクラスを手動で探す必要がありました。最終的に定着したのは、各教室のステーションにあるQRコードを読み込むと、時刻から「現在のクラス」を自動判定して開くシステムです。何かを探す必要も、ログインする必要もありません。ここから、このシステムは単なる出席管理をはるかに超えた機能を持ちます。教師はクラス全体を評価し、クラス内の個々の生徒も評価し、学期末の曖昧なコメントではなく、特定のレッスンに直結した短いコメントを残します。これらのデータはすべてSupabaseにリアルタイムで保存され、誰も開かないスプレッドシートに埋もれるのではなく、学校が一目で読み取れるグラフやトレンドとして集約されます。さらに、このシステムは各生徒の「健康スコア」を継続的に算出します。出席パターン、行動面のメモ、授業で繰り返し指摘された問題点から構成される早期警戒シグナルであり、静かに軌道から外れつつある生徒を、問題が深刻化する前に可視化します。保護者との面談の際、スタッフは記憶や過去のメールを頼りにする必要はなく、生徒のプロフィールを開けば、重要なコメント、健康スコアの推移、直近のテスト結果がすべて一箇所にまとまっており、その場ですぐに参照できます。現在、このツールの利用率はほぼ100%に達しており、すべてのクラスがレッスンから36時間以内に記録され、教師の入力時間は1日合計でおよそ5分程度です。"},
+       reverse:false,
+       carousel:true}
     ]
   },
   {
@@ -888,7 +884,7 @@ const CASE_STUDIES = [
               ja:"日本円は近年、主要通貨に対して大幅に下落しており、そのリスクについて学ぶ機会がなかった世代の購買力を静かに蝕んでいます。同時に、一つの会社で勤め上げる終身雇用モデルは薄れつつあり、個人が自らキャリアと家計を管理することを前提とした労働市場へと変化しています。標準化されたテストと画一的な教室運営を前提とする日本の従来型教育制度は、こうした変化のいずれにも十分に対応できていません。その最も明確な証拠が不登校の数字です。文部科学省の調査によると、2024年度における小・中学生の不登校児童生徒数は353,970人と過去最多を記録し、12年連続で増加、高校生でも67,782人にのぼります。一方、アメリカなど海外では、レモネードスタンドの運営に代表されるように、幼少期から金融リテラシーを学ぶことがごく当たり前の教育として根付いています。日本にはこれに相当する伝統がなく、そのギャップは明らかです。"},
        reverse:false},
       {label:{en:"02 — What already exists",ja:"02 — 既存の取り組み"},
-       title:{en:"Free curricula exist. And they're boring without any results.",ja:"無償の教材は存在する。しかし、つまらなくて、効果を測定している例はほとんどない。"},
+       title:{en:"Free curricula exist. Nobody measures whether they work.",ja:"無償の教材は存在する。しかし、効果を測定している例はほとんどない。"},
        body:{en:"To be fair, Japan is not without financial education resources. The Financial Services Agency's J-FLEC (Japan Financial Literacy and Education Corporation) distributes free classroom materials nationally. The Japan FP Association publishes free booklets for schools. Japan Post Bank and Nomura Holdings both run their own free in-school financial education programs, and NVIC has partnered with the SENSEI Note teacher platform to distribute free high-school financial materials nationwide since 2022. The intention behind all of these is genuine. But in practice, at the schools where these materials were actually used, the format was almost always the same: a printed worksheet, a short instructional PDF, maybe a single 50-minute visit from a bank employee running a simulated trading game once a year. Students sat through them politely and forgot the content by the following week. None of these providers publish measured learning outcomes, engagement data, or behavioural follow-up. The materials exist. Proof that they change how a child thinks about money does not.",
               ja:"公平を期すために言えば、日本にも金融教育の資源が存在しないわけではありません。金融庁所管のJ-FLEC（金融経済教育推進機構）は全国の学校に無償で教材を配布しています。日本FP協会も学校向けの無償小冊子を発行しています。ゆうちょ銀行や野村ホールディングスもそれぞれ独自の無償金融教育プログラムを学校向けに展開しており、NVICは2022年より「SENSEIノート」と提携し、高校向け金融教育教材を全国の教員に無償提供しています。いずれも意図は真摯なものです。しかし実際にこれらの教材が使われた学校では、そのフォーマットはほぼ共通していました。印刷されたワークシート、短い解説PDF、年に一度、銀行員が来校して行う50分程度の模擬売買ゲーム。生徒たちは行儀よく座って聞き、翌週には内容を忘れてしまいます。これらの提供元のいずれも、学習成果や engagement データ、行動面の追跡調査を公表していません。教材は存在します。しかし、それが子どものお金に対する考え方を実際に変えたという証拠は存在しないのです。"},
        reverse:true},
@@ -1145,6 +1141,7 @@ function openStudy(id){
     const hasFlowDiagram = (id === "line-automation" && i === 1);
     const isOutcomeCarousel = (id === "line-automation" && i === 2);
     const isFinale = !!s.finale;
+    const hasBigCarousel = !!s.carousel;
     let visualBlock;
     if(isProblemCarousel){
       visualBlock = carouselHTML(`${id}-problem`, [
@@ -1157,7 +1154,7 @@ function openStudy(id){
         { key: `${id}-2-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — manual, slow, error-prone", captionJA:"導入前 — 手作業で時間がかかり、ミスも発生", },
         { key: `${id}-2-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — 90% adoption, under a minute", captionJA:"導入後 — 利用率90%、1分未満で完了", },
       ]);
-    } else if(hasFlowDiagram || (id === "lifehack-curriculum" && i === 2)){
+    } else if(hasFlowDiagram || (id === "lifehack-curriculum" && i === 2) || hasBigCarousel){
       visualBlock = null;
     } else {
       const imgKey = `${id}-${i}`;
@@ -1192,7 +1189,13 @@ function openStudy(id){
         <p>${s.body[LANG]}</p>
       </div>
     </div>
-    ${hasFlowDiagram ? `<div style="padding:0 5.5vw 2vh;">${flowDiagramHTML()}</div>` : ''}`;
+    ${hasFlowDiagram ? `<div style="padding:0 5.5vw 2vh;">${flowDiagramHTML()}</div>` : ''}
+    ${hasBigCarousel ? `<div style="padding:0 5.5vw 6vh;max-width:1100px;margin:0 auto;">${carouselHTML(`${id}-system`, [
+        { key: `${id}-carousel-0`, badge:"", badgeEN:"1", badgeJA:"1", captionEN:"QR check-in — opens the current class automatically", captionJA:"QRチェックイン — 現在のクラスを自動で開く" },
+        { key: `${id}-carousel-1`, badge:"", badgeEN:"2", badgeJA:"2", captionEN:"Rating & comments — class and student level", captionJA:"評価とコメント — クラス単位・生徒単位" },
+        { key: `${id}-carousel-2`, badge:"", badgeEN:"3", badgeJA:"3", captionEN:"Charts & trends — data the school can actually read", captionJA:"グラフとトレンド — 学校が実際に読み取れるデータ" },
+        { key: `${id}-carousel-3`, badge:"", badgeEN:"4", badgeJA:"4", captionEN:"Student profile — health score, comments, and scores at a glance", captionJA:"生徒プロフィール — 健康スコア、コメント、成績を一目で" },
+      ])}</div>` : ''}`;
 
   }).join("");
   showView("study"); window.scrollTo({top:0});
@@ -1278,7 +1281,7 @@ document.body.addEventListener("click",e=>{
   }
 });
 
-document.getElementById("-toggle").addEventListener("click",()=>{
+document.getElementById("resume-toggle").addEventListener("click",()=>{
   const dd = document.getElementById("resume-dropdown");
   const arrow = document.getElementById("resume-arrow");
   const open = dd.classList.toggle("open");
