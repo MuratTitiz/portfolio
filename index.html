@@ -176,6 +176,19 @@
   .hero-photo img{width:100%;height:100%;object-fit:cover;}
   @media(max-width:760px){.hero-row{grid-template-columns:1fr;}.hero-photo{max-width:260px;margin:0 auto;}}
 
+  /* AT A GLANCE — clickable highlight cards */
+  .glance-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .glance-card{background:var(--white);border-radius:20px;padding:22px 24px;border:1px solid var(--line);
+    cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;text-align:left;position:relative;}
+  .glance-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(36,27,20,0.09);border-color:transparent;}
+  .glance-card .glance-headline{font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--ink);
+    margin:0 0 8px;line-height:1.35;letter-spacing:-0.005em;}
+  .glance-card .glance-body{font-size:0.86rem;color:rgba(36,27,20,0.62);line-height:1.55;margin:0 0 14px;}
+  .glance-card .glance-link{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--red-deep);display:inline-flex;align-items:center;gap:6px;font-weight:600;}
+  .glance-card .glance-link .arrow{transition:transform .2s;}
+  .glance-card:hover .glance-link .arrow{transform:translateX(4px);}
+
   .stats-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
   .stat-card{background:var(--white);border-radius:18px;padding:20px 22px;border:1px solid var(--line);transition:transform .2s;}
   .stat-card:hover{transform:translateY(-3px);}
@@ -436,62 +449,7 @@
 
     <section>
       <span class="index-no" data-en="📊 At a glance" data-ja="📊 実績サマリー">📊 At a glance</span>
-      <div class="stats-wrap">
-        <div class="stat-card">
-          <div class="num">150+</div>
-          <div class="label"
-            data-en="Students across 100+ families — the school where all four case studies were built"
-            data-ja="生徒数150名以上・100家庭以上。4つのケーススタディはすべてここから生まれました">
-            Students across 100+ families — the school where all four case studies were built
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="num">~100%</div>
-          <div class="label"
-            data-en="Staff adoption of an in-house lesson tracking tool, built and iterated from scratch"
-            data-ja="自社開発の授業記録ツールのスタッフ定着率（ゼロから設計・改善）">
-            Staff adoption of an in-house lesson tracking tool, built and iterated from scratch
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="num">90%</div>
-          <div class="label"
-            data-en="Parent adoption of a custom LINE communication system for scheduling and support"
-            data-ja="スケジュール管理・サポート用LINEシステムの保護者登録率">
-            Parent adoption of a custom LINE communication system for scheduling and support
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="num">87%</div>
-          <div class="label"
-            data-en="Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom"
-            data-ja="家庭学習を促す保護者参加プログラムの継続的な定着率">
-            Sustained engagement with a parent-involvement program designed to extend learning beyond the classroom
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="num">100+</div>
-          <div class="label"
-            data-en="Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide"
-            data-ja="制作した学習コンテンツ数（カリキュラム解説、オンボーディング資料、インストラクターガイドなど）">
-            Learning assets produced — curriculum explainers, onboarding materials, and a full instructor guide
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="num">5</div>
-          <div class="label"
-            data-en="Languages — Turkish, English, Japanese, Italian, basic Russian"
-            data-ja="言語 — トルコ語、英語、日本語、イタリア語、ロシア語（基礎）">
-            Languages — Turkish, English, Japanese, Italian, basic Russian
-          </div>
-        </div>
-        <div class="stat-card" style="grid-column:1/-1;">
-          <div class="num" style="font-size:1.05rem;line-height:1.6;letter-spacing:0;">
-            LINE LIFF &nbsp;·&nbsp; Make.com &nbsp;·&nbsp; Supabase &nbsp;·&nbsp; Google Workspace &nbsp;·&nbsp; Articulate Rise &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Google UX/UI Design &nbsp;·&nbsp; ABA Therapy
-          </div>
-          <div class="label" data-en="Tools &amp; certifications" data-ja="ツール・資格">Tools &amp; certifications</div>
-        </div>
-      </div>
+      <div class="glance-wrap" id="glance-wrap"></div>
     </section>
 
     <section>
@@ -692,32 +650,24 @@
 <script>
 // =============================================================
 //  GITHUB PAGES BASE URL
-//  Change this to your GitHub Pages URL, e.g.:
-//  "https://yourusername.github.io/yourrepo"
-//  Leave as empty string "" if index.html is at the root.
 // =============================================================
 const GITHUB_BASE = "";
 
 // =============================================================
 //  IMAGE MAP
-//  Keys match case study id + step index (0-based).
-//  Values are filenames inside your /images/ folder.
-//  Upload images to GitHub with these exact filenames.
 // =============================================================
 const IMAGES = {
   "hero":                    "images/hero.png",
-  // LINE Automation — Step 01 carousel (Before/After + Flow)
-  "line-automation-0-before":"images/cs01-step01-before.png",   // Before: old email chain / screenshot of the 9-step process
-  "line-automation-0-after": "images/cs01-step01-after.png",    // After:  the new LINE interface / LIFF screen
-  "line-automation-0-flow":  "images/cs01-step01-flowchart.png",// Flow:   user flow diagram / Make.com scenario map
-  "line-flow-0": "images/cs01-flow-01-menu.png",         // Screen 1: LINE main menu
-  "line-flow-1": "images/cs01-flow-02-absence-1.png",    // Screen 2: Absence — select student/date
-  "line-flow-2": "images/cs01-flow-03-absence-2.png",    // Screen 3: Absence — confirm & submit
-  "line-flow-3": "images/cs01-flow-04-makeup-1.png",     // Screen 4: Makeup — browse available slots
-  "line-flow-4": "images/cs01-flow-05-makeup-2.png",     // Screen 5: Makeup — confirm booking
-  // LINE Automation — Step 03 "Outcome" carousel (Before/After)
-  "line-automation-2-before": "images/cs01-step03-before.png", // Before: the old manual outcome (e.g. slow, error-prone confirmations)
-  "line-automation-2-after":  "images/cs01-step03-after.png",  // After: the result — 90% adoption, near-instant confirmation
+  "line-automation-0-before":"images/cs01-step01-before.png",
+  "line-automation-0-after": "images/cs01-step01-after.png",
+  "line-automation-0-flow":  "images/cs01-step01-flowchart.png",
+  "line-flow-0": "images/cs01-flow-01-menu.png",
+  "line-flow-1": "images/cs01-flow-02-absence-1.png",
+  "line-flow-2": "images/cs01-flow-03-absence-2.png",
+  "line-flow-3": "images/cs01-flow-04-makeup-1.png",
+  "line-flow-4": "images/cs01-flow-05-makeup-2.png",
+  "line-automation-2-before": "images/cs01-step03-before.png",
+  "line-automation-2-after":  "images/cs01-step03-after.png",
   "churn-study-0":           "images/cs02-step01-problem.png",
   "churn-study-1":           "images/cs02-step02-process.png",
   "churn-study-2":           "images/cs02-step03-outcome.png",
@@ -738,7 +688,6 @@ function imgSrc(key){
   return GITHUB_BASE ? GITHUB_BASE + "/" + path : path;
 }
 
-// Placeholder shown when an image hasn't been uploaded yet
 function placeholderHTML(label){
   return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:0.68rem;color:rgba(36,27,20,0.35);text-align:center;padding:16px;">
     <div style="font-size:1.6rem;">🖼</div>
@@ -748,6 +697,75 @@ function placeholderHTML(label){
 
 const TILE_COLORS = ["#D14B3F","#D99A4E","#A8281F","#E8866F","#5C8A6E"];
 let LANG = 'en';
+
+// =============================================================
+//  AT A GLANCE — clickable highlight cards, each linking to its
+//  related case study. Rephrased into professional, concise copy.
+// =============================================================
+const GLANCE_ITEMS = [
+  {
+    studyId: "churn-study",
+    headline: {
+      en: "Served thousands of students across 400+ families",
+      ja: "400家庭以上、数千人の生徒に対応"
+    },
+    body: {
+      en: "Worked closely with the learning journey of each individual student and family, not just the aggregate numbers.",
+      ja: "全体の数字だけでなく、一人ひとりの生徒と家庭の学びのプロセスに丁寧に向き合いました。"
+    }
+  },
+  {
+    studyId: "line-automation",
+    headline: {
+      en: "Built scheduling automation that saved hundreds of staff hours",
+      ja: "スタッフの作業時間を数百時間削減する予約自動化を構築"
+    },
+    body: {
+      en: "Designed and implemented a LINE LIFF and Make.com-based system that replaced manual scheduling entirely.",
+      ja: "LINE LIFFとMake.comを活用し、手作業でのスケジュール管理を完全に置き換えるシステムを設計・実装しました。"
+    }
+  },
+  {
+    studyId: "kana-progress-tracking",
+    headline: {
+      en: "Built a student progress tracking system",
+      ja: "生徒進捗管理システムを構築"
+    },
+    body: {
+      en: "Enabled staff to capture and reflect on real, structured student data through a fast, low-friction interface.",
+      ja: "スタッフが簡単かつ迅速なインターフェースを通じて、構造化された生徒データを記録・活用できる仕組みを実現しました。"
+    }
+  },
+  {
+    studyId: "lifehack-curriculum",
+    headline: {
+      en: "Built a financial curriculum with real-world outcomes",
+      ja: "実社会での成果につながる金融教育カリキュラムを構築"
+    },
+    body: {
+      en: "Elementary, middle, and high school students worked through simulations covering inflation, investment, and business planning, then ran an actual business, earning over $150 at a festival in Florida, USA.",
+      ja: "小中高生がインフレ、投資、事業計画をテーマにしたシミュレーションに取り組み、実際に事業を運営。米国フロリダ州のフェスティバルで150ドル以上を売り上げました。"
+    }
+  }
+];
+
+function glanceCardHTML(item){
+  const h = item.headline[LANG];
+  const b = item.body[LANG];
+  const linkText = LANG === 'ja' ? '関連する事例を見る' : 'View related case study';
+  return `<div class="glance-card reveal" data-study="${item.studyId}">
+    <div class="glance-headline">${h}</div>
+    <div class="glance-body">${b}</div>
+    <div class="glance-link">${linkText} <span class="arrow">→</span></div>
+  </div>`;
+}
+
+function renderGlance(){
+  const wrap = document.getElementById('glance-wrap');
+  if(!wrap) return;
+  wrap.innerHTML = GLANCE_ITEMS.map(glanceCardHTML).join("");
+  wrap.querySelectorAll(".glance-card").forEach(el=>observer.observe(el));
+}
 
 const CASE_STUDIES = [
   {
@@ -913,6 +931,7 @@ function renderTiles(){
   document.getElementById("home-tiles").innerHTML = all.join("");
   document.getElementById("work-tiles").innerHTML = all.join("");
   document.querySelectorAll(".tile").forEach(el=>observer.observe(el));
+  renderGlance();
 }
 renderTiles();
 
@@ -956,7 +975,6 @@ function flowDiagramHTML(){
   const arrowDiagR = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q78 12 81 48" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M75 42L81 50L87 42" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
   const arrowRight = `<svg width="32" height="20" viewBox="0 0 32 20" fill="none"><line x1="0" y1="10" x2="24" y2="10" stroke="rgba(209,75,63,0.45)" stroke-width="1.5"/><path d="M18 4L26 10L18 16" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 
-  // Annotation texts
   const ann = {
     menu_title:   isJA ? "保護者がLINEを開く" : "Parent opens LINE",
     menu_body:    isJA ? "いつも使っているアプリ。新しいログイン不要。" : "An app they already use. No new login required.",
@@ -1106,11 +1124,8 @@ function openStudy(id){
   document.getElementById("study-title").textContent = cs.title[LANG];
   document.getElementById("study-tags").innerHTML = `<span>${cs.type[LANG]}</span><span>${cs.loc}</span>`;
   document.getElementById("study-body").innerHTML = cs.steps.map((s,i)=>{
-    // LINE automation step 0 gets the Before/After/Flow carousel
     const isProblemCarousel = (id === "line-automation" && i === 0);
-    // LINE automation step 1 gets the flow diagram appended below the text
     const hasFlowDiagram = (id === "line-automation" && i === 1);
-    // LINE automation step 2 (Outcome) gets a Before/After carousel
     const isOutcomeCarousel = (id === "line-automation" && i === 2);
     let visualBlock;
     if(isProblemCarousel){
@@ -1125,8 +1140,6 @@ function openStudy(id){
         { key: `${id}-2-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — 90% adoption, under a minute", captionJA:"導入後 — 定着率90%、1分未満で完了", },
       ]);
     } else if(hasFlowDiagram){
-      // Process step (LINE automation, step 1) has no image —
-      // the flow diagram below already illustrates this step visually.
       visualBlock = null;
     } else {
       const imgKey = `${id}-${i}`;
@@ -1205,6 +1218,18 @@ document.body.addEventListener("click",e=>{
   }
 });
 
+// Glance cards navigate to their related case study
+document.body.addEventListener("click",e=>{
+  const card = e.target.closest(".glance-card");
+  if(card){
+    currentStudyId = card.getAttribute("data-study");
+    showView("work");
+    openStudy(currentStudyId);
+    document.getElementById('view-study').setAttribute('data-current', currentStudyId);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+});
+
 document.getElementById("menu-toggle").addEventListener("click",()=>{
   document.getElementById("main-nav").classList.toggle("open");
 });
@@ -1234,8 +1259,6 @@ function initReveal(){
 }
 // =============================================================
 //  UNIFIED ZOOMABLE LIGHTBOX ENGINE
-//  Handles both carousel images (flat) and flow phones (phone frame)
-//  Scroll/pinch = zoom · Drag = pan · Escape/✕ = close
 // =============================================================
 const zlb = {
   el: null, viewport: null, wrap: null,
@@ -1244,12 +1267,11 @@ const zlb = {
   caption: null, hint: null, zoomEl: null,
   navPrev: null, navNext: null, slideCounter: null,
   scale: 1, minScale: 0.5, maxScale: 12,
-  ox: 0, oy: 0,          // current translate (pan)
-  baseW: 0, baseH: 0,    // "fit to screen" size at scale=1, in real px
+  ox: 0, oy: 0,
+  baseW: 0, baseH: 0,
   dragging: false, lastX: 0, lastY: 0,
-  mode: 'flat',          // 'flat' | 'phone'
+  mode: 'flat',
 
-  // Carousel navigation state — only populated when opened from a carousel
   carouselId: null, srcs: [], captions: [], slideIndex: 0,
 
   init(){
@@ -1269,8 +1291,6 @@ const zlb = {
     this._bindEvents();
   },
 
-  // src/label kept for backward compatibility (phone mode, single images).
-  // carouselId + srcs + captions + startIndex enable next/prev navigation.
   open(src, label, mode, carouselId, srcs, captions, startIndex){
     this.mode = mode || 'flat';
     this.scale = 1; this.ox = 0; this.oy = 0;
@@ -1310,12 +1330,9 @@ const zlb = {
   },
 
   _goToSlide(){
-    // Reset zoom/pan on slide change — standard viewer behaviour
     this.scale = 1; this.ox = 0; this.oy = 0;
     this._updateNavVisibility();
     this._renderCurrentSlide(this.srcs[this.slideIndex] || '', this.captions[this.slideIndex] || '');
-    // Keep the underlying carousel in sync so it reflects the current
-    // slide when the lightbox is closed.
     if(typeof carouselGo === 'function'){
       try { carouselGo(this.carouselId, this.slideIndex); } catch(e){}
     }
@@ -1344,10 +1361,6 @@ const zlb = {
       this.phoneImg.src = '';
       if(src){
         this.ph.textContent = '';
-        // Load the image fresh so we know its true natural pixel size,
-        // then size it explicitly (not via CSS max-width) so zooming
-        // re-renders from the real source resolution instead of a
-        // pre-shrunk, blurry compositor layer.
         this.img.style.display = 'none';
         this.img.onload = ()=>{
           this._computeBaseSize();
@@ -1367,14 +1380,12 @@ const zlb = {
     this._applyTransform();
   },
 
-  // Work out the "fit to viewport" size in true pixels from the image's
-  // natural dimensions, so scale=1 always maps to real, unblurred pixels.
   _computeBaseSize(){
     const nw = this.img.naturalWidth  || 1600;
     const nh = this.img.naturalHeight || 900;
     const maxW = window.innerWidth  * 0.92;
     const maxH = window.innerHeight * 0.88;
-    const ratio = Math.min(maxW / nw, maxH / nh, 1); // never upscale past native at 1x
+    const ratio = Math.min(maxW / nw, maxH / nh, 1);
     this.baseW = Math.round(nw * ratio);
     this.baseH = Math.round(nh * ratio);
   },
@@ -1404,13 +1415,8 @@ const zlb = {
 
   _applyTransform(){
     if(this.mode === 'phone'){
-      // Phone frame is small and mostly UI chrome, not dense text —
-      // transform-scale is fine here and keeps the device frame crisp.
       this.phoneWrap.style.transform = `translate(${this.ox}px,${this.oy}px) scale(${this.scale})`;
     } else {
-      // Flat images: set real pixel width/height so the browser
-      // re-rasterizes from the full-resolution source on every zoom
-      // step, instead of scaling an already-shrunk layer.
       if(this.baseW && this.baseH){
         this.img.style.width  = (this.baseW * this.scale) + 'px';
         this.img.style.height = (this.baseH * this.scale) + 'px';
@@ -1421,7 +1427,6 @@ const zlb = {
   },
 
   _bindEvents(){
-    // Scroll to zoom
     this.viewport.addEventListener('wheel', e=>{
       if(!this.el.classList.contains('active')) return;
       e.preventDefault();
@@ -1429,7 +1434,6 @@ const zlb = {
       this.zoom(delta, e.clientX, e.clientY);
     }, { passive: false });
 
-    // Mouse drag to pan
     this.viewport.addEventListener('mousedown', e=>{
       if(e.button !== 0) return;
       this.dragging = true;
@@ -1448,12 +1452,10 @@ const zlb = {
       this.viewport.classList.remove('dragging');
     });
 
-    // Close on backdrop click
     this.el.addEventListener('click', e=>{
       if(e.target === this.el || e.target === this.viewport) this.close();
     });
 
-    // Touch pinch-to-zoom + drag + swipe-to-navigate (when not zoomed in)
     let lastDist = null, lastTX = null, lastTY = null;
     let touchStartX = null, touchStartY = null, touchTotalDX = 0, touchTotalDY = 0;
     this.viewport.addEventListener('touchstart', e=>{
@@ -1494,8 +1496,6 @@ const zlb = {
     }, { passive: false });
 
     this.viewport.addEventListener('touchend', ()=>{
-      // A clear horizontal swipe while not zoomed in navigates slides,
-      // even mid-zoom-gesture the pan itself still works as normal panning.
       const isSwipe = this.scale <= 1.05 && Math.abs(touchTotalDX) > 70 && Math.abs(touchTotalDY) < 50;
       if(isSwipe && this.mode === 'flat' && this.carouselId && this.srcs.length > 1){
         if(touchTotalDX < 0) this.nextSlide(); else this.prevSlide();
@@ -1510,7 +1510,6 @@ function zlbClose(){ zlb.close(); }
 function zlbZoom(d){ zlb.zoom(d); }
 function zlbReset(){ zlb.reset(); }
 
-// Called from carousel enlarge button
 function openLightbox(studyId){
   const dots = document.querySelectorAll(`#carousel-${studyId} .ba-dot`);
   const current = [...dots].findIndex(d=>d.classList.contains('active'));
@@ -1526,12 +1525,10 @@ function openLightbox(studyId){
 function zlbNextSlide(){ zlb.nextSlide(); }
 function zlbPrevSlide(){ zlb.prevSlide(); }
 
-// Called from flow phone taps
 function openFlowLightbox(src, label, filename){
   zlb.open(src || '', label || filename, 'phone');
 }
 
-// Deprecated stubs — kept so any stray calls don't throw
 function closeLightbox(){ zlb.close(); }
 function closeFlowLightbox(){ zlb.close(); }
 
@@ -1542,13 +1539,11 @@ document.addEventListener('keydown', e=>{
   if(e.key==='ArrowLeft') zlb.prevSlide();
 });
 document.addEventListener('DOMContentLoaded', ()=> zlb.init() );
-// Also init immediately in case DOMContentLoaded already fired
 if(document.readyState !== 'loading') zlb.init();
 
 function observeAll(){ document.querySelectorAll(".reveal").forEach(el=>observer.observe(el)); }
 observeAll(); initReveal();
 
-// Apply hero image
 (function(){
   const heroImg = document.getElementById("img-hero");
   const src = imgSrc("hero");
@@ -1566,12 +1561,10 @@ observeAll(); initReveal();
 <!-- UNIFIED ZOOMABLE LIGHTBOX -->
 <div id="zlb">
   <div id="zlb-viewport">
-    <!-- flat image mode (carousel) -->
     <div id="zlb-img-wrap">
       <img id="zlb-img" src="" alt="" style="display:none;">
       <div id="zlb-ph"></div>
     </div>
-    <!-- phone frame mode (flow) -->
     <div id="zlb-phone-wrap">
       <div id="zlb-phone-device">
         <div id="zlb-phone-screen">
