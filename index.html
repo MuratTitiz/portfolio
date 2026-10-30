@@ -18,11 +18,25 @@
   ── HOME PAGE ───────────────────────────────────────────────
   images/hero.png
     Your professional headshot or portrait.
-    Recommended: square crop, min 600×600px.
+    Recommended: square crop, min 600×600px. It is shown in a
+    rounded blob shape, so keep your face centred.
+
+  ── SITE STRUCTURE ──────────────────────────────────────────
+  The site is a job-search portfolio. Home has three "Start here"
+  cards (learning design / UX research / product & operations) that
+  open Work in the order that suits that role. Shareable links:
+    #work/learning   #work/research   #work/product
+    #case/<id>  e.g. #case/line-automation
+  Case study 05 (Cultural Training) is text only, no images needed.
+
+  images/thumb.png
+    Small round photo next to your name in the top bar.
+    Recommended: square, at least 120×120px, face centred.
+    Until it's uploaded, a smiley shows instead.
 
   ── FEATURED — Prosper Academy (プロアカ) ─────────────────
-  Prosper Academy is now the centrepiece. It appears as the
-  large featured block on Home and Work, and as case study 01.
+  Prosper Academy is the featured personal project. It appears as
+  the large featured block on Home and Work, and as case study 01.
 
   images/cs04-step01-origin.png
     A visual representing the broader problem: yen depreciation,
@@ -46,13 +60,13 @@
     on Home and Work, so use the highest resolution you have.
 
   ── OTHER WORK — LINE Automation ───────────────────────────
-  images/cs01-step01-before.png     (old 9-step email chain)
+  images/cs01-step01-before.png     (old 10-step email chain)
   images/cs01-step01-after.png      (new LINE/LIFF interface)
   images/cs01-step01-flowchart.png  (user flow / Make.com map)
   images/cs01-flow-01-menu.png … cs01-flow-05-makeup-2.png
                                     (phone screens in the flow)
   images/cs01-step03-before.png     (old manual result)
-  images/cs01-step03-after.png      (90% adoption / confirmation)
+  images/cs01-step03-after.png      (adoption / confirmation screen)
 
   ── OTHER WORK — Parent Retention ──────────────────────────
   images/cs02-step01-problem.png
@@ -74,226 +88,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Murat Mert Titiz — Prosper Academy &amp; Curriculum Design</title>
+<title>Murat Mert Titiz — Learning Experience Design &amp; UX Research</title>
+<meta name="description" content="Learning experience designer and UX researcher in Tokyo. Curriculum design, usability testing with children and adults, and tools people actually adopt.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --red:#D14B3F; --red-deep:#A8281F; --coral:#E8866F; --ochre:#D99A4E;
-    --cream:#FBF3E7; --ink:#241B14; --white:#FFFFFF; --line:rgba(36,27,20,0.13);
-    --mono:'IBM Plex Mono',monospace; --display:'Fraunces','Noto Sans JP',serif; --body:'Inter','Noto Sans JP',sans-serif;
-    --sidebar-w:230px; --r:18px;
+    --paper:#F4F7FF; --white:#FFFFFF; --ink:#1D2459; --ink-soft:rgba(29,36,89,0.72); --ink-faint:rgba(29,36,89,0.5);
+    --sun:#FFC83D; --sun-soft:#FFF1C7; --leaf:#2FB37C; --leaf-soft:#D8F3E7; --sky:#3C7DF0; --sky-deep:#2350B8; --sky-soft:#DDE8FF;
+    --peach:#FF7A6B; --peach-soft:#FFE1DC; --line:rgba(29,36,89,0.14);
+    --display:'Mochiy Pop One','Zen Maru Gothic',sans-serif; --body:'Zen Maru Gothic',sans-serif;
+    /* names used by the flow diagram, carousel and lightbox */
+    --red:var(--sky); --red-deep:var(--sky-deep); --cream:var(--paper); --ochre:var(--sun); --mono:var(--body);
+    --wrap:1120px;
   }
-  html[lang="ja"]{--display:'Noto Sans JP',sans-serif;}
-  html[lang="ja"] .text p, html[lang="ja"] .hero p.sub{line-height:1.95;}
-  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
-  ::selection{background:var(--red);color:var(--cream);} a{color:inherit;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--sun);color:var(--ink);}
+  a{color:inherit;}
+  img{max-width:100%;}
+  :focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:6px;}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.3;margin:0;letter-spacing:0.005em;}
+  html[lang="ja"] body{line-height:1.9;}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px;}
 
-  aside{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:var(--white);
-    display:flex;flex-direction:column;justify-content:space-between;padding:30px 24px;z-index:400;
-    border-radius:0 28px 28px 0;box-shadow:4px 0 24px rgba(36,27,20,0.05);}
-  .brand{font-family:var(--display);font-weight:700;font-size:1.1rem;line-height:1.15;cursor:pointer;}
-  .brand .dot{color:var(--red);}
-  .brand-role{font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:.06em;
-    color:var(--red-deep);margin-top:10px;background:rgba(209,75,63,0.1);display:inline-block;padding:5px 10px;border-radius:20px;}
-  nav{margin-top:40px;}
-  nav ol{list-style:none;margin:0;padding:0;}
-  nav a{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;font-size:1rem;
-    text-decoration:none;color:rgba(36,27,20,0.45);padding:11px 14px;border-radius:14px;margin-bottom:4px;transition:all .2s;}
-  nav a:hover{color:var(--ink);background:rgba(36,27,20,0.04);}
-  nav a.active{color:var(--white);background:var(--red);}
-  nav a .emoji{font-size:1rem;}
-  nav a.nav-feature{color:var(--red-deep);font-weight:600;}
-  nav a.nav-feature.active{color:var(--white);}
-
-  .lang-toggle{display:flex;gap:4px;margin-top:16px;}
-  .lang-btn{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;
-    padding:6px 12px;border-radius:16px;border:1px solid var(--line);background:transparent;
-    color:rgba(36,27,20,0.5);cursor:pointer;transition:all .2s;}
-  .lang-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink);}
-
-  .sidebar-foot{font-family:var(--mono);font-size:0.62rem;color:rgba(36,27,20,0.45);line-height:1.8;}
-  .sidebar-foot .loc{color:var(--red-deep);font-weight:600;}
-
-  #menu-toggle{display:none;}
+  /* HEADER */
+  .site-head{position:sticky;top:0;z-index:600;background:rgba(244,247,255,0.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:2px solid var(--line);}
+  .site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px;}
+  .brand{font-family:var(--display);font-size:1.15rem;cursor:pointer;display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .brand-dot{width:38px;height:38px;border-radius:50%;background:var(--sun);display:inline-grid;place-items:center;font-size:1rem;overflow:hidden;border:2px solid var(--ink);flex-shrink:0;}
+  .brand-dot img{width:100%;height:100%;object-fit:cover;display:block;}
+  nav ol{list-style:none;margin:0;padding:0;display:flex;gap:4px;}
+  nav a{display:block;text-decoration:none;font-weight:700;font-size:0.98rem;padding:8px 14px;border-radius:12px;color:var(--ink-soft);}
+  nav a:hover{color:var(--ink);background:var(--white);}
+  nav a.active{color:var(--ink);background:var(--sun);}
+  .head-right{display:flex;align-items:center;gap:14px;}
+  .lang-toggle{display:flex;background:var(--white);border:2px solid var(--line);border-radius:12px;padding:3px;}
+  .lang-btn{font-family:var(--body);font-weight:700;font-size:0.82rem;padding:5px 10px;border-radius:9px;border:0;background:transparent;color:var(--ink-faint);cursor:pointer;}
+  .lang-btn.active{background:var(--ink);color:var(--white);}
+  #menu-toggle{display:none;font-family:var(--body);font-weight:700;font-size:0.9rem;background:var(--ink);color:var(--white);border:0;padding:8px 14px;border-radius:12px;cursor:pointer;}
   @media(max-width:860px){
-    aside{width:100%;height:auto;bottom:auto;flex-direction:row;align-items:center;
-      justify-content:space-between;padding:14px 5vw;border-radius:0;position:fixed;z-index:600;}
-    nav{margin-top:0;position:fixed;top:64px;left:0;right:0;background:var(--white);
-      border-radius:0 0 24px 24px;max-height:0;overflow:hidden;transition:max-height .25s;box-shadow:0 10px 24px rgba(36,27,20,0.08);}
-    nav.open{max-height:420px;} nav ol{padding:10px 5vw 16px;}
-    .sidebar-foot{display:none;}
-    .brand-role{display:none;}
-    .lang-toggle{margin-top:0;}
-    #menu-toggle{display:block;font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;
-      background:var(--red);color:var(--cream);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;}
+    #menu-toggle{display:block;}
+    nav{position:absolute;top:72px;left:0;right:0;background:var(--paper);border-bottom:2px solid var(--line);max-height:0;overflow:hidden;transition:max-height .25s;}
+    nav.open{max-height:320px;}
+    nav ol{flex-direction:column;padding:10px 24px 18px;}
   }
+  .brand,.lang-btn,#menu-toggle{white-space:nowrap;}
+  @media(max-width:520px){
+    .site-head .wrap{gap:10px;padding:0 16px;}
+    .brand{font-size:0.98rem;gap:8px;}
+    .brand-dot{width:30px;height:30px;font-size:0.8rem;}
+    .head-right{gap:8px;}
+    .lang-btn{padding:5px 8px;font-size:0.76rem;}
+    #menu-toggle{padding:8px 11px;font-size:0.82rem;}
+    .wrap{padding:0 16px;}
+  }
+  @media(max-width:420px){.brand{font-size:0.88rem;gap:6px;}.brand-dot{width:26px;height:26px;}}
 
-  main{margin-left:var(--sidebar-w);}
-  @media(max-width:860px){main{margin-left:0;padding-top:64px;}}
-  .view{display:none;} .view.active{display:block;animation:fadeIn .45s ease;}
-  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-  section{padding:6vh 5.5vw;}
-  .index-no{font-family:var(--mono);font-size:0.72rem;color:var(--red-deep);letter-spacing:.08em;
-    text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;
-    background:rgba(209,75,63,0.1);padding:6px 12px;border-radius:20px;}
+  main section{padding:72px 0;}
+  .section-head{max-width:640px;margin-bottom:32px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:10px;}
+  .section-head p{margin:0;color:var(--ink-soft);}
+  .view{display:none;} .view.active{display:block;}
 
-  /* HOME */
-  .hero{padding-bottom:5vh;}
-  .hero-row{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:center;}
-  .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(2.1rem,4.3vw,3.6rem);line-height:1.1;margin:0 0 22px;letter-spacing:-0.01em;}
-  html[lang="ja"] .hero h1{font-size:clamp(1.9rem,4.2vw,3.2rem);line-height:1.35;letter-spacing:0;}
-  .hero h1 em{font-style:italic;font-weight:600;color:var(--red-deep);}
-  html[lang="ja"] .hero h1 em{font-style:normal;}
-  .hero .tagline{font-family:var(--display);font-size:clamp(1.08rem,1.6vw,1.3rem);line-height:1.5;max-width:580px;margin:0 0 10px;color:var(--ink);font-weight:500;}
-  .hero .tagline em{color:var(--red-deep);font-style:italic;}
-  html[lang="ja"] .hero .tagline em{font-style:normal;}
-  .hero .tagline-note{font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.5);margin:0 0 22px;letter-spacing:.02em;}
-  .hero p.sub{font-size:1.02rem;max-width:560px;color:rgba(36,27,20,0.72);line-height:1.7;margin-bottom:24px;}
-  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:1rem;
-    padding:13px 24px;border-radius:30px;text-decoration:none;border:1.5px solid var(--red);transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;}
-  .btn.solid{background:var(--red);color:var(--white);}
-  .btn.solid:hover{background:var(--red-deep);border-color:var(--red-deep);transform:translateY(-2px);box-shadow:0 10px 24px rgba(168,40,31,0.25);}
-  .btn.ghost{background:transparent;color:var(--red-deep);}
-  .btn.ghost:hover{background:rgba(209,75,63,0.08);transform:translateY(-2px);}
-  .discipline-tags{display:flex;gap:10px;flex-wrap:wrap;}
-  .tag{font-family:var(--mono);font-size:0.72rem;letter-spacing:.04em;text-transform:uppercase;
-    padding:9px 16px;border-radius:20px;background:var(--white);border:1px solid var(--line);}
-  .tag.primary{color:var(--white);background:var(--red);border-color:var(--red);font-weight:500;}
-  .hero-photo{aspect-ratio:1/1;border-radius:28px;overflow:hidden;border:2px solid var(--line);}
-  .hero-photo img{width:100%;height:100%;object-fit:cover;}
-  @media(max-width:760px){.hero-row{grid-template-columns:1fr;}.hero-photo{max-width:260px;margin:0 auto;order:-1;}}
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:900;font-size:1rem;padding:13px 22px;border-radius:14px;text-decoration:none;cursor:pointer;border:2px solid var(--ink);transition:transform .15s,box-shadow .15s;}
+  .btn.solid{background:var(--sky);border-color:var(--sky);color:var(--white);box-shadow:0 4px 0 var(--sky-deep);}
+  .btn.solid:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--sky-deep);}
+  .btn.solid:active{transform:translateY(2px);box-shadow:0 2px 0 var(--sky-deep);}
+  .btn.ghost{background:var(--white);color:var(--ink);box-shadow:0 4px 0 var(--ink);}
+  .btn.ghost:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--ink);}
 
-  /* FEATURED — PROSPER ACADEMY */
-  .feature{background:var(--ink);color:var(--cream);border-radius:30px;padding:clamp(26px,4.2vw,52px);position:relative;overflow:hidden;}
-  .feature::before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;right:-140px;top:-160px;
-    background:radial-gradient(circle,rgba(209,75,63,0.45),rgba(209,75,63,0) 70%);pointer-events:none;}
-  .feature > *{position:relative;}
-  .feature-top{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center;}
-  .feature-kicker{font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);
-    background:var(--ochre);display:inline-block;padding:6px 13px;border-radius:20px;margin-bottom:18px;font-weight:600;}
-  .feature h2{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,4.4vw,3.4rem);margin:0 0 10px;letter-spacing:-0.015em;line-height:1.05;}
-  .feature h2 .ja-name{font-size:0.5em;font-weight:500;color:var(--coral);margin-left:10px;letter-spacing:0;}
-  .feature .f-tagline{font-family:var(--display);font-style:italic;font-size:clamp(1.1rem,1.8vw,1.35rem);color:var(--coral);margin:0 0 16px;line-height:1.45;}
-  html[lang="ja"] .feature .f-tagline{font-style:normal;}
-  .feature .f-lead{font-size:0.98rem;line-height:1.75;color:rgba(251,243,231,0.78);margin:0 0 18px;max-width:600px;}
-  .feature .f-status{font-family:var(--mono);font-size:0.66rem;letter-spacing:.04em;color:rgba(251,243,231,0.5);text-transform:uppercase;}
-  .feature .f-status b{color:var(--ochre);font-weight:600;}
-  .feature-photo{aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
-    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.68rem;color:rgba(251,243,231,0.4);text-align:center;padding:0;}
+  /* HERO */
+  .hero{padding:64px 0 40px;}
+  .hero-row{display:grid;grid-template-columns:1.25fr 0.75fr;gap:56px;align-items:center;}
+  .hero-kicker{font-weight:700;color:var(--sky-deep);margin:0 0 14px;font-size:1.02rem;}
+  .hero h1{font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:1.28;margin:0 0 22px;}
+  html[lang="ja"] .hero h1{font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.45;}
+  .hero .tagline{font-size:1.18rem;line-height:1.65;max-width:600px;margin:0 0 8px;font-weight:500;}
+  .hero .tagline-note{font-size:0.88rem;color:var(--ink-faint);margin:0 0 20px;}
+  .hero p.sub{max-width:600px;color:var(--ink-soft);margin:0 0 28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .photo-wrap{position:relative;width:100%;max-width:360px;margin:0 auto;}
+  .hero-photo{aspect-ratio:1/1;border-radius:38% 62% 55% 45% / 45% 40% 60% 55%;overflow:hidden;background:var(--sky-soft);border:4px solid var(--ink);}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .sticker{position:absolute;font-family:var(--display);font-size:0.9rem;line-height:1.2;text-align:center;padding:12px 16px;border-radius:999px;border:3px solid var(--ink);box-shadow:3px 4px 0 var(--ink);white-space:nowrap;}
+  .sticker.s1{background:var(--sun);top:6%;left:-10%;transform:rotate(-8deg);}
+  .sticker.s2{background:var(--leaf);color:var(--white);bottom:14%;left:-14%;transform:rotate(6deg);}
+  .sticker.s3{background:var(--peach);right:-8%;bottom:-2%;transform:rotate(-5deg);}
+  @media (prefers-reduced-motion:no-preference){
+    .sticker{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;}
+    .sticker.s2{animation-delay:.12s;} .sticker.s3{animation-delay:.24s;}
+    @keyframes pop{from{opacity:0;scale:.4;}to{opacity:1;scale:1;}}
+  }
+  @media(max-width:860px){.hero-row{grid-template-columns:1fr;gap:40px;}.photo-wrap{max-width:260px;order:-1;}.sticker{font-size:0.78rem;padding:9px 12px;}}
+
+  /* PATHS — coloured paper */
+  .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .path-card{position:relative;padding:26px 26px 24px;border-radius:6px 6px 6px 6px;cursor:pointer;text-align:left;border:0;font:inherit;color:var(--ink);
+    clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,0 100%);transition:transform .15s;}
+  .path-card::after{content:'';position:absolute;top:0;right:0;width:34px;height:34px;background:linear-gradient(225deg,transparent 50%,rgba(0,0,0,0.13) 50%);}
+  .path-card:hover{transform:translateY(-4px) rotate(-0.6deg);}
+  .path-card.learning{background:var(--sun);}
+  .path-card.research{background:var(--sky);color:var(--white);}
+  .path-card.product{background:var(--leaf);color:var(--white);}
+  .path-card .path-emoji{font-size:1.8rem;display:block;margin-bottom:12px;}
+  .path-card h3{font-size:1.15rem;margin-bottom:10px;}
+  .path-card p{margin:0 0 16px;font-size:0.95rem;line-height:1.6;}
+  .path-card .go{font-weight:900;font-size:0.95rem;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;}
+  @media(max-width:860px){.paths{grid-template-columns:1fr;}}
+
+  /* STAMP CARD — results */
+  .stamp-card{background:var(--white);border:3px dashed var(--ink);border-radius:26px;padding:34px 30px;}
+  .stamp-card-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:16px;margin-bottom:28px;}
+  .stamp-card-head h2{font-size:clamp(1.4rem,2.6vw,1.9rem);}
+  .stamp-card-head span{color:var(--ink-faint);font-weight:700;font-size:0.92rem;}
+  .stamps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 18px;justify-items:center;}
+  .stamp{width:168px;height:168px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;
+    border:3px solid currentColor;position:relative;}
+  .stamp::before{content:'';position:absolute;inset:6px;border-radius:50%;border:2px dashed currentColor;opacity:.45;}
+  .stamp .num{font-family:var(--display);font-size:1.75rem;line-height:1.1;}
+  .stamp .lbl{font-size:0.8rem;font-weight:700;line-height:1.35;margin-top:6px;color:var(--ink);}
+  .stamp.c0{color:var(--sky-deep);background:var(--sky-soft);transform:rotate(-6deg);}
+  .stamp.c1{color:#C2410C;background:var(--peach-soft);transform:rotate(4deg);}
+  .stamp.c2{color:#1E7A55;background:var(--leaf-soft);transform:rotate(-3deg);}
+  .stamp.c3{color:#9A6A00;background:var(--sun-soft);transform:rotate(7deg);}
+  .stamp.empty{color:var(--ink-faint);background:transparent;border-style:dashed;transform:none;}
+  .stamp.empty::before{display:none;}
+  .stamp.empty .lbl{color:var(--ink-faint);font-size:0.86rem;}
+  @media(max-width:860px){.stamps{grid-template-columns:repeat(2,1fr);}.stamp{width:146px;height:146px;}.stamp .num{font-size:1.45rem;}}
+
+  /* SUGOROKU — how I work (3 x 2 board) */
+  .board{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 0;}
+  .square{position:relative;padding:0 18px;text-align:center;}
+  .square:not(:nth-child(3n))::after{content:'';position:absolute;top:34px;left:calc(50% + 46px);right:calc(-50% + 46px);border-top:4px dotted var(--ink);opacity:.3;}
+  .square .die{width:68px;height:68px;margin:0 auto 16px;border-radius:18px;border:3px solid var(--ink);display:grid;place-items:center;font-family:var(--display);font-size:1.6rem;box-shadow:3px 4px 0 var(--ink);}
+  .square:nth-child(1) .die{background:var(--sun);}
+  .square:nth-child(2) .die{background:var(--peach);}
+  .square:nth-child(3) .die{background:var(--leaf);color:var(--white);}
+  .square:nth-child(4) .die{background:var(--sky);color:var(--white);}
+  .square:nth-child(5) .die{background:var(--sun);}
+  .square:nth-child(6) .die{background:var(--peach);}
+  .square h3{font-size:1.15rem;margin-bottom:8px;}
+  .square p{margin:0 auto;font-size:0.94rem;line-height:1.65;color:var(--ink-soft);max-width:300px;}
+  @media(max-width:860px){.board{grid-template-columns:1fr 1fr;gap:34px 0;}.square::after{display:none;}}
+  @media(max-width:520px){.board{grid-template-columns:1fr;}}
+
+  /* FEATURE — Prosper Academy */
+  .feature{background:var(--sun);border-radius:30px;padding:clamp(28px,4.5vw,56px);border:3px solid var(--ink);box-shadow:6px 8px 0 var(--ink);}
+  .feature-top{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;}
+  .feature-kicker{font-weight:900;font-size:0.95rem;margin:0 0 10px;}
+  .feature h2{font-size:clamp(2rem,4.2vw,3rem);margin:0 0 12px;}
+  .feature h2 .ja-name{font-family:var(--body);font-weight:700;font-size:0.42em;margin-left:12px;vertical-align:middle;background:var(--white);padding:3px 10px;border-radius:10px;}
+  .feature .f-tagline{font-size:1.2rem;font-weight:700;margin:0 0 14px;line-height:1.5;}
+  .feature .f-lead{margin:0 0 16px;max-width:600px;}
+  .feature .f-status{font-size:0.88rem;color:var(--ink-soft);}
+  .feature-photo{aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:var(--white);border:3px solid var(--ink);transform:rotate(2deg);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--ink-faint);text-align:center;}
   .feature-photo img{width:100%;height:100%;object-fit:cover;display:block;}
   .feature-photo.empty{padding:20px;}
-  .missions{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 0;}
-  .mission{font-family:var(--mono);font-size:0.7rem;letter-spacing:.03em;padding:8px 14px;border-radius:20px;
-    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:var(--cream);}
-  .months{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;}
-  .month{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);border-radius:22px;padding:22px 22px 18px;}
-  .month .m-num{font-family:var(--mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ochre);margin-bottom:6px;}
-  .month h4{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0 0 6px;}
-  .month .m-goal{font-size:0.85rem;line-height:1.55;color:rgba(251,243,231,0.6);margin:0 0 12px;}
-  .month ul{margin:0;padding-left:1.1em;font-size:0.86rem;line-height:1.6;color:rgba(251,243,231,0.86);}
+  .missions{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0;}
+  .mission{font-weight:700;font-size:0.92rem;padding:8px 14px;border-radius:12px;background:var(--white);border:2px solid var(--ink);}
+  .months{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;}
+  .month{background:var(--white);border:2px solid var(--ink);border-radius:20px;padding:22px;}
+  .month .m-num{font-weight:900;font-size:0.9rem;color:var(--sky-deep);margin-bottom:4px;}
+  .month h4{font-size:1.2rem;margin:0 0 6px;}
+  .month .m-goal{font-size:0.9rem;line-height:1.55;color:var(--ink-soft);margin:0 0 10px;}
+  .month ul{margin:0;padding-left:1.1em;font-size:0.9rem;line-height:1.6;}
   .month li{margin-bottom:6px;}
-  .months.light .month{background:var(--white);border-color:var(--line);color:var(--ink);}
-  .months.light .month .m-num{color:var(--red-deep);}
-  .months.light .month .m-goal{color:rgba(36,27,20,0.55);}
-  .months.light .month ul{color:rgba(36,27,20,0.78);}
-  .feature-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px;}
-  .f-stat{border-top:1px solid rgba(255,255,255,0.16);padding-top:12px;}
-  .f-stat .num{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--coral);}
-  .f-stat .lbl{font-size:0.78rem;color:rgba(251,243,231,0.6);line-height:1.4;margin-top:2px;}
-  .feature-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;}
-  .feature .btn.ghost{color:var(--cream);border-color:rgba(251,243,231,0.4);}
-  .feature .btn.ghost:hover{background:rgba(255,255,255,0.08);}
+  .months.light .month{background:var(--white);}
+  .feature-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;}
+  .f-stat{border-top:3px solid var(--ink);padding-top:10px;}
+  .f-stat .num{font-family:var(--display);font-size:1.6rem;}
+  .f-stat .lbl{font-size:0.86rem;line-height:1.45;color:var(--ink-soft);}
+  .feature-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
   @media(max-width:960px){.feature-top{grid-template-columns:1fr;}.months{grid-template-columns:1fr;}.feature-stats{grid-template-columns:repeat(2,1fr);}}
 
-  .subhead{max-width:680px;margin:0 0 22px;}
-  .subhead p{font-size:0.98rem;line-height:1.7;color:rgba(36,27,20,0.65);margin:0;}
-
-  /* AT A GLANCE — clickable highlight cards */
-  .glance-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
-  .glance-card{background:var(--white);border-radius:20px;padding:22px 24px;border:1px solid var(--line);
-    cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;text-align:left;position:relative;}
-  .glance-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(36,27,20,0.09);border-color:transparent;}
-  .glance-card .glance-headline{font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--ink);
-    margin:0 0 8px;line-height:1.35;letter-spacing:-0.005em;}
-  .glance-card .glance-body{font-size:0.86rem;color:rgba(36,27,20,0.62);line-height:1.55;margin:0 0 14px;}
-  .glance-card .glance-link{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;
-    color:var(--red-deep);display:inline-flex;align-items:center;gap:6px;font-weight:600;}
-  .glance-card .glance-link .arrow{transition:transform .2s;}
-  .glance-card:hover .glance-link .arrow{transform:translateX(4px);}
-
-  /* WORK tiles */
-  .work-intro{max-width:720px;margin-bottom:30px;}
-  .work-intro h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3vw,2.3rem);margin:0 0 14px;letter-spacing:-0.01em;line-height:1.25;}
-  .tiles{display:flex;flex-direction:column;gap:14px;}
-  .tile{background:var(--white);border-radius:22px;padding:22px 26px;display:flex;gap:22px;align-items:center;
-    cursor:pointer;border:1px solid var(--line);transition:transform .2s,box-shadow .2s;}
-  .tile:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(36,27,20,0.08);border-color:transparent;}
-  .tile .badge{width:48px;height:48px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;
-    justify-content:center;font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--white);}
-  .tile .info{flex:1;min-width:0;}
-  .tile .tile-meta{font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.4);margin-bottom:5px;}
-  .tile h3{font-family:var(--display);font-weight:600;font-size:clamp(1.05rem,1.8vw,1.25rem);margin:0 0 6px;}
-  .tile .desc{font-size:0.88rem;color:rgba(36,27,20,0.6);line-height:1.5;max-width:560px;}
-  .tile .chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
-  .tile .chips span{font-family:var(--mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:.04em;
-    background:rgba(36,27,20,0.05);padding:4px 10px;border-radius:14px;color:rgba(36,27,20,0.6);}
-  .tile-demo{font-family:var(--mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:.04em;
-    background:var(--red);color:var(--white);padding:4px 12px;border-radius:14px;text-decoration:none;transition:background .2s;}
-  .tile-demo:hover{background:var(--red-deep);}
-  .tile .go{font-family:var(--display);font-size:1.5rem;color:var(--red);transition:transform .2s;}
-  .tile:hover .go{transform:translateX(6px);}
-  .tile.audit-tile{border:1.5px dashed rgba(209,75,63,0.5);background:linear-gradient(135deg,rgba(209,75,63,0.03) 0%,rgba(255,255,255,1) 60%);}
-  @media(max-width:600px){.tile{flex-wrap:wrap;}.tile .go{display:none;}}
+  /* WORK */
+  .work-intro{max-width:760px;margin-bottom:28px;}
+  .work-intro h1{font-size:clamp(1.7rem,3.4vw,2.5rem);margin-bottom:12px;}
+  .work-intro p{color:var(--ink-soft);margin:0;}
+  .track-bar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px;}
+  .track-btn{font-family:var(--body);font-weight:900;font-size:0.95rem;padding:10px 16px;border-radius:14px;border:2px solid var(--ink);background:var(--white);color:var(--ink);cursor:pointer;}
+  .track-btn.active.t-all{background:var(--ink);color:var(--white);}
+  .track-btn.active.t-learning{background:var(--sun);}
+  .track-btn.active.t-research{background:var(--sky);color:var(--white);}
+  .track-btn.active.t-product{background:var(--leaf);color:var(--white);}
+  .track-note{color:var(--ink-soft);margin:0 0 30px;max-width:700px;}
+  #work-feature:not(:empty){margin-bottom:34px;}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .tile{background:var(--white);border:2px solid var(--ink);border-radius:22px;padding:24px 26px 22px;cursor:pointer;position:relative;overflow:hidden;
+    box-shadow:4px 5px 0 var(--ink);transition:transform .15s,box-shadow .15s;}
+  .tile:hover{transform:translate(-2px,-2px);box-shadow:6px 7px 0 var(--ink);}
+  .tile .tab{position:absolute;top:0;left:26px;width:56px;height:10px;border-radius:0 0 8px 8px;}
+  .tile .tile-meta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px;}
+  .tile .tile-meta span{font-size:0.8rem;font-weight:700;padding:3px 10px;border-radius:9px;background:var(--paper);color:var(--ink-soft);}
+  .tile h3{font-size:1.15rem;margin:0 0 8px;}
+  .tile .desc{font-size:0.95rem;line-height:1.6;color:var(--ink-soft);}
+  .tile .open{display:inline-block;margin-top:14px;font-weight:900;font-size:0.92rem;color:var(--sky-deep);}
+  .tile-demo{display:inline-block;margin:14px 0 0 14px;font-weight:900;font-size:0.92rem;color:var(--ink);text-decoration:underline;text-underline-offset:4px;}
+  @media(max-width:760px){.tiles{grid-template-columns:1fr;}}
 
   /* CONTACT */
-  .contact-wrap{max-width:640px;}
-  .contact-wrap h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.2vw,2.5rem);margin:0 0 16px;letter-spacing:-0.01em;}
-  .contact-row{margin-top:26px;display:flex;flex-direction:column;gap:10px;}
-  .resume-dropdown-wrap{user-select:none;}
-  .resume-dropdown{display:none;flex-direction:column;gap:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin-top:-10px;}
+  .contact-wrap{max-width:660px;}
+  .contact-wrap h1{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:16px;}
+  .contact-wrap p{color:var(--ink-soft);}
+  .contact-row{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
+  .contact-link{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:1.05rem;padding:16px 22px;border-radius:16px;background:var(--white);border:2px solid var(--ink);text-decoration:none;color:var(--ink);cursor:pointer;}
+  .contact-link:hover{background:var(--sun);}
+  .contact-link.primary-cta{background:var(--sky);border-color:var(--sky);color:var(--white);}
+  .contact-link.primary-cta:hover{background:var(--sky-deep);}
+  .resume-dropdown{display:none;flex-direction:column;border-radius:16px;overflow:hidden;border:2px solid var(--ink);margin-top:-6px;}
   .resume-dropdown.open{display:flex;}
-  .resume-option{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:500;font-size:1rem;
-    padding:16px 24px;background:var(--cream);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);transition:all .2s;}
+  .resume-option{display:flex;justify-content:space-between;font-weight:700;padding:14px 22px;background:var(--white);border-bottom:2px solid var(--line);text-decoration:none;color:var(--ink);}
   .resume-option:last-child{border-bottom:none;}
-  .resume-option:hover{background:var(--red);color:var(--white);padding-left:30px;}
-  .contact-link{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:500;font-size:1rem;
-    padding:18px 24px;border-radius:18px;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:all .2s;}
-  .contact-link:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateX(4px);}
-  .contact-link span:last-child{font-size:1.2rem;}
-  .contact-link.primary-cta{background:var(--red);color:var(--white);border-color:var(--red);}
-  .contact-link.primary-cta:hover{background:var(--red-deep);border-color:var(--red-deep);}
+  .resume-option:hover{background:var(--sky-soft);}
 
   /* CASE STUDY */
-  .study-header{padding:6vh 5.5vw 4vh;}
-  .back-link{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
-    text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;background:rgba(209,75,63,0.1);padding:7px 14px;border-radius:20px;}
-  .study-header h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4.6vw,3.3rem);margin:0;letter-spacing:-0.01em;}
-  .study-header .study-summary{font-size:1.05rem;line-height:1.7;color:rgba(36,27,20,0.7);max-width:720px;margin:14px 0 0;}
-  .study-header .study-tags{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;}
-  .study-header .study-tags span, .study-header .study-tags a{font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:.04em;
-    color:var(--red-deep);background:rgba(209,75,63,0.1);padding:6px 12px;border-radius:16px;text-decoration:none;}
-  .study-header .study-tags a{background:var(--red);color:var(--white);}
-  .story-block{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:5vh 5.5vw;}
+  .study-header{padding:48px 0 16px;}
+  .back-link{display:inline-block;font-weight:900;text-decoration:none;color:var(--sky-deep);margin-bottom:20px;}
+  .back-link:hover{text-decoration:underline;text-underline-offset:4px;}
+  .study-header h1{font-size:clamp(1.8rem,4vw,2.9rem);max-width:900px;}
+  .study-header .study-summary{font-size:1.12rem;color:var(--ink-soft);max-width:740px;margin:16px 0 0;}
+  .study-header .study-tags{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap;}
+  .study-header .study-tags span,.study-header .study-tags a{font-size:0.85rem;font-weight:700;padding:5px 12px;border-radius:10px;background:var(--white);border:2px solid var(--line);text-decoration:none;}
+  .study-header .study-tags a{background:var(--sun);border-color:var(--ink);}
+  .story-block{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:44px 0;}
   .story-block.reverse .visual{order:2;} .story-block.reverse .text{order:1;}
-  .visual{aspect-ratio:16/9;background:var(--white);border-radius:22px;border:2px dashed var(--line);
-    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
-    font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.4);text-align:center;padding:20px;cursor:zoom-in;transition:transform .2s,border-color .25s;}
-  .visual:hover{border-color:var(--red);transform:translateY(-3px);}
-  .visual.finale{aspect-ratio:16/9;}
-  .story-block.finale-block{grid-template-columns:1fr;padding-top:2vh;}
-  .story-block.finale-block .visual{aspect-ratio:21/9;max-width:100%;}
-  .story-block.finale-block .text{text-align:center;max-width:640px;margin:0 auto;}
-  .text-only{max-width:820px;}
-  .program-map{padding:0 5.5vw 5vh;}
-  .license-cta{margin:2vh 5.5vw 8vh;background:var(--ink);color:var(--cream);border-radius:28px;padding:clamp(26px,4vw,46px);}
-  .license-cta .feature-kicker{margin-bottom:14px;}
-  .license-cta h3{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,3vw,2.3rem);margin:0 0 12px;}
-  .license-cta p{font-size:1rem;line-height:1.75;color:rgba(251,243,231,0.78);max-width:680px;margin:0 0 22px;}
+  .visual{aspect-ratio:16/9;background:var(--white);border-radius:22px;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
+    font-size:0.8rem;color:var(--ink-faint);text-align:center;padding:20px;cursor:zoom-in;}
+  .story-block.finale-block{grid-template-columns:1fr;}
+  .story-block.finale-block .visual{aspect-ratio:21/9;}
+  .story-block.finale-block .text{text-align:center;max-width:680px;margin:0 auto;}
+  .text-only{max-width:780px;}
+  .program-map{padding:0 0 30px;}
+  .step-label{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--sky-deep);margin-bottom:12px;}
+  .finale-block .step-label{justify-content:center;}
+  .step-label .step-num{width:34px;height:34px;border-radius:50%;background:var(--sun);border:2px solid var(--ink);display:grid;place-items:center;font-family:var(--display);font-size:0.9rem;color:var(--ink);}
+  .text h3{font-size:1.45rem;margin:0 0 14px;}
+  .text p{color:var(--ink-soft);margin:0;}
+  @media(max-width:760px){.story-block{grid-template-columns:1fr;gap:24px;}.story-block.reverse .visual{order:1;}.story-block.reverse .text{order:2;}}
 
-  /* USER FLOW DIAGRAM */
+    /* USER FLOW DIAGRAM */
   .flow-diagram{width:100%;overflow-x:auto;padding:32px 0 20px;}
   .flow-phone{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:zoom-in;flex-shrink:0;width:130px;}
   .flow-phone:hover .flow-device{box-shadow:0 10px 32px rgba(0,0,0,0.32);transform:translateY(-4px);}
@@ -304,16 +341,16 @@
   .flow-screen-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:var(--mono);font-size:0.58rem;color:rgba(36,27,20,0.35);text-align:center;padding:8px;background:#f5f5f5;}
   .flow-label{font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.5);text-align:center;max-width:130px;line-height:1.4;}
   .flow-expand-hint{font-family:var(--mono);font-size:0.55rem;color:rgba(36,27,20,0.28);letter-spacing:.03em;}
-  .flow-step-num{font-family:var(--display);font-weight:700;font-size:0.75rem;color:var(--red-deep);background:rgba(209,75,63,0.1);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
+  .flow-step-num{font-family:var(--display);font-weight:700;font-size:0.75rem;color:var(--red-deep);background:rgba(60,125,240,0.1);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
 
   /* ANNOTATION BUBBLES */
   .ann{background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:9px 13px;box-shadow:0 2px 14px rgba(36,27,20,0.07);font-size:0.78rem;line-height:1.45;color:rgba(36,27,20,0.72);max-width:180px;min-height:76px;display:flex;flex-direction:column;justify-content:center;position:relative;}
   .ann strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px;font-size:0.8rem;}
-  .ann.red{border-color:rgba(209,75,63,0.3);background:rgba(209,75,63,0.03);}
-  .ann.green{border-color:rgba(92,138,110,0.3);background:rgba(92,138,110,0.04);}
+  .ann.red{border-color:rgba(60,125,240,0.3);background:rgba(60,125,240,0.03);}
+  .ann.green{border-color:rgba(47,179,124,0.3);background:rgba(47,179,124,0.04);}
   .ann.tail-b::after{content:'';position:absolute;width:9px;height:9px;transform:rotate(45deg);bottom:-5px;left:20px;background:var(--white);border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line);}
-  .ann.red.tail-b::after{background:rgba(209,75,63,0.03);border-color:rgba(209,75,63,0.3);}
-  .ann.green.tail-b::after{background:rgba(92,138,110,0.04);border-color:rgba(92,138,110,0.3);}
+  .ann.red.tail-b::after{background:rgba(60,125,240,0.03);border-color:rgba(60,125,240,0.3);}
+  .ann.green.tail-b::after{background:rgba(47,179,124,0.04);border-color:rgba(47,179,124,0.3);}
 
   /* BEFORE/AFTER CAROUSEL */
   .ba-carousel{aspect-ratio:16/9;border-radius:22px;overflow:hidden;position:relative;background:var(--white);border:1px solid var(--line);}
@@ -365,289 +402,124 @@
   #zlb-slide-counter{position:fixed;top:22px;right:70px;font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);background:rgba(0,0,0,0.35);padding:4px 12px;border-radius:12px;z-index:5003;pointer-events:none;display:none;}
   #zlb-slide-counter.show{display:block;}
 
-  .text .step-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red-deep);
-    margin-bottom:10px;display:inline-block;background:rgba(209,75,63,0.1);padding:5px 12px;border-radius:14px;}
-  .text h3{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 14px;letter-spacing:-0.005em;}
-  .text p{line-height:1.75;color:rgba(36,27,20,0.75);}
-  .text p + p{margin-top:0;}
-  @media(max-width:760px){.story-block{grid-template-columns:1fr;}.story-block.reverse .visual{order:1;}.story-block.reverse .text{order:2;}}
 
-  /* AUDIT OFFER PAGE */
-  .audit-view{max-width:760px;margin:0 auto;}
-  .audit-view h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.2vw,2.6rem);margin:0 0 14px;letter-spacing:-0.01em;}
-  .audit-view .lead{font-size:1.08rem;line-height:1.75;color:rgba(36,27,20,0.75);margin-bottom:40px;max-width:620px;}
-  .audit-note{font-size:0.88rem;line-height:1.6;color:rgba(36,27,20,0.6);background:var(--white);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin:0 0 28px;}
-  .audit-note a{color:var(--red-deep);font-weight:600;}
-  .audit-section{margin-bottom:40px;}
-  .audit-section h3{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0 0 12px;}
-  .audit-section p{font-size:1rem;line-height:1.75;color:rgba(36,27,20,0.75);margin:0 0 10px;}
-  .audit-section ul{margin:0;padding-left:1.2em;color:rgba(36,27,20,0.75);font-size:1rem;line-height:1.9;}
-  .audit-pricing{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
-  .price-card{background:var(--white);border-radius:18px;padding:22px 24px;border:1px solid var(--line);}
-  .price-card.featured{border:2px solid var(--red);background:linear-gradient(135deg,rgba(209,75,63,0.04),var(--white));}
-  .price-card .price-label{font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(36,27,20,0.45);margin-bottom:8px;}
-  .price-card .price-num{font-family:var(--display);font-weight:700;font-size:1.9rem;color:var(--red);margin-bottom:6px;}
-  .price-card .price-desc{font-size:0.85rem;color:rgba(36,27,20,0.62);line-height:1.5;}
-  @media(max-width:600px){.audit-pricing{grid-template-columns:1fr;}}
-  .audit-cta-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:1.05rem;
-    background:var(--red);color:var(--white);padding:16px 34px;border-radius:30px;text-decoration:none;border:none;cursor:pointer;
-    transition:transform .2s,box-shadow .2s;margin-top:8px;}
-  .audit-cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(168,40,31,0.3);}
-  .proof-strip{background:var(--white);border-radius:20px;border:1px solid var(--line);padding:24px 28px;margin:28px 0;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;}
-  .proof-stat .num{font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--red);}
-  .proof-stat .lbl{font-size:0.78rem;color:rgba(36,27,20,0.6);line-height:1.4;margin-top:3px;}
 
-  footer{margin-left:var(--sidebar-w);padding:30px 5.5vw;font-family:var(--mono);font-size:0.7rem;color:rgba(36,27,20,0.5);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-  @media(max-width:860px){footer{margin-left:0;}}
-  footer a{text-decoration:none;color:var(--red-deep);}
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
+  /* FOOTER */
+  footer{border-top:2px solid var(--line);margin-top:40px;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px;padding-bottom:36px;font-size:0.9rem;color:var(--ink-soft);}
+  footer a{color:var(--sky-deep);font-weight:700;}
 </style>
 </head>
 <body>
 
-<aside>
-  <div>
-    <div class="brand" data-nav="home">Murat Mert Titiz<span class="dot">.</span></div>
-    <div class="brand-role"
-      data-en="Curriculum Design &amp; Licensing"
-      data-ja="カリキュラム設計・ライセンス">Curriculum Design &amp; Licensing</div>
+<header class="site-head">
+  <div class="wrap">
+    <a href="#" class="brand" data-nav="home"><span class="brand-dot" aria-hidden="true"><img id="img-thumb" src="" alt=""></span>Murat Mert Titiz</a>
+    <nav id="main-nav" aria-label="Main">
+      <ol>
+        <li><a href="#" data-nav="home" class="active" data-en="Home" data-ja="ホーム">Home</a></li>
+        <li><a href="#" data-study-link="prosper-academy">Prosper Academy</a></li>
+        <li><a href="#" data-nav="work" data-en="Work" data-ja="実績">Work</a></li>
+        <li><a href="#" data-nav="contact" data-en="Contact" data-ja="お問い合わせ">Contact</a></li>
+      </ol>
+    </nav>
+    <div class="head-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" id="btn-en">EN</button>
+        <button class="lang-btn" id="btn-ja">日本語</button>
+      </div>
+      <button id="menu-toggle" data-en="Menu" data-ja="メニュー">Menu</button>
+    </div>
   </div>
-  <button id="menu-toggle" data-en="Menu" data-ja="メニュー">Menu</button>
-  <nav id="main-nav">
-    <ol>
-      <li><a href="#" data-nav="home" class="active"><span class="emoji">🏠</span><span data-en="Home" data-ja="ホーム">Home</span></a></li>
-      <li><a href="#" data-study-link="prosper-academy" class="nav-feature"><span class="emoji">🪙</span><span>Prosper Academy</span></a></li>
-      <li><a href="#" data-nav="work"><span class="emoji">🧩</span><span data-en="Work" data-ja="実績">Work</span></a></li>
-      <li><a href="#" data-nav="audit"><span class="emoji">🔍</span><span data-en="School Audit" data-ja="スクール診断">School Audit</span></a></li>
-      <li><a href="#" data-nav="contact"><span class="emoji">💬</span><span data-en="Contact" data-ja="お問い合わせ">Contact</span></a></li>
-    </ol>
-  </nav>
-  <div class="lang-toggle">
-    <button class="lang-btn active" id="btn-en">EN</button>
-    <button class="lang-btn" id="btn-ja">日本語</button>
-  </div>
-  <div class="sidebar-foot">
-    <span data-en="Based in" data-ja="拠点：">Based in</span> <span class="loc">Tokyo</span><br>
-    <span data-en="Lived in" data-ja="居住歴：">Lived in</span> <span class="loc">TR · US · IT · JP</span><br>
-    <span data-en="Speak" data-ja="言語：">Speak</span> <span class="loc">TR · EN · JP · IT</span> + <span data-en="basic RU" data-ja="ロシア語（基礎）">basic RU</span><br>
-    <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" style="color:var(--red-deep);text-decoration:none;font-weight:600;">LinkedIn ↗</a><br>
-    © 2026 Murat Mert Titiz
-  </div>
-</aside>
+</header>
 
 <main>
 
   <!-- HOME -->
   <div class="view active" id="view-home">
     <section class="hero">
-      <span class="index-no"
-        data-en="👋 Curriculum Design · Licensing · Experiential Learning"
-        data-ja="👋 カリキュラム設計 · ライセンス提供 · 体験型学習">
-        👋 Curriculum Design · Licensing · Experiential Learning
-      </span>
-      <div class="hero-row">
+      <div class="wrap hero-row">
         <div>
-          <h1
-            data-en='School, money, a career, companies are all games. And children are <em>good at games.</em>'
-            data-ja='学校も、お金も、キャリアも、会社も、すべてはゲームだ。そして、子どもは<em>ゲームが得意だ。</em>'>
-            School, money, a career, companies are all games. And children are <em>good at games.</em>
-          </h1>
+          <p class="hero-kicker" data-en="Learning experience designer and UX researcher in Tokyo" data-ja="東京の学習体験デザイナー／UXリサーチャー">Learning experience designer and UX researcher in Tokyo</p>
+          <h1 data-en="Children and adults want the same thing: an experience with tegotae and meaning."
+              data-ja="子どもも大人も一緒。手応えがある、意味がある経験が欲しい。">Children and adults want the same thing: an experience with tegotae and meaning.</h1>
           <p class="tagline"
-            data-en="Using gamification and creating real-world experiences with <em>tegotae</em> to teach kids about finance, careers, life, and success."
-            data-ja="ゲーミフィケーションと、<em>「手応え」</em>のある実社会での体験を通じて、子どもたちにお金・キャリア・人生・成功について教えています。">
-            Using gamification and creating real-world experiences with <em>tegotae</em> to teach kids about finance, careers, life, and success.
-          </p>
+            data-en="I watch how people actually learn and use things, design from educational and psychological principles, then test with real users and fix what doesn't work."
+            data-ja="人が実際にどう学び、どう使っているかを観察し、教育と心理の原則で体験を設計し、本物のユーザーと試して直す。">I watch how people actually learn and use things, design from educational and psychological principles, then test with real users and fix what doesn't work.</p>
           <p class="tagline-note"
-            data-en="tegotae (手応え) — the real, in-your-hands feeling that your effort produced a result."
-            data-ja="手応え — 自分の行動が本当に結果を生んだと、身をもって感じられる実感。">
-            tegotae (手応え) — the real, in-your-hands feeling that your effort produced a result.
-          </p>
+            data-en="Tegotae (手応え): the real, in-your-hands feeling that your effort produced a result."
+            data-ja="手応え：自分の行動が本当に結果を生んだと、身をもって感じられる実感。">Tegotae (手応え): the real, in-your-hands feeling that your effort produced a result.</p>
           <p class="sub"
-            data-en="I'm a curriculum designer, licensor, and educator. I take the systems adults live inside — money, work, business — redesign them as games children can actually play, and then send kids into the real world to play them for real. My flagship program is <strong>Prosper Academy</strong>."
-            data-ja="カリキュラムデザイナー、ライセンサー、そして教育者として活動しています。お金、仕事、ビジネスなど、大人が生きている「仕組み」を、子どもが実際にプレイできるゲームとして設計し直し、そのうえで実社会という本番の舞台へと送り出します。現在の主力プログラムは<strong>Prosper Academy（プロアカ）</strong>です。">
-            I'm a curriculum designer, licensor, and educator. I take the systems adults live inside — money, work, business — redesign them as games children can actually play, and then send kids into the real world to play them for real. My flagship program is <strong>Prosper Academy</strong>.
-          </p>
+            data-en="I have 6+ years in Japanese education, including running a language school's operations, and before that a psychology degree and four years of behavioral research. At school I interview parents, test tools with teachers and learners, and build the systems that fix what I find. On my own, I'm building <strong>Prosper Academy</strong>, a financial literacy curriculum tested with 20+ learners. I work in English and Japanese (JLPT N1)."
+            data-ja="英会話教室の運営を含め、日本の教育現場で6年以上の経験があり、その前は心理学を学び、4年間行動研究に携わりました。教室では保護者へのインタビューや、講師・生徒とのツール検証を行い、見つかった課題を解決する仕組みを自ら構築しています。個人では、20名以上の生徒と検証を重ねている金融リテラシー・カリキュラム<strong>Prosper Academy</strong>を開発しています。英語と日本語（JLPT N1）で業務が可能です。">I have 6+ years in Japanese education, including running a language school's operations, and before that a psychology degree and four years of behavioral research. At school I interview parents, test tools with teachers and learners, and build the systems that fix what I find. On my own, I'm building <strong>Prosper Academy</strong>, a financial literacy curriculum tested with 20+ learners. I work in English and Japanese (JLPT N1).</p>
           <div class="hero-ctas">
-            <a href="#" class="btn solid" data-study-link="prosper-academy"
-              data-en="Explore Prosper Academy →" data-ja="Prosper Academyを見る →">Explore Prosper Academy →</a>
-            <a href="#" class="btn ghost" data-nav="contact"
-              data-en="License the curriculum" data-ja="ライセンスについて相談する">License the curriculum</a>
+            <a href="#" class="btn solid" data-nav="work" data-en="See my work" data-ja="実績を見る">See my work</a>
+            <a href="#" class="btn ghost" data-nav="contact" data-en="Get in touch" data-ja="お問い合わせ">Get in touch</a>
           </div>
         </div>
-        <div class="hero-photo">
-          <!-- IMAGE: images/hero.png — your headshot -->
-          <img id="img-hero" src="" alt="Murat Mert Titiz" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+        <div class="photo-wrap">
+          <div class="hero-photo">
+            <!-- IMAGE: images/hero.png — your headshot -->
+            <img id="img-hero" src="" alt="Murat Mert Titiz">
+          </div>
+          <span class="sticker s1">JLPT N1</span>
+          <span class="sticker s2" data-en="Psychology B.S." data-ja="心理学 学士">Psychology B.S.</span>
+          <span class="sticker s3" data-en="6+ years in education" data-ja="教育現場6年以上">6+ years in education</span>
         </div>
       </div>
-      <div class="discipline-tags">
-        <span class="tag primary" data-en="Curriculum Design" data-ja="カリキュラム設計">Curriculum Design</span>
-        <span class="tag primary" data-en="Curriculum Licensing" data-ja="カリキュラムのライセンス提供">Curriculum Licensing</span>
-        <span class="tag" data-en="Gamification" data-ja="ゲーミフィケーション">Gamification</span>
-        <span class="tag" data-en="Experiential Learning" data-ja="体験型学習">Experiential Learning</span>
-        <span class="tag" data-en="Financial Literacy" data-ja="金融リテラシー">Financial Literacy</span>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2 data-en="How can I help?" data-ja="どんなお手伝いができるか">How can I help?</h2>
+          <p data-en="Three things I can take on for your team. Each one opens my work in the order that shows it best." data-ja="チームのためにお引き受けできる3つのこと。それぞれ、最もよく伝わる順番で実績をご覧いただけます。">Three things I can take on for your team. Each one opens my work in the order that shows it best.</p>
+        </div>
+        <div class="paths" id="paths-wrap"></div>
       </div>
     </section>
 
     <section>
-      <span class="index-no" data-en="⭐ Featured work" data-ja="⭐ 主力プロジェクト">⭐ Featured work</span>
-      <div id="home-feature"></div>
+      <div class="wrap">
+        <div class="stamp-card">
+          <div class="stamp-card-head">
+            <h2 data-en="My stamp card so far" data-ja="これまでのスタンプカード">My stamp card so far</h2>
+            <span data-en="Results from my school work and Prosper Academy" data-ja="教室での実績とProsper Academyの成果">Results from my school work and Prosper Academy</span>
+          </div>
+          <div class="stamps" id="proof-strip"></div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <span class="index-no" data-en="🏫 Also · School operations" data-ja="🏫 その他の実績 · スクール運営">🏫 Also · School operations</span>
-      <div class="glance-wrap" id="glance-wrap"></div>
+      <div class="wrap">
+        <div class="section-head">
+          <h2 data-en="How I work" data-ja="仕事の進め方">How I work</h2>
+          <p data-en="Every project on this site moved through the same six squares, usually more than once." data-ja="このサイトのどのプロジェクトも、同じ6つのマスを、たいていは何周もしながら進めてきました。">Every project on this site moved through the same six squares, usually more than once.</p>
+        </div>
+        <div class="board" id="process"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div id="home-feature"></div>
+      </div>
     </section>
   </div>
 
   <!-- WORK -->
   <div class="view" id="view-work">
     <section>
-      <div class="work-intro">
-        <span class="index-no" data-en="🧩 Work" data-ja="🧩 実績">🧩 Work</span>
-        <h2
-          data-en="Prosper Academy is the work I'm building now. Everything else here is where I learned how to build it — real problems, inside a real school."
-          data-ja="いま私が全力で取り組んでいるのが、Prosper Academyです。その他の実績は、実際のスクールで本物の課題に向き合いながら、その土台を築いてきた記録です。">
-          Prosper Academy is the work I'm building now. Everything else here is where I learned how to build it — real problems, inside a real school.
-        </h2>
-      </div>
-      <div id="work-feature"></div>
-    </section>
-
-    <section style="padding-top:0;">
-      <div class="subhead">
-        <span class="index-no" data-en="🏫 Other work · School operations &amp; systems" data-ja="🏫 その他の実績 · スクール運営・仕組みづくり">🏫 Other work · School operations &amp; systems</span>
-        <p data-en="Before Prosper Academy, I worked inside a language school fixing the problems that make families leave. That's where I learned what actually keeps kids — and their parents — engaged."
-           data-ja="Prosper Academy以前は、語学スクールの現場で、ご家庭が離れていく原因となる課題の解決に取り組んできました。子どもと保護者が「続けたくなる」仕組みを学んだのは、この現場です。">
-          Before Prosper Academy, I worked inside a language school fixing the problems that make families leave. That's where I learned what actually keeps kids — and their parents — engaged.
-        </p>
-      </div>
-      <div class="tiles" id="work-tiles"></div>
-    </section>
-  </div>
-
-  <!-- AUDIT SERVICE PAGE -->
-  <div class="view" id="view-audit">
-    <section>
-      <div class="audit-view">
-        <span class="index-no" data-en="🔍 School Audit" data-ja="🔍 スクール診断サービス">🔍 School Audit</span>
-
-        <h2
-          data-en="School Audit: Parent Retention &amp; Revenue Clarity"
-          data-ja="スクール診断：生徒・保護者の定着と収益構造の可視化">
-          School Audit: Parent Retention &amp; Revenue Clarity
-        </h2>
-
-        <p class="audit-note"
-          data-en="A side service alongside Prosper Academy, built on the school operations work in my portfolio. Looking for the curriculum instead? <a href='#' data-study-link='prosper-academy'>See Prosper Academy →</a>"
-          data-ja="Prosper Academyと並行して提供している、スクール運営の実績をもとにした診断サービスです。カリキュラムについては<a href='#' data-study-link='prosper-academy'>Prosper Academyのページ →</a>をご覧ください。">
-          A side service alongside Prosper Academy, built on the school operations work in my portfolio. Looking for the curriculum instead? <a href='#' data-study-link='prosper-academy'>See Prosper Academy →</a>
-        </p>
-
-        <p class="lead"
-          data-en="You know some parents are unhappy. You see enrollment flat, trial requests shrinking, or students quitting after two or three months. Most schools don't know the real cause because they're not asking the right people, in the right way. That's what this audit is for."
-          data-ja="保護者の不満は感じている。体験入学の問い合わせが減ったり、2〜3か月で退会する生徒が続いたりしている。多くのスクールが本当の原因を特定できないのは、適切な相手に、適切な方法で話を聞けていないからです。この診断では、そこを明らかにします。">
-          You know some parents are unhappy. You see enrollment flat, trial requests shrinking, or students quitting after two or three months. Most schools don't know the real cause because they're not asking the right people, in the right way. That's what this audit is for.
-        </p>
-
-        <div class="proof-strip">
-          <div class="proof-stat">
-            <div class="num">25</div>
-            <div class="lbl" data-en="New students in the first year post-implementation" data-ja="施策後、初年度に増えた新規生徒数">New students in the first year post-implementation</div>
-          </div>
-          <div class="proof-stat">
-            <div class="num">90%</div>
-            <div class="lbl" data-en="Parent adoption of a new communication system within two months" data-ja="2か月以内に新コミュニケーションシステムを利用した保護者の割合">Parent adoption of a new communication system within two months</div>
-          </div>
-          <div class="proof-stat">
-            <div class="num">30%</div>
-            <div class="lbl" data-en="Rise in homework completion after a visibility intervention" data-ja="可視化施策後の宿題完了率の向上">Rise in homework completion after a visibility intervention</div>
-          </div>
-          <div class="proof-stat">
-            <div class="num">0</div>
-            <div class="lbl" data-en="Complaints about progress visibility since the Output Relay launched" data-ja="アウトプットリレー導入後の進捗に関するクレーム件数">Complaints about progress visibility since the Output Relay launched</div>
-          </div>
+      <div class="wrap">
+        <div class="work-intro">
+          <h1 data-en="Five case studies, one way of working" data-ja="5つのケーススタディ、ひとつの進め方">Five case studies, one way of working</h1>
+          <p data-en="Watch people closely, design from principles, test, and fix. Choose a role to reorder the work for that job." data-ja="人をよく観察し、原則から設計し、試して、直す。職種を選ぶと、その仕事に合った順番に並び替わります。">Watch people closely, design from principles, test, and fix. Choose a role to reorder the work for that job.</p>
         </div>
-
-        <div class="audit-section">
-          <h3 data-en="What the audit involves" data-ja="診断の内容">What the audit involves</h3>
-          <p data-en="We conduct structured interviews with three groups:" data-ja="3つの対象に対して、体系的なインタビューを実施します。">We conduct structured interviews with three groups:</p>
-          <ul>
-            <li data-en="<strong>Parents (current and former)</strong> — why they joined, what surprised them, why some left" data-ja="<strong>保護者（在籍・退会された方）</strong> — 入学した理由、期待と異なった点、退会した理由"><strong>Parents (current and former)</strong> — why they joined, what surprised them, why some left</li>
-            <li data-en="<strong>Staff and teachers</strong> — recurring complaints, where communication breaks down, what they find hardest to manage" data-ja="<strong>スタッフ・講師</strong> — 繰り返し寄せられる声、コミュニケーションが滞るポイント、運営上の負担"><strong>Staff and teachers</strong> — recurring complaints, where communication breaks down, what they find hardest to manage</li>
-            <li data-en="<strong>You (the owner)</strong> — your revenue targets, your read on where the gaps are, what you've already tried" data-ja="<strong>スクール運営者</strong> — 収益目標、課題に対する認識、これまでに試した施策"><strong>You (the owner)</strong> — your revenue targets, your read on where the gaps are, what you've already tried</li>
-          </ul>
-          <p style="margin-top:14px;"
-            data-en="We also review your parent journey end-to-end — from trial inquiry through the first months of enrollment — and identify where families are most likely to disengage."
-            data-ja="体験入学の問い合わせから入学後数か月までの保護者体験を一連の流れとして確認し、どの段階で離脱が起きやすいかを特定します。">
-            We also review your parent journey end-to-end — from trial inquiry through the first months of enrollment — and identify where families are most likely to disengage.
-          </p>
-        </div>
-
-        <div class="audit-section">
-          <h3 data-en="What you get" data-ja="ご提供するもの">What you get</h3>
-          <ul>
-            <li data-en="<strong>Specific problems, not observations</strong> — diagnoses with enough detail to act on immediately" data-ja="<strong>単なる観察ではなく、原因まで踏み込んだ具体的な課題</strong> — すぐに実行に移せる具体性で提示します"><strong>Specific problems, not observations</strong> — diagnoses with enough detail to act on immediately</li>
-            <li data-en="<strong>Revenue impact assessment</strong> — which issues are costing you students and which are just friction" data-ja="<strong>収益への影響分析</strong> — 生徒の離脱につながっている問題と、単なる運用上の摩擦を切り分けます"><strong>Revenue impact assessment</strong> — which issues are costing you students and which are just friction</li>
-            <li data-en="<strong>A prioritised first fix</strong> — the highest-impact, lowest-effort intervention, with a rationale for why it comes first" data-ja="<strong>優先順位を付けた最初の改善策</strong> — 効果が高く、実行負荷の低い施策と、その施策を最初に行う理由"><strong>A prioritised first fix</strong> — the highest-impact, lowest-effort intervention, with a rationale for why it comes first</li>
-            <li data-en="<strong>Systems assessment</strong> — whether your current tools and workflows are part of the problem" data-ja="<strong>システム評価</strong> — 現在のツールや業務フローが問題の一因になっていないかを確認します"><strong>Systems assessment</strong> — whether your current tools and workflows are part of the problem</li>
-          </ul>
-        </div>
-
-        <div class="audit-section">
-          <h3 data-en="Investment" data-ja="ご利用料金">Investment</h3>
-          <div class="audit-pricing">
-            <div class="price-card">
-              <div class="price-label" data-en="Audit only" data-ja="診断のみ">Audit only</div>
-              <div class="price-num">¥75,000</div>
-              <div class="price-desc"
-                data-en="Structured interviews, written report with specific findings, and a prioritised first recommendation."
-                data-ja="体系的なインタビュー、具体的な所見をまとめたレポート、優先順位を付けた初回改善提案。">
-                Structured interviews, written report with specific findings, and a prioritised first recommendation.
-              </div>
-            </div>
-            <div class="price-card featured">
-              <div class="price-label" data-en="Audit + implementation" data-ja="診断＋導入支援">Audit + implementation</div>
-              <div class="price-num">¥150,000</div>
-              <div class="price-desc"
-                data-en="Everything above, plus 4–6 weeks of hands-on support executing the first fix — system builds, workflow redesigns, communication infrastructure."
-                data-ja="上記すべてに加え、最初の改善策の実行を4〜6週間にわたり伴走支援します（システム構築、業務フローの再設計、コミュニケーション基盤の整備など）。">
-                Everything above, plus 4–6 weeks of hands-on support executing the first fix — system builds, workflow redesigns, communication infrastructure.
-              </div>
-            </div>
-          </div>
-          <p style="font-size:0.85rem;color:rgba(36,27,20,0.5);"
-            data-en="The first conversation is free. We'll spend 90 minutes looking at your school together. If an audit would genuinely help, we'll tell you. If it wouldn't, we'll tell you that too."
-            data-ja="初回相談は無料です。90分かけて、スクールの現状を一緒に確認します。診断がお役に立つと判断した場合は率直にお伝えしますし、必要ない場合も正直にお伝えします。">
-            The first conversation is free. We'll spend 90 minutes looking at your school together. If an audit would genuinely help, we'll tell you. If it wouldn't, we'll tell you that too.
-          </p>
-        </div>
-
-        <div class="audit-section">
-          <h3 data-en="What we can help you implement" data-ja="導入・実施支援の対象領域">What we can help you implement</h3>
-          <ul>
-            <li data-en="Parent communication infrastructure — LINE-based scheduling, automated workflows, progress reporting" data-ja="保護者向けコミュニケーション基盤 — LINEによるスケジュール管理、自動化、進捗レポート">Parent communication infrastructure — LINE-based scheduling, automated workflows, progress reporting</li>
-            <li data-en="Staff-facing logging and tracking tools built around real operational constraints" data-ja="現場の制約を踏まえた、スタッフ向け記録・進捗管理ツールの構築">Staff-facing logging and tracking tools built around real operational constraints</li>
-            <li data-en="Acquisition channel diagnostics — Google, social, referral programme design" data-ja="集客チャネルの診断 — Google、SNS、紹介プログラムの設計">Acquisition channel diagnostics — Google, social, referral programme design</li>
-            <li data-en="Trial-to-enrollment conversion flow redesign" data-ja="体験入学から入学までの転換フローの再設計">Trial-to-enrollment conversion flow redesign</li>
-            <li data-en="Onboarding materials for new families and incoming teaching staff" data-ja="新規入会家庭・新任講師向けオンボーディング資料の整備">Onboarding materials for new families and incoming teaching staff</li>
-          </ul>
-        </div>
-
-        <div style="margin-top:36px;">
-          <p style="font-size:1rem;line-height:1.7;color:rgba(36,27,20,0.72);max-width:560px;margin-bottom:20px;"
-            data-en="Get in touch with your school name, approximate student count, and what you think your biggest retention challenge is. We'll take it from there."
-            data-ja="スクール名、生徒数の目安、現在もっとも大きな生徒定着上の課題だと感じていることをお知らせください。あとは、こちらで整理します。">
-            Get in touch with your school name, approximate student count, and what you think your biggest retention challenge is. We'll take it from there.
-          </p>
-          <a href="mailto:muratto.titiz@gmail.com?subject=School%20Audit" class="audit-cta-btn"
-            data-en="Book a free 90-min intake call →"
-            data-ja="無料の90分相談を予約する →">
-            Book a free 90-min intake call →
-          </a>
-        </div>
-
+        <div class="track-bar" id="track-bar"></div>
+        <p class="track-note" id="track-note"></p>
+        <div id="work-feature"></div>
+        <div class="tiles" id="work-tiles"></div>
       </div>
     </section>
   </div>
@@ -655,41 +527,19 @@
   <!-- CONTACT -->
   <div class="view" id="view-contact">
     <section>
-      <div class="contact-wrap">
-        <span class="index-no" data-en="💬 Contact" data-ja="💬 お問い合わせ">💬 Contact</span>
-        <h2 data-en="Let's give your students something real to play for." data-ja="子どもたちに、本気で挑める「本物のゲーム」を。">Let's give your students something real to play for.</h2>
-        <p style="line-height:1.75;color:rgba(36,27,20,0.75);"
-          data-en="If you run a school, juku, eikaiwa, or after-school program and want to bring Prosper Academy to your students, I'd love to hear from you. The same goes for partners who could host a festival stand, a neighbourhood tour, or a pitch day. I also take on a small number of school operations audits."
-          data-ja="学校、塾、英会話スクール、放課後プログラムなどを運営していて、Prosper Academyを導入したいとお考えの方は、ぜひご連絡ください。お祭りの屋台、街案内、ピッチデイなどの場を一緒につくってくださるパートナーの方も歓迎します。また、スクール運営の診断も少数ながらお引き受けしています。">
-          If you run a school, juku, eikaiwa, or after-school program and want to bring Prosper Academy to your students, I'd love to hear from you. The same goes for partners who could host a festival stand, a neighbourhood tour, or a pitch day. I also take on a small number of school operations audits.
-        </p>
+      <div class="wrap contact-wrap">
+        <h1 data-en="Let's build learning people want to come back to." data-ja="人が「また来たい」と思える学びを、一緒につくりましょう。">Let's build learning people want to come back to.</h1>
+        <p data-en="I'm looking for learning experience design, UX research, and product roles, especially in education and EdTech, in Tokyo or remote. I work in English and Japanese (JLPT N1)."
+           data-ja="教育・EdTech分野を中心に、学習体験デザイン、UXリサーチ、プロダクト関連のポジションを探しています（東京またはリモート）。英語と日本語（JLPT N1）で業務が可能です。">I'm looking for learning experience design, UX research, and product roles, especially in education and EdTech, in Tokyo or remote. I work in English and Japanese (JLPT N1).</p>
         <div class="contact-row">
-          <a href="mailto:muratto.titiz@gmail.com?subject=Prosper%20Academy%20licensing" class="contact-link primary-cta">
-            <span data-en="License Prosper Academy" data-ja="Prosper Academyのライセンスについて問い合わせる">License Prosper Academy</span><span>→</span>
-          </a>
-          <a href="mailto:muratto.titiz@gmail.com?subject=Prosper%20Academy%20partnership" class="contact-link">
-            <span data-en="Partner on a real-world mission" data-ja="実社会ミッションのパートナーになる">Partner on a real-world mission</span><span>↗</span>
-          </a>
-          <a href="#" data-nav="audit" class="contact-link">
-            <span data-en="School audit (side service)" data-ja="スクール診断（サブサービス）">School audit (side service)</span><span>→</span>
-          </a>
-          <a href="mailto:muratto.titiz@gmail.com" class="contact-link">
-            <span data-en="Email" data-ja="メール">Email</span><span>↗</span>
-          </a>
-          <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link">
-            <span>LinkedIn</span><span>↗</span>
-          </a>
-          <div class="contact-link resume-dropdown-wrap" id="resume-toggle" style="cursor:pointer;">
-            <span data-en="Résumé (PDF)" data-ja="履歴書（PDF）">Résumé (PDF)</span>
-            <span id="resume-arrow">↓</span>
+          <a href="mailto:muratto.titiz@gmail.com" class="contact-link primary-cta"><span data-en="Email me" data-ja="メールで連絡する">Email me</span><span aria-hidden="true">✉️</span></a>
+          <a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener" class="contact-link"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
+          <div class="contact-link" id="resume-toggle" role="button" tabindex="0" aria-expanded="false">
+            <span data-en="Résumé (PDF)" data-ja="履歴書・職務経歴書（PDF）">Résumé (PDF)</span><span id="resume-arrow" aria-hidden="true">▾</span>
           </div>
           <div class="resume-dropdown" id="resume-dropdown">
-            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option">
-              <span data-en="🇬🇧 English" data-ja="🇬🇧 英語版">🇬🇧 English</span><span>↗</span>
-            </a>
-            <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option">
-              <span data-en="🇯🇵 Japanese" data-ja="🇯🇵 日本語版">🇯🇵 Japanese</span><span>↗</span>
-            </a>
+            <a href="Murat_Titiz_Resume2026.pdf" target="_blank" class="resume-option"><span data-en="English" data-ja="英語版">English</span><span aria-hidden="true">↗</span></a>
+            <a href="Murat_Titiz_Resume2026_JP.pdf" target="_blank" class="resume-option"><span data-en="Japanese" data-ja="日本語版">Japanese</span><span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </div>
@@ -698,20 +548,24 @@
 
   <!-- CASE STUDY DETAIL -->
   <div class="view" id="view-study">
-    <div class="study-header">
-      <a href="#" class="back-link" data-nav="work" data-en="← Back to work" data-ja="← 実績一覧へ">← Back to work</a>
-      <h1 id="study-title"></h1>
-      <p class="study-summary" id="study-summary"></p>
-      <div class="study-tags" id="study-tags"></div>
+    <div class="wrap">
+      <div class="study-header">
+        <a href="#" class="back-link" data-nav="work" data-en="← Back to work" data-ja="← 実績一覧へ">← Back to work</a>
+        <h1 id="study-title"></h1>
+        <p class="study-summary" id="study-summary"></p>
+        <div class="study-tags" id="study-tags"></div>
+      </div>
+      <div id="study-body"></div>
     </div>
-    <div id="study-body"></div>
   </div>
 
 </main>
 
 <footer>
-  <div>© 2026 Murat Mert Titiz</div>
-  <a href="#" data-nav="contact" data-en="Get in touch ↗" data-ja="お問い合わせはこちら ↗">Get in touch ↗</a>
+  <div class="wrap">
+    <div><span data-en="Based in Tokyo. Lived in Turkey, the US, Italy and Japan. Speaks Turkish, English, Japanese and Italian, plus basic Russian." data-ja="東京在住。トルコ、アメリカ、イタリア、日本に居住経験あり。トルコ語・英語・日本語・イタリア語、ロシア語（基礎）を話します。">Based in Tokyo. Lived in Turkey, the US, Italy and Japan. Speaks Turkish, English, Japanese and Italian, plus basic Russian.</span><br>© 2026 Murat Mert Titiz</div>
+    <div><a href="https://www.linkedin.com/in/murat-titiz-44533416b" target="_blank" rel="noopener">LinkedIn</a> &nbsp; <a href="#" data-nav="contact" data-en="Get in touch" data-ja="お問い合わせ">Get in touch</a></div>
+  </div>
 </footer>
 
 <script>
@@ -725,6 +579,7 @@ const GITHUB_BASE = "";
 // =============================================================
 const IMAGES = {
   "hero":                    "images/hero.png",
+  "thumb":                   "images/thumb.png",
   "prosper-origin":          "images/cs04-step01-origin.png",
   "prosper-gap":             "images/cs04-step02-build.png",
   "prosper-pilot":           "images/cs04-step04-trial.png",
@@ -757,28 +612,23 @@ function imgSrc(key){
   return GITHUB_BASE ? GITHUB_BASE + "/" + path : path;
 }
 
-function placeholderHTML(label){
-  return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:0.68rem;color:rgba(36,27,20,0.35);text-align:center;padding:16px;">
-    <div style="font-size:1.6rem;">🖼</div>
-    <div>${label}</div>
-  </div>`;
-}
 
-const TILE_COLORS = ["#D99A4E","#A8281F","#E8866F","#5C8A6E","#D14B3F"];
 let LANG = 'en';
-
-// =============================================================
-//  PROSPER ACADEMY — featured content (Home + Work + case study)
-// =============================================================
+(function(){
+  const t = document.getElementById('img-thumb');
+  const fallback = ()=>{ t.parentElement.textContent = '🙂'; };
+  const src = imgSrc('thumb');
+  if(src){ t.onerror = fallback; t.src = src; } else { fallback(); }
+})();
 const PROSPER = {
-  kicker:{en:"Flagship curriculum · Available to license", ja:"主力カリキュラム · ライセンス提供中"},
+  kicker:{en:"Personal project · Since February 2026", ja:"個人プロジェクト · 2026年2月〜"},
   jaName:"プロアカ",
   tagline:{en:"A 3-month financial literacy course where kids don't just study money — they earn it.",
            ja:"お金を「勉強する」だけでなく、実際に「稼いでみる」。3か月間の金融リテラシー・コース。"},
   lead:{en:"Children learn the rules of money, business, and work through games and simulations — then leave the classroom to play for real: running a festival stand, selling on Mercari, guiding visitors around Tokyo, and building and pitching their own company. Every module ends in <em>tegotae</em>: tangible proof that what they did actually worked.",
         ja:"子どもたちは、お金・ビジネス・仕事のルールをゲームとシミュレーションで学び、その後、教室を飛び出して「本番」に挑みます。お祭りの屋台を運営し、メルカリで販売し、東京の街を案内し、自分たちの会社をつくってプレゼンする。すべてのモジュールは「手応え」で締めくくられます。自分の行動が本当に結果につながった、という確かな実感です。"},
-  status:{en:"<b>Status:</b> 3-month program in development · simulations, festival stand &amp; Mercari already piloted",
-          ja:"<b>現状：</b>3か月プログラムを開発中 · シミュレーション、屋台出店、メルカリ販売は実施済み"},
+  status:{en:"<b>Status:</b> 3-month program in development · usability-tested with 20+ learners · festival stand &amp; Mercari already piloted",
+          ja:"<b>現状：</b>3か月プログラムを開発中 · 20名以上の生徒とユーザビリティテストを実施 · 屋台出店、メルカリ販売は実施済み"},
   missions:[
     {en:"🏮 Festival stand", ja:"🏮 お祭りの屋台"},
     {en:"📦 Selling on Mercari", ja:"📦 メルカリで販売"},
@@ -805,8 +655,8 @@ const PROSPER = {
   stats:[
     {num:{en:"3",ja:"3か月"}, lbl:{en:"months, from first lesson to pitch day",ja:"初回の授業からピッチデイまで"}},
     {num:{en:"4",ja:"4つ"}, lbl:{en:"real-world missions with real stakes",ja:"本物の手応えがある実社会ミッション"}},
-    {num:{en:"$150+",ja:"$150+"}, lbl:{en:"earned by students at the Florida pilot stall",ja:"フロリダでの試行で、生徒たちが稼いだ売上"}},
-    {num:{en:"K–12",ja:"小〜高"}, lbl:{en:"designed for elementary through high school",ja:"小学生から高校生まで対象"}}
+    {num:{en:"20+",ja:"20名以上"}, lbl:{en:"learners in usability pilots, elementary to high school",ja:"小学生から高校生まで、ユーザビリティテストに参加した生徒"}},
+    {num:{en:"$150+",ja:"$150+"}, lbl:{en:"earned by students at the Florida pilot stall",ja:"フロリダでの試行で、生徒たちが稼いだ売上"}}
   ]
 };
 
@@ -820,16 +670,18 @@ function monthsHTML(light){
     </div>`).join('')}</div>`;
 }
 
+
+
 function featureHTML(){
   const P = PROSPER, ja = LANG === 'ja';
   const src = imgSrc("prosper-results");
   const photo = src
     ? `<div class="feature-photo"><img src="${src}" alt="${ja?'屋台の売上を掲げる生徒たち':'Students holding up the cash they earned at their festival stall'}" onerror="this.parentElement.classList.add('empty');this.parentElement.textContent='🖼 ${IMAGES['prosper-results']}';"></div>`
     : `<div class="feature-photo empty">🖼 ${IMAGES['prosper-results']}</div>`;
-  return `<div class="feature reveal">
+  return `<div class="feature">
     <div class="feature-top">
       <div>
-        <span class="feature-kicker">${P.kicker[LANG]}</span>
+        <p class="feature-kicker">${P.kicker[LANG]}</p>
         <h2>Prosper Academy<span class="ja-name">${P.jaName}</span></h2>
         <p class="f-tagline">${P.tagline[LANG]}</p>
         <p class="f-lead">${P.lead[LANG]}</p>
@@ -841,97 +693,102 @@ function featureHTML(){
     ${monthsHTML(false)}
     <div class="feature-stats">${P.stats.map(s=>`<div class="f-stat"><div class="num">${s.num[LANG]}</div><div class="lbl">${s.lbl[LANG]}</div></div>`).join('')}</div>
     <div class="feature-actions">
-      <a href="#" class="btn solid" data-study-link="prosper-academy">${ja?'ケーススタディを読む →':'Read the full case study →'}</a>
-      <a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" class="btn ghost">${ja?'eラーニングモジュールを見る ↗':'Try the e-learning module ↗'}</a>
-      <a href="#" class="btn ghost" data-nav="contact">${ja?'ライセンスについて相談する':'License it for your school'}</a>
+      <a href="#" class="btn solid" data-study-link="prosper-academy">${ja?'ケーススタディを読む':'Read the case study'}</a>
+      <a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" class="btn ghost">${ja?'eラーニングを体験する ↗':'Try the e-learning module ↗'}</a>
     </div>
   </div>`;
 }
 
-function renderFeature(){
-  ["home-feature","work-feature"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.innerHTML = featureHTML();
-  });
-}
+// =============================================================
+//  TRACKS — the same work, ordered for each kind of role.
+//  Shareable links: #work/learning · #work/research · #work/product
+//  A single case study: #case/<id>  (e.g. #case/line-automation)
+// =============================================================
+const ALL_ORDER = ["prosper-academy","line-automation","churn-study","kana-progress-tracking","cultural-training"];
 
-// =============================================================
-//  AT A GLANCE — supporting work (school operations)
-// =============================================================
-const GLANCE_ITEMS = [
-  {
-    studyId: "churn-study",
-    headline: {
-      en: "Served thousands of students across 400+ families",
-      ja: "400家庭以上、数千人の生徒をサポート"
-    },
-    body: {
-      en: "Worked closely with the learning journey of each individual student and family, not just the aggregate numbers.",
-      ja: "全体の数字だけを見るのではなく、一人ひとりの生徒とご家庭の学習プロセスに向き合いました。"
-    }
+const TRACKS = {
+  learning:{
+    emoji:"🎓",
+    label:{en:"Learning design", ja:"学習体験デザイン"},
+    headline:{en:"Hiring for learning or instructional design", ja:"学習体験・インストラクショナルデザインの採用ご担当の方へ"},
+    body:{en:"Curricula for children and adults, built from learning principles and revised after testing with real learners.",
+          ja:"学習の原則にもとづいて子ども・大人向けのカリキュラムを設計し、実際の学習者との検証を経て改善しています。"},
+    note:{en:"Ordered for learning and instructional design roles: curriculum design and testing with learners first, then adult learning and learner data.",
+          ja:"学習体験・インストラクショナルデザイン職向けの順番です。カリキュラム設計と学習者との検証を先に、続いて社会人向け学習と学習データの事例を掲載しています。"},
+    order:["prosper-academy","cultural-training","kana-progress-tracking","churn-study","line-automation"]
   },
-  {
-    studyId: "line-automation",
-    headline: {
-      en: "Built scheduling automation that saved hundreds of staff hours",
-      ja: "スタッフの作業時間を数百時間削減する予約自動化システムを構築"
-    },
-    body: {
-      en: "Designed and implemented a LINE LIFF and Make.com-based system that replaced manual scheduling entirely.",
-      ja: "LINE LIFFとMake.comを活用し、手作業でのスケジュール管理を完全に置き換えるシステムを設計・実装しました。"
-    }
+  research:{
+    emoji:"🔍",
+    label:{en:"UX research", ja:"UXリサーチ"},
+    headline:{en:"Hiring for UX research", ja:"UXリサーチャーの採用ご担当の方へ"},
+    body:{en:"Interviews, surveys, usability tests and behavioral observation, run end to end and turned into changes people actually adopted.",
+          ja:"インタビュー、アンケート、ユーザビリティテスト、行動観察を一貫して実施し、実際に使われる改善につなげています。"},
+    note:{en:"Ordered for UX research roles: parent research first, then usability testing with teachers, process research, and testing with children.",
+          ja:"UXリサーチ職向けの順番です。保護者リサーチを先に、続いて講師とのユーザビリティテスト、業務プロセスの調査、子どもとの検証を掲載しています。"},
+    order:["churn-study","kana-progress-tracking","line-automation","prosper-academy","cultural-training"]
   },
-  {
-    studyId: "kana-progress-tracking",
-    headline: {
-      en: "Built a student progress tracking system",
-      ja: "生徒の学習進捗を管理するシステムを構築"
-    },
-    body: {
-      en: "Enabled staff to capture and reflect on real, structured student data through a fast, low-friction interface.",
-      ja: "スタッフが短時間で、生徒に関する構造化されたデータを記録・活用できる仕組みを実現しました。"
-    }
+  product:{
+    emoji:"🛠",
+    label:{en:"Product & operations", ja:"プロダクト・オペレーション"},
+    headline:{en:"Hiring for product, service design or operations", ja:"プロダクト・サービス企画・オペレーションの採用ご担当の方へ"},
+    body:{en:"Research turned into tools people adopted: a LINE self-service system for families and a logging tool teachers use between classes.",
+          ja:"リサーチを、実際に使われるツールへ。保護者向けのLINEセルフサービスと、授業の合間に講師が使う記録ツールを構築しました。"},
+    note:{en:"Ordered for product, service design and operations roles: the tools I built and how they were adopted first, then the research behind them.",
+          ja:"プロダクト・サービス企画・オペレーション職向けの順番です。構築したツールと定着までの過程を先に、続いてその土台となったリサーチを掲載しています。"},
+    order:["line-automation","kana-progress-tracking","churn-study","prosper-academy","cultural-training"]
   }
+};
+
+const TRACK_ALL = {
+  label:{en:"All work", ja:"すべて"},
+  note:{en:"Prosper Academy first, then the school work and adult curriculum around it. Pick a role above to see the same work ordered for that job.",
+        ja:"Prosper Academyを先頭に、教室での実績と社会人向けカリキュラムを掲載しています。上のボタンで、職種ごとの順番に切り替えられます。"}
+};
+
+
+
+// Stamp card — every number matches the résumé
+const PROOF = [
+  {num:{en:"100+",ja:"100名+"}, lbl:{en:"parents interviewed and surveyed",ja:"保護者にヒアリング・調査"}},
+  {num:{en:"51%",ja:"51%"}, lbl:{en:"couldn't see their child's progress",ja:"が子どもの成長を実感できず"}},
+  {num:{en:"30 sec",ja:"約30秒"}, lbl:{en:"per absence request, down from 10 steps",ja:"欠席連絡1件（以前は10工程）"}},
+  {num:{en:"80%",ja:"80%"}, lbl:{en:"of teachers on the new tool in week 1",ja:"導入1週目の講師利用率"}},
+  {num:{en:"20+",ja:"20名+"}, lbl:{en:"learners in usability pilots",ja:"ユーザビリティテスト参加者"}},
+  {num:{en:"180 h",ja:"180時間"}, lbl:{en:"staff time saved a year",ja:"年間のスタッフ工数削減"}},
+  {num:{en:"12%",ja:"12%"}, lbl:{en:"annual churn",ja:"年間退会率"}}
+];
+const NEXT_STAMP = {en:"Your team next?", ja:"次は、あなたのチームで"};
+
+const PROCESS = [
+  {title:{en:"Notice",ja:"気づく"}, body:{en:"Observe users and talk to them to understand what they're struggling with. Many frustrations sit below the surface.",ja:"ユーザーを観察し、話を聞いて、何に困っているのかを理解する。不満の多くは、表には出てこないところにある。"}},
+  {title:{en:"Care",ja:"寄り添う"}, body:{en:"Relate to these issues and get into the users' minds. I can't fully understand why something is a problem until I understand how the user feels.",ja:"課題に共感し、ユーザーの気持ちに入り込む。ユーザーがどう感じているかを知るまでは、なぜそれが問題なのかを本当には理解できない。"}},
+  {title:{en:"Theorycraft and discuss",ja:"仮説を練り、議論する"}, body:{en:"Get past my gut-reaction ideas and discuss them with experts who see things differently. Come up with many solutions, then keep the ones we can act on.",ja:"最初に浮かんだアイデアで終わらせず、異なる視点を持つ専門家と議論する。解決策を数多く出し、実行できるものに絞り込む。"}},
+  {title:{en:"Design",ja:"設計する"}, body:{en:"Iterate on designs built from educational and psychological principles: active engagement (ICAP), feedback, transfer of learning.",ja:"教育と心理の原則にもとづいて設計し、改良を重ねる。能動的な関与（ICAP）、フィードバック、学習の転移など。"}},
+  {title:{en:"Test",ja:"試す"}, body:{en:"Run moderated sessions with screened participants, log behavior, rate every issue by severity, then process the data into a bigger picture.",ja:"選定した参加者とモデレート形式のテストを行い、行動を記録し、課題を重要度で評価して、データから全体像を組み立てる。"}},
+  {title:{en:"Fix and roll out",ja:"直して広げる"}, body:{en:"Iterate until even a first grader can jump into the game and immediately understand what's going on.",ja:"小学1年生でもすぐにゲームに入り込み、何が起きているのかを一目で理解できるまで改善を重ねる。"}}
 ];
 
-function glanceCardHTML(item){
-  const linkText = LANG === 'ja' ? '関連する事例を見る' : 'View related case study';
-  return `<div class="glance-card reveal" data-study="${item.studyId}">
-    <div class="glance-headline">${item.headline[LANG]}</div>
-    <div class="glance-body">${item.body[LANG]}</div>
-    <div class="glance-link">${linkText} <span class="arrow">→</span></div>
-  </div>`;
-}
+// Each case study's main track sets its colour tab
+const PRIMARY = {"prosper-academy":"learning","cultural-training":"learning","churn-study":"research","kana-progress-tracking":"research","line-automation":"product"};
+const TRACK_COLOR = {learning:"var(--sun)", research:"var(--sky)", product:"var(--leaf)"};
 
-function renderGlance(){
-  const wrap = document.getElementById('glance-wrap');
-  if(!wrap) return;
-  wrap.innerHTML = GLANCE_ITEMS.map(glanceCardHTML).join("");
-  wrap.querySelectorAll(".glance-card").forEach(el=>observer.observe(el));
-}
-
-// =============================================================
-//  CASE STUDIES — Prosper Academy first; the rest are supporting work
-//  Step options: img (image key), noVisual, programMap, finale, carousel
-// =============================================================
 const CASE_STUDIES = [
   {
     id:"prosper-academy", num:"01", featured:true,
     title:{en:"Prosper Academy: Financial Literacy Through Real-World Play", ja:"Prosper Academy（プロアカ）：実体験で学ぶ金融リテラシー"},
-    type:{en:"Flagship Curriculum · Licensing", ja:"主力カリキュラム · ライセンス提供"},
+    type:{en:"Personal project · Learning design", ja:"個人プロジェクト · 学習体験デザイン"},
     loc:"Japan · USA",
-    tags:{en:["Curriculum Design","Gamification","Experiential Learning","Curriculum Licensing"],
-          ja:["カリキュラム設計","ゲーミフィケーション","体験型学習","ライセンス提供"]},
+    tags:{en:["Curriculum Design","Gamification","Usability Testing","Experiential Learning"],
+          ja:["カリキュラム設計","ゲーミフィケーション","ユーザビリティテスト","体験型学習"]},
     demoUrl:"https://murattitiz.github.io/articulaterise/",
     demoLabel:{en:"Try the Articulate Rise module ↗", ja:"Articulate Riseモジュールを見る ↗"},
-    summary:{en:"School, money, a career, companies — they are all games, and children are good at games. Prosper Academy is a 3-month course that teaches finance by letting kids play: first in simulations, then in the real world, with real customers and real money.",
-             ja:"学校も、お金も、キャリアも、会社も、すべてはゲームであり、子どもはゲームが得意です。Prosper Academyは、子どもたちが「プレイ」しながら金融を学ぶ3か月間のコースです。まずはシミュレーションで、次に本物のお客様と本物のお金を相手に、実社会で。"},
-    licenseCta:true,
+    summary:{en:"School, money, a career, companies — they are all games, and children are good at games. Prosper Academy is a 3-month course that teaches finance by letting kids play: first in simulations tested with 20+ learners, then in the real world, with real customers and real money.",
+             ja:"学校も、お金も、キャリアも、会社も、すべてはゲームであり、子どもはゲームが得意です。Prosper Academyは、子どもたちが「プレイ」しながら金融を学ぶ3か月間のコースです。まずは20名以上の生徒と検証したシミュレーションで、次に本物のお客様と本物のお金を相手に、実社会で。"},
     steps:[
       {label:{en:"01 — The problem",ja:"01 — 課題"}, img:"prosper-origin",
        title:{en:"A shrinking yen, a changing job market, and a school system leaving too many kids behind",ja:"円安、変わりゆく労働環境、そして多くの子どもを取り残す教育制度"},
-       body:{en:"Japan's yen has weakened dramatically against major currencies in recent years, quietly eroding the purchasing power of a generation that was never taught to think about that risk. At the same time, lifetime employment at one company is fading, replaced by a labour market that expects individuals to manage their own career and financial trajectory. Japan's traditional education system, built around standardised testing and rigid classroom structure, is struggling to prepare students for either shift. The clearest evidence is truancy: in the 2024 school year, a record 353,970 elementary and junior high school students were classified as futoko (non-attending) by Japan's Ministry of Education — the twelfth consecutive year of increase — with a further 67,782 in high school. Meanwhile, in countries like the United States, financial literacy is a normal part of childhood, from classroom economics units to the almost clichéd lemonade stand. Japan has no equivalent tradition, and the gap shows.",
-              ja:"日本円は近年、主要通貨に対して大幅に下落しており、そのリスクについて学ぶ機会がなかった世代の購買力を静かに蝕んでいます。同時に、一つの会社で勤め上げる終身雇用モデルは薄れつつあり、個人が自らキャリアと家計を管理することを前提とした労働市場へと変化しています。標準化されたテストと画一的な教室運営を前提とする日本の従来型教育制度は、こうした変化のいずれにも十分に対応できていません。その最も明確な証拠が不登校の数字です。文部科学省の調査によると、2024年度の小・中学生の不登校児童生徒数は353,970人と過去最多を記録し、12年連続で増加、高校生でも67,782人にのぼります。一方、アメリカなどでは、レモネードスタンドに代表されるように、幼少期から金融リテラシーを学ぶことがごく当たり前になっています。日本にはこれに相当する伝統がなく、そのギャップは明らかです。"},
+       body:{en:"Japan's yen has weakened dramatically against major currencies in recent years, quietly eroding the purchasing power of a generation that was never taught to think about that risk. At the same time, lifetime employment at one company is fading, replaced by a labour market that expects individuals to manage their own career and financial trajectory. Japan's traditional education system, built around standardised testing and rigid classroom structure, is struggling to prepare students for either shift. The clearest evidence is truancy: in the 2024 school year, a record 353,970 elementary and junior high school students were classified as futoko (non-attending) by Japan's Ministry of Education — the twelfth consecutive year of increase — with a further 67,782 in high school. Meanwhile, in countries like the United States, financial literacy is a normal part of childhood, from classroom economics units to the almost clichéd lemonade stand. Japan has no equivalent tradition, and the gap shows.<br><br>Prosper Academy began when a civil servant asked me to help build a money curriculum that gave young learners hands-on, real-world experience with concrete results. When they stepped away, I took the project over.",
+              ja:"日本円は近年、主要通貨に対して大幅に下落しており、そのリスクについて学ぶ機会がなかった世代の購買力を静かに蝕んでいます。同時に、一つの会社で勤め上げる終身雇用モデルは薄れつつあり、個人が自らキャリアと家計を管理することを前提とした労働市場へと変化しています。標準化されたテストと画一的な教室運営を前提とする日本の従来型教育制度は、こうした変化のいずれにも十分に対応できていません。その最も明確な証拠が不登校の数字です。文部科学省の調査によると、2024年度の小・中学生の不登校児童生徒数は353,970人と過去最多を記録し、12年連続で増加、高校生でも67,782人にのぼります。一方、アメリカなどでは、レモネードスタンドに代表されるように、幼少期から金融リテラシーを学ぶことがごく当たり前になっています。日本にはこれに相当する伝統がなく、そのギャップは明らかです。<br><br>Prosper Academyは、ある公務員の方から「子どもたちが実体験を通じて確かな成果を得られる、お金のカリキュラムを一緒につくりたい」と声をかけられたことから始まりました。その方が離れた後、私がプロジェクトを引き継ぎました。"},
        reverse:false},
       {label:{en:"02 — What already exists",ja:"02 — 既存の取り組み"}, img:"prosper-gap",
        title:{en:"Free curricula exist. Nobody measures whether they work.",ja:"無償の教材は存在する。しかし、効果を測定している例はほとんどない。"},
@@ -948,12 +805,17 @@ const CASE_STUDIES = [
        body:{en:"Prosper Academy is structured like a game with three levels. Month one teaches the rules in a safe sandbox. Month two takes the same rules into the real world, using knowledge and skills kids already have: they run a festival stand, sell on Mercari, and plan and lead machi-annai — neighbourhood tours of Tokyo — for paying guests. Month three asks them to build something of their own: a mock start-up, taken through everything a real one needs, from the idea and the customer to the budget, the org chart, and a final pitch of the company and its structure.",
               ja:"Prosper Academyは、3つのレベルを持つゲームとして構成されています。1か月目は、安全な「砂場」でルールを学びます。2か月目は、そのルールを実社会へ持ち出し、子どもたちがすでに持っている知識やスキルを活かして挑みます。お祭りの屋台を運営し、メルカリで販売し、お客様を東京の街に案内する「街案内」を企画・実施します。3か月目は、自分たちだけのものをつくります。アイデアとお客様の発見から、予算、組織図、そして最終的な事業と組織のプレゼンまで、本物のスタートアップに必要なすべてを経験する模擬起業です。"},
        reverse:false},
-      {label:{en:"05 — The pilot",ja:"05 — 試行"}, img:"prosper-pilot",
+      {label:{en:"05 — Testing with learners",ja:"05 — 学習者との検証"}, noVisual:true,
+       title:{en:"20+ learners, and the one thing they couldn't see",ja:"20名以上の生徒との検証で見えた、ひとつの「見えないもの」"},
+       body:{en:"Before taking the classroom game further, I ran usability pilots with more than 20 learners in separate elementary, middle and high school groups, in person and online. I screened participants with their teachers for English level and comfort with a computer, and got parental consent before every session. Each session combined moderated observation with in-game logs, and I rated every issue by severity so the worst problems were fixed first.<br><br>The clearest finding: students couldn't tell when the game had moved on to the next day, so decisions that were meant to carry over felt random. Using Claude Code, I added a day/night cycle so the passage of time is visible on screen, giving players the sense of progress the design depends on. The prototype is now ready for wider rollout.",
+              ja:"教室用ゲームをさらに展開する前に、小学生・中学生・高校生のグループごとに、対面とオンラインで20名以上の生徒とユーザビリティテストを行いました。参加者は講師と相談しながら英語力やPC操作の可否をもとに選定し、毎回保護者の同意を得たうえで実施しました。各セッションではモデレーターとしての行動観察とゲーム内ログを組み合わせ、すべての課題を重要度で評価して、深刻なものから順に改善しました。<br><br>最も明確だった発見は、ゲームの「一日」が進んだことが生徒に伝わっていなかったことです。そのため、翌日に持ち越すはずの判断が、偶然のように感じられていました。そこでClaude Codeを使って昼と夜の切り替えを加え、時間の経過を画面上で見えるようにしました。設計の前提である「進んでいる手応え」を、プレイヤーが感じられるようにするためです。現在、より広く展開できるプロトタイプが完成しています。"},
+       reverse:false},
+      {label:{en:"06 — The real-world pilot",ja:"06 — 実社会での試行"}, img:"prosper-pilot",
        title:{en:"From simulation to an actual festival stall in Florida, USA",ja:"シミュレーションから、米国フロリダ州の実際の屋台出店へ"},
        body:{en:"The real-world level has already been tested. The program's most advanced students were given a real business to run. We secured a food and retail hygiene certification so students could legally operate their own stall, and set up a live stand at a community festival in Florida, USA, selling Yo-Yo Tsuri (a traditional Japanese water yo-yo game), Katakiri (paper cutting art), and origami. The students planned the entire operation themselves: they set prices, forecasted demand, designed and hand-made their own signage, and managed the cash box through a full day of actual customers. Separately, students practised market research and pricing by listing and selling their own belongings on Mercari, turning an app most of them already used casually into a structured lesson on supply, demand, and negotiation.",
               ja:"実社会レベルは、すでに試行済みです。プログラムの上級レベルの生徒には、実際に運営できる事業の機会を用意しました。生徒たちが自分たちの屋台を合法的に運営できるよう食品・小売の衛生資格を取得し、米国フロリダ州の地域フェスティバルで、ヨーヨー釣り、切り絵、折り紙を販売する屋台を出店しました。運営はすべて生徒自身が計画しました。価格設定、需要予測、看板のデザインと手作り、そして実際のお客様を相手にした1日を通じたレジ管理まで、すべて自分たちで行いました。これとは別に、生徒たちはメルカリで自分の持ち物を出品・販売し、市場調査と価格設定も練習しました。多くの生徒が日常的に使っているアプリを、需要と供給、価格交渉を学ぶ構造化されたレッスンへと転換したのです。"},
        reverse:true},
-      {label:{en:"06 — Results speak for themselves",ja:"06 — 結果がすべてを物語る"}, img:"prosper-results",
+      {label:{en:"07 — Results speak for themselves",ja:"07 — 結果がすべてを物語る"}, img:"prosper-results",
        title:{en:"That's what tegotae looks like",ja:"これが「手応え」だ"},
        body:{en:"By the end of the day in Florida, the students had earned more than $150 in real cash — money they priced, earned, and counted themselves. No worksheet score, simulated leaderboard, or quiz result captures what happened as well as this photo does: a group of kids who spent the day running an actual business, holding up what they made from it. This is what financial literacy looks like when it stops being a PDF and starts being real.",
               ja:"フロリダでの1日の終わりに、生徒たちは自分たちで値付けし、稼ぎ、数えた150ドル以上の現金を手にしていました。ワークシートの点数も、シミュレーション上のランキングも、テストの結果も、この一枚の写真ほど雄弁には物語りません。実際にビジネスを一日運営した子どもたちが、その成果を誇らしげに掲げている姿です。金融リテラシーがPDFであることをやめ、本物になった瞬間です。"},
@@ -963,18 +825,18 @@ const CASE_STUDIES = [
   },
   {
     id:"line-automation", num:"02",
-    title:{en:"LINE Communication & Workflow Automation", ja:"LINEによるコミュニケーション・業務自動化"},
-    type:{en:"Learning Operations", ja:"学習オペレーション"},
+    title:{en:"From a 10-Step Email Chain to 30 Seconds in LINE", ja:"10工程のメール対応を、LINEで約30秒に"},
+    type:{en:"Research → product", ja:"リサーチ → プロダクト"},
     loc:"Japan",
-    tags:{en:["Process Automation","Communication Design","UX Research","No-Code Tools"],
-          ja:["業務プロセス自動化","コミュニケーション設計","UXリサーチ","ノーコードツール"]},
-    summary:{en:"A 9-step email loop for scheduling makeup lessons now runs through LINE and resolves in under a minute.",
-             ja:"9段階に及んでいた振替授業のメール対応を、LINE上で1分以内に完結できる仕組みに刷新しました。"},
+    tags:{en:["UX Research","Service Design","Process Automation","No-Code Tools"],
+          ja:["UXリサーチ","サービスデザイン","業務プロセス自動化","ノーコードツール"]},
+    summary:{en:"Every absence meant a 10-step email loop for parents and staff. I mapped where it broke, rebuilt it inside the app families already use, and 60% of them switched within two weeks.",
+             ja:"欠席のたびに、保護者とスタッフは10工程のメール対応を繰り返していました。どこで滞るのかを洗い出し、保護者が普段使っているアプリの中に仕組みを作り直した結果、2週間で60%の家庭が新しい方法に切り替えました。"},
     steps:[
       {label:{en:"01 — Problem",ja:"01 — 課題"},
-       title:{en:"Nine steps, all done by hand",ja:"9段階にわたる手作業"},
-       body:{en:"At KANA English School, every absence or makeup request went through the same email chain: check the site, email a request, wait for staff to check availability, wait again for a teacher consultation, get a confirmation, confirm back, and hope someone records it correctly. About 35 of these came in per week across 150 students and 100+ families. On a normal weekday that loop ate up 20+ hours; over a weekend, closer to 30, since the school was closed Sundays. Only staff with strong Japanese could even handle the requests, and because different part-timers picked up different threads, the same conversation would get answered twice or dropped entirely.",
-              ja:"KANA English Schoolでは、欠席・振替の依頼がすべて同じメール対応を経ていました。サイトを確認し、依頼を送り、スタッフが空き状況を確認し、担当講師に相談し、返信を待ち、最終確認を行い、記録に残すという流れです。週に約35件、150名の生徒・100家庭以上から依頼が届き、平日だけで20時間以上、週末には30時間近くがこの対応に費やされていました。日本語に堪能なスタッフしか対応できず、複数のアルバイトスタッフが別々にやり取りを引き継ぐため、同じ問い合わせに二重に返信したり、対応が漏れたりすることもありました。"},
+       title:{en:"Ten steps, all done by hand",ja:"10工程にわたる手作業"},
+       body:{en:"At KANA English School, every absence or makeup request went through the same email chain: check the site, email a request, wait for staff to check availability, wait again for a teacher, get a confirmation, confirm back, and hope someone records it correctly. More than 35 of these came in every week. Only staff with strong Japanese could handle them, and because different part-timers picked up different threads, the same request would get answered twice or dropped entirely.",
+              ja:"KANA English Schoolでは、欠席・振替の依頼がすべて同じメール対応を経ていました。サイトを確認し、依頼を送り、スタッフが空き状況を確認し、担当講師に相談し、返信を待ち、最終確認を行い、記録に残すという流れです。依頼は毎週35件以上。日本語に堪能なスタッフしか対応できず、複数のアルバイトスタッフが別々にやり取りを引き継ぐため、同じ依頼に二重に返信したり、対応が漏れたりすることもありました。"},
        reverse:false},
       {label:{en:"02 — Process",ja:"02 — プロセス"},
        title:{en:"Stop fighting the channel parents already use",ja:"保護者がすでに使っているチャネルで完結させる"},
@@ -982,36 +844,36 @@ const CASE_STUDIES = [
               ja:"保護者へのアンケートでは、74名がメールよりLINEを希望し、43名が振替手続きそのものをわかりにくいと回答しました。そこで別の予約アプリを作るのではなく、LIFFを使ってLINE内で完結するインターフェースを設計。アプリのダウンロードも、新しいログインも必要ありません。裏側ではMake.comが、生徒情報の確認、リアルタイムの空き枠取得、二重予約の防止、クレジット管理までを自動で処理します。"},
        reverse:true},
       {label:{en:"03 — Outcome",ja:"03 — 成果"},
-       title:{en:"Days down to under a minute, 90% adoption",ja:"数日かかっていた対応を1分以内に。利用率90%"},
-       body:{en:"The LINE interface now sits at 90% adoption across the school's families. What used to take a staff member 10 minutes of manually cross-checking schedules finishes in under three seconds, and a parent can submit a request, get confirmation, and be done in under a minute total. Staff time went back to the things that actually need a person — marketing, account management, customer support, and building relationships.",
-              ja:"LINEインターフェースの利用率は現在90%。スタッフが10分かけて手作業でスケジュールを照合していた処理が、3秒以内に完了します。保護者も、依頼から確認までを1分以内で完了できます。これにより、スタッフはマーケティング、顧客対応、関係構築など、人が対応すべき業務に時間を使えるようになりました。"},
+       title:{en:"From ten steps to about 30 seconds",ja:"10工程から約30秒へ"},
+       body:{en:"Within two weeks, 60% of families were using the LINE flow. A parent can now report an absence or book a makeup lesson in about 30 seconds without waiting for anyone, and the checks staff used to do by hand happen automatically. Together with the school's other communication automation, it saves about 180 staff hours a year, which now go to the things that need a person: building relationships with families, customer support, and marketing.",
+              ja:"導入から2週間で、60%の家庭がLINEでの手続きを利用し始めました。保護者は誰かの返信を待つことなく、約30秒で欠席連絡や振替予約を完了できます。スタッフが手作業で行っていた確認も自動化されました。ほかの連絡業務の自動化と合わせて、年間約180時間のスタッフ工数を削減し、その時間を保護者との関係づくり、顧客対応、マーケティングなど、人が担うべき業務に充てています。"},
        reverse:false}
     ]
   },
   {
     id:"churn-study", num:"03",
-    title:{en:"Parent Retention & Customer Education", ja:"保護者の定着支援とカスタマーエデュケーション"},
-    type:{en:"Customer Education", ja:"カスタマーエデュケーション"},
+    title:{en:"Parent Research & Retention", ja:"保護者リサーチと定着支援"},
+    type:{en:"UX research · Retention", ja:"UXリサーチ · 定着支援"},
     loc:"Japan",
-    tags:{en:["Retention Strategy","Behaviour Change","Content Production","Channel Diagnostics"],
-          ja:["リテンション戦略","行動変容","コンテンツ制作","チャネル診断"]},
+    tags:{en:["User Interviews","Surveys","Behaviour Change","Retention"],
+          ja:["ユーザーインタビュー","アンケート","行動変容","リテンション"]},
     summary:{en:"Parents thought their kids weren't learning English. The kids were; just not where anyone could see it.",
              ja:"保護者は「子どもが英語を身につけていない」と感じていました。実際には学んでいたのです。ただ、その成長が見えていませんでした。"},
     steps:[
       {label:{en:"01 — Problem",ja:"01 — 課題"},
        title:{en:"The progress was real. Parents just couldn't see it.",ja:"成長はあった。ただ、それが保護者には見えていなかった。"},
-       body:{en:"After more than 30 parent interviews, a pattern showed up everywhere: kids spoke English at school and reverted to their home language the second they walked in the door. To a parent watching from outside, that looked like zero progress, even though teachers were marking most students as on track. Thirteen of 36 parents interviewed brought up some version of the same complaint, almost word for word: their kid couldn't even tell them what happened in class that day.",
-              ja:"30名以上の保護者へのインタビューから、共通するパターンが見えてきました。子どもたちは学校では英語を話す一方、家に帰ると母語に戻ります。そのため、外から見ている保護者には「まったく成長していない」ように見えていました。36名中13名が、ほぼ同じ趣旨の声を上げていました。「今日何をやったのか聞いても、子どもが何も話せない」というものでした。"},
+       body:{en:"I interviewed and surveyed more than 100 parents about lessons, materials and online tools, running interviews together with staff so the findings didn't rest on one interviewer's reading. One finding dominated: 51% said they couldn't see their child's progress. The interviews explained why. Kids spoke English at school and switched back to their home language the moment they walked in the door, so to a parent watching from outside it looked like nothing was happening, even when teachers had most students on track. Other issues came up too: materials that were hard to reach at home, free learning tools nobody knew about (such as an AI pronunciation checker), and slow replies to absence requests.",
+              ja:"レッスン・教材・オンラインツールについて、100名以上の保護者にインタビューとアンケートを行いました。インタビューはスタッフと一緒に実施し、一人の聞き手の解釈に偏らないようにしました。最も大きな発見は、51%の保護者が「子どもの成長が見えない」と感じていたことです。インタビューからその理由も見えてきました。子どもたちは教室では英語を話す一方、家に帰ると母語に戻ります。そのため、外から見ている保護者には「何も変わっていない」ように見えていたのです。講師の評価では、ほとんどの生徒が順調に伸びていたにもかかわらずです。ほかにも、家庭で教材にアクセスしにくいこと、無料で使える学習ツール（AI発音チェッカーなど）が知られていないこと、欠席連絡への返信が遅いことなどの課題が見つかりました。"},
        reverse:false},
       {label:{en:"02 — Process",ja:"02 — プロセス"},
        title:{en:"Give the work somewhere to live outside the classroom",ja:"教室の外にも、学びが見える仕組みをつくる"},
-       body:{en:"Three things came out of this. First, an Output Relay program where students teach the lesson back to a parent at home — turning the kid into the expert instead of the passive recipient. Students earn a sticker per signed notebook entry, with a reward at the end of each unit. Second, over 100 short video explanations in the parent's native language placed next to the homework. Third, a flexible observation option replacing the single rigid observation week most working parents couldn't make anyway.",
-              ja:"ここから3つの施策を導入しました。①「アウトプットリレー」：生徒が家庭でレッスン内容を保護者に教える仕組み。ノートへの保護者のサインに応じてステッカーを貯め、単元ごとにご褒美を用意しました。②100本以上の解説動画：保護者の母語で宿題の内容を解説。③柔軟な授業参観：年1回の固定された参観週を見直し、対面またはGoogle Meetで都合のよい日に参観できる仕組みに変更しました。"},
+       body:{en:"Four things came out of this. First, an Output Relay program where students teach the lesson back to a parent at home — turning the kid into the expert instead of the passive recipient. Students earn a sticker per signed notebook entry, with a reward at the end of each unit. Second, over 100 short video explanations in the parent's native language placed next to the homework. Third, a flexible observation option replacing the single rigid observation week most working parents couldn't make anyway. Fourth, new channels between parents and teachers, including regular check-in calls about each child's progress, so problems surface before a family starts thinking about leaving.",
+              ja:"ここから4つの施策を導入しました。①「アウトプットリレー」：生徒が家庭でレッスン内容を保護者に教える仕組み。ノートへの保護者のサインに応じてステッカーを貯め、単元ごとにご褒美を用意しました。②100本以上の解説動画：保護者の母語で宿題の内容を解説。③柔軟な授業参観：年1回の固定された参観週を見直し、対面またはGoogle Meetで都合のよい日に参観できる仕組みに変更しました。④保護者と講師をつなぐ新たな連絡の仕組み：お子さまの様子を伺う定期的な電話フォローなどを通じて、退会を検討する前に課題に対応できるようにしました。"},
        reverse:true},
       {label:{en:"03 — Outcome",ja:"03 — 成果"},
-       title:{en:"87% sustained adoption, 30% jump in homework completion",ja:"継続利用率87%、宿題完了率30%向上"},
-       body:{en:"The Output Relay is now at 87% sustained adoption. Since it launched there hasn't been a single complaint about a kid forgetting what happened in class. Homework completion rose 30% overall, with a 45% jump specifically in listening sections parents previously couldn't help with.",
-              ja:"アウトプットリレーの継続利用率は87%。導入後、「子どもがレッスン内容を覚えていない」という苦情はゼロになりました。宿題の完了率は全体で30%向上し、特に保護者がこれまでサポートできなかったリスニングセクションでは45%向上しました。"},
+       title:{en:"Progress families can see, and families who stay",ja:"見える成長と、続けてくれる家庭"},
+       body:{en:"The Output Relay is at 87% sustained adoption. Homework completion rose 30% overall, with a 45% jump in the listening sections parents previously couldn't help with. Churn now sits at 12% a year, and the school has averaged 44 new customers a year over the last three years.",
+              ja:"アウトプットリレーの継続利用率は87%。宿題の完了率は全体で30%向上し、特に保護者がこれまでサポートできなかったリスニングセクションでは45%向上しました。年間退会率は12%に抑えられ、直近3年間の新規入会は平均年44名です。"},
        reverse:false},
       {label:{en:"04 — Supporting materials",ja:"04 — サポート資料"},
        title:{en:"Onboarding, 100+ videos, and a full teacher manual",ja:"オンボーディング、100本以上の動画、講師マニュアル"},
@@ -1028,64 +890,143 @@ const CASE_STUDIES = [
   {
     id:"kana-progress-tracking", num:"04",
     title:{en:"Student Progress Tracking System", ja:"生徒の学習進捗管理システム"},
-    type:{en:"Learning Operations", ja:"学習オペレーション"},
+    type:{en:"Usability testing · Learning data", ja:"ユーザビリティテスト · 学習データ"},
     loc:"Japan",
-    tags:{en:["Data Systems","Iterative Design","Staff Adoption","Learning Analytics"],
-          ja:["データシステム","反復設計","スタッフ定着","学習アナリティクス"]},
-    summary:{en:"A logging tool for teachers that had to survive three rebuilds before it actually got used.",
-             ja:"実際に使われるまでに、3度の改善を重ねた講師向け記録ツール。"},
+    tags:{en:["Usability Testing","Iterative Design","Staff Adoption","Learning Analytics"],
+          ja:["ユーザビリティテスト","反復設計","スタッフ定着","学習アナリティクス"]},
+    summary:{en:"A logging tool for teachers that had to survive three rounds of testing before it actually got used.",
+             ja:"実際に使われるまでに、3度の検証と改善を重ねた講師向け記録ツール。"},
     steps:[
       {label:{en:"01 — Problem",ja:"01 — 課題"},
        title:{en:"Everyone had an opinion. Nobody had data.",ja:"誰もが意見を持っていた。でも、それを裏付けるデータがなかった。"},
-       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint: teachers get about 8 minutes between classes, already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used.",
-              ja:"生徒の様子について講師と保護者の認識が食い違うことが多く、それを裏付ける記録もありませんでした。最大の制約は時間です。授業間の約8分は、保護者への声かけ、教室の片付け、次の生徒の迎え入れなどですでに埋まっています。1〜2分以上かかる仕組みでは、現場では定着しません。"},
+       body:{en:"Teachers and parents disagreed constantly about how a student was doing, and there was nothing written down to settle it either way. The real constraint: teachers get about 5 minutes between classes, already spoken for — talking to parents on the way out, resetting the room, greeting whoever's coming in next. Anything that asked for more than a minute or two just wasn't going to get used.",
+              ja:"生徒の様子について講師と保護者の認識が食い違うことが多く、それを裏付ける記録もありませんでした。最大の制約は時間です。授業間の約5分は、保護者への声かけ、教室の片付け、次の生徒の迎え入れなどですでに埋まっています。1〜2分以上かかる仕組みでは、現場では定着しません。"},
        reverse:false},
       {label:{en:"How it works",ja:"仕組み"},
-       title:{en:"One system, built around the eight minutes teachers actually have",ja:"講師が実際に持つ「8分間」を前提に設計した、ひとつのシステム"},
-       body:{en:"Two earlier versions failed for exactly that reason: a Google Sheet with dropdown menus was miserable on a phone, and a web app with charts was better but still required teachers to manually hunt for the day's class. The version that finally stuck uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time of day, so there's nothing to search for and nothing to log in to. From there, teachers rate each class as a whole and rate individual students within it, leaving short comments tied to specific lessons rather than vague end-of-term notes. Every data point is saved to Supabase in real time and rolled up into charts and trend lines the school can read at a glance. On top of that, the system calculates a running health score for each student — an early-warning signal built from attendance patterns, behavioural notes, and recurring issues flagged in class — so a student quietly drifting off track shows up before it becomes a crisis. When a parent conversation comes up, staff open the student's profile and see the key comments, the health trend, and recent test scores in one place. The tool now sits at near-100% adoption, every class gets logged within 36 hours of the lesson, and teachers spend roughly five minutes total across an entire day making it happen.",
-              ja:"過去に試した2つのバージョンは、まさにこの理由で失敗しました。ドロップダウン付きのGoogleスプレッドシートはスマートフォンでは使いにくく、グラフ付きのウェブアプリも改善はしたものの、講師が毎回その日のクラスを手動で探す必要がありました。最終的に定着したのは、各ステーションのQRコードを読み込むと、時刻から「現在のクラス」を自動判定して開くシステムです。何かを探す必要も、ログインする必要もありません。講師はクラス全体と個々の生徒を評価し、学期末の曖昧なコメントではなく、特定のレッスンに直結した短いコメントを残します。データはすべてSupabaseにリアルタイムで保存され、学校が一目で読み取れるグラフやトレンドとして集約されます。さらに、出席パターン、行動面のメモ、授業で繰り返し指摘された問題点から各生徒の「健康スコア」を継続的に算出し、静かに軌道から外れつつある生徒を、問題が深刻化する前に可視化します。保護者との面談では、生徒のプロフィールを開くだけで、重要なコメント、健康スコアの推移、直近のテスト結果を一箇所で確認できます。現在、利用率はほぼ100%、すべてのクラスがレッスンから36時間以内に記録され、講師の入力時間は1日合計でおよそ5分程度です。"},
+       title:{en:"One system, built around the five minutes teachers actually have",ja:"講師が実際に持つ「5分間」を前提に設計した、ひとつのシステム"},
+       body:{en:"Two earlier versions failed for exactly that reason: a Google Sheet with dropdown menus was miserable on a phone, and a web app with charts was better but still required teachers to manually hunt for the day's class. Testing also showed that updating each student took seven separate steps, so I replaced them with a single class comment: name a student in it, and the note lands on that student's profile automatically. The version that finally stuck uses a QR code at each station that opens straight into whatever class is happening right now, detected automatically by the time of day, so there's nothing to search for and nothing to log in to. From there, teachers rate each class as a whole and rate individual students within it, leaving short comments tied to specific lessons rather than vague end-of-term notes. Every data point is saved to Supabase in real time and rolled up into charts and trend lines the school can read at a glance. On top of that, the system calculates a running health score for each student — an early-warning signal built from attendance patterns, behavioural notes, and recurring issues flagged in class — so a student quietly drifting off track shows up before it becomes a crisis. When a parent conversation comes up, staff open the student's profile and see the key comments, the health trend, and recent test scores in one place. The tool reached 80% adoption in its first week. Every class now gets logged within 36 hours of the lesson, and teachers spend roughly five minutes total across a day doing it.",
+              ja:"過去に試した2つのバージョンは、まさにこの理由で失敗しました。ドロップダウン付きのGoogleスプレッドシートはスマートフォンでは使いにくく、グラフ付きのウェブアプリも改善はしたものの、講師が毎回その日のクラスを手動で探す必要がありました。また検証の中で、生徒一人ひとりの記録更新に7つの手順がかかっていることが分かりました。そこで、クラスコメント1件に置き換えました。コメントの中で生徒の名前に触れると、その内容が自動的にその生徒のプロフィールに反映されます。最終的に定着したのは、各ステーションのQRコードを読み込むと、時刻から「現在のクラス」を自動判定して開くシステムです。何かを探す必要も、ログインする必要もありません。講師はクラス全体と個々の生徒を評価し、学期末の曖昧なコメントではなく、特定のレッスンに直結した短いコメントを残します。データはすべてSupabaseにリアルタイムで保存され、学校が一目で読み取れるグラフやトレンドとして集約されます。さらに、出席パターン、行動面のメモ、授業で繰り返し指摘された問題点から各生徒の「健康スコア」を継続的に算出し、静かに軌道から外れつつある生徒を、問題が深刻化する前に可視化します。保護者との面談では、生徒のプロフィールを開くだけで、重要なコメント、健康スコアの推移、直近のテスト結果を一箇所で確認できます。導入1週目で講師の80%が利用し、現在はすべてのクラスがレッスンから36時間以内に記録され、講師の入力時間は1日合計でおよそ5分程度です。"},
        reverse:true,
        carousel:true}
+    ]
+  },
+  {
+    id:"cultural-training", num:"05",
+    title:{en:"Cultural Training for Business Travelers", ja:"海外出張者向け異文化研修"},
+    type:{en:"Personal project · Adult learning", ja:"個人プロジェクト · 社会人向け学習"},
+    loc:"Japan",
+    tags:{en:["Curriculum Design","Adult Learning","Intercultural Communication"],
+          ja:["カリキュラム設計","社会人向け学習","異文化コミュニケーション"]},
+    summary:{en:"A mini-curriculum for professionals heading to the US, UK, Brazil, Mexico and Italy, covering what a phrasebook leaves out.",
+             ja:"米国・英国・ブラジル・メキシコ・イタリアへ出張するビジネスパーソンのための、フレーズ集では学べないことを扱うミニカリキュラム。"},
+    steps:[
+      {label:{en:"01 — The learners",ja:"01 — 学習者"}, noVisual:true,
+       title:{en:"Good English on paper, surprises on the ground",ja:"英語力は十分。それでも現地で戸惑う"},
+       body:{en:"The learners were adults preparing for business trips to the US, UK, Brazil, Mexico and Italy. What catches people out abroad is often not grammar but everything around it: what people expect from a meeting, how business gets done, and words that work in Japan but not elsewhere.",
+              ja:"学習者は、米国・英国・ブラジル・メキシコ・イタリアへの出張を控えた社会人です。海外で戸惑う原因は、文法よりもその周りにあることが少なくありません。会議で相手が何を期待しているのか、どのように商談が進むのか、そして日本では通じても海外では通じない言葉です。"},
+       reverse:false},
+      {label:{en:"02 — The design",ja:"02 — 設計"}, noVisual:true,
+       title:{en:"Built around what actually goes wrong",ja:"現地で本当につまずく点から設計"},
+       body:{en:"I designed a mini-curriculum around three strands: cultural expectations, business practices, and expressions that don't carry over from Japanese English. \"Plus alpha\" and \"claim\" are good examples: everyday words in a Tokyo office that mean something different, or nothing at all, to a colleague in Chicago or Milan.",
+              ja:"ミニカリキュラムは、3つの柱で構成しました。現地で期待される振る舞い、商習慣、そして和製英語のように海外では通じにくい表現です。「プラスアルファ」や「クレーム」はその典型で、東京のオフィスでは日常的な言葉でも、シカゴやミラノの同僚には違う意味で伝わったり、まったく通じなかったりします。"},
+       reverse:false},
+      {label:{en:"03 — Why it's here",ja:"03 — この事例の意味"}, noVisual:true,
+       title:{en:"The same principle, for adults",ja:"大人にも、同じ原則を"},
+       body:{en:"Like Prosper Academy, it starts from the situation the learner will actually face and works backward to what they need to know. The difference is the audience: busy adults with a trip on the calendar, who need learning that pays off the week they land.",
+              ja:"Prosper Academyと同じく、学習者が実際に直面する場面から出発し、そこで必要になることを逆算して設計しています。違いは対象者です。出張の予定が決まっている忙しい社会人が、現地に着いたその週から役立つ学びを必要としています。"},
+       reverse:false}
     ]
   }
 ];
 
-const AUDIT_TILE = {
-  id:"audit-service", num:"05",
-  title:{en:"School Audit: Parent Retention & Revenue Clarity", ja:"スクール診断：生徒・保護者の定着と収益構造の可視化"},
-  type:{en:"Side Service · Consulting", ja:"サブサービス · コンサルティング"},
-  loc:"Japan",
-  tags:{en:["Retention Audit","Communication Systems","Revenue Diagnostics"], ja:["リテンション診断","コミュニケーション設計","収益分析"]},
-  summary:{en:"A structured diagnostic for small eikaiwa and language schools — interviews with parents, staff, and owners, followed by a written report and a prioritised first fix.", ja:"小規模英会話スクール・語学スクール向けの構造化診断。保護者・スタッフ・スクール運営者へのインタビューをもとに、書面レポートと優先度付きの改善策を提供します。"},
-  isAudit: true
-};
 
-function tileHTML(cs, idx, isAuditTile){
-  const color = TILE_COLORS[idx % TILE_COLORS.length];
+function tileHTML(cs){
+  const ja = LANG === 'ja';
   const dl = cs.demoUrl ? `<a href="${cs.demoUrl}" target="_blank" rel="noopener" class="tile-demo" onclick="event.stopPropagation()">${cs.demoLabel[LANG]}</a>` : '';
-  const auditClass = isAuditTile ? ' audit-tile' : '';
-  const nav = isAuditTile ? `data-nav-audit="true"` : `data-study="${cs.id}"`;
-  return `<div class="tile reveal${auditClass}" ${nav}>
-    <div class="badge" style="background:${color};">${cs.num}</div>
-    <div class="info">
-      <div class="tile-meta">${cs.type[LANG]} &nbsp;·&nbsp; ${cs.loc}</div>
-      <h3>${cs.title[LANG]}</h3>
-      <div class="desc">${cs.summary[LANG]}</div>
-      <div class="chips">${cs.tags[LANG].map(t=>`<span>${t}</span>`).join('')}${dl}</div>
-    </div>
-    <div class="go">→</div>
+  const meta = cs.type[LANG].split(' · ').concat([cs.loc.replace(' · ', ' / ')]);
+  return `<div class="tile" data-study="${cs.id}" tabindex="0" role="link">
+    <span class="tab" style="background:${TRACK_COLOR[PRIMARY[cs.id]]};"></span>
+    <div class="tile-meta">${meta.map(m=>`<span>${m}</span>`).join('')}</div>
+    <h3>${cs.title[LANG]}</h3>
+    <div class="desc">${cs.summary[LANG]}</div>
+    <span class="open">${ja?'ケーススタディを読む':'Read the case study'}</span>${dl}
   </div>`;
 }
 
-const observer = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); }); },{threshold:0.1});
+let currentTrack = 'all';
 
-function renderTiles(){
-  const others = CASE_STUDIES.filter(c=>!c.featured);
-  const all = [...others.map((c,i)=>tileHTML(c,i,false)), tileHTML(AUDIT_TILE, others.length, true)];
-  document.getElementById("work-tiles").innerHTML = all.join("");
-  renderFeature();
-  renderGlance();
-  document.querySelectorAll(".tile, .feature").forEach(el=>observer.observe(el));
+function renderTrackBar(){
+  const bar = document.getElementById('track-bar');
+  if(!bar) return;
+  bar.innerHTML = ['all','learning','research','product'].map(k=>{
+    const label = k==='all' ? TRACK_ALL.label[LANG] : `${TRACKS[k].emoji} ${TRACKS[k].label[LANG]}`;
+    return `<button class="track-btn t-${k}${k===currentTrack?' active':''}" data-track="${k}" aria-pressed="${k===currentTrack}">${label}</button>`;
+  }).join('');
+}
+
+const HELP = {
+  learning:{headline:{en:"Design learning people actually finish",ja:"最後までやり切れる学びを設計する"},
+            body:{en:"Curricula for children and adults, built from learning principles and revised after testing with real learners.",ja:"学習の原則にもとづいて子ども・大人向けのカリキュラムを設計し、実際の学習者との検証を経て改善します。"}},
+  research:{headline:{en:"Find out what your users really struggle with",ja:"ユーザーが本当に困っていることを見つける"},
+            body:{en:"Interviews, surveys, usability tests and observation, run end to end in English and Japanese.",ja:"インタビュー、アンケート、ユーザビリティテスト、行動観察を、英語と日本語で一貫して実施します。"}},
+  product:{headline:{en:"Turn findings into tools people adopt",ja:"発見を、使われるツールに変える"},
+           body:{en:"A 10-step email chain became 30 seconds in LINE, and a teacher logging tool reached 80% adoption in its first week.",ja:"10工程のメール対応をLINEで約30秒に。講師向け記録ツールは導入1週目で80%が利用しました。"}}
+};
+
+function renderPaths(){
+  const wrap = document.getElementById('paths-wrap');
+  if(!wrap) return;
+  const go = LANG === 'ja' ? '実例を見る' : "See how I've done it";
+  wrap.innerHTML = Object.keys(TRACKS).map(k=>{
+    const t = TRACKS[k];
+    return `<button class="path-card ${k}" data-track="${k}">
+      <span class="path-emoji" aria-hidden="true">${t.emoji}</span>
+      <h3>${HELP[k].headline[LANG]}</h3>
+      <p>${HELP[k].body[LANG]}</p>
+      <span class="go">${go}</span>
+    </button>`;
+  }).join('');
+}
+
+function renderProof(){
+  const el = document.getElementById('proof-strip');
+  if(!el) return;
+  el.innerHTML = PROOF.map((p,i)=>`<div class="stamp c${i%4}"><div class="num">${p.num[LANG]}</div><div class="lbl">${p.lbl[LANG]}</div></div>`).join('')
+    + `<div class="stamp empty"><div class="lbl">${NEXT_STAMP[LANG]}</div></div>`;
+}
+
+function renderProcess(){
+  const el = document.getElementById('process');
+  if(!el) return;
+  el.innerHTML = PROCESS.map((p,i)=>`<div class="square">
+    <div class="die">${i+1}</div>
+    <h3>${p.title[LANG]}</h3>
+    <p>${p.body[LANG]}</p>
+  </div>`).join('');
+}
+
+function renderTiles(track){
+  if(track && (track==='all' || TRACKS[track])) currentTrack = track;
+  renderTrackBar();
+  const note = document.getElementById('track-note');
+  const workFeature = document.getElementById('work-feature');
+  let ids;
+  if(currentTrack === 'all'){
+    ids = ALL_ORDER.filter(id=>id!=='prosper-academy');
+    workFeature.innerHTML = featureHTML();
+    note.textContent = TRACK_ALL.note[LANG];
+  } else {
+    ids = TRACKS[currentTrack].order;
+    workFeature.innerHTML = '';
+    note.textContent = TRACKS[currentTrack].note[LANG];
+  }
+  document.getElementById("work-tiles").innerHTML = ids.map(id=>CASE_STUDIES.find(c=>c.id===id)).filter(Boolean).map(tileHTML).join("");
+  document.getElementById('home-feature').innerHTML = featureHTML();
+  renderPaths(); renderProof(); renderProcess();
+}
+
+function setHash(h){
+  try { history.replaceState(null, '', h ? h : location.pathname + location.search); } catch(e){}
 }
 
 function phoneScreen(key, stepNum, labelEN, labelJA){
@@ -1117,9 +1058,9 @@ function flowDiagramHTML(){
     { key:"line-flow-4", num:5, en:"Confirm makeup",      ja:"振替予約を確認" },
   ];
 
-  const arrowDiagL = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q12 12 9 48" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M3 42L9 50L15 42" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
-  const arrowDiagR = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q78 12 81 48" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M75 42L81 50L87 42" stroke="rgba(209,75,63,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
-  const arrowRight = `<svg width="32" height="20" viewBox="0 0 32 20" fill="none"><line x1="0" y1="10" x2="24" y2="10" stroke="rgba(209,75,63,0.45)" stroke-width="1.5"/><path d="M18 4L26 10L18 16" stroke="rgba(209,75,63,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowDiagL = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q12 12 9 48" stroke="rgba(60,125,240,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M3 42L9 50L15 42" stroke="rgba(60,125,240,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowDiagR = `<svg width="90" height="52" viewBox="0 0 90 52" fill="none"><path d="M45 2 Q78 12 81 48" stroke="rgba(60,125,240,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M75 42L81 50L87 42" stroke="rgba(60,125,240,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+  const arrowRight = `<svg width="32" height="20" viewBox="0 0 32 20" fill="none"><line x1="0" y1="10" x2="24" y2="10" stroke="rgba(60,125,240,0.45)" stroke-width="1.5"/><path d="M18 4L26 10L18 16" stroke="rgba(60,125,240,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 
   const ann = {
     menu_title:   isJA ? "保護者がLINEを開く" : "Parent opens LINE",
@@ -1129,12 +1070,12 @@ function flowDiagramHTML(){
     absence_2:    isJA ? "1タップで送信完了。スタッフにも即時通知。" : "One tap to confirm. Staff notified instantly.",
     makeup_title: isJA ? "振替授業" : "Booking a makeup lesson",
     makeup_1:     isJA ? "空き枠をリアルタイムで確認。二重予約も防止。" : "Sees live available slots. No double-booking possible.",
-    makeup_2:     isJA ? "予約確定。カレンダーにも自動反映。所要時間は1分未満。" : "Booking confirmed. Auto-added to calendar. Under one minute total.",
+    makeup_2:     isJA ? "予約確定。カレンダーにも自動反映。所要時間は約30秒。" : "Booking confirmed. Auto-added to calendar. About 30 seconds total.",
   };
 
   return `
   <div style="padding:36px 0 24px;">
-    <div style="font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--red-deep);background:rgba(209,75,63,0.08);display:inline-block;padding:5px 14px;border-radius:20px;margin-bottom:14px;">
+    <div style="font-family:var(--mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--red-deep);background:rgba(60,125,240,0.08);display:inline-block;padding:5px 14px;border-radius:20px;margin-bottom:14px;">
       ${isJA ? "実際の操作フロー" : "The parent experience, step by step"}
     </div>
     <h3 style="font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:0 0 8px;letter-spacing:-0.01em;color:var(--ink);">
@@ -1142,8 +1083,8 @@ function flowDiagramHTML(){
     </h3>
     <p style="font-size:0.92rem;color:rgba(36,27,20,0.56);line-height:1.65;max-width:500px;margin:0;">
       ${isJA
-        ? "欠席連絡も振替予約も、LINEを離れずに1分以内で完了します。アプリのダウンロードも、新しいログインも必要ありません。"
-        : "Absence reports and makeup bookings both resolve in under a minute without leaving LINE. No download, no new account, no waiting for staff."}
+        ? "欠席連絡も振替予約も、LINEを離れずに約30秒で完了します。アプリのダウンロードも、新しいログインも必要ありません。"
+        : "Absence reports and makeup bookings both resolve in about 30 seconds without leaving LINE. No download, no new account, no waiting for staff."}
     </p>
   </div>
 
@@ -1166,7 +1107,7 @@ function flowDiagramHTML(){
         </div>
       </div>
       <div style="grid-column:5/8;grid-row:1;display:flex;justify-content:center;">
-        <div style="font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--red-deep);background:rgba(209,75,63,0.08);padding:4px 14px;border-radius:10px;">
+        <div style="font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--red-deep);background:rgba(60,125,240,0.08);padding:4px 14px;border-radius:10px;">
           ${isJA ? "振替授業" : "Makeup"}
         </div>
       </div>
@@ -1242,19 +1183,18 @@ function carouselGo(id, index){
   if(caption && captionsData) caption.textContent = captionsData[index] || "";
 }
 
-function licenseCtaHTML(){
-  const ja = LANG === 'ja';
-  return `<div class="license-cta">
-    <span class="feature-kicker">${ja ? 'ライセンス提供' : 'Licensing'}</span>
-    <h3>${ja ? 'Prosper Academyを、あなたの生徒たちに。' : 'Bring Prosper Academy to your students'}</h3>
-    <p>${ja
-      ? 'Prosper Academyは、ライセンス提供を前提に設計しています。学校、塾、英会話スクール、放課後プログラムなどが、自校のスタッフで実施できます。ライセンスには、3か月分のカリキュラム全体、ファシリテーター用スクリプト、シミュレーション教材、eラーニングモジュール、そして地域での実社会ミッションの企画支援が含まれます。'
-      : 'Prosper Academy is designed to be licensed. Schools, juku, eikaiwa, and after-school programs can run it with their own staff. A license covers the full 3-month curriculum, facilitator scripts, simulation materials, the e-learning module, and hands-on support planning the real-world missions in your own community.'}</p>
-    <div class="feature-actions" style="margin-top:0;">
-      <a href="mailto:muratto.titiz@gmail.com?subject=Prosper%20Academy%20licensing" class="btn solid">${ja ? 'ライセンスについて問い合わせる →' : 'Ask about licensing →'}</a>
-      <a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" class="btn ghost" style="color:var(--cream);border-color:rgba(251,243,231,0.4);">${ja ? 'eラーニングモジュールを見る ↗' : 'Try the e-learning module ↗'}</a>
-    </div>
-  </div>`;
+
+function placeholderHTML(label){
+  return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:0.8rem;color:var(--ink-faint);text-align:center;padding:16px;">
+    <div style="font-size:1.6rem;">🖼</div><div>${label}</div></div>`;
+}
+
+function stepLabelHTML(label){
+  const parts = label.split(' — ');
+  if(parts.length === 2 && /^\d+$/.test(parts[0])){
+    return `<div class="step-label"><span class="step-num">${parseInt(parts[0],10)}</span><span>${parts[1]}</span></div>`;
+  }
+  return `<div class="step-label"><span>${label}</span></div>`;
 }
 
 function openStudy(id){
@@ -1262,7 +1202,8 @@ function openStudy(id){
   document.getElementById("study-title").textContent = cs.title[LANG];
   document.getElementById("study-summary").textContent = cs.summary[LANG];
   const demo = cs.demoUrl ? `<a href="${cs.demoUrl}" target="_blank" rel="noopener">${cs.demoLabel[LANG]}</a>` : '';
-  document.getElementById("study-tags").innerHTML = `<span>${cs.type[LANG]}</span><span>${cs.loc}</span>${demo}`;
+  const meta = cs.type[LANG].split(' · ').concat(cs.loc.split(' · '));
+  document.getElementById("study-tags").innerHTML = meta.map(m=>`<span>${m}</span>`).join('') + cs.tags[LANG].map(t=>`<span>${t}</span>`).join('') + demo;
   document.getElementById("study-body").innerHTML = cs.steps.map((s,i)=>{
     const isProblemCarousel = (id === "line-automation" && i === 0);
     const hasFlowDiagram = (id === "line-automation" && i === 1);
@@ -1272,14 +1213,14 @@ function openStudy(id){
     let visualBlock;
     if(isProblemCarousel){
       visualBlock = carouselHTML(`${id}-problem`, [
-        { key: `${id}-0-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — the 9-step email process", captionJA:"導入前 — 9段階にわたるメール対応" },
-        { key: `${id}-0-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — the LINE scheduling interface", captionJA:"導入後 — LINEによる予約インターフェース" },
-        { key: `${id}-0-flow`,   badge:"flow",   badgeEN:"User Flow", badgeJA:"ユーザーフロー", captionEN:"User flow — how the automation connects", captionJA:"ユーザーフロー — 自動化の仕組み" },
+        { key: `${id}-0-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before: the 10-step email process", captionJA:"導入前：10工程にわたるメール対応" },
+        { key: `${id}-0-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After: the LINE scheduling interface", captionJA:"導入後：LINEによる予約インターフェース" },
+        { key: `${id}-0-flow`,   badge:"flow",   badgeEN:"User flow", badgeJA:"ユーザーフロー", captionEN:"User flow: how the automation connects", captionJA:"ユーザーフロー：自動化の仕組み" },
       ]);
     } else if(isOutcomeCarousel){
       visualBlock = carouselHTML(`${id}-outcome`, [
-        { key: `${id}-2-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before — manual, slow, error-prone", captionJA:"導入前 — 手作業で時間がかかり、ミスも発生" },
-        { key: `${id}-2-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After — 90% adoption, under a minute", captionJA:"導入後 — 利用率90%、1分未満で完了" },
+        { key: `${id}-2-before`, badge:"before", badgeEN:"Before",  badgeJA:"導入前",  captionEN:"Before: manual, slow, error-prone", captionJA:"導入前：手作業で時間がかかり、ミスも発生" },
+        { key: `${id}-2-after`,  badge:"after",  badgeEN:"After",   badgeJA:"導入後",  captionEN:"After: 60% of families in two weeks, about 30 seconds a request", captionJA:"導入後：2週間で60%の家庭が利用、1件約30秒" },
       ]);
     } else if(hasFlowDiagram || s.noVisual || hasBigCarousel){
       visualBlock = null;
@@ -1287,50 +1228,40 @@ function openStudy(id){
       const imgKey = s.img || `${id}-${i}`;
       const src = imgSrc(imgKey);
       const filename = IMAGES[imgKey] || "no filename";
-      const visualInner = src
+      const inner = src
         ? `<img src="${src}" alt="${s.title[LANG]}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" onerror="this.parentElement.innerHTML=placeholderHTML('Upload: ${filename}')">`
         : placeholderHTML(`Upload: ${filename}`);
-      visualBlock = `<div class="visual${isFinale?' finale':''}" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">${visualInner}</div>`;
+      visualBlock = `<div class="visual" data-zoom="${s.title[LANG]}" style="padding:0;overflow:hidden;border:${src?'none':'2px dashed var(--line)'};">${inner}</div>`;
     }
-
+    const label = stepLabelHTML(s.label[LANG]);
     if(isFinale){
-      return `
-      <div class="story-block finale-block">
-        <div style="display:flex;flex-direction:column;gap:0;">${visualBlock}</div>
-        <div class="text" style="margin-top:28px;">
-          <span class="step-label">${s.label[LANG]}</span>
-          <h3 style="font-size:2rem;">${s.title[LANG]}</h3>
-          <p>${s.body[LANG]}</p>
-        </div>
+      return `<div class="story-block finale-block">
+        <div>${visualBlock}</div>
+        <div class="text">${label}<h3 style="font-size:2rem;">${s.title[LANG]}</h3><p>${s.body[LANG]}</p></div>
       </div>`;
     }
-
-    return `
-    <div class="story-block ${s.reverse?'reverse':''}" style="${visualBlock===null?'grid-template-columns:1fr;':''}">
-      ${visualBlock===null ? '' : `<div style="display:flex;flex-direction:column;gap:0;">${visualBlock}</div>`}
-      <div class="text${visualBlock===null?' text-only':''}">
-        <span class="step-label">${s.label[LANG]}</span>
-        <h3>${s.title[LANG]}</h3>
-        <p>${s.body[LANG]}</p>
-      </div>
+    return `<div class="story-block ${s.reverse?'reverse':''}" style="${visualBlock===null?'grid-template-columns:1fr;':''}">
+      ${visualBlock===null ? '' : `<div>${visualBlock}</div>`}
+      <div class="text${visualBlock===null?' text-only':''}">${label}<h3>${s.title[LANG]}</h3><p>${s.body[LANG]}</p></div>
     </div>
     ${s.programMap ? `<div class="program-map">${monthsHTML(true)}</div>` : ''}
-    ${hasFlowDiagram ? `<div style="padding:0 5.5vw 2vh;">${flowDiagramHTML()}</div>` : ''}
-    ${hasBigCarousel ? `<div style="padding:0 5.5vw 6vh;max-width:1100px;margin:0 auto;">${carouselHTML(`${id}-system`, [
-        { key: `${id}-carousel-0`, badge:"", badgeEN:"1", badgeJA:"1", captionEN:"QR check-in — opens the current class automatically", captionJA:"QRチェックイン — 現在のクラスを自動で開く" },
-        { key: `${id}-carousel-1`, badge:"", badgeEN:"2", badgeJA:"2", captionEN:"Rating & comments — class and student level", captionJA:"評価とコメント — クラス単位・生徒単位" },
-        { key: `${id}-carousel-2`, badge:"", badgeEN:"3", badgeJA:"3", captionEN:"Charts & trends — data the school can actually read", captionJA:"グラフとトレンド — 学校が実際に読み取れるデータ" },
-        { key: `${id}-carousel-3`, badge:"", badgeEN:"4", badgeJA:"4", captionEN:"Student profile — health score, comments, and scores at a glance", captionJA:"生徒プロフィール — 健康スコア、コメント、成績を一目で" },
+    ${hasFlowDiagram ? `<div style="padding:0 0 2vh;">${flowDiagramHTML()}</div>` : ''}
+    ${hasBigCarousel ? `<div style="padding:0 0 6vh;max-width:1100px;margin:0 auto;">${carouselHTML(`${id}-system`, [
+        { key: `${id}-carousel-0`, badge:"", badgeEN:"1", badgeJA:"1", captionEN:"QR check-in: opens the current class automatically", captionJA:"QRチェックイン：現在のクラスを自動で開く" },
+        { key: `${id}-carousel-1`, badge:"", badgeEN:"2", badgeJA:"2", captionEN:"Ratings and comments for the class and each student", captionJA:"評価とコメント：クラス単位・生徒単位" },
+        { key: `${id}-carousel-2`, badge:"", badgeEN:"3", badgeJA:"3", captionEN:"Charts and trends the school can actually read", captionJA:"グラフとトレンド：学校が実際に読み取れるデータ" },
+        { key: `${id}-carousel-3`, badge:"", badgeEN:"4", badgeJA:"4", captionEN:"Student profile: health score, comments and scores at a glance", captionJA:"生徒プロフィール：健康スコア、コメント、成績を一目で" },
       ])}</div>` : ''}`;
-
-  }).join("") + (cs.licenseCta ? licenseCtaHTML() : '');
+  }).join("");
   showView("study");
   document.querySelectorAll(`nav a[data-study-link="${id}"]`).forEach(a=>a.classList.add("active"));
   window.scrollTo({top:0});
 }
 
+let currentStudyId = '';
 function goStudy(id){
   currentStudyId = id;
+  setHash('#case/' + id);
   document.getElementById('view-study').setAttribute('data-current', id);
   openStudy(id);
 }
@@ -1343,13 +1274,10 @@ function applyLang(lang){
   document.getElementById('btn-ja').classList.toggle('active', lang==='ja');
   document.querySelectorAll('[data-en]').forEach(el=>{
     const val = el.getAttribute('data-'+lang);
-    if(!val) return;
-    if(el.tagName==='INPUT'||el.tagName==='BUTTON') el.textContent = val;
-    else el.innerHTML = val;
+    if(val) el.innerHTML = val;
   });
   document.getElementById('zlb-hint').textContent = lang==='ja' ? 'スクロールで拡大 · ドラッグで移動' : 'Scroll to zoom · Drag to pan';
   renderTiles();
-  initReveal();
   const studyEl = document.getElementById('view-study');
   if(studyEl.classList.contains('active')){
     const id = studyEl.getAttribute('data-current');
@@ -1366,64 +1294,57 @@ function showView(name){
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   document.querySelectorAll(`nav a[data-nav="${name}"]`).forEach(a=>a.classList.add("active"));
   document.getElementById("main-nav").classList.remove("open");
-  initReveal();
 }
+function initReveal(){}
 
-let currentStudyId = '';
-
-// One delegated click handler for all in-page navigation
 document.body.addEventListener("click",e=>{
+  const trackEl = e.target.closest("[data-track]");
+  if(trackEl){
+    e.preventDefault();
+    const t = trackEl.getAttribute("data-track");
+    showView("work");
+    renderTiles(t);
+    setHash(t === 'all' ? '#work' : '#work/' + t);
+    window.scrollTo({top:0,behavior:"smooth"});
+    return;
+  }
   const navEl = e.target.closest("[data-nav]");
   if(navEl){
     e.preventDefault();
-    showView(navEl.getAttribute("data-nav"));
+    const dest = navEl.getAttribute("data-nav");
+    setHash(dest === 'home' ? '' : (dest === 'work' ? (currentTrack === 'all' ? '#work' : '#work/' + currentTrack) : '#' + dest));
+    showView(dest);
     window.scrollTo({top:0,behavior:"smooth"});
     return;
   }
   const studyLink = e.target.closest("[data-study-link]");
-  if(studyLink){
-    e.preventDefault();
-    goStudy(studyLink.getAttribute("data-study-link"));
-    return;
-  }
+  if(studyLink){ e.preventDefault(); goStudy(studyLink.getAttribute("data-study-link")); return; }
   const tile = e.target.closest(".tile");
-  if(tile){
-    if(tile.hasAttribute("data-nav-audit")){
-      showView("audit"); window.scrollTo({top:0,behavior:"smooth"});
-    } else {
-      goStudy(tile.getAttribute("data-study"));
-    }
-    return;
-  }
-  const card = e.target.closest(".glance-card");
-  if(card){
-    goStudy(card.getAttribute("data-study"));
-    return;
-  }
+  if(tile){ goStudy(tile.getAttribute("data-study")); return; }
   const v = e.target.closest(".visual");
   if(v){
     const img = v.querySelector("img");
-    const label = v.getAttribute("data-zoom") || "";
-    if(img && img.src) zlb.open(img.src, label, 'flat');
+    if(img && img.src) zlb.open(img.src, v.getAttribute("data-zoom") || "", 'flat');
   }
+});
+document.body.addEventListener("keydown",e=>{
+  const tile = e.target.closest && e.target.closest(".tile");
+  if(tile && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); goStudy(tile.getAttribute("data-study")); }
 });
 
 document.getElementById("menu-toggle").addEventListener("click",()=>{
   document.getElementById("main-nav").classList.toggle("open");
 });
 
-document.getElementById("resume-toggle").addEventListener("click",()=>{
+function toggleResume(){
   const dd = document.getElementById("resume-dropdown");
-  const arrow = document.getElementById("resume-arrow");
   const open = dd.classList.toggle("open");
-  arrow.textContent = open?"↑":"↓";
-});
-
-function initReveal(){
-  document.querySelectorAll(".reveal").forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight*0.9) el.classList.add("in");
-  });
+  document.getElementById("resume-arrow").textContent = open ? "▴" : "▾";
+  document.getElementById("resume-toggle").setAttribute('aria-expanded', open);
 }
+document.getElementById("resume-toggle").addEventListener("click", toggleResume);
+document.getElementById("resume-toggle").addEventListener("keydown", e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleResume(); } });
+
 // =============================================================
 //  UNIFIED ZOOMABLE LIGHTBOX ENGINE
 // =============================================================
@@ -1720,7 +1641,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
   try { lang = localStorage.getItem('portfolio-lang'); } catch(e){}
   if(lang !== 'en' && lang !== 'ja') lang = (navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en';
   applyLang(lang);
+  // Deep links: #work, #work/<track>, #case/<id>, #contact
+  const h = (location.hash || '').replace(/^#/, '');
+  let m;
+  if((m = h.match(/^work(?:\/(all|learning|research|product))?$/))){
+    showView('work'); renderTiles(m[1] || 'all'); initReveal();
+  } else if((m = h.match(/^case\/([\w-]+)$/)) && CASE_STUDIES.some(c=>c.id===m[1])){
+    goStudy(m[1]);
+  } else if(h === 'contact'){
+    showView('contact');
+  }
 });
+
 </script>
 <!-- UNIFIED ZOOMABLE LIGHTBOX -->
 <div id="zlb">
