@@ -90,6 +90,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Murat Mert Titiz — Learning Experience Design &amp; UX Research</title>
 <meta name="description" content="Learning experience designer and UX researcher in Tokyo. Curriculum design, usability testing with children and adults, and tools people actually adopt.">
+<link rel="icon" id="favicon" type="image/png" href="images/thumb.png">
+<link rel="apple-touch-icon" href="images/thumb.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -622,6 +624,20 @@ let LANG = 'en';
   const fallback = ()=>{ t.parentElement.textContent = '🙂'; };
   const src = imgSrc('thumb');
   if(src){ t.onerror = fallback; t.src = src; } else { fallback(); }
+  // Browser tab icon: the same photo, cropped to a circle
+  if(src){
+    const img = new Image();
+    img.onload = ()=>{
+      try{
+        const c = document.createElement('canvas'); c.width = c.height = 64;
+        const x = c.getContext('2d'), side = Math.min(img.width, img.height);
+        x.beginPath(); x.arc(32, 32, 32, 0, Math.PI * 2); x.clip();
+        x.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, 64, 64);
+        document.getElementById('favicon').href = c.toDataURL('image/png');
+      }catch(e){}
+    };
+    img.src = src;
+  }
 })();
 const PROSPER = {
   kicker:{en:"Personal project · Since February 2026", ja:"個人プロジェクト · 2026年2月〜"},
