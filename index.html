@@ -200,25 +200,34 @@
   .path-card .go{font-weight:900;font-size:0.95rem;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;}
   @media(max-width:860px){.paths{grid-template-columns:1fr;}}
 
-  /* STAMP CARD — results */
-  .stamp-card{background:var(--white);border:3px dashed var(--ink);border-radius:26px;padding:34px 30px;}
-  .stamp-card-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:16px;margin-bottom:28px;}
-  .stamp-card-head h2{font-size:clamp(1.4rem,2.6vw,1.9rem);}
-  .stamp-card-head span{color:var(--ink-faint);font-weight:700;font-size:0.92rem;}
-  .stamps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 18px;justify-items:center;}
-  .stamp{width:168px;height:168px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;
-    border:3px solid currentColor;position:relative;}
-  .stamp::before{content:'';position:absolute;inset:6px;border-radius:50%;border:2px dashed currentColor;opacity:.45;}
-  .stamp .num{font-family:var(--display);font-size:1.75rem;line-height:1.1;}
-  .stamp .lbl{font-size:0.8rem;font-weight:700;line-height:1.35;margin-top:6px;color:var(--ink);}
-  .stamp.c0{color:var(--sky-deep);background:var(--sky-soft);transform:rotate(-6deg);}
-  .stamp.c1{color:#C2410C;background:var(--peach-soft);transform:rotate(4deg);}
-  .stamp.c2{color:#1E7A55;background:var(--leaf-soft);transform:rotate(-3deg);}
-  .stamp.c3{color:#9A6A00;background:var(--sun-soft);transform:rotate(7deg);}
-  .stamp.empty{color:var(--ink-faint);background:transparent;border-style:dashed;transform:none;}
-  .stamp.empty::before{display:none;}
-  .stamp.empty .lbl{color:var(--ink-faint);font-size:0.86rem;}
-  @media(max-width:860px){.stamps{grid-template-columns:repeat(2,1fr);}.stamp{width:146px;height:146px;}.stamp .num{font-size:1.45rem;}}
+  /* REPORT CARD — results (通知表) */
+  .report{background:var(--white);border:3px solid var(--ink);border-radius:22px;box-shadow:6px 8px 0 var(--ink);overflow:hidden;}
+  .report-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;padding:26px 30px;background:var(--sky-soft);border-bottom:3px solid var(--ink);}
+  .report-head h2{font-size:clamp(1.5rem,2.8vw,2rem);margin-bottom:10px;}
+  .report-meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-size:0.95rem;}
+  .report-meta div{display:flex;gap:8px;}
+  .report-meta dt{color:var(--ink-faint);font-weight:700;white-space:nowrap;}
+  .report-meta dd{margin:0;font-weight:700;}
+  .seal{width:76px;height:76px;border-radius:50%;border:3px solid #D93A2B;color:#D93A2B;display:grid;place-items:center;font-family:var(--display);font-size:1.25rem;transform:rotate(-12deg);background:rgba(255,255,255,0.6);}
+  .report-cols,.report-row{display:grid;grid-template-columns:200px 150px 1fr;gap:20px;padding:0 30px;}
+  .report-cols{padding-top:12px;padding-bottom:12px;font-weight:900;font-size:0.88rem;color:var(--ink-faint);border-bottom:2px solid var(--line);}
+  .report-row{padding-top:18px;padding-bottom:18px;border-bottom:2px dashed var(--line);align-items:center;}
+  .report-row:last-of-type{border-bottom:0;}
+  .report-row .subject{font-family:var(--display);font-size:1.02rem;line-height:1.35;}
+  .report-row .grade{font-family:var(--display);font-size:1.5rem;line-height:1.15;white-space:nowrap;}
+  .report-row:nth-child(4n+1) .grade{color:var(--sky-deep);}
+  .report-row:nth-child(4n+2) .grade{color:#C2410C;}
+  .report-row:nth-child(4n+3) .grade{color:#1E7A55;}
+  .report-row:nth-child(4n) .grade{color:#9A6A00;}
+  .report-row .detail{margin:0;color:var(--ink-soft);font-size:0.97rem;line-height:1.6;}
+  .report-foot{padding:18px 30px;background:var(--sun-soft);border-top:3px solid var(--ink);font-weight:900;}
+  @media(max-width:760px){
+    .report-cols{display:none;}
+    .report-row{grid-template-columns:1fr auto;gap:4px 14px;padding:16px 20px;}
+    .report-row .detail{grid-column:1 / -1;}
+    .report-head{padding:22px 20px;} .report-foot{padding:16px 20px;}
+    .seal{width:60px;height:60px;font-size:1rem;}
+  }
 
   /* SUGOROKU — how I work (3 x 2 board) */
   .board{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 0;}
@@ -481,13 +490,7 @@
 
     <section>
       <div class="wrap">
-        <div class="stamp-card">
-          <div class="stamp-card-head">
-            <h2 data-en="My stamp card so far" data-ja="これまでのスタンプカード">My stamp card so far</h2>
-            <span data-en="Results from my school work and Prosper Academy" data-ja="教室での実績とProsper Academyの成果">Results from my school work and Prosper Academy</span>
-          </div>
-          <div class="stamps" id="proof-strip"></div>
-        </div>
+        <div class="report" id="report"></div>
       </div>
     </section>
 
@@ -672,6 +675,9 @@ function monthsHTML(light){
 
 
 
+// Paste the link to your playable demo game here, e.g. "https://murattitiz.github.io/shop-tycoon/"
+const DEMO_GAME_URL = "https://prosper-academy-omisetycoon.web.app";
+
 function featureHTML(){
   const P = PROSPER, ja = LANG === 'ja';
   const src = imgSrc("prosper-results");
@@ -693,8 +699,9 @@ function featureHTML(){
     ${monthsHTML(false)}
     <div class="feature-stats">${P.stats.map(s=>`<div class="f-stat"><div class="num">${s.num[LANG]}</div><div class="lbl">${s.lbl[LANG]}</div></div>`).join('')}</div>
     <div class="feature-actions">
-      <a href="#" class="btn solid" data-study-link="prosper-academy">${ja?'ケーススタディを読む':'Read the case study'}</a>
-      <a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" class="btn ghost">${ja?'eラーニングを体験する ↗':'Try the e-learning module ↗'}</a>
+      <a href="#" class="btn solid" data-study-link="prosper-academy">${ja?'ケーススタディを読む':'Read case study'}</a>
+      <a href="${DEMO_GAME_URL || '#'}" ${DEMO_GAME_URL ? 'target="_blank" rel="noopener"' : 'onclick="return false" aria-disabled="true" title="Link coming soon"'} class="btn ghost">${ja?'デモゲームを遊ぶ ↗':'Demo game ↗'}</a>
+      <a href="https://murattitiz.github.io/articulaterise/" target="_blank" rel="noopener" class="btn ghost">${ja?'Articulate Riseモジュール ↗':'Articulate Rise module ↗'}</a>
     </div>
   </div>`;
 }
@@ -747,17 +754,37 @@ const TRACK_ALL = {
 
 
 
-// Stamp card — every number matches the résumé
-const PROOF = [
-  {num:{en:"100+",ja:"100名+"}, lbl:{en:"parents interviewed and surveyed",ja:"保護者にヒアリング・調査"}},
-  {num:{en:"51%",ja:"51%"}, lbl:{en:"couldn't see their child's progress",ja:"が子どもの成長を実感できず"}},
-  {num:{en:"30 sec",ja:"約30秒"}, lbl:{en:"per absence request, down from 10 steps",ja:"欠席連絡1件（以前は10工程）"}},
-  {num:{en:"80%",ja:"80%"}, lbl:{en:"of teachers on the new tool in week 1",ja:"導入1週目の講師利用率"}},
-  {num:{en:"20+",ja:"20名+"}, lbl:{en:"learners in usability pilots",ja:"ユーザビリティテスト参加者"}},
-  {num:{en:"180 h",ja:"180時間"}, lbl:{en:"staff time saved a year",ja:"年間のスタッフ工数削減"}},
-  {num:{en:"12%",ja:"12%"}, lbl:{en:"annual churn",ja:"年間退会率"}}
-];
-const NEXT_STAMP = {en:"Your team next?", ja:"次は、あなたのチームで"};
+// Report card (通知表) — every result matches the résumé
+const REPORT = {
+  title:{en:"Report card", ja:"通知表"},
+  meta:[
+    {k:{en:"Name",ja:"氏名"}, v:{en:"Murat Mert Titiz",ja:"ティティズ・ムラート"}},
+    {k:{en:"School",ja:"学校"}, v:{en:"KANA English School and Prosper Academy",ja:"KANA英語教室・Prosper Academy"}},
+    {k:{en:"Years",ja:"期間"}, v:{en:"2022 to now",ja:"2022年〜現在"}}
+  ],
+  cols:{en:["Subject","Result","What I did"], ja:["科目","成績","内容"]},
+  rows:[
+    {s:{en:"Process automation",ja:"業務の自動化"}, g:{en:"30 sec",ja:"約30秒"},
+     d:{en:"Rebuilt a 10-step, 30+ hour absence and makeup process as an automated 5-step LINE flow that takes about 30 seconds.",ja:"10工程・30時間以上かかっていた欠席・振替の手続きを、約30秒で終わる5ステップのLINE自動フローに作り直しました。"}},
+    {s:{en:"Time saved",ja:"工数削減"}, g:{en:"180 h",ja:"180時間"},
+     d:{en:"Staff time saved a year by automating communication, now spent on families and marketing.",ja:"連絡業務の自動化で削減した年間のスタッフ工数。その時間を保護者対応やマーケティングに充てています。"}},
+    {s:{en:"Systems and CRM",ja:"システム・CRM"}, g:{en:"Built",ja:"構築"},
+     d:{en:"Built the school's CRM and data collection flows, and automated routine staff tasks.",ja:"教室のCRMとデータ収集の仕組みを構築し、スタッフの定型業務を自動化しました。"}},
+    {s:{en:"Product design",ja:"プロダクト設計"}, g:{en:"80%",ja:"80%"},
+     d:{en:"Teacher adoption in the first week for a progress-logging tool I designed and tested over three rounds.",ja:"3度の検証を経て設計した学習進捗記録ツールの、導入1週目の講師利用率。"}},
+    {s:{en:"User research",ja:"ユーザーリサーチ"}, g:{en:"100+",ja:"100名以上"},
+     d:{en:"Parents interviewed and surveyed about lessons, materials and online tools. The findings led straight to new tools and services.",ja:"レッスン・教材・オンラインツールについてインタビュー・アンケートを行った保護者の数。発見は、新しいツールやサービスに直結しました。"}},
+    {s:{en:"Retention and growth",ja:"定着・集客"}, g:{en:"12%",ja:"12%"},
+     d:{en:"Annual churn, with an average of 44 new customers a year over the last three years.",ja:"年間退会率。直近3年間の新規入会は平均年44名です。"}},
+    {s:{en:"Team leadership",ja:"チーム運営"}, g:{en:"Team of 4",ja:"4名"},
+     d:{en:"Manage one teacher and two staff, coordinate work with the owner, and wrote the teacher manual and onboarding system.",ja:"講師1名・スタッフ2名の業務管理とオーナーとの業務調整を担い、講師マニュアルとオンボーディング体制を整備しました。"}},
+    {s:{en:"Learning design",ja:"学習体験デザイン"}, g:{en:"20+",ja:"20名以上"},
+     d:{en:"Learners in usability pilots of Prosper Academy, plus a cultural training curriculum for business trips to five countries.",ja:"Prosper Academyのユーザビリティテストに参加した生徒数。ほかに、5か国への出張者向け異文化研修も設計しました。"}},
+    {s:{en:"Languages",ja:"語学"}, g:{en:"JLPT N1",ja:"JLPT N1"},
+     d:{en:"English and Turkish (native), Japanese (N1), Italian (fluent).",ja:"英語・トルコ語（ネイティブ）、日本語（N1）、イタリア語（流暢）。"}}
+  ],
+  foot:{en:"Next term: your team.", ja:"次の学期は、あなたのチームで。"}
+};
 
 const PROCESS = [
   {title:{en:"Notice",ja:"気づく"}, body:{en:"Observe users and talk to them to understand what they're struggling with. Many frustrations sit below the surface.",ja:"ユーザーを観察し、話を聞いて、何に困っているのかを理解する。不満の多くは、表には出てこないところにある。"}},
@@ -989,10 +1016,17 @@ function renderPaths(){
 }
 
 function renderProof(){
-  const el = document.getElementById('proof-strip');
+  const el = document.getElementById('report');
   if(!el) return;
-  el.innerHTML = PROOF.map((p,i)=>`<div class="stamp c${i%4}"><div class="num">${p.num[LANG]}</div><div class="lbl">${p.lbl[LANG]}</div></div>`).join('')
-    + `<div class="stamp empty"><div class="lbl">${NEXT_STAMP[LANG]}</div></div>`;
+  const R = REPORT, c = R.cols[LANG];
+  el.innerHTML = `<div class="report-head">
+      <div><h2>${R.title[LANG]}</h2>
+        <dl class="report-meta">${R.meta.map(m=>`<div><dt>${m.k[LANG]}</dt><dd>${m.v[LANG]}</dd></div>`).join('')}</dl></div>
+      <div class="seal" aria-hidden="true">MT</div>
+    </div>
+    <div class="report-cols" aria-hidden="true"><span>${c[0]}</span><span>${c[1]}</span><span>${c[2]}</span></div>
+    ${R.rows.map(r=>`<div class="report-row"><div class="subject">${r.s[LANG]}</div><div class="grade">${r.g[LANG]}</div><p class="detail">${r.d[LANG]}</p></div>`).join('')}
+    <div class="report-foot">${R.foot[LANG]}</div>`;
 }
 
 function renderProcess(){
